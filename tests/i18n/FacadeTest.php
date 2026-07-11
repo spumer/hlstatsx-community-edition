@@ -26,4 +26,17 @@ return [
 
         hlx_assert_same('some.unbound.key', __('some.unbound.key'), 'unbound facade must return the key untouched');
     },
+
+    'i18n facade: __f() substitutes placeholders when arg count matches' => function () use ($fixtures) {
+        i18n_bind(new LanguageService($fixtures, 'en'));
+
+        hlx_assert_same('Hello World', __f('sample.with_placeholder', 'World'), 'matching arg count must substitute normally');
+    },
+
+    'i18n facade: __f() falls back to the unsubstituted string on a placeholder mismatch (fail-safe)' => function () use ($fixtures) {
+        i18n_bind(new LanguageService($fixtures, 'en'));
+
+        // 'Hello %s' needs one arg; give it zero. Must not throw/fatal.
+        hlx_assert_same('Hello %s', __f('sample.with_placeholder'), 'placeholder mismatch must fall back, not crash the render path');
+    },
 ];

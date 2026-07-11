@@ -45,8 +45,23 @@ function _e(string $key): void
  * Only for keys whose translation already contains sprintf-style
  * placeholders (%s, %d, ...). Do not use to glue unrelated fragments
  * together -- see the fragment-wrapping rule in FEAT-0027-PLAN §5.4.
+ *
+ * A translation whose placeholder count doesn't match $args (e.g. a ru
+ * string missing a %s the en original has) must not turn into a fatal
+ * render-path error (PHP 8+ throws ArgumentCountError/ValueError out of
+ * vsprintf() for this) -- fail-safe invariant, FEAT-0027-PLAN §4.2. Falls
+ * back to the unsubstituted resolved string (already ru -> en -> key via
+ * __()), logging the mismatch instead of crashing the page.
  */
 function __f(string $key, ...$args): string
 {
-    return vsprintf(__($key), $args);
+    $format = __($key);
+
+    try {
+        return vsprintf($format, $args);
+    } catch (\Throwable $e) {
+        error_log("i18n: __f('{$key}') placeholder mismatch: " . $e->getMessage());
+
+        return $format;
+    }
 }
