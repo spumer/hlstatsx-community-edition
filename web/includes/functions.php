@@ -178,7 +178,7 @@ function timestamp_to_str($seconds)
 {
     // We allow passing an empty parameter, for output in html
 	if (empty($seconds)) {
-		return '---';
+		return __('common.msg.empty');
 	}
 
     // If something other than int or float is passed here, then return 'Undefined'
@@ -211,7 +211,7 @@ function error(string $message, bool $exit = true) : void
 
     $html .= '<thead style="text-align:center; color:#673636;">';
     $html .= '<tr>';
-    $html .= '<td class="errorhead">ERROR</td>';
+    $html .= '<td class="errorhead">' . __('common.msg.error_heading') . '</td>';
     $html .= '</tr>';
     $html .= '</thead>';
 

@@ -141,7 +141,7 @@ class Table
 		if ($this->showranking)
 		{
 			$totalwidth += 5;
-			echo "<td style=\"width:5%;text-align:right;\" class=\"fSmall\">Rank</td>\n";
+			echo "<td style=\"width:5%;text-align:right;\" class=\"fSmall\">" . __('common.col.rank') . "</td>\n";
 		}
 
 		foreach ($this->columns as $col)
@@ -190,7 +190,7 @@ class Table
 		if ($this->showranking)
 		{
 			$totalwidth += 5;
-			echo "<td style=\"width:5%;text-align=:right;\" class=\"fSmall\">Rank</td>\n";
+			echo "<td style=\"width:5%;text-align=:right;\" class=\"fSmall\">" . __('common.col.rank') . "</td>\n";
 		}
 
 		foreach ($this->columns as $col)

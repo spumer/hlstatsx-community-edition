@@ -8,4 +8,8 @@
  */
 
 return [
+    // common.* -- class_table.php / includes/functions.php (shared across pages)
+    'common.col.rank'        => 'Ранг',
+    'common.msg.error_heading' => 'ОШИБКА',
+    'common.msg.empty'       => '---',
 ];

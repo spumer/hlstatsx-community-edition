@@ -13,4 +13,8 @@
  */
 
 return [
+    // common.* -- class_table.php / includes/functions.php (shared across pages)
+    'common.col.rank'        => 'Rank',
+    'common.msg.error_heading' => 'ERROR',
+    'common.msg.empty'       => '---',
 ];
