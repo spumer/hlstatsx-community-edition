@@ -219,4 +219,23 @@ return [
     'countryclansinfo.col.clan_kills'          => 'Clan Kills',
     'countryclansinfo.col.kpd'                  => 'Kpd',
     'countryclansinfo.members_title'          => 'Members',
+
+    // pages/contents.php (breadcrumb/title reuse common.nav.contents;
+    // table header/icon-alt reuse common.nav.players/clans where the
+    // fork's English matches). The big interpolated summary paragraph
+    // ("<strong>N</strong> players and <strong>M</strong> clans ranked
+    // in...") is NOT extracted -- three concatenated pieces, each with
+    // multiple live $-interpolations, would need a full sentence
+    // restructure into __f() with five placeholders; that's a deliberate
+    // future step, not a plain wrap. Flagged, see batch report.
+    'contents.games_title'            => 'Games',
+    'contents.col.game'                => 'Game',
+    'contents.col.top_player'          => 'Top Player',
+    'contents.col.top_clan'            => 'Top Clan',
+    'contents.clan_icon_alt'           => 'Clan Rankings',
+    'contents.player_icon_alt'         => 'Player Rankings',
+    'contents.general_stats_title'    => 'General Statistics',
+    'contents.last_kill_label'        => 'Last Kill',
+    'contents.stats_disclaimer.pre'   => 'All statistics are generated in real-time. Event history data expires after ',
+    'contents.stats_disclaimer.post'  => ' days.',
 ];

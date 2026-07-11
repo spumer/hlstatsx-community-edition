@@ -68,9 +68,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 	} else {
 		unset($_SESSION['game']);
 		
-		pageHeader(array('Contents'), array('Contents' => ''));
+		pageHeader(array(__('common.nav.contents')), array(__('common.nav.contents') => ''));
 		include(PAGE_PATH . '/voicecomm_serverlist.php');
-		printSectionTitle('Games');
+		printSectionTitle(__('contents.games_title'));
 	?>
 
 		<div class="subblock">
@@ -78,10 +78,10 @@ For support and installation notes visit http://www.hlxcommunity.com
 			<table class="data-table">
 			
 				<tr class="data-table-head">
-					<td class="fSmall" width="60%" align="left">&nbsp;Game</td>
-					<td class="fSmall" width="10%" align="center">&nbsp;Players</td>
-					<td class="fSmall" width="20%" align="center">&nbsp;Top Player</td>
-					<td class="fSmall" width="10%" align="center">&nbsp;Top Clan</td>
+					<td class="fSmall" width="60%" align="left">&nbsp;<?=__('contents.col.game')?></td>
+					<td class="fSmall" width="10%" align="center">&nbsp;<?=__('common.nav.players')?></td>
+					<td class="fSmall" width="20%" align="center">&nbsp;<?=__('contents.col.top_player')?></td>
+					<td class="fSmall" width="10%" align="center">&nbsp;<?=__('contents.col.top_clan')?></td>
 				</tr>
 				
 <?php
@@ -174,16 +174,16 @@ For support and installation notes visit http://www.hlxcommunity.com
 				echo $image['url'];
 			else
 				echo IMAGE_PATH . '/game.gif';
-               ?>"  style="margin-left: 3px; margin-right: 4px;" alt="Game" /></a><a href="<?php echo $g_options['scripturl'] . "?game=$gamedata[0]"; ?>"><?php echo $gamedata[1]; ?></a>
+               ?>"  style="margin-left: 3px; margin-right: 4px;" alt="<?=__('contents.col.game')?>" /></a><a href="<?php echo $g_options['scripturl'] . "?game=$gamedata[0]"; ?>"><?php echo $gamedata[1]; ?></a>
 						</div>
 						<div style="float:right;">
-							<div style="margin-left: 3px; margin-right: 4px; vertical-align:top; text-align:center;"><a href="<?php echo $g_options['scripturl'] . "?mode=clans&amp;game=$gamedata[0]"; ?>"><img src="<?php echo IMAGE_PATH; ?>/clan.gif" alt="Clan Rankings" /></a></div>
-							<div style="vertical-align:bottom; text-align:left;">&nbsp;<a href="<?php echo $g_options['scripturl'] . "?mode=clans&amp;game=$gamedata[0]"; ?>" class="fSmall">Clans</a>&nbsp;&nbsp;</div>
+							<div style="margin-left: 3px; margin-right: 4px; vertical-align:top; text-align:center;"><a href="<?php echo $g_options['scripturl'] . "?mode=clans&amp;game=$gamedata[0]"; ?>"><img src="<?php echo IMAGE_PATH; ?>/clan.gif" alt="<?=__('contents.clan_icon_alt')?>" /></a></div>
+							<div style="vertical-align:bottom; text-align:left;">&nbsp;<a href="<?php echo $g_options['scripturl'] . "?mode=clans&amp;game=$gamedata[0]"; ?>" class="fSmall"><?=__('common.nav.clans')?></a>&nbsp;&nbsp;</div>
 						</div>
 							
 						<div style="float:right;">
-							<div style="margin-left: 3px; margin-right: 4px; vertical-align:top; text-align:center;"><a href="<?php echo $g_options['scripturl'] . "?mode=players&amp;game=$gamedata[0]"; ?>"><img src="<?php echo IMAGE_PATH; ?>/player.gif" alt="Player Rankings" /></a></div>
-							<div style="vertical-align:bottom; text-align:left;">&nbsp;<a href="<?php echo $g_options['scripturl'] . "?mode=players&amp;game=$gamedata[0]"; ?>" class="fSmall">Players</a>&nbsp;&nbsp;</div>
+							<div style="margin-left: 3px; margin-right: 4px; vertical-align:top; text-align:center;"><a href="<?php echo $g_options['scripturl'] . "?mode=players&amp;game=$gamedata[0]"; ?>"><img src="<?php echo IMAGE_PATH; ?>/player.gif" alt="<?=__('contents.player_icon_alt')?>" /></a></div>
+							<div style="vertical-align:bottom; text-align:left;">&nbsp;<a href="<?php echo $g_options['scripturl'] . "?mode=players&amp;game=$gamedata[0]"; ?>" class="fSmall"><?=__('common.nav.players')?></a>&nbsp;&nbsp;</div>
 						</div>
 					</td>
 					<td class="game-table-cell" style="text-align:center;"><?php 
@@ -229,7 +229,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		<br />
 		
 <?php
-		printSectionTitle('General Statistics');
+		printSectionTitle(__('contents.general_stats_title'));
 		
 		$nonhiddengamestring = preg_replace('/,$/', ')', $nonhiddengamestring);
 		
@@ -271,10 +271,10 @@ For support and installation notes visit http://www.hlxcommunity.com
 <?php
 		if ($lastevent)
 		{
-			echo "\t\t\t\t<li>Last Kill <strong> " . date('g:i:s A, D. M. d, Y', strtotime($lastevent)) . "</strong></li>";
+			echo "\t\t\t\t<li>" . __('contents.last_kill_label') . " <strong> " . date('g:i:s A, D. M. d, Y', strtotime($lastevent)) . "</strong></li>";
 		}
 ?>
-				<li>All statistics are generated in real-time. Event history data expires after <strong><?php echo $g_options['DeleteDays']; ?></strong> days.</li>
+				<li><?=__('contents.stats_disclaimer.pre')?><strong><?php echo $g_options['DeleteDays']; ?></strong><?=__('contents.stats_disclaimer.post')?></li>
 			</ul>
 		</div>
 <?php

@@ -220,4 +220,19 @@ return [
     'countryclansinfo.col.clan_kills'          => 'Клановых убийств',
     'countryclansinfo.col.kpd'                  => 'Уб:См',
     'countryclansinfo.members_title'          => 'Участники',
+
+    // pages/contents.php
+    // clan_icon_alt/player_icon_alt use our RU source's simpler icon-alt
+    // translations ('Кланы'/'Игроки'), not a literal port of the fork's
+    // more verbose "Clan Rankings"/"Player Rankings" alt text.
+    'contents.games_title'            => 'Игры',
+    'contents.col.game'                => 'Игра',
+    'contents.col.top_player'          => 'Лучший Игрок',
+    'contents.col.top_clan'            => 'Лучший Клан',
+    'contents.clan_icon_alt'           => 'Кланы',
+    'contents.player_icon_alt'         => 'Игроки',
+    'contents.general_stats_title'    => 'Общая Статистика',
+    'contents.last_kill_label'        => 'Последнее Убийство',
+    'contents.stats_disclaimer.pre'   => 'Вся статистика ведется в реальном времени. Данные об истории событий хранятся ',
+    'contents.stats_disclaimer.post'  => ' дней.',
 ];
