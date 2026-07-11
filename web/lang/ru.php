@@ -12,8 +12,7 @@ return [
     'common.col.rank'        => 'Ранг',
     'common.msg.error_heading' => 'ОШИБКА',
     'common.msg.empty'       => '---',
-    // 'common.msg.undefined' -- our RU source's timestamp_to_str() never had
-    // this type-check branch at all (§5.5 gap), falls back to en.
+    'common.msg.undefined'   => 'Неизвестно',
 
     // common.nav.* -- pages/header.php (site chrome, shown on every page)
     'common.nav.contents'    => 'Статистика',
@@ -30,8 +29,7 @@ return [
     'common.nav.maps'        => 'Карты',
     'common.nav.roles'       => 'Роли',
     'common.nav.bans'        => 'Баны',
-    // 'header.banner_alt' -- our RU source left "Banner" untranslated too
-    // (§5.5 gap), falls back to en.
+    'header.banner_alt'      => 'Баннер',
 
     // common.col.* -- reusable table-column labels (first used by pages/players.php)
     'common.col.player'          => 'Игрок',
@@ -54,9 +52,7 @@ return [
     'players.rankview.total'     => 'Общая Статистика',
     'players.rankview.lastweek'  => 'Последняя Неделя',
     'players.rankview.lastmonth' => 'Последний Месяц',
-    // 'players.col.mmrank' -- no ru translation available: this TableColumn
-    // (mmrank/elorank icon) doesn't exist in our RU source file at all, so
-    // there's nothing to map (FEAT-0027-PLAN §5.5 "gap"); falls back to en.
+    'players.col.mmrank'         => 'Ранг',
     'players.minkills.pre'       => 'Показать Игроков с',
     'players.minkills.post'      => 'или более убийствами.',
     'players.minkills.submit'    => 'Показать',
@@ -89,9 +85,10 @@ return [
 
     // pages/search-class.php: Search::$uniqueid_string(_plural), moved into
     // the constructor since __() can't be a property default (§4.4/PR review).
-    // 'search.uniqueid.singular'/'.plural' -- our RU source left these
-    // untranslated too ('Unique ID'/'Steam ID'), so there's nothing to
-    // port; falls back to en (documented gap, not a silent drop).
+    // Our RU source left these untranslated ('Unique ID'/'Steam ID'), so
+    // this is a fresh translation, not a port (plan §5.4 allows it).
+    'search.uniqueid.singular'     => 'Уникальный ID',
+    'search.uniqueid.plural'       => 'Уникальные ID',
     'search.uniqueid.ip_singular'  => 'IP-адрес',
     'search.uniqueid.ip_plural'    => 'IP-адрес',
 ];
