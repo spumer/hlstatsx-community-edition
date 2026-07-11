@@ -73,8 +73,8 @@
     }
 
     pageHeader(
-            array($gameName, 'Awards Info'),
-            array($gameName => "%s?game=$game", 'Awards Info' => '')
+            array($gameName, __('awards.title')),
+            array($gameName => "%s?game=$game", __('awards.title') => '')
     );
 
     $defaultTab = 'daily';
@@ -89,16 +89,16 @@
         <div id="main">
             <ul class="subsection_tabs" id="tabs_submenu">
                 <li>
-                    <a href="#" id="tab_daily">Daily&nbsp;Awards</a>
+                    <a href="#" id="tab_daily"><?=__('awards.tab.daily')?></a>
                 </li>
                 <li>
-                    <a href="#" id="tab_global">Global&nbsp;Awards</a>
+                    <a href="#" id="tab_global"><?=__('awards.tab.global')?></a>
                 </li>
                 <li>
-                    <a href="#" id="tab_ranks">Ranks</a>
+                    <a href="#" id="tab_ranks"><?=__('awards.tab.ranks')?></a>
                 </li>
                 <li>
-                    <a href="#" id="tab_ribbons">Ribbons</a>
+                    <a href="#" id="tab_ribbons"><?=__('awards.tab.ribbons')?></a>
                 </li>
             </ul>
             <br>

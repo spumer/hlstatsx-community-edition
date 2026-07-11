@@ -90,4 +90,11 @@ return [
     'search.uniqueid.plural'       => 'Unique IDs',
     'search.uniqueid.ip_singular'  => 'IP Address',
     'search.uniqueid.ip_plural'    => 'IP Addresses',
+
+    // pages/awards.php
+    'awards.title'       => 'Awards Info',
+    'awards.tab.daily'   => 'Daily&nbsp;Awards',
+    'awards.tab.global'  => 'Global&nbsp;Awards',
+    'awards.tab.ranks'   => 'Ranks',
+    'awards.tab.ribbons' => 'Ribbons',
 ];

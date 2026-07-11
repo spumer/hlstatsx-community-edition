@@ -91,4 +91,13 @@ return [
     'search.uniqueid.plural'       => 'Уникальные ID',
     'search.uniqueid.ip_singular'  => 'IP-адрес',
     'search.uniqueid.ip_plural'    => 'IP-адрес',
+
+    // pages/awards.php
+    // 'awards.title' is a best-effort adaptation (our RU source's
+    // equivalent title is the shorter 'Награды', not a positional port).
+    'awards.title'       => 'Награды',
+    'awards.tab.daily'   => 'Награды за День',
+    'awards.tab.global'  => 'Общие Награды',
+    'awards.tab.ranks'   => 'Звания',
+    'awards.tab.ribbons' => 'Медали',
 ];
