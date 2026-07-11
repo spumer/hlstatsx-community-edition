@@ -42,7 +42,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 	// Ribbon Statistics
 
-	$ribbon =  valid_request($_GET['ribbon'], true) or error('No ribbon ID specified.');
+	$ribbon =  valid_request($_GET['ribbon'], true) or error(__('ribboninfo.no_ribbon_id'));
 
 	$db->query("
 		SELECT
@@ -72,11 +72,11 @@ For support and installation notes visit http://www.hlxcommunity.com
 	$db->free_result();
 	
 	pageHeader(
-		array($gamename, 'Ribbon Details', $act_name),
+		array($gamename, __('ribboninfo.title'), $act_name),
 		array(
 			$gamename => $g_options['scripturl']."?game=$game",
-			'Ribbons' => $g_options['scripturl']."mode=awards&game=$game&tab=ribbons",
-			'Ribbon Details' => ''
+			__('awards.tab.ribbons') => $g_options['scripturl']."mode=awards&game=$game&tab=ribbons",
+			__('ribboninfo.title') => ''
 		),
 		$act_name
 	);
@@ -86,14 +86,14 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'playerName',
-				'Player',
+				__('common.col.player'),
 				'width=45&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
 			),
 			new TableColumn
 			(
 				'numawards',
-				'Daily awards',
-				'width=10&align=right&append=' . urlencode(' times')
+				__('ribboninfo.col.daily_awards'),
+				'width=10&align=right&append=' . urlencode(__('ribboninfo.times_suffix'))
 			),
 			new TableColumn
 			(
@@ -183,10 +183,10 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?>
 
 <div class="block">
-	<?php printSectionTitle('Ribbon Details'); ?>
+	<?php printSectionTitle(__('ribboninfo.section_title')); ?>
 	<div class="subblock">
 		<div style="float:right;">
-			Back to <a href="<?php echo $g_options['scripturl'] . "?mode=awards&amp;game=$game&tab=ribbons"; ?>">Ribbons</a>
+			<?=__('dailyawardinfo.back_to')?><a href="<?php echo $g_options['scripturl'] . "?mode=awards&amp;game=$game&tab=ribbons"; ?>"><?=__('ribboninfo.back_to_link')?></a>
 		</div>
 		<div style="clear:both;"></div>
 	</div>

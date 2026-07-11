@@ -150,4 +150,15 @@ return [
     'rankinfo.section_title' => 'Rank Details',
     'rankinfo.col.skill'     => 'Skill',
     'rankinfo.back_to_link'  => 'Ranks',
+
+    // pages/ribboninfo.php (breadcrumb + "Back to" reuse
+    // awards.tab.ribbons/dailyawardinfo.back_to; TableColumn reuses
+    // common.col.player). error("No such game '$game'.") NOT extracted:
+    // $-interpolated, same deferred category as elsewhere -- see report.
+    'ribboninfo.no_ribbon_id'      => 'No ribbon ID specified.',
+    'ribboninfo.title'             => 'Ribbon Details',
+    'ribboninfo.section_title'     => 'Ribbon Details',
+    'ribboninfo.col.daily_awards'  => 'Daily awards',
+    'ribboninfo.times_suffix'      => ' times',
+    'ribboninfo.back_to_link'      => 'Ribbons',
 ];

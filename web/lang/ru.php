@@ -156,4 +156,18 @@ return [
     'rankinfo.section_title' => 'Звание подробно',
     'rankinfo.col.skill'     => 'Очков',
     'rankinfo.back_to_link'  => 'Званиям',
+
+    // pages/ribboninfo.php
+    // no_ribbon_id is a fresh translation (our RU source left it in
+    // English too). col.daily_awards is a best-effort adaptation (our
+    // source simplified to 'Всего' = "Total"). times_suffix is a fresh
+    // translation (our RU source also left " times" untranslated).
+    // back_to_link is separate from awards.tab.ribbons for the same
+    // dative-case reason as rankinfo.back_to_link.
+    'ribboninfo.no_ribbon_id'      => 'Не указан ID медали.',
+    'ribboninfo.title'             => 'Медаль Подробно',
+    'ribboninfo.section_title'     => 'Медаль подробно',
+    'ribboninfo.col.daily_awards'  => 'Всего',
+    'ribboninfo.times_suffix'      => ' раз',
+    'ribboninfo.back_to_link'      => 'Медалям',
 ];
