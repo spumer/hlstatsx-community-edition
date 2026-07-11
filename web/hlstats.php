@@ -145,6 +145,9 @@ if (empty($g_options)) {
 	error('Warning: Could not find any options in the database. Check HLStats configuration.');
 }
 
+$languageService = $container->get(\Service\LanguageService::class);
+i18n_bind($languageService);
+
 $cacheCleaner = $container->get(\Cache\CacheCleaner::class);
 $deleteFiles = $cacheCleaner->cleanOldTrendCache(
 	null,

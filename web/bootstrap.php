@@ -10,6 +10,7 @@
     use Repository\GameRepository;
     use Repository\PlayerRepository;
     use Service\OptionService;
+    use Service\LanguageService;
     use Cache\CacheCleaner;
 
     $container = new class
@@ -64,6 +65,14 @@
             $c->get('logger'),
             $defaultScriptUrl
         );
+    });
+
+    $container->set(LanguageService::class, function($c) {
+        global $g_options;
+
+        $lang = $g_options['language'] ?? 'en';
+
+        return new LanguageService(ROOT_PATH . '/lang', $lang, 'en');
     });
 
     $container->set(GameRepository::class, function($c) {

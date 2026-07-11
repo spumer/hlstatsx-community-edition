@@ -40,6 +40,8 @@ if (!defined('IN_HLSTATS')) {
 	die('Do not access this file directly.');
 }
 
+require_once __DIR__ . '/i18n.php';
+
 function checkValidGame(string $gameStr, array $allowedGames, ?string &$retError) : bool
 {
 	// Not object and array
