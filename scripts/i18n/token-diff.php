@@ -113,8 +113,8 @@ function reconstructAsEn(string $source, array $en): array
     $wraps = [];
     $errors = [];
 
-    // Shape 1: <?=__('key')?>  (must run before Shape 2/3, which would
-    // otherwise also match the __('key') sitting inside the short-echo tag).
+    // Shape 1: the "<?=" short-echo wrap (must run before Shape 2/3, which
+    // would otherwise also match the __('key') sitting inside that tag).
     $source = preg_replace_callback(
         '/<\?=\s*__\(\s*([\'"])((?:(?!\1).)*)\1\s*\)\s*\?>/',
         function ($m) use ($en, &$wraps, &$errors) {
