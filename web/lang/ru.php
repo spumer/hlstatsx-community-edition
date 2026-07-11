@@ -58,4 +58,28 @@ return [
     'players.minkills.submit'    => 'Показать',
     'players.nav.goto_label'     => 'Перейти к:',
     'players.nav.clan_rankings'  => 'Ранги Кланов',
+
+    // common.col.* -- more reusable table-column labels (first used by search.php/search-class.php)
+    'common.col.id'    => 'ID',
+    'common.col.game'  => 'Игра',
+    'common.col.tag'   => 'Тег',
+    'common.col.name'  => 'Название',
+
+    // pages/search.php + pages/search-class.php
+    // Our RU source (zozo/hlstatsx) diverged from the fork here (dropped
+    // the "Player X" plural phrasing, added a 'city' search type the fork
+    // doesn't have) -- these are best-effort adaptations of the fork's
+    // exact English, not a positional match. Flagged per FEAT-0027-PLAN §5.5.
+    'search.type.player'          => 'Имя Игрока',
+    'search.type.ip'               => 'IP-адрес',
+    'search.type.clan'             => 'Клан',
+    'search.form.title'            => 'Найти Игрока или Клан',
+    'search.form.query_label'      => 'Искать:',
+    'search.form.type_label'       => 'По:',
+    'search.form.game_label'       => 'Игра:',
+    'search.form.game_all'         => '(Все)',
+    'search.form.submit'           => 'Искать',
+    'search.results.title'         => 'Результаты Поиска',
+    'search.results.count_prefix'  => 'Результаты поиска:',
+    'search.results.count_suffix'  => 'совпадения',
 ];

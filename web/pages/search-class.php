@@ -67,18 +67,18 @@ For support and installation notes visit http://www.hlxcommunity.com
 			if (!is_array($searchtypes))
 			{
 				$searchtypes = array(
-					'player' => 'Player Names',
-					'uniqueid' => 'Player' . $this->uniqueid_string_plural
+					'player' => __('search.type.player'),
+					'uniqueid' => __('common.col.player') . $this->uniqueid_string_plural
 				);
 				if ($g_options['Mode'] != 'LAN' && isset($_SESSION['loggedin']) && $_SESSION['acclevel'] >= 80) {
-					$searchtypes['ip'] = 'Player IP Addresses';
+					$searchtypes['ip'] = __('search.type.ip');
 				}
-				$searchtypes['clan'] = 'Clan Names';
+				$searchtypes['clan'] = __('search.type.clan');
 			}
 ?>
 
 <div class="block">
-	<?php printSectionTitle('Find a Player or Clan'); ?>
+	<?php printSectionTitle(__('search.form.title')); ?>
 	<div class="subblock">
 		<form method="get" action="<?php echo $g_options['scripturl']; ?>">
 			<?php
@@ -89,13 +89,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 			?>
 					<table class="data-table" style="width:30%;">
 						<tr valign="middle" class="bg1">
-							<td nowrap="nowrap" style="width:30%;">Search For:</td>
+							<td nowrap="nowrap" style="width:30%;"><?=__('search.form.query_label')?></td>
 							<td style="width:70%;">
 								<input type="text" name="q" size="20" maxlength="128" value="<?php echo htmlspecialchars($this->query, ENT_QUOTES); ?>" style="width:300px;" />
 							</td>
 						</tr>
 						<tr valign="middle" class="bg1">
-							<td nowrap="nowrap" style="width:30%;">In:</td>
+							<td nowrap="nowrap" style="width:30%;"><?=__('search.form.type_label')?></td>
 							<td style="width:70%;">
 								<?php
 									echo getSelect('st', $searchtypes, $this->type);
@@ -103,11 +103,11 @@ For support and installation notes visit http://www.hlxcommunity.com
 							</td>
 						</tr>
 						<tr valign="middle" class="bg1">
-							<td nowrap="nowrap" style="width:30%;">Game:</td>
+							<td nowrap="nowrap" style="width:30%;"><?=__('search.form.game_label')?></td>
 							<td style="width:70%;">
 								<?php
 									$games = array ();
-									$games[''] = '(All)';
+									$games[''] = __('search.form.game_all');
 									$result = $db->query("
 										SELECT
 											hlstats_Games.code,
@@ -129,7 +129,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 						</tr>
 						<tr class="bg1">
 							<td colspan="3" style="text-align:center;">
-								<input type="submit" value=" Find Now " class="submit" />
+								<input type="submit" value=" <?=__('search.form.submit')?> " class="submit" />
 							</td> 
 						</tr>
 					</table>
@@ -151,7 +151,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 </div class="block">
 	<a name="results"></a>
-	<?php printSectionTitle('Search Results'); ?>
+	<?php printSectionTitle(__('search.results.title')); ?>
 	<br /><br />
 
 <?php
@@ -167,19 +167,19 @@ For support and installation notes visit http://www.hlxcommunity.com
 						new TableColumn
 						(
 							'player_id',
-							'ID',
+							__('common.col.id'),
 							'width=5&align=right'
 						),
 						new TableColumn
 						(
 							'name',
-							'Player',
+							__('common.col.player'),
 							'width=65&flag=1&link=' . urlencode($link_player)
 						),
 						new TableColumn
 						(
 							'gamename',
-							'Game',
+							__('common.col.game'),
 							'width=30'
 						)
 					),
@@ -264,19 +264,19 @@ For support and installation notes visit http://www.hlxcommunity.com
 						new TableColumn
 						(
 							'lastName',
-							'Player',
+							__('common.col.player'),
 							'width=50&flag=1&link=' . urlencode($link_player)
 						),
 						new TableColumn
 						(
 							'gamename',
-							'Game',
+							__('common.col.game'),
 							'width=30'
 						),
 						new TableColumn
 						(
 							'playerId',
-							'ID',
+							__('common.col.id'),
 							'width=5&align=right'
 						)
 					),
@@ -354,19 +354,19 @@ For support and installation notes visit http://www.hlxcommunity.com
 						new TableColumn
 						(
 							'player_id',
-							'ID',
+							__('common.col.id'),
 							'width=5&align=right'
 						),
 						new TableColumn
 						(
 							'name',
-							'Player',
+							__('common.col.player'),
 							'width=65&flag=1&link=' . urlencode($link_player)
 						),
 						new TableColumn
 						(
 							'gamename',
-							'Game',
+							__('common.col.game'),
 							'width=30'
 						)
 					),
@@ -463,25 +463,25 @@ For support and installation notes visit http://www.hlxcommunity.com
 						new TableColumn
 						(
 							'tag',
-							'Tag',
+							__('common.col.tag'),
 							'width=15'
 						),
 						new TableColumn
 						(
 							'name',
-							'Name',
+							__('common.col.name'),
 							'width=50&icon=clan&link=' . urlencode($link_clan)
 						),
 						new TableColumn
 						(
 							'gamename',
-							'Game',
+							__('common.col.game'),
 							'width=30'
 						),
 						new TableColumn
 						(
 							'clanId',
-							'ID',
+							__('common.col.id'),
 							'width=5&align=right'
 						)
 					),
@@ -542,7 +542,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?>
 	<br /><br />
 	<div class="subblock" style="text-align:center;">
-		Search results: <strong><?php echo $numitems; ?></strong> items matching
+		<?=__('search.results.count_prefix')?> <strong><?php echo $numitems; ?></strong> <?=__('search.results.count_suffix')?>
 	</div>
 </div>
 <?php

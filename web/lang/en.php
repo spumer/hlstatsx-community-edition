@@ -61,4 +61,24 @@ return [
     'players.minkills.submit'    => 'Apply',
     'players.nav.goto_label'     => 'Go to:',
     'players.nav.clan_rankings'  => 'Clan Rankings',
+
+    // common.col.* -- more reusable table-column labels (first used by search.php/search-class.php)
+    'common.col.id'    => 'ID',
+    'common.col.game'  => 'Game',
+    'common.col.tag'   => 'Tag',
+    'common.col.name'  => 'Name',
+
+    // pages/search.php + pages/search-class.php
+    'search.type.player'          => 'Player Names',
+    'search.type.ip'               => 'Player IP Addresses',
+    'search.type.clan'             => 'Clan Names',
+    'search.form.title'            => 'Find a Player or Clan',
+    'search.form.query_label'      => 'Search For:',
+    'search.form.type_label'       => 'In:',
+    'search.form.game_label'       => 'Game:',
+    'search.form.game_all'         => '(All)',
+    'search.form.submit'           => 'Find Now',
+    'search.results.title'         => 'Search Results',
+    'search.results.count_prefix'  => 'Search results:',
+    'search.results.count_suffix'  => 'items matching',
 ];
