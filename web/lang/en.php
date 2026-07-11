@@ -161,4 +161,18 @@ return [
     'ribboninfo.col.daily_awards'  => 'Daily awards',
     'ribboninfo.times_suffix'      => ' times',
     'ribboninfo.back_to_link'      => 'Ribbons',
+
+    // pages/clans.php (title/section_title/footer-link reuse
+    // players.nav.clan_rankings/players.title/players.nav.goto_label;
+    // TableColumn reuses common.col.tag/activity/connection_time/kills/
+    // deaths/kpd; submit buttons reuse players.search.submit/
+    // players.minkills.submit). error("No such game '$game'.") NOT
+    // extracted -- same deferred $-interpolation category.
+    'clans.col.clan'             => 'Clan',
+    'clans.col.avg_points'       => 'Avg. Points',
+    'clans.col.members'          => 'Members',
+    'clans.search.label'         => 'Find a clan:',
+    'clans.minmembers.pre'       => 'Show only clans with',
+    'clans.minmembers.post'      => 'or more members from a total of ',
+    'clans.minmembers.total_suffix' => ' clans',
 ];

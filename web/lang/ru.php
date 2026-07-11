@@ -170,4 +170,17 @@ return [
     'ribboninfo.col.daily_awards'  => 'Всего',
     'ribboninfo.times_suffix'      => ' раз',
     'ribboninfo.back_to_link'      => 'Медалям',
+
+    // pages/clans.php
+    // minmembers.pre/post/total_suffix are best-effort adaptations: our
+    // RU source restructures the whole sentence ("N и более участниками.
+    // Всего M Кланов" vs the fork's "N or more members from a total of M
+    // clans") rather than translating word-for-word.
+    'clans.col.clan'             => 'Клан',
+    'clans.col.avg_points'       => 'Очки (ср.)',
+    'clans.col.members'          => 'Участников',
+    'clans.search.label'         => 'Найти Клан:',
+    'clans.minmembers.pre'       => 'Показать Кланы с',
+    'clans.minmembers.post'      => 'или более участников из ',
+    'clans.minmembers.total_suffix' => ' кланов',
 ];

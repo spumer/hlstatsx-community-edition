@@ -66,8 +66,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 	pageHeader
 	(
-		array ($gamename, 'Clan Rankings'),
-		array ($gamename=>"%s?game=$game", 'Clan Rankings' => '')
+		array ($gamename, __('players.nav.clan_rankings')),
+		array ($gamename=>"%s?game=$game", __('players.nav.clan_rankings') => '')
 	);
 
 	$table = new Table
@@ -77,55 +77,55 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'name',
-				'Clan',
+				__('clans.col.clan'),
 				'width=25&icon=clan&link=' . urlencode('mode=claninfo&amp;clan=%k')
 			),
 			new TableColumn
 			(
 				'tag',
-				'Tag',
+				__('common.col.tag'),
 				'width=15&align=center'
 			),
 			new TableColumn
 			(
 				'skill',
-				'Avg. Points',
+				__('clans.col.avg_points'),
 				'width=8&align=right&skill_change=1'
 			),
 			new TableColumn
 			(
 				'nummembers',
-				'Members',
+				__('clans.col.members'),
 				'width=5&align=right'
 			),
 			new TableColumn
 			(
 				'activity',
-				'Activity',
+				__('common.col.activity'),
 				'width=8&type=bargraph'
 			),
 			new TableColumn
 			(
 				'connection_time',
-				'Connection Time',
+				__('common.col.connection_time'),
 				'width=13&align=right&type=timestamp'
 			),
 			new TableColumn
 			(
 				'kills',
-				'Kills',
+				__('common.col.kills'),
 				'width=7&align=right'
 			),
 			new TableColumn
 			(
 				'deaths',
-				'Deaths',
+				__('common.col.deaths'),
 				'width=7&align=right'
 			),
 			new TableColumn
 			(
 				'kpd',
-				'K:D',
+				__('common.col.kpd'),
 				'width=7&align=right'
 			)
 		),
@@ -193,16 +193,16 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?>
 
 <div class="block">
-	<?php printSectionTitle('Clan Rankings');	?>
+	<?php printSectionTitle(__('players.nav.clan_rankings'));	?>
 	<div class="subblock">
 		<div style="float:left;">
 			<form method="get" action="<?php echo $g_options['scripturl']; ?>">
 				<input type="hidden" name="mode" value="search" />
 				<input type="hidden" name="game" value="<?php echo $game; ?>" />
 				<input type="hidden" name="st" value="clan" />
-				<strong>&#8226;</strong> Find a clan:
+				<strong>&#8226;</strong> <?=__('clans.search.label')?>
 				<input type="text" name="q" size="20" maxlength="64" class="textbox" />
-				<input type="submit" value="Search" class="smallsubmit" />
+				<input type="submit" value="<?=__('players.search.submit')?>" class="smallsubmit" />
 			</form>
 		</div>
 		<div style="clear:both;"></div>
@@ -233,13 +233,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 						}
 					}
 				?>
-				<strong>&#8226;</strong> Show only clans with
-					<input type="text" name="minmembers" size="4" maxlength="2" value="<?php echo $minmembers; ?>" class="textbox" /> or more members from a total of <strong><?php echo number_format($total_clans); ?></strong> clans
-					<input type="submit" value="Apply" class="smallsubmit" />
+				<strong>&#8226;</strong> <?=__('clans.minmembers.pre')?>
+					<input type="text" name="minmembers" size="4" maxlength="2" value="<?php echo $minmembers; ?>" class="textbox" /> <?=__('clans.minmembers.post')?><strong><?php echo number_format($total_clans); ?></strong><?=__('clans.minmembers.total_suffix')?>
+					<input type="submit" value="<?=__('players.minkills.submit')?>" class="smallsubmit" />
 			</form>
 		</div>
 		<div style="float:right;">
-			Go to: <a href="<?php echo $g_options["scripturl"] . "?mode=players&amp;game=$game"; ?>">Player Rankings</a>
+			<?=__('players.nav.goto_label')?> <a href="<?php echo $g_options["scripturl"] . "?mode=players&amp;game=$game"; ?>"><?=__('players.title')?></a>
 		</div>
 	</div>
 </div>
