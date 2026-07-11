@@ -6,4 +6,4 @@
          locale.
 :! Change: Insert new option 'language', default 'en'
 */
-INSERT INTO `hlstats_Options` (`keyname`, `value`, `opttype`) VALUES ('language', 'en', 1);
+INSERT IGNORE INTO `hlstats_Options` (`keyname`, `value`, `opttype`) VALUES ('language', 'en', 1);
