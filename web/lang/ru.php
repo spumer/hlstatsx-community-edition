@@ -82,4 +82,12 @@ return [
     'search.results.title'         => 'Результаты Поиска',
     'search.results.count_prefix'  => 'Результаты поиска:',
     'search.results.count_suffix'  => 'совпадения',
+
+    // pages/search-class.php: Search::$uniqueid_string(_plural), moved into
+    // the constructor since __() can't be a property default (§4.4/PR review).
+    // 'search.uniqueid.singular'/'.plural' -- our RU source left these
+    // untranslated too ('Unique ID'/'Steam ID'), so there's nothing to
+    // port; falls back to en (documented gap, not a silent drop).
+    'search.uniqueid.ip_singular'  => 'IP-адрес',
+    'search.uniqueid.ip_plural'    => 'IP-адрес',
 ];

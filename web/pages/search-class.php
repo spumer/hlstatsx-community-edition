@@ -42,8 +42,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 		var $query;
 		var $type;
 		var $game;
-		var $uniqueid_string = 'Unique ID';
-		var $uniqueid_string_plural = 'Unique IDs';
+		var $uniqueid_string;
+		var $uniqueid_string_plural;
 
 		function __construct($query, $type, $game)
 		{
@@ -53,10 +53,18 @@ For support and installation notes visit http://www.hlxcommunity.com
 			$this->type = $type;
 			$this->game = $game;
 
+			// Moved out of the property defaults above: __() is a function
+			// call, not a compile-time constant, so PHP can't use it as a
+			// `var $x = ...;` default -- has to be assigned here instead.
 			if ($g_options['Mode'] == 'LAN')
 			{
-				$this->uniqueid_string = 'IP Address';
-				$this->uniqueid_string_plural = 'IP Addresses';
+				$this->uniqueid_string = __('search.uniqueid.ip_singular');
+				$this->uniqueid_string_plural = __('search.uniqueid.ip_plural');
+			}
+			else
+			{
+				$this->uniqueid_string = __('search.uniqueid.singular');
+				$this->uniqueid_string_plural = __('search.uniqueid.plural');
 			}
 		}
 

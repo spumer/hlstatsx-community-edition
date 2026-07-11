@@ -81,4 +81,11 @@ return [
     'search.results.title'         => 'Search Results',
     'search.results.count_prefix'  => 'Search results:',
     'search.results.count_suffix'  => 'items matching',
+
+    // pages/search-class.php: Search::$uniqueid_string(_plural), moved into
+    // the constructor since __() can't be a property default (§4.4/PR review).
+    'search.uniqueid.singular'     => 'Unique ID',
+    'search.uniqueid.plural'       => 'Unique IDs',
+    'search.uniqueid.ip_singular'  => 'IP Address',
+    'search.uniqueid.ip_plural'    => 'IP Addresses',
 ];
