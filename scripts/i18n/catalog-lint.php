@@ -66,16 +66,60 @@ function collectKeysFromCode(string $webDir): array
             continue;
         }
 
-        $source = file_get_contents($file);
-
-        if (preg_match_all('/\b(?:__|_e|__f)\(\s*([\'"])((?:(?!\1).)*)\1/', $source, $matches)) {
-            foreach ($matches[2] as $key) {
-                $keys[$key] = true;
-            }
+        foreach (extractKeysFromFile($file) as $key) {
+            $keys[$key] = true;
         }
     }
 
     return array_keys($keys);
+}
+
+/**
+ * Uses token_get_all(), not regex, for the same reason as
+ * scripts/i18n/token-diff.php: a regex scanning for quote characters
+ * textually will misread an apostrophe inside a `//` comment (e.g.
+ * "doesn't") as a string delimiter. token_get_all() classifies comments
+ * (T_COMMENT/T_DOC_COMMENT) correctly, so that can't happen here.
+ *
+ * @return string[]
+ */
+function extractKeysFromFile(string $file): array
+{
+    $tokens = token_get_all(file_get_contents($file));
+    $tokens = array_values(array_filter($tokens, function ($token) {
+        return !is_array($token) || !in_array($token[0], [T_WHITESPACE, T_COMMENT, T_DOC_COMMENT], true);
+    }));
+
+    $keys = [];
+    $n = count($tokens);
+
+    for ($i = 0; $i < $n; $i++) {
+        $token = $tokens[$i];
+
+        if (!is_array($token) || $token[0] !== T_STRING || !in_array($token[1], ['__', '_e', '__f'], true)) {
+            continue;
+        }
+
+        if (!isset($tokens[$i + 1]) || $tokens[$i + 1] !== '(') {
+            continue;
+        }
+
+        if (!isset($tokens[$i + 2]) || !is_array($tokens[$i + 2]) || $tokens[$i + 2][0] !== T_CONSTANT_ENCAPSED_STRING) {
+            continue;
+        }
+
+        $keys[] = decodePhpStringLiteral($tokens[$i + 2][1]);
+    }
+
+    return $keys;
+}
+
+function decodePhpStringLiteral(string $tokenText): string
+{
+    // This is OUR own source, not attacker input, so evaluating it as a
+    // literal expression is a safe and exact way to get PHP's own view
+    // of the value (handles escapes the same way PHP itself would).
+    return eval("return {$tokenText};");
 }
 
 function globRecursive(string $dir, string $pattern): array
