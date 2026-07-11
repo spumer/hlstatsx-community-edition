@@ -33,4 +33,32 @@ return [
     'common.nav.maps'        => 'Maps',
     'common.nav.roles'       => 'Roles',
     'common.nav.bans'        => 'Bans',
+
+    // common.col.* -- reusable table-column labels (first used by pages/players.php)
+    'common.col.player'          => 'Player',
+    'common.col.points'           => 'Points',
+    'common.col.activity'         => 'Activity',
+    'common.col.connection_time'  => 'Connection Time',
+    'common.col.kills'             => 'Kills',
+    'common.col.deaths'            => 'Deaths',
+    'common.col.kpd'               => 'K:D',
+    'common.col.headshots'         => 'Headshots',
+    'common.col.hpk'                => 'HS:K',
+    'common.col.accuracy'           => 'Accuracy',
+
+    // pages/players.php
+    'players.title'              => 'Player Rankings',
+    'players.search.label'       => 'Find a player:',
+    'players.search.submit'      => 'Search',
+    'players.rankview.label'     => 'Ranking View',
+    'players.rankview.submit'    => 'View',
+    'players.rankview.total'     => 'Total Ranking',
+    'players.rankview.lastweek'  => 'Last Week',
+    'players.rankview.lastmonth' => 'Last Month',
+    'players.col.mmrank'         => 'Rank',
+    'players.minkills.pre'       => 'Only show players with',
+    'players.minkills.post'      => 'or more kills.',
+    'players.minkills.submit'    => 'Apply',
+    'players.nav.goto_label'     => 'Go to:',
+    'players.nav.clan_rankings'  => 'Clan Rankings',
 ];

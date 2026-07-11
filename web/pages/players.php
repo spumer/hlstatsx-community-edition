@@ -66,8 +66,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 	pageHeader
 	(
-		array ($gamename, 'Player Rankings'),
-		array ($gamename=>"%s?game=$game", 'Player Rankings'=>'')
+		array ($gamename, __('players.title')),
+		array ($gamename=>"%s?game=$game", __('players.title')=>'')
 	);
 
 	$rank_type = filter_input(INPUT_GET, 'rank_type', FILTER_VALIDATE_INT, [
@@ -91,9 +91,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 	$i = 1;
 	$dates = array();
 	$options = [
-		0  => 'Total Ranking',
-		-1 => 'Last Week',
-		-2 => 'Last Month'
+		0  => __('players.rankview.total'),
+		-1 => __('players.rankview.lastweek'),
+		-2 => __('players.rankview.lastmonth')
 	];
 
 	while ($rowdata = $db->fetch_array()) {
@@ -115,7 +115,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?>
 
 <div class="block">
-	<?php printSectionTitle('Player Rankings');	?>
+	<?php printSectionTitle(__('players.title'));	?>
 	<div class="subblock">
 		<div style="float:left;">
 			<link rel="stylesheet" type="text/css" href="css/search-suggestions.css">
@@ -125,9 +125,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 				<input type="hidden" name="mode" value="search" />
 				<input type="hidden" name="game" value="<?php echo $game; ?>" />
 				<input type="hidden" name="st" value="player" />
-				<strong>&#8226;</strong> Find a player:
+				<strong>&#8226;</strong> <?=__('players.search.label')?>
 				<input type="text" name="q" size="20" maxlength="64" class="textbox" id="playersearch" />
-				<input type="submit" value="Search" class="smallsubmit" />
+				<input type="submit" value="<?=__('players.search.submit')?>" class="smallsubmit" />
 			</form>
 		</div>
 		<div style="float:right;">
@@ -135,7 +135,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				<input type="hidden" name="mode" value="players" />
 				<input type="hidden" name="game" value="<?php echo $game; ?>" />
 
-				<strong>&#8226;</strong> Ranking View
+				<strong>&#8226;</strong> <?=__('players.rankview.label')?>
 
 				<select name="rank_type">
 					 <?php foreach ($options as $value => $label): ?>
@@ -143,7 +143,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					<?php endforeach; ?>
 				</select>
 
-				<input type="submit" value="View" class="smallsubmit" />
+				<input type="submit" value="<?=__('players.rankview.submit')?>" class="smallsubmit" />
 			</form>
 		</div>
 		<div style="clear:both;"></div><br /><br />
@@ -158,67 +158,67 @@ For support and installation notes visit http://www.hlxcommunity.com
 					new TableColumn
 					(
 						'lastName',
-						'Player',
+						__('common.col.player'),
 						'width=26&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
 					),
 					new TableColumn
 					(
 							'mmrank',
-							'Rank',
+							__('players.col.mmrank'),
 							'width=4&type=elorank'
 					),
 					new TableColumn
 					(
 						'skill',
-						'Points',
+						__('common.col.points'),
 						'width=7&align=right&skill_change=1'
 					),
 					new TableColumn
 					(
 						'activity',
-						'Activity',
+						__('common.col.activity'),
 						'width=10&sort=no&type=bargraph'
 					),
 					new TableColumn
 					(
 						'connection_time',
-						'Connection Time',
+						__('common.col.connection_time'),
 						'width=10&align=right&type=timestamp'
 					),
 					new TableColumn
 					(
 						'kills',
-						'Kills',
+						__('common.col.kills'),
 						'width=7&align=right'
 					),
 					new TableColumn
 					(
 						'deaths',
-						'Deaths',
+						__('common.col.deaths'),
 						'width=7&align=right'
 					),
 					new TableColumn
 					(
 						'kpd',
-						'K:D',
+						__('common.col.kpd'),
 						'width=6&align=right'
 					),
 					new TableColumn
 					(
 						'headshots',
-						'Headshots',
+						__('common.col.headshots'),
 						'width=6&align=right'
 					),
 					new TableColumn
 					(
 						'hpk',
-						'HS:K',
+						__('common.col.hpk'),
 						'width=6&align=right'
 					),
 					new TableColumn
 					(
 						'acc',
-						'Accuracy',
+						__('common.col.accuracy'),
 						'width=6&align=right&append=' . urlencode('%')
 					)
 				),
@@ -237,61 +237,61 @@ For support and installation notes visit http://www.hlxcommunity.com
 					new TableColumn
 					(
 						'lastName',
-						'Player',
+						__('common.col.player'),
 						'width=30&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
 					),
 					new TableColumn
 					(
 						'activity',
-						'Activity',
+						__('common.col.activity'),
 						'width=10&sort=no&type=bargraph'
 						),
 					new TableColumn
 					(
 						'kills',
-						'Kills',
+						__('common.col.kills'),
 						'width=7&align=right'
 					),
 					new TableColumn
 					(
 						'deaths',
-						'Deaths',
+						__('common.col.deaths'),
 						'width=7&align=right'
 					),
 					new TableColumn
 					(
 						'kpd',
-						'K:D',
+						__('common.col.kpd'),
 						'width=6&align=right'
 					),
 					new TableColumn
 					(
 						'headshots',
-						'Headshots',
+						__('common.col.headshots'),
 						'width=6&align=right'
 					),
 					new TableColumn
 					(
 						'hpk',
-						'HS:K',
+						__('common.col.hpk'),
 						'width=6&align=right'
 					),
 					new TableColumn
 					(
 						'acc',
-						'Accuracy',
+						__('common.col.accuracy'),
 						'width=6&align=right&append=' . urlencode('%')
 					),
 					new TableColumn
 					(
 						'skill',
-						'Points',
+						__('common.col.points'),
 						'width=7&align=right&skill_change=1'
 					),
 					new TableColumn
 					(
 						'connection_time',
-						'Connection Time',
+						__('common.col.connection_time'),
 						'width=10&align=right&type=timestamp'
 					)
 				),
@@ -416,13 +416,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 						}
 					}
 				?>
-				<strong>&#8226;</strong> Only show players with
-					<input type="text" name="minkills" size="4" maxlength="2" value="<?php echo $minkills; ?>" class="textbox" /> or more kills.
-					<input type="submit" value="Apply" class="smallsubmit" />
+				<strong>&#8226;</strong> <?=__('players.minkills.pre')?>
+					<input type="text" name="minkills" size="4" maxlength="2" value="<?php echo $minkills; ?>" class="textbox" /> <?=__('players.minkills.post')?>
+					<input type="submit" value="<?=__('players.minkills.submit')?>" class="smallsubmit" />
 			</form>
 		</div>
 		<div style="float:right;">
-			Go to: <a href="<?php echo $g_options["scripturl"] . "?mode=clans&amp;game=$game"; ?>">Clan Rankings</a>
+			<?=__('players.nav.goto_label')?> <a href="<?php echo $g_options["scripturl"] . "?mode=clans&amp;game=$game"; ?>"><?=__('players.nav.clan_rankings')?></a>
 		</div>	
 	</div>
 </div>
