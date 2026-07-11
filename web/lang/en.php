@@ -97,4 +97,14 @@ return [
     'awards.tab.global'  => 'Global&nbsp;Awards',
     'awards.tab.ranks'   => 'Ranks',
     'awards.tab.ribbons' => 'Ribbons',
+
+    // pages/awards_daily.php
+    // The " Awards ($awards_d_date)" suffix is one interpolated string
+    // (real $-interpolation, not just a plain literal) -- "Awards" inside
+    // it needs a structural split to extract safely; deferred, see batch
+    // report (same category as the search-class.php property-default
+    // refactor: token-diff can't fold across live interpolation).
+    'awards_daily.period_daily'     => 'Daily',
+    'awards_daily.period_day_suffix' => 'Day',
+    'awards_daily.no_winner'         => 'No Award Winner',
 ];

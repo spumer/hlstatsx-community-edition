@@ -100,4 +100,15 @@ return [
     'awards.tab.global'  => 'Общие Награды',
     'awards.tab.ranks'   => 'Звания',
     'awards.tab.ribbons' => 'Медали',
+
+    // pages/awards_daily.php
+    // Our RU source restructured this whole title ("... за День" instead
+    // of "... Awards") rather than translating word-for-word, so these
+    // are adaptations, not a positional port. Note the still-untranslated
+    // "Awards" word (see en.php comment) means ru currently renders a
+    // mixed "Ежедневные Awards (date)" until that's split -- flagged, not
+    // silently dropped.
+    'awards_daily.period_daily'     => 'Ежедневные',
+    'awards_daily.period_day_suffix' => 'дн.',
+    'awards_daily.no_winner'         => 'Нет Награжденных',
 ];

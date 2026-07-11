@@ -91,7 +91,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 ?>
 <div class="block">
-	<?php printSectionTitle((($awards_numdays == 1) ? 'Daily' : $awards_numdays.'Day')." Awards ($awards_d_date)"); ?>
+	<?php printSectionTitle((($awards_numdays == 1) ? __('awards_daily.period_daily') : $awards_numdays.__('awards_daily.period_day_suffix'))." Awards ($awards_d_date)"); ?>
 	<div class="subblock">
 		<table class="data-table">
 
@@ -139,7 +139,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			$achvd = "{$imagestring} <a href=\"hlstats.php?mode=playerinfo&amp;player={$r['d_winner_id']}&amp;game={$game}\">{$winnerstring}</a>";
 			$wincount = $r['d_winner_count'];
 		} else {
-			$achvd = "<em>No Award Winner</em>";
+			$achvd = "<em>" . __('awards_daily.no_winner') . "</em>";
 			$wincount= "0";
 		}
 			
