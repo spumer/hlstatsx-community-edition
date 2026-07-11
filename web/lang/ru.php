@@ -12,6 +12,8 @@ return [
     'common.col.rank'        => 'Ранг',
     'common.msg.error_heading' => 'ОШИБКА',
     'common.msg.empty'       => '---',
+    // 'common.msg.undefined' -- our RU source's timestamp_to_str() never had
+    // this type-check branch at all (§5.5 gap), falls back to en.
 
     // common.nav.* -- pages/header.php (site chrome, shown on every page)
     'common.nav.contents'    => 'Статистика',

@@ -183,7 +183,7 @@ function timestamp_to_str($seconds)
 
     // If something other than int or float is passed here, then return 'Undefined'
 	if (!is_numeric($seconds)) {
-		return "Undefined";
+		return __('common.msg.undefined');
 	}
 
     // DateTime class doesn't work with float type,

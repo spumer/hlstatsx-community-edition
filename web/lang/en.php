@@ -17,6 +17,7 @@ return [
     'common.col.rank'        => 'Rank',
     'common.msg.error_heading' => 'ERROR',
     'common.msg.empty'       => '---',
+    'common.msg.undefined'   => 'Undefined',
 
     // common.nav.* -- pages/header.php (site chrome, shown on every page)
     'common.nav.contents'    => 'Contents',

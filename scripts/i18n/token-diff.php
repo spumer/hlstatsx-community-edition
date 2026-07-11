@@ -84,6 +84,18 @@ const AUTHORIZED_INSERTIONS = [
 ];
 
 /**
+ * Quote style for a BARE __('key') call (no adjacent literal to inherit
+ * a style from) defaults to single-quote, matching how virtually every
+ * literal this pipeline has wrapped so far. The rare original that was
+ * double-quoted for no escaping reason (just author preference) needs
+ * an explicit override here, or the gate false-fails on an otherwise
+ * correct wrap -- e.g. includes/functions.php's `return "Undefined";`.
+ */
+const BARE_CALL_QUOTE_OVERRIDES = [
+    'common.msg.undefined' => '"',
+];
+
+/**
  * Removes one occurrence of each authorized-insertion block for $path
  * from $text (if present), returning the stripped text plus the list of
  * blocks actually found and removed.
@@ -321,6 +333,10 @@ function reconstructAsEn(string $source, array $en): array
         if ($chainError !== null) {
             $errors[] = $chainError;
             continue;
+        }
+
+        if ($quoteChar === null && count($chainKeys) === 1) {
+            $quoteChar = BARE_CALL_QUOTE_OVERRIDES[$chainKeys[0]] ?? null;
         }
 
         $first = $chain[0];
