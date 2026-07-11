@@ -235,4 +235,13 @@ return [
     'contents.last_kill_label'        => 'Последнее Убийство',
     'contents.stats_disclaimer.pre'   => 'Вся статистика ведется в реальном времени. Данные об истории событий хранятся ',
     'contents.stats_disclaimer.post'  => ' дней.',
+
+    // pages/roles.php
+    'roles.title'         => 'Роли',
+    'roles.col.role'      => 'Роль',
+    'roles.col.picked'    => 'Выбрана',
+    'roles.col.ratio'     => 'Соотношение',
+    'roles.stats.pre'     => 'Всего ',
+    'roles.stats.mid'     => ' убийств и ',
+    'roles.stats.post'    => ' смертей',
 ];

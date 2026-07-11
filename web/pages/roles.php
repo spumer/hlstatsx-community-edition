@@ -55,8 +55,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 	$db->free_result();
 	pageHeader
 	(
-		array ($gamename, 'Role Statistics'),
-		array ($gamename => "%s?game=$game", 'Role Statistics' => '')
+		array ($gamename, __('roles.title')),
+		array ($gamename => "%s?game=$game", __('roles.title') => '')
 	);
 	$result = $db->query
 	("
@@ -80,14 +80,14 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'code',
-				'Role',
+				__('roles.col.role'),
 				'width=24&type=roleimg&align=left&link=' . urlencode("mode=rolesinfo&amp;role=%k&amp;game=$game"),
 				$fname
 			),
 			new TableColumn
 			(
 				'picked',
-				'Picked',
+				__('roles.col.picked'),
 				'width=9&align=right&append=+times'
 			),
 			new TableColumn
@@ -99,13 +99,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'ppercent',
-				'Ratio',
+				__('roles.col.ratio'),
 				'width=9&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
 				'kills',
-				'Kills',
+				__('common.col.kills'),
 				'width=6&align=right'
 			),
 			new TableColumn
@@ -117,13 +117,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'kpercent',
-				'Ratio',
+				__('roles.col.ratio'),
 				'width=9&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
 				'deaths',
-				'Deaths',
+				__('common.col.deaths'),
 				'width=6&align=right'
 			),
 			new TableColumn
@@ -135,13 +135,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'dpercent',
-				'Ratio',
+				__('roles.col.ratio'),
 				'width=9&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
 				'kpd',
-				'K:D',
+				__('common.col.kpd'),
 				'width=5&align=right'
 			)
 		),
@@ -194,15 +194,15 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?>
 
 <div class="block">
-	<?php printSectionTitle('Role Statistics'); ?>
+	<?php printSectionTitle(__('roles.title')); ?>
 	<div class="subblock">
-		From a total of <strong><?php echo number_format($realkills); ?></strong> kills with <strong><?php echo number_format($realdeaths); ?></strong> deaths
+		<?=__('roles.stats.pre')?><strong><?php echo number_format($realkills); ?></strong><?=__('roles.stats.mid')?><strong><?php echo number_format($realdeaths); ?></strong><?=__('roles.stats.post')?>
 	</div>
 	<br /><br />
 	<?php $tblRoles->draw($result, $db->num_rows($result), 95); ?><br /><br />
 	<div class="subblock">
 		<div style="float:right;">
-			Go to: <a href="<?php echo $g_options['scripturl']."?game=$game"; ?>"><?php echo $gamename; ?></a>
+			<?=__('players.nav.goto_label')?> <a href="<?php echo $g_options['scripturl']."?game=$game"; ?>"><?php echo $gamename; ?></a>
 		</div>
 	</div>
 </div>

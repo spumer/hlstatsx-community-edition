@@ -238,4 +238,16 @@ return [
     'contents.last_kill_label'        => 'Last Kill',
     'contents.stats_disclaimer.pre'   => 'All statistics are generated in real-time. Event history data expires after ',
     'contents.stats_disclaimer.post'  => ' days.',
+
+    // pages/roles.php (title reuses itself for both pageHeader and
+    // printSectionTitle; TableColumn reuses common.col.kills/deaths/kpd;
+    // footer nav reuses players.nav.goto_label). error("No such game
+    // '$game'.") NOT extracted -- same deferred $-interpolation category.
+    'roles.title'         => 'Role Statistics',
+    'roles.col.role'      => 'Role',
+    'roles.col.picked'    => 'Picked',
+    'roles.col.ratio'     => 'Ratio',
+    'roles.stats.pre'     => 'From a total of ',
+    'roles.stats.mid'     => ' kills with ',
+    'roles.stats.post'    => ' deaths',
 ];
