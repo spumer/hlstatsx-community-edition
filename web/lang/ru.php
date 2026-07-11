@@ -127,4 +127,20 @@ return [
     // pages/awards_ribbons.php -- our RU source uses the same empty-prefix
     // restructuring here too (reuses awards_ranks.achieved_prefix).
     'awards_ribbons.achieved_suffix' => ' игроков заслужили',
+
+    // pages/dailyawardinfo.php
+    // breadcrumb_details/section_title both port from our source's
+    // 'Награда Подробно'/'Награда подробно' -- note our RU source itself
+    // has this same case inconsistency (capital vs lowercase "подробно"),
+    // preserved as-is rather than "fixed" here. no_award_id is a fresh
+    // translation (our RU source left this error message in English too).
+    'dailyawardinfo.no_award_id'         => 'Не указан ID награды.',
+    'dailyawardinfo.title'                => 'Награда Подробно',
+    'dailyawardinfo.breadcrumb_awards'    => 'Награды',
+    'dailyawardinfo.breadcrumb_details'   => 'Награда Подробно',
+    'dailyawardinfo.col.day'              => 'День',
+    'dailyawardinfo.col.count'            => 'Выполнено',
+    'dailyawardinfo.section_title'        => 'Награда подробно',
+    'dailyawardinfo.back_to'              => 'Вернуться к ',
+    'dailyawardinfo.back_to_link'         => 'Наградам за День',
 ];

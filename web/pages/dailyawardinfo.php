@@ -41,7 +41,7 @@ For support and installation notes visit http://www.hlxcommunity.com
     }
 
 	// Daily Award Statistics
-	$award = valid_request($_GET['award'], true) or error('No award ID specified.');
+	$award = valid_request($_GET['award'], true) or error(__('dailyawardinfo.no_award_id'));
 
 	$db->query("
 		SELECT
@@ -71,11 +71,11 @@ For support and installation notes visit http://www.hlxcommunity.com
 	$db->free_result();
 	
 	pageHeader(
-		array($gamename, 'Award Details', $awardname),
+		array($gamename, __('dailyawardinfo.title'), $awardname),
 		array(
 			$gamename=>$g_options['scripturl'] . "?game=$game",
-			'Awards Statistics' => $g_options['scripturl'] . "?mode=awards&game=$game",
-			'Awards Details' => ''
+			__('dailyawardinfo.breadcrumb_awards') => $g_options['scripturl'] . "?mode=awards&game=$game",
+			__('dailyawardinfo.breadcrumb_details') => ''
 		),
 		$awardname
 	);
@@ -84,17 +84,17 @@ For support and installation notes visit http://www.hlxcommunity.com
 		array(
 			new TableColumn(
 				'awardTime',
-				'Day',
+				__('dailyawardinfo.col.day'),
 				'width=20&align=left'
 			),
 			new TableColumn(
 				'lastName',
-				'Player',
+				__('common.col.player'),
 				'width=40&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k') 
 			),
 			new TableColumn(
 				'count',
-				'Count for the Day',
+				__('dailyawardinfo.col.count'),
 				'width=35&align=right&append=' . urlencode(" $awardverb")
 			)
 		),
@@ -142,10 +142,10 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?>
 
 <div class="block">
-	<?php printSectionTitle('Daily Award Details'); ?>
+	<?php printSectionTitle(__('dailyawardinfo.section_title')); ?>
 	<div class="subblock">
 		<div style="float:right;">
-			Back to <a href="<?php echo $g_options['scripturl'] . "?mode=awards&amp;game=$game"; ?>">Daily Awards</a>
+			<?=__('dailyawardinfo.back_to')?><a href="<?php echo $g_options['scripturl'] . "?mode=awards&amp;game=$game"; ?>"><?=__('dailyawardinfo.back_to_link')?></a>
 		</div>
 		<div style="clear:both;"></div>
 	</div>

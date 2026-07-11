@@ -129,4 +129,15 @@ return [
     // a plain wrap -- flagged, see batch report (candidate for __f() with
     // two placeholders once that's sanctioned as a deliberate step).
     'awards_ribbons.achieved_suffix' => ' players',
+
+    // pages/dailyawardinfo.php
+    'dailyawardinfo.no_award_id'         => 'No award ID specified.',
+    'dailyawardinfo.title'                => 'Award Details',
+    'dailyawardinfo.breadcrumb_awards'    => 'Awards Statistics',
+    'dailyawardinfo.breadcrumb_details'   => 'Awards Details',
+    'dailyawardinfo.col.day'              => 'Day',
+    'dailyawardinfo.col.count'            => 'Count for the Day',
+    'dailyawardinfo.section_title'        => 'Daily Award Details',
+    'dailyawardinfo.back_to'              => 'Back to ',
+    'dailyawardinfo.back_to_link'         => 'Daily Awards',
 ];
