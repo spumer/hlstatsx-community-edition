@@ -193,4 +193,31 @@ return [
     'countryclans.minmembers.pre'          => 'Показать Страны с',
     'countryclans.minmembers.post'         => 'и более участников. Всего ',
     'countryclans.minmembers.total_suffix' => ' Стран',
+
+    // pages/countryclansinfo.php
+    // no_country_id is a fresh translation (our RU source left it in
+    // English too). col.name is a best-effort adaptation: our source
+    // uses 'Игрок' here (as everywhere else it labels a player-name
+    // column), even though the fork's English says "Name" not "Player".
+    'countryclansinfo.no_country_id'          => 'Не указан ID страны.',
+    'countryclansinfo.title'                  => 'Страна Подробно',
+    'countryclansinfo.section_title'          => 'Информация о стране',
+    'countryclansinfo.stats_summary'          => 'Сводная статистика',
+    'countryclansinfo.row.country'            => 'Страна:',
+    'countryclansinfo.row.activity'           => 'Активность:',
+    'countryclansinfo.row.members'            => 'Участников:',
+    'countryclansinfo.active_members'         => 'активных участников',
+    'countryclansinfo.row.total_kills'        => 'Всего убийств:',
+    'countryclansinfo.row.total_deaths'       => 'Всего смертей:',
+    'countryclansinfo.row.avg_kills'          => 'Убийств (среднее):',
+    'countryclansinfo.row.kills_per_death'    => 'Убийств / Смертей:',
+    'countryclansinfo.row.kills_per_minute'   => 'Убийств в минуту:',
+    'countryclansinfo.row.avg_member_points'  => 'Очки участников (среднее):',
+    'countryclansinfo.row.avg_connection_time' => 'Среднее время игры:',
+    'countryclansinfo.row.total_connection_time' => 'Общее время игры:',
+    'countryclansinfo.col.name'               => 'Игрок',
+    'countryclansinfo.col.time'                => 'Время',
+    'countryclansinfo.col.clan_kills'          => 'Клановых убийств',
+    'countryclansinfo.col.kpd'                  => 'Уб:См',
+    'countryclansinfo.members_title'          => 'Участники',
 ];

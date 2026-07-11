@@ -193,4 +193,30 @@ return [
     // NOTE: 'countrys' is a typo in the original fork source, preserved
     // verbatim for en-parity -- not a mistake introduced here.
     'countryclans.minmembers.total_suffix' => ' countrys',
+
+    // pages/countryclansinfo.php (breadcrumb reuses countryclans.title;
+    // TableColumn reuses players.col.mmrank/common.col.points/activity/
+    // kills/deaths). error("No such countryclan '$flag'.") NOT extracted
+    // -- $-interpolated, same deferred category as elsewhere.
+    'countryclansinfo.no_country_id'          => 'No country ID specified.',
+    'countryclansinfo.title'                  => 'Country Details',
+    'countryclansinfo.section_title'          => 'Country Information',
+    'countryclansinfo.stats_summary'          => 'Statistics Summary',
+    'countryclansinfo.row.country'            => 'Country:',
+    'countryclansinfo.row.activity'           => 'Activity:',
+    'countryclansinfo.row.members'            => 'Members:',
+    'countryclansinfo.active_members'         => 'active members',
+    'countryclansinfo.row.total_kills'        => 'Total Kills:',
+    'countryclansinfo.row.total_deaths'       => 'Total Deaths:',
+    'countryclansinfo.row.avg_kills'          => 'Avg. Kills:',
+    'countryclansinfo.row.kills_per_death'    => 'Kills per Death:',
+    'countryclansinfo.row.kills_per_minute'   => 'Kills per Minute:',
+    'countryclansinfo.row.avg_member_points'  => 'Avg. Member Points:',
+    'countryclansinfo.row.avg_connection_time' => 'Avg. Connection Time:',
+    'countryclansinfo.row.total_connection_time' => 'Total Connection Time:',
+    'countryclansinfo.col.name'               => 'Name',
+    'countryclansinfo.col.time'                => 'Time',
+    'countryclansinfo.col.clan_kills'          => 'Clan Kills',
+    'countryclansinfo.col.kpd'                  => 'Kpd',
+    'countryclansinfo.members_title'          => 'Members',
 ];
