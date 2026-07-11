@@ -175,4 +175,22 @@ return [
     'clans.minmembers.pre'       => 'Show only clans with',
     'clans.minmembers.post'      => 'or more members from a total of ',
     'clans.minmembers.total_suffix' => ' clans',
+
+    // pages/countryclans.php (title/section_title/footer-link reuse
+    // countryclans.title/players.nav.goto_label; TableColumn reuses
+    // clans.col.avg_points/members + common.col.activity/
+    // connection_time/kills/deaths/kpd; submit reuses
+    // players.minkills.submit). error("No such game '$game'.") NOT
+    // extracted -- same deferred category. minmembers.pre kept separate
+    // from clans.minmembers.pre despite byte-identical English (the
+    // fork copy-pasted "Show only clans with" here verbatim, even
+    // though this page is about countries) because our RU source uses
+    // a different, context-correct translation for each page.
+    'countryclans.title'              => 'Country Rankings',
+    'countryclans.col.country'        => 'Country',
+    'countryclans.minmembers.pre'          => 'Show only clans with',
+    'countryclans.minmembers.post'         => 'or more members from a total of ',
+    // NOTE: 'countrys' is a typo in the original fork source, preserved
+    // verbatim for en-parity -- not a mistake introduced here.
+    'countryclans.minmembers.total_suffix' => ' countrys',
 ];

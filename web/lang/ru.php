@@ -183,4 +183,14 @@ return [
     'clans.minmembers.pre'       => 'Показать Кланы с',
     'clans.minmembers.post'      => 'или более участников из ',
     'clans.minmembers.total_suffix' => ' кланов',
+
+    // pages/countryclans.php -- again a restructured sentence ("N и более
+    // участников. Всего M Стран"), and a page-appropriate 'Страны'
+    // translation distinct from clans.php's 'Кланы' despite the fork
+    // using byte-identical English for both pre-fragments.
+    'countryclans.title'              => 'Ранги Стран',
+    'countryclans.col.country'        => 'Страна',
+    'countryclans.minmembers.pre'          => 'Показать Страны с',
+    'countryclans.minmembers.post'         => 'и более участников. Всего ',
+    'countryclans.minmembers.total_suffix' => ' Стран',
 ];

@@ -67,8 +67,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 	pageHeader
 	(
-		array ($gamename, 'Country Rankings'),
-		array ($gamename=>"%s?game=$game", 'Country Rankings' => '')
+		array ($gamename, __('countryclans.title')),
+		array ($gamename=>"%s?game=$game", __('countryclans.title') => '')
 	);
 
 	$table = new Table
@@ -78,49 +78,49 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'name',
-				'Country',
+				__('countryclans.col.country'),
 				'width=40&flag=1&link=' . urlencode('mode=countryclansinfo&amp;flag=%k&amp;game='.$game)
 			),
 			new TableColumn
 			(
 				'skill',
-				'Avg. Points',
+				__('clans.col.avg_points'),
 				'width=8&skill_change=1&align=right'
 			),
 			new TableColumn
 			(
 				"nummembers",
-				"Members",
+				__('clans.col.members'),
 				"width=5&align=right"
 			),
 			new TableColumn
 			(
 				'activity',
-				'Activity',
+				__('common.col.activity'),
 				'width=8&type=bargraph'
 			),
 			new TableColumn
 			(
 				'connection_time',
-				'Connection Time',
+				__('common.col.connection_time'),
 				'width=13&align=right&type=timestamp'
 			),
 			new TableColumn
 			(
 				'kills',
-				'Kills',
+				__('common.col.kills'),
 				'width=7&align=right'
 			),
 			new TableColumn
 			(
 				'deaths',
-				'Deaths',
+				__('common.col.deaths'),
 				'width=7&align=right'
 			),
 			new TableColumn
 			(
 				'kpd',
-				'K:D',
+				__('common.col.kpd'),
 				'width=7&align=right'
 			)
 		),
@@ -189,7 +189,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 <div class="block">
 <?php
-	printSectionTitle('Country Rankings');
+	printSectionTitle(__('countryclans.title'));
 	$table->draw($result, $db->num_rows($resultCount), 95);
 ?><br /><br />
 	<div class="subblock">
@@ -219,13 +219,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 		}
 	}
 ?>
-				<strong>&#8226;</strong> Show only clans with
-					<input type="text" name="minmembers" size="4" maxlength="2" value="<?php echo $minmembers; ?>" class="textbox" /> or more members from a total of <b><?php echo number_format($total_countrys); ?></b> countrys
-					<input type="submit" value="Apply" class="smallsubmit" />
+				<strong>&#8226;</strong> <?=__('countryclans.minmembers.pre')?>
+					<input type="text" name="minmembers" size="4" maxlength="2" value="<?php echo $minmembers; ?>" class="textbox" /> <?=__('countryclans.minmembers.post')?><b><?php echo number_format($total_countrys); ?></b><?=__('countryclans.minmembers.total_suffix')?>
+					<input type="submit" value="<?=__('players.minkills.submit')?>" class="smallsubmit" />
 			</form>
 		</div>
 		<div style="float:right;">
-			Go to: <a href="<?php echo $g_options['scripturl'] . "?game=$game"; ?>"><?php echo $gamename; ?></a>
+			<?=__('players.nav.goto_label')?> <a href="<?php echo $g_options['scripturl'] . "?game=$game"; ?>"><?php echo $gamename; ?></a>
 		</div>
 		<div style="clear:both;"></div>
 	</div>
