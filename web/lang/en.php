@@ -110,4 +110,14 @@ return [
 
     // pages/awards_global.php
     'awards_global.title' => 'Global Awards',
+
+    // pages/awards_ranks.php (title reuses awards.tab.ranks)
+    // '&nbsp;kills)' word "kills" NOT extracted: immediately chained via
+    // "." to an unrelated adjacent literal ('<br />'), and the token-diff
+    // fold groups by raw dot-adjacency with no logical-boundary awareness,
+    // so wrapping it would merge that unrelated literal into the same
+    // reconstructed token and break byte-parity. Flagged, see batch report.
+    'awards_ranks.player_list_fallback' => 'Player List',
+    'awards_ranks.achieved_prefix'      => 'Achieved by ',
+    'awards_ranks.achieved_suffix'      => ' Players',
 ];

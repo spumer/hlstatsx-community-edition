@@ -85,7 +85,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?>
 
 <div class="block">
-	<?php printSectionTitle('Ranks'); ?>
+	<?php printSectionTitle(__('awards.tab.ranks')); ?>
 	<div class="subblock">
 		<table class="data-table">
 <?php
@@ -118,13 +118,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 		}
 		else
 		{
-			$imagestring = 'Player List';
+			$imagestring = __('awards_ranks.player_list_fallback');
 		}
 		$achvd = '';
 		if ($ranks[$r['rankId']] > 0)
 		{
 			$imagestring = "$link$imagestring</a>";
-			$achvd = 'Achieved by '.$ranks[$r['rankId']].' Players';
+			$achvd = __('awards_ranks.achieved_prefix').$ranks[$r['rankId']].__('awards_ranks.achieved_suffix');
 		}    
    
 		echo "<td style=\"text-align:center;vertical-align:top;width:$colwidth%;\">"

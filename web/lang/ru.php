@@ -114,4 +114,13 @@ return [
 
     // pages/awards_global.php
     'awards_global.title' => 'Общие Награды',
+
+    // pages/awards_ranks.php (title reuses awards.tab.ranks)
+    // 'Player List' -- our RU source left this untranslated too (§5.5 gap).
+    // achieved_prefix is empty on purpose: our RU source restructures the
+    // sentence as "<N> игроков заслужили" (number first, no lead-in word),
+    // which the empty prefix + suffix keys reproduce without needing a
+    // sprintf placeholder.
+    'awards_ranks.achieved_prefix' => '',
+    'awards_ranks.achieved_suffix' => ' игроков заслужили',
 ];
