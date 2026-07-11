@@ -34,6 +34,7 @@ return [
     'common.nav.maps'        => 'Maps',
     'common.nav.roles'       => 'Roles',
     'common.nav.bans'        => 'Bans',
+    'header.banner_alt'      => 'Banner',
 
     // common.col.* -- reusable table-column labels (first used by pages/players.php)
     'common.col.player'          => 'Player',

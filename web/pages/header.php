@@ -263,7 +263,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	if ($g_options['bannerdisplay'] != 0 && ($mode == 'contents' || $g_options['bannerdisplay']==1)) {
 ?>    
 	<div class="block" style="text-align:center;">
-		<img src="<?php echo ((strncmp($g_options['bannerfile'], 'http:/', 6) == 0)?$g_options['bannerfile']:IMAGE_PATH.'/'.$g_options['bannerfile']); ?>" alt="Banner" />
+		<img src="<?php echo ((strncmp($g_options['bannerfile'], 'http:/', 6) == 0)?$g_options['bannerfile']:IMAGE_PATH.'/'.$g_options['bannerfile']); ?>" alt="<?=__('header.banner_alt')?>" />
 	</div>
 <?php
 	}

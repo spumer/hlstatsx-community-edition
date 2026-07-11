@@ -30,6 +30,8 @@ return [
     'common.nav.maps'        => 'Карты',
     'common.nav.roles'       => 'Роли',
     'common.nav.bans'        => 'Баны',
+    // 'header.banner_alt' -- our RU source left "Banner" untranslated too
+    // (§5.5 gap), falls back to en.
 
     // common.col.* -- reusable table-column labels (first used by pages/players.php)
     'common.col.player'          => 'Игрок',
