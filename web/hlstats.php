@@ -127,6 +127,15 @@ require(INCLUDE_PATH . '/class_db.php');
 require(INCLUDE_PATH . '/class_table.php');
 require(INCLUDE_PATH . '/functions.php');
 
+$container = require ROOT_PATH . '/bootstrap.php';
+
+// Bind a safe default (English) translator right away, before the DB
+// connection attempt below: a failed connection or missing DB_TYPE class
+// calls error(), which now calls __(), and that has to render readable
+// English rather than a raw 'common.msg.error_heading' key -- $g_options
+// (and the real configured language) isn't available this early yet.
+i18n_bind(new \Service\LanguageService(ROOT_PATH . '/lang', 'en'));
+
 $db_classname = 'DB_' . DB_TYPE;
 if ( class_exists($db_classname) )
 {
@@ -137,7 +146,6 @@ else
 	error('Database class does not exist.  Please check your config.php file for DB_TYPE');
 }
 
-$container = require ROOT_PATH . '/bootstrap.php';
 $optionService = $container->get(\Service\OptionService::class);
 
 $g_options = $optionService->getAllOptions();
