@@ -143,4 +143,17 @@ return [
     'dailyawardinfo.section_title'        => 'Награда подробно',
     'dailyawardinfo.back_to'              => 'Вернуться к ',
     'dailyawardinfo.back_to_link'         => 'Наградам за День',
+
+    // pages/rankinfo.php
+    // no_rank_id/invalid_game are fresh translations (our RU source left
+    // both error messages in English too). back_to_link is a separate key
+    // from awards.tab.ranks despite the same English word: our RU source
+    // uses the dative "Званиям" here (object of "к"), not the nominative
+    // "Звания" the awards tab uses.
+    'rankinfo.no_rank_id'    => 'Не указан ID звания.',
+    'rankinfo.invalid_game'  => 'Неверная или не указана игра.',
+    'rankinfo.title'         => 'Звание Подробно',
+    'rankinfo.section_title' => 'Звание подробно',
+    'rankinfo.col.skill'     => 'Очков',
+    'rankinfo.back_to_link'  => 'Званиям',
 ];

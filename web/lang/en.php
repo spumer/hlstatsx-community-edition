@@ -140,4 +140,14 @@ return [
     'dailyawardinfo.section_title'        => 'Daily Award Details',
     'dailyawardinfo.back_to'              => 'Back to ',
     'dailyawardinfo.back_to_link'         => 'Daily Awards',
+
+    // pages/rankinfo.php (breadcrumb + "Back to" reuse
+    // awards.tab.ranks/dailyawardinfo.back_to; TableColumn reuses
+    // common.col.player/common.col.kills)
+    'rankinfo.no_rank_id'    => 'No rank ID specified.',
+    'rankinfo.invalid_game'  => 'Invalid or no game specified.',
+    'rankinfo.title'         => 'Rank Details',
+    'rankinfo.section_title' => 'Rank Details',
+    'rankinfo.col.skill'     => 'Skill',
+    'rankinfo.back_to_link'  => 'Ranks',
 ];

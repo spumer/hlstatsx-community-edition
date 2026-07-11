@@ -41,7 +41,7 @@ For support and installation notes visit http://www.hlxcommunity.com
     }
 	// Action Details
 
-	$rank = valid_request($_GET['rank'], true) or error('No rank ID specified.');
+	$rank = valid_request($_GET['rank'], true) or error(__('rankinfo.no_rank_id'));
 	
 	$db->query("
 		SELECT
@@ -62,17 +62,17 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 	$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
 	if ($db->num_rows() != 1) {
-		error('Invalid or no game specified.');
+		error(__('rankinfo.invalid_game'));
 	} else {
 		list($gamename) = $db->fetch_row();
 	}
 		
 	pageHeader(
-		array($gamename, 'Rank Details', $act_name),
+		array($gamename, __('rankinfo.title'), $act_name),
 		array(
 			$gamename => $g_options['scripturl']."?game=$game",
-			'Ranks' => $g_options['scripturl']."?mode=awards&game=$game&tab=ranks",
-			'Rank Details'=>''
+			__('awards.tab.ranks') => $g_options['scripturl']."?mode=awards&game=$game&tab=ranks",
+			__('rankinfo.title')=>''
 		),
 		$act_name
 	);
@@ -81,17 +81,17 @@ For support and installation notes visit http://www.hlxcommunity.com
 		array(
 			new TableColumn(
 				'playerName',
-				'Player',
+				__('common.col.player'),
 				'width=45&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k') 
 			),
 			new TableColumn(
 				'kills',
-				'Kills',
+				__('common.col.kills'),
 				'width=25&align=right'
 			),
 			new TableColumn(
 				'skill',
-				'Skill',
+				__('rankinfo.col.skill'),
 				'width=25&align=right'
 			)
 		),
@@ -155,10 +155,10 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?>
 
 <div class="block">
-    <?php printSectionTitle('Rank Details'); ?>
+    <?php printSectionTitle(__('rankinfo.section_title')); ?>
 	<div class="subblock">
 		<div style="float:right;">
-			Back to <a href="<?php echo $g_options['scripturl'] . "?mode=awards&amp;game=$game&tab=ranks"; ?>">Ranks</a>
+			<?=__('dailyawardinfo.back_to')?><a href="<?php echo $g_options['scripturl'] . "?mode=awards&amp;game=$game&tab=ranks"; ?>"><?=__('rankinfo.back_to_link')?></a>
 		</div>
 		<div style="clear:both;"></div>
 	</div>
