@@ -90,9 +90,21 @@ const AUTHORIZED_INSERTIONS = [
  * double-quoted for no escaping reason (just author preference) needs
  * an explicit override here, or the gate false-fails on an otherwise
  * correct wrap -- e.g. includes/functions.php's `return "Undefined";`.
+ *
+ * Keyed by [file][key] rather than just [key]: a shared/reused key can
+ * legitimately have been double-quoted in one file's original literal
+ * and single-quoted in another's (e.g. clans.col.members -- singly
+ * quoted in clans.php, but countryclans.php's TableColumn call happens
+ * to double-quote all of its arguments), so the override has to be
+ * scoped per file, not global to the key.
  */
 const BARE_CALL_QUOTE_OVERRIDES = [
-    'common.msg.undefined' => '"',
+    'web/includes/functions.php' => [
+        'common.msg.undefined' => '"',
+    ],
+    'web/pages/countryclans.php' => [
+        'clans.col.members' => '"',
+    ],
 ];
 
 /**
@@ -126,7 +138,7 @@ $current = str_replace("\r\n", "\n", file_get_contents($currentPath));
 $before = str_replace("\r\n", "\n", file_get_contents($args['before']));
 $en = require $root . '/web/lang/en.php';
 
-[$reconstructed, $wraps, $errors] = reconstructAsEn($current, $en);
+[$reconstructed, $wraps, $errors] = reconstructAsEn($current, $en, $args['path']);
 
 foreach ($errors as $error) {
     echo "ERROR: {$error}\n";
@@ -173,10 +185,11 @@ function parseArgs(array $argv): array
 /**
  * @return array{0: string, 1: string[], 2: string[]} [reconstructed text, wrapped keys, errors]
  */
-function reconstructAsEn(string $source, array $en): array
+function reconstructAsEn(string $source, array $en, string $path): array
 {
     $wraps = [];
     $errors = [];
+    $quoteOverrides = BARE_CALL_QUOTE_OVERRIDES[$path] ?? [];
 
     // Shape 1: the "<?=" short-echo wrap (must run before Shape 2/3, which
     // would otherwise also match the __('key') sitting inside that tag).
@@ -336,7 +349,7 @@ function reconstructAsEn(string $source, array $en): array
         }
 
         if ($quoteChar === null && count($chainKeys) === 1) {
-            $quoteChar = BARE_CALL_QUOTE_OVERRIDES[$chainKeys[0]] ?? null;
+            $quoteChar = $quoteOverrides[$chainKeys[0]] ?? null;
         }
 
         $first = $chain[0];
