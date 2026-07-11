@@ -120,4 +120,13 @@ return [
     'awards_ranks.player_list_fallback' => 'Player List',
     'awards_ranks.achieved_prefix'      => 'Achieved by ',
     'awards_ranks.achieved_suffix'      => ' Players',
+
+    // pages/awards_ribbons.php (title reuses awards.tab.ribbons; prefix
+    // reuses awards_ranks.achieved_prefix, byte-identical 'Achieved by ')
+    // "Ribbon Class #$i1 ($cnt awards required)" header NOT extracted:
+    // fully $-interpolated string (two variables mid-string), so
+    // splitting it into concatenation pieces is a structural change, not
+    // a plain wrap -- flagged, see batch report (candidate for __f() with
+    // two placeholders once that's sanctioned as a deliberate step).
+    'awards_ribbons.achieved_suffix' => ' players',
 ];

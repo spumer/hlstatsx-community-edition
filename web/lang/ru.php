@@ -123,4 +123,8 @@ return [
     // sprintf placeholder.
     'awards_ranks.achieved_prefix' => '',
     'awards_ranks.achieved_suffix' => ' игроков заслужили',
+
+    // pages/awards_ribbons.php -- our RU source uses the same empty-prefix
+    // restructuring here too (reuses awards_ranks.achieved_prefix).
+    'awards_ribbons.achieved_suffix' => ' игроков заслужили',
 ];
