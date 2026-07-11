@@ -59,6 +59,54 @@ if (!is_file($args['before'])) {
     exit(2);
 }
 
+/**
+ * Exact text blocks that an authorized infra commit is allowed to ADD on
+ * top of the pre-i18n baseline for a given file -- never a replacement of
+ * existing content, only ever an insertion. This gate still fails on any
+ * other delta; this list exists so that a genuinely-authorized wiring
+ * change (e.g. the require_once that pulls in web/includes/i18n.php)
+ * doesn't get flagged as "something else changed" alongside real wraps.
+ *
+ * web/includes/functions.php is require()'d directly by six other entry
+ * points besides hlstats.php (autocomplete.php, status.php, sig.php,
+ * show_graph.php, ingame.php, trend_graph.php), none of which route
+ * through hlstats.php's i18n_bind() wiring -- so functions.php must stay
+ * self-sufficient (require the facade itself) rather than relying solely
+ * on hlstats.php, or __() would be an undefined-function fatal on every
+ * one of those entry points. Keep this list to the smallest number of
+ * blocks that keeps that guarantee true; each entry should cite, in the
+ * commit that adds it, which entry points require it.
+ */
+const AUTHORIZED_INSERTIONS = [
+    'web/includes/functions.php' => [
+        "require_once __DIR__ . '/i18n.php';\n\n",
+    ],
+];
+
+/**
+ * Removes one occurrence of each authorized-insertion block for $path
+ * from $text (if present), returning the stripped text plus the list of
+ * blocks actually found and removed.
+ *
+ * @return array{0: string, 1: string[]}
+ */
+function stripAuthorizedInsertions(string $path, string $text): array
+{
+    $blocks = AUTHORIZED_INSERTIONS[$path] ?? [];
+    $removed = [];
+
+    foreach ($blocks as $block) {
+        $pos = strpos($text, $block);
+
+        if ($pos !== false) {
+            $text = substr_replace($text, '', $pos, strlen($block));
+            $removed[] = $block;
+        }
+    }
+
+    return [$text, $removed];
+}
+
 // This repo checks out CRLF (core.autocrlf=true) but git blobs (what
 // `git show ref:path` returns) are LF-normalized. Normalize both sides so
 // the comparison is about content, not EOL style.
@@ -76,16 +124,21 @@ if ($errors) {
     exit(1);
 }
 
-if ($reconstructed === $before) {
+[$forCompare, $authorizedInsertions] = stripAuthorizedInsertions($args['path'], $reconstructed);
+
+if ($forCompare === $before) {
     echo 'OK    ' . $args['path'] . ': ' . count($wraps) . " wrap(s), reconstructed en text matches baseline byte-for-byte.\n";
     foreach ($wraps as $key) {
         echo "      - {$key}\n";
+    }
+    foreach ($authorizedInsertions as $block) {
+        echo '      + (authorized insertion) ' . trim($block) . "\n";
     }
     exit(0);
 }
 
 echo 'FAIL  ' . $args['path'] . ": reconstructed en text does NOT match baseline.\n";
-echo diffPreview($before, $reconstructed);
+echo diffPreview($before, $forCompare);
 exit(1);
 
 // -- helpers --------------------------------------------------------------
