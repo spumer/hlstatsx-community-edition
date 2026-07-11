@@ -268,4 +268,15 @@ return [
     'rolesinfo.stats.days_pre'     => '(за последние ',
     'rolesinfo.stats.days_post'    => ' дней)',
     'rolesinfo.back_to_link'       => 'Ролям',
+
+    // pages/maps.php
+    // 'HeatMap' -- our RU source left this untranslated too (§5.5 gap).
+    // maps.stats.mid is a separate key from roles.stats.mid despite
+    // byte-identical English ('kills with' in both fork files): our RU
+    // source phrases the maps-page sentence as "убийств, из них" (kills,
+    // of which) rather than roles.php's "убийств и" (kills and).
+    'maps.title'        => 'Карты',
+    'maps.col.map'      => 'Карта',
+    'maps.stats.mid'    => ' убийств, из них ',
+    'maps.stats.post'   => ' хедшотов',
 ];

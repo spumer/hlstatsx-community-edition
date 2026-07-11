@@ -58,8 +58,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 	$db->free_result();
 
 	pageHeader(
-		array ($gamename, 'Map Statistics'),
-		array ($gamename=>"%s?game=$game", 'Map Statistics'=>'')
+		array ($gamename, __('maps.title')),
+		array ($gamename=>"%s?game=$game", __('maps.title')=>'')
 	);
 
 	$tblMaps = new Table
@@ -69,13 +69,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'map',
-				'Map',
+				__('maps.col.map'),
 				'width=20&align=left&link=' . urlencode("mode=mapinfo&amp;map=%k&amp;game=$game")
 			),
 			new TableColumn
 			(
 				'kills',
-				'Kills',
+				__('common.col.kills'),
 				'width=8&align=right'
 			),
 			new TableColumn
@@ -87,13 +87,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'kpercent',
-				'Ratio',
+				__('roles.col.ratio'),
 				'width=16&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
 				'headshots',
-				'Headshots',
+				__('common.col.headshots'),
 				'width=8&align=right'
 			),
 			new TableColumn
@@ -105,19 +105,19 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'hpercent',
-				'Ratio',
+				__('roles.col.ratio'),
 				'width=16&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
 				'hpk',
-				'HS:K',
+				__('common.col.hpk'),
 				'width=9&align=right'
 			),
 			new TableColumn
 			(
 				'map',
-				'HeatMap',
+				__('maps.col.heatmap'),
 				'width=4&type=heatmap'
 			)
 		),
@@ -162,10 +162,10 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?>
 
 <div class="block">
-	<?php printSectionTitle('Map Statistics'); ?>
+	<?php printSectionTitle(__('maps.title')); ?>
 	<div class="subblock">
 		<div style="float:left;">
-			From a total of <strong><?php echo number_format($realkills); ?></strong> kills with <strong><?php echo number_format($realheadshots); ?></strong> headshots
+			<?=__('roles.stats.pre')?><strong><?php echo number_format($realkills); ?></strong><?=__('maps.stats.mid')?><strong><?php echo number_format($realheadshots); ?></strong><?=__('maps.stats.post')?>
 		</div>
 		<div style="clear:both;"></div>
 	</div>
@@ -173,7 +173,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	<?php $tblMaps->draw($result, $db->num_rows($result), 95); ?><br /><br />
 	<div class="subblock">
 		<div style="float:right;">
-			Go to: <a href="<?php echo $g_options['scripturl'] . "?game=$game"; ?>"><?php echo $gamename; ?></a>
+			<?=__('players.nav.goto_label')?> <a href="<?php echo $g_options['scripturl'] . "?game=$game"; ?>"><?php echo $gamename; ?></a>
 		</div>
 	</div>
 </div>

@@ -270,4 +270,16 @@ return [
     'rolesinfo.stats.days_pre'     => '(Last ',
     'rolesinfo.stats.days_post'    => ' Days)',
     'rolesinfo.back_to_link'       => 'Roles Statistics',
+
+    // pages/maps.php (title reused for pageHeader value+key and
+    // printSectionTitle; TableColumn reuses common.col.kills/headshots/
+    // hpk + roles.col.ratio; stats.pre reuses roles.stats.pre byte-
+    // identical 'From a total of '; footer nav reuses
+    // players.nav.goto_label). error("No such game '$game'.") NOT
+    // extracted -- same deferred category as elsewhere.
+    'maps.title'        => 'Map Statistics',
+    'maps.col.map'      => 'Map',
+    'maps.col.heatmap'  => 'HeatMap',
+    'maps.stats.mid'    => ' kills with ',
+    'maps.stats.post'   => ' headshots',
 ];
