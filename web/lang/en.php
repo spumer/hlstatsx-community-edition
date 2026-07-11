@@ -17,4 +17,20 @@ return [
     'common.col.rank'        => 'Rank',
     'common.msg.error_heading' => 'ERROR',
     'common.msg.empty'       => '---',
+
+    // common.nav.* -- pages/header.php (site chrome, shown on every page)
+    'common.nav.contents'    => 'Contents',
+    'common.nav.search'      => 'Search',
+    'common.nav.help'        => 'Help',
+    'common.nav.servers'     => 'Servers',
+    'common.nav.chat'        => 'Chat',
+    'common.nav.players'     => 'Players',
+    'common.nav.clans'       => 'Clans',
+    'common.nav.countries'   => 'Countries',
+    'common.nav.awards'      => 'Awards',
+    'common.nav.actions'     => 'Actions',
+    'common.nav.weapons'     => 'Weapons',
+    'common.nav.maps'        => 'Maps',
+    'common.nav.roles'       => 'Roles',
+    'common.nav.bans'        => 'Bans',
 ];
