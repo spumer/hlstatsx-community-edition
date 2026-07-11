@@ -106,5 +106,8 @@ return [
     // refactor: token-diff can't fold across live interpolation).
     'awards_daily.period_daily'     => 'Daily',
     'awards_daily.period_day_suffix' => 'Day',
-    'awards_daily.no_winner'         => 'No Award Winner',
+    'awards.no_winner'         => 'No Award Winner',
+
+    // pages/awards_global.php
+    'awards_global.title' => 'Global Awards',
 ];

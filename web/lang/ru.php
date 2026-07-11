@@ -110,5 +110,8 @@ return [
     // silently dropped.
     'awards_daily.period_daily'     => 'Ежедневные',
     'awards_daily.period_day_suffix' => 'дн.',
-    'awards_daily.no_winner'         => 'Нет Награжденных',
+    'awards.no_winner'         => 'Нет Награжденных',
+
+    // pages/awards_global.php
+    'awards_global.title' => 'Общие Награды',
 ];

@@ -139,7 +139,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			$achvd = "{$imagestring} <a href=\"hlstats.php?mode=playerinfo&amp;player={$r['d_winner_id']}&amp;game={$game}\">{$winnerstring}</a>";
 			$wincount = $r['d_winner_count'];
 		} else {
-			$achvd = "<em>" . __('awards_daily.no_winner') . "</em>";
+			$achvd = "<em>" . __('awards.no_winner') . "</em>";
 			$wincount= "0";
 		}
 			
