@@ -244,4 +244,28 @@ return [
     'roles.stats.pre'     => 'Всего ',
     'roles.stats.mid'     => ' убийств и ',
     'roles.stats.post'    => ' смертей',
+
+    // pages/rolesinfo.php
+    // no_role_id is a fresh translation (our RU source left it in
+    // English too). breadcrumb_details/section_title preserve our RU
+    // source's own case inconsistency ('Роль Подробно' vs 'Роль
+    // подробно'), same pattern as dailyawardinfo/rankinfo/ribboninfo.
+    // headshots_with/headshots_word are approximate: our RU source
+    // restructures this whole clause ("из них N хедшотами" -- "of them,
+    // N by headshots") rather than a literal "with N headshots".
+    // back_to_link uses the dative 'Ролям' (object of "к"), distinct
+    // from breadcrumb_roles' nominative 'Роли'.
+    'rolesinfo.no_role_id'         => 'Не указан ID роли.',
+    'rolesinfo.title'              => 'Роль Подробно',
+    'rolesinfo.breadcrumb_roles'   => 'Роли',
+    'rolesinfo.breadcrumb_details' => 'Роль Подробно',
+    'rolesinfo.section_title'      => 'Роль подробно',
+    'rolesinfo.col.kills_suffix'   => ' убил',
+    'rolesinfo.stats.pre'          => '',
+    'rolesinfo.stats.mid'          => ' убийств сделал ',
+    'rolesinfo.headshots_with'     => 'из них',
+    'rolesinfo.headshots_word'     => 'хедшотами',
+    'rolesinfo.stats.days_pre'     => '(за последние ',
+    'rolesinfo.stats.days_post'    => ' дней)',
+    'rolesinfo.back_to_link'       => 'Ролям',
 ];

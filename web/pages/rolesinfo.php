@@ -42,7 +42,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	
 	// Roles Details
 	
-	$role = valid_request($_GET['role'], false) or error('No role ID specified.');
+	$role = valid_request($_GET['role'], false) or error(__('rolesinfo.no_role_id'));
 	
 	$db->query("
 		SELECT
@@ -67,17 +67,17 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 	$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
 	if ($db->num_rows() != 1) {
-		error('Invalid or no game specified.');
+		error(__('rankinfo.invalid_game'));
 	} else {
 		list($gamename) = $db->fetch_row();
 	}
 
 	pageHeader(
-		array($gamename, 'Roles Details', htmlspecialchars($role_name)),
+		array($gamename, __('rolesinfo.title'), htmlspecialchars($role_name)),
 		array(
 			$gamename => $g_options['scripturl']."?game=$game",
-			'Roles Statistics' => $g_options['scripturl']."?mode=roles&game=$game",
-			'Role Details' => ''
+			__('rolesinfo.breadcrumb_roles') => $g_options['scripturl']."?mode=roles&game=$game",
+			__('rolesinfo.breadcrumb_details') => ''
 		),
 		$role_name
 	);
@@ -86,12 +86,12 @@ For support and installation notes visit http://www.hlxcommunity.com
 		array(
 			new TableColumn(
 				'killerName',
-				'Player',
+				__('common.col.player'),
 				'width=60&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k') 
 			),
 			new TableColumn(
 				'frags',
-				ucfirst($role_name) . ' kills',
+				ucfirst($role_name) . __('rolesinfo.col.kills_suffix'),
 				'width=35&align=right'
 			),
 		),
@@ -142,7 +142,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?>
 
 <div class="block">
-	<?php printSectionTitle('Role Details'); ?>
+	<?php printSectionTitle(__('rolesinfo.section_title')); ?>
 	<div class="subblock">
 <?php // figure out URL and absolute path of image
 
@@ -154,16 +154,16 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?>
 		<div style="float:left;">
 			<?php echo $wep_content ?>
-			&nbsp;From a total of <b><?php echo number_format(intval($totalkills)); ?></b> kills as <?php 
+			&nbsp;<?=__('rolesinfo.stats.pre')?><b><?php echo number_format(intval($totalkills)); ?></b><?=__('rolesinfo.stats.mid')?><?php 
 				echo htmlspecialchars($role_name);
 				if($totalheadshots > 0 || $role=='sniper')
 				{
-					echo ' with <b>' . number_format($totalheadshots) . '</b> headshots ';
+					echo ' ' . __('rolesinfo.headshots_with') . ' <b>' . number_format($totalheadshots) . '</b> ' . __('rolesinfo.headshots_word') . ' ';
 				}
-				?> (Last <?php echo $g_options['DeleteDays']; ?> Days)
+				?> <?=__('rolesinfo.stats.days_pre')?><?php echo $g_options['DeleteDays']; ?><?=__('rolesinfo.stats.days_post')?>
 		</div>
 		<div style="float:right;">
-			Back to <a href="<?php echo $g_options['scripturl'] . "?mode=roles&amp;game=$game"; ?>">Roles Statistics</a>
+			<?=__('dailyawardinfo.back_to')?><a href="<?php echo $g_options['scripturl'] . "?mode=roles&amp;game=$game"; ?>"><?=__('rolesinfo.back_to_link')?></a>
 		</div>
 		<div style="clear:both;padding:2px;"></div>
 	</div>

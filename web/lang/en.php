@@ -250,4 +250,24 @@ return [
     'roles.stats.pre'     => 'From a total of ',
     'roles.stats.mid'     => ' kills with ',
     'roles.stats.post'    => ' deaths',
+
+    // pages/rolesinfo.php (invalid_game reuses rankinfo.invalid_game;
+    // TableColumn Player reuses common.col.player; back_to reuses
+    // dailyawardinfo.back_to; section_title reuses breadcrumb_details).
+    // Note the fork's own inconsistency, preserved as-is: 'Roles Details'
+    // (title) vs 'Role Details' (breadcrumb/section_title) vs
+    // 'Roles Statistics' (breadcrumb) vs roles.php's 'Role Statistics'.
+    'rolesinfo.no_role_id'         => 'No role ID specified.',
+    'rolesinfo.title'              => 'Roles Details',
+    'rolesinfo.breadcrumb_roles'   => 'Roles Statistics',
+    'rolesinfo.breadcrumb_details' => 'Role Details',
+    'rolesinfo.section_title'      => 'Role Details',
+    'rolesinfo.col.kills_suffix'   => ' kills',
+    'rolesinfo.stats.pre'          => 'From a total of ',
+    'rolesinfo.stats.mid'          => ' kills as ',
+    'rolesinfo.headshots_with'     => 'with',
+    'rolesinfo.headshots_word'     => 'headshots',
+    'rolesinfo.stats.days_pre'     => '(Last ',
+    'rolesinfo.stats.days_post'    => ' Days)',
+    'rolesinfo.back_to_link'       => 'Roles Statistics',
 ];
