@@ -26,6 +26,14 @@
  * -- but this pilot's extraction only emits the shapes above, so only those
  * are modeled here.)
  *
+ * Shape 2/3 detection uses PHP's own token_get_all(), not regex, precisely
+ * because regex-matching quote characters textually is wrong: a lone
+ * apostrophe inside a `//` comment (e.g. "doesn't") or inside an
+ * interpolated string's non-literal part reads as a string delimiter to a
+ * naive scanner and corrupts quote-pairing for the rest of the file.
+ * token_get_all() classifies comments and interpolated-string pieces as
+ * their own token types, so this can't happen.
+ *
  * Usage:
  *   git show master:web/pages/players.php > /tmp/before_players.php
  *   php scripts/i18n/token-diff.php web/pages/players.php --before=/tmp/before_players.php
@@ -87,7 +95,7 @@ function parseArgs(array $argv): array
     $out = [];
 
     foreach (array_slice($argv, 1) as $arg) {
-        if (str_starts_with($arg, '--before=')) {
+        if (substr($arg, 0, strlen('--before=')) === '--before=') {
             $out['before'] = substr($arg, strlen('--before='));
         } elseif (!isset($out['path'])) {
             $out['path'] = $arg;
@@ -127,35 +135,86 @@ function reconstructAsEn(string $source, array $en): array
         return [$source, $wraps, $errors];
     }
 
-    // Shape 2 + 3: find every remaining literal or __('key') call, group
-    // consecutive ones joined only by "." into chains, and fold any chain
-    // containing a call back into a single literal.
-    $tokenPattern = '/\'(?:[^\'\\\\]|\\\\.)*\'|"(?:[^"\\\\]|\\\\.)*"|__\(\s*(?:\'(?:[^\'\\\\]|\\\\.)*\'|"(?:[^"\\\\]|\\\\.)*")\s*\)/';
+    // Shape 2 + 3: find every remaining literal or __('key') call using
+    // PHP's own tokenizer, not regex. An earlier regex-only version of
+    // this function matched quote characters textually, so an apostrophe
+    // inside a // comment (e.g. "doesn't") was mistaken for a string
+    // delimiter and corrupted quote-pairing for the rest of the file.
+    // token_get_all() classifies comments (T_COMMENT) and interpolated
+    // strings (which decompose into several tokens, not one
+    // T_CONSTANT_ENCAPSED_STRING) correctly, so that class of bug can't
+    // recur here.
+    $tokens = token_get_all($source);
+    $n = count($tokens);
 
-    preg_match_all($tokenPattern, $source, $m, PREG_OFFSET_CAPTURE);
-    $tokens = $m[0];
+    // Pass 1: locate atoms (literals and __('key') calls) with their
+    // byte offsets and exact source text, plus whether a "connector"
+    // (whitespace or a lone ".") separates each atom from the previous one.
+    $atoms = [];
+    $offset = 0;
+    $i = 0;
 
-    $chains = [];
-    $current = [];
+    while ($i < $n) {
+        $token = $tokens[$i];
+        $id = is_array($token) ? $token[0] : null;
+        $text = is_array($token) ? $token[1] : $token;
 
-    foreach ($tokens as $token) {
-        [$text, $offset] = $token;
+        if ($id === T_STRING && $text === '__') {
+            $call = tryParseCall($tokens, $i);
 
-        if ($current === []) {
-            $current[] = $token;
+            if ($call !== null) {
+                [$consumed, $key] = $call;
+                $callText = tokensText($tokens, $i, $consumed);
+                $atoms[] = ['type' => 'call', 'text' => $callText, 'offset' => $offset, 'key' => $key];
+                $offset += strlen($callText);
+                $i += $consumed;
+                continue;
+            }
+        }
+
+        if ($id === T_CONSTANT_ENCAPSED_STRING) {
+            $atoms[] = ['type' => 'literal', 'text' => $text, 'offset' => $offset, 'key' => null];
+            $offset += strlen($text);
+            $i++;
             continue;
         }
 
-        $prev = $current[count($current) - 1];
-        $prevEnd = $prev[1] + strlen($prev[0]);
-        $between = substr($source, $prevEnd, $offset - $prevEnd);
+        $isConnector = $id === T_WHITESPACE || (!is_array($token) && $token === '.');
+        $atoms[] = ['type' => $isConnector ? 'connector' : 'other', 'text' => $text, 'offset' => $offset, 'key' => null];
+        $offset += strlen($text);
+        $i++;
+    }
 
-        if (preg_match('/^\s*\.\s*$/', $between)) {
-            $current[] = $token;
-        } else {
-            $chains[] = $current;
-            $current = [$token];
+    // Pass 2: group maximal runs of literal/call atoms separated only by
+    // connector atoms into chains; anything else (code, comments, other
+    // punctuation) breaks a chain.
+    $chains = [];
+    $current = [];
+    $pendingConnectors = [];
+
+    foreach ($atoms as $atom) {
+        if ($atom['type'] === 'connector') {
+            $pendingConnectors[] = $atom;
+            continue;
         }
+
+        if ($atom['type'] === 'literal' || $atom['type'] === 'call') {
+            if ($current !== []) {
+                $current = array_merge($current, $pendingConnectors);
+            }
+            $pendingConnectors = [];
+            $current[] = $atom;
+            continue;
+        }
+
+        // 'other': breaks the chain (pending connectors belonged to code
+        // we're not touching, e.g. "$a, $b" -- discard them, not part of
+        // any chain either way).
+        if ($current !== []) {
+            $chains[] = $current;
+        }
+        $current = [];
+        $pendingConnectors = [];
     }
 
     if ($current !== []) {
@@ -167,8 +226,8 @@ function reconstructAsEn(string $source, array $en): array
         $chain = $chains[$c];
         $hasCall = false;
 
-        foreach ($chain as [$text, ]) {
-            if (str_starts_with($text, '__(')) {
+        foreach ($chain as $atom) {
+            if ($atom['type'] === 'call') {
                 $hasCall = true;
                 break;
             }
@@ -183,10 +242,13 @@ function reconstructAsEn(string $source, array $en): array
         $chainKeys = [];
         $chainError = null;
 
-        foreach ($chain as [$text, ]) {
-            if (str_starts_with($text, '__(')) {
-                preg_match('/__\(\s*([\'"])((?:(?!\1).)*)\1\s*\)/', $text, $mm);
-                $key = $mm[2];
+        foreach ($chain as $atom) {
+            if ($atom['type'] === 'connector') {
+                continue; // "." and whitespace vanish once folded into one literal
+            }
+
+            if ($atom['type'] === 'call') {
+                $key = $atom['key'];
                 $chainKeys[] = $key;
 
                 if (!array_key_exists($key, $en)) {
@@ -196,8 +258,8 @@ function reconstructAsEn(string $source, array $en): array
 
                 $value .= $en[$key];
             } else {
-                $quoteChar ??= $text[0];
-                $value .= decodePhpStringLiteral($text);
+                $quoteChar ??= $atom['text'][0];
+                $value .= decodePhpStringLiteral($atom['text']);
             }
         }
 
@@ -208,15 +270,66 @@ function reconstructAsEn(string $source, array $en): array
             continue;
         }
 
-        $start = $chain[0][1];
+        $first = $chain[0];
         $last = $chain[count($chain) - 1];
-        $end = $last[1] + strlen($last[0]);
+        $start = $first['offset'];
+        $end = $last['offset'] + strlen($last['text']);
 
         $replacement = encodePhpStringLiteral($value, $quoteChar ?? "'");
         $source = substr_replace($source, $replacement, $start, $end - $start);
     }
 
     return [$source, $wraps, $errors];
+}
+
+/**
+ * Matches T_STRING("__") "(" [T_WHITESPACE] T_CONSTANT_ENCAPSED_STRING [T_WHITESPACE] ")"
+ * starting at $tokens[$i] (which must already be the "__" T_STRING).
+ *
+ * @return array{0: int, 1: string}|null [tokens consumed, key] or null if not a match.
+ */
+function tryParseCall(array $tokens, int $i): ?array
+{
+    $n = count($tokens);
+    $j = $i + 1;
+
+    if ($j >= $n || $tokens[$j] !== '(') {
+        return null;
+    }
+    $j++;
+
+    while ($j < $n && is_array($tokens[$j]) && $tokens[$j][0] === T_WHITESPACE) {
+        $j++;
+    }
+
+    if ($j >= $n || !is_array($tokens[$j]) || $tokens[$j][0] !== T_CONSTANT_ENCAPSED_STRING) {
+        return null;
+    }
+
+    $key = decodePhpStringLiteral($tokens[$j][1]);
+    $j++;
+
+    while ($j < $n && is_array($tokens[$j]) && $tokens[$j][0] === T_WHITESPACE) {
+        $j++;
+    }
+
+    if ($j >= $n || $tokens[$j] !== ')') {
+        return null;
+    }
+
+    return [$j - $i + 1, $key];
+}
+
+function tokensText(array $tokens, int $start, int $count): string
+{
+    $out = '';
+
+    for ($k = 0; $k < $count; $k++) {
+        $token = $tokens[$start + $k];
+        $out .= is_array($token) ? $token[1] : $token;
+    }
+
+    return $out;
 }
 
 function decodePhpStringLiteral(string $tokenText): string
