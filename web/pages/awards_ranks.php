@@ -127,9 +127,11 @@ For support and installation notes visit http://www.hlxcommunity.com
 			$achvd = __('awards_ranks.achieved_prefix').$ranks[$r['rankId']].__('awards_ranks.achieved_suffix');
 		}    
    
+		$minKills = $r['minKills'];
+		$maxKills = $r['maxKills'];
 		echo "<td style=\"text-align:center;vertical-align:top;width:$colwidth%;\">"
 			.'<strong>'.$r['rankName'].'</strong><br />'
-			.'<span class="fSmall">('.$r['minKills'].'-'.$r['maxKills'].'&nbsp;kills)'.'<br />'
+			.'<span class="fSmall">('.$minKills.'-'.$maxKills.'&nbsp;'.__('awards_ranks.kills_suffix').')'.'<br />'
 			."$achvd<br /></span>"
 			.$imagestring.'
 			</td>';

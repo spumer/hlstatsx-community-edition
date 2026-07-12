@@ -128,14 +128,18 @@ return [
     'awards_global.title' => 'Global Awards',
 
     // pages/awards_ranks.php (title reuses awards.tab.ranks)
-    // '&nbsp;kills)' word "kills" NOT extracted: immediately chained via
-    // "." to an unrelated adjacent literal ('<br />'), and the token-diff
-    // fold groups by raw dot-adjacency with no logical-boundary awareness,
-    // so wrapping it would merge that unrelated literal into the same
-    // reconstructed token and break byte-parity. Flagged, see batch report.
+    // '&nbsp;kills)' word "kills" IS now extracted (structural package
+    // group в) -- $r['minKills']/$r['maxKills'] were hoisted into local
+    // $minKills/$maxKills variables first so the wrap sits next to plain
+    // T_VARIABLE tokens, not quoted array-key strings: token-diff's
+    // chain-folder tokenizes a quoted array key ('minKills') as if it
+    // were itself a candidate literal atom, so wrapping "kills" while it
+    // was still dot-adjacent to $r['minKills']/$r['maxKills'] risked a
+    // corrupted fold, not just an expected token-diff FAIL.
     'awards_ranks.player_list_fallback' => 'Player List',
     'awards_ranks.achieved_prefix'      => 'Achieved by ',
     'awards_ranks.achieved_suffix'      => ' Players',
+    'awards_ranks.kills_suffix'         => 'kills',
 
     // pages/awards_ribbons.php (title reuses awards.tab.ribbons; prefix
     // reuses awards_ranks.achieved_prefix, byte-identical 'Achieved by ')

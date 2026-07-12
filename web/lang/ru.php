@@ -131,6 +131,7 @@ return [
     // sprintf placeholder.
     'awards_ranks.achieved_prefix' => '',
     'awards_ranks.achieved_suffix' => ' игроков заслужили',
+    'awards_ranks.kills_suffix' => 'убийств',
 
     // pages/awards_ribbons.php -- our RU source uses the same empty-prefix
     // restructuring here too (reuses awards_ranks.achieved_prefix).
