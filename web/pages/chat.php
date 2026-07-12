@@ -97,14 +97,14 @@
 
 	pageHeader
 	(
-		array ($gamename, 'Server Chat Statistics'),
-		array ($gamename => "%s?game={$gameSafeHtml}", 'Server Chat Statistics' => '')
+		array ($gamename, __('chat.title')),
+		array ($gamename => "%s?game={$gameSafeHtml}", __('chat.title') => '')
 	);
 
-	$servername = "(All Servers)";
+	$servername = __('chat.default.all_servers');
 	if ($showserver != 0) {
 		$servername = getServerNameById($db, $showserver);
-		$servername = ($servername !== null) ? "({$servername})" : "(Unknown Server)";
+		$servername = ($servername !== null) ? "({$servername})" : __('chat.default.unknown_server');
 	}
 
 	$delaySql = "";
@@ -284,19 +284,19 @@
 	function getChatColumns($showserver) {
 		if ($showserver == 0) {
 			return [
-				new TableColumn('eventTime', 'Date', 'width=16'),
-				new TableColumn('lastName', 'Player', 'width=17&sort=no&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')),
-				new TableColumn('message', 'Message', 'width=34&sort=no&embedlink=yes'),
-				new TableColumn('serverName', 'Server', 'width=23&sort=no'),
-				new TableColumn('map', 'Map', 'width=10&sort=no')
+				new TableColumn('eventTime', __('chat.col.date'), 'width=16'),
+				new TableColumn('lastName', __('common.col.player'), 'width=17&sort=no&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')),
+				new TableColumn('message', __('chat.col.message'), 'width=34&sort=no&embedlink=yes'),
+				new TableColumn('serverName', __('chat.col.server'), 'width=23&sort=no'),
+				new TableColumn('map', __('maps.col.map'), 'width=10&sort=no')
 			];
 		}
 
 		return [
-			new TableColumn('eventTime', 'Date', 'width=16'),
-			new TableColumn('lastName', 'Player', 'width=24&sort=no&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')),
-			new TableColumn('message', 'Message', 'width=44&sort=no&embedlink=yes'),
-			new TableColumn('map', 'Map', 'width=16&sort=no')
+			new TableColumn('eventTime', __('chat.col.date'), 'width=16'),
+			new TableColumn('lastName', __('common.col.player'), 'width=24&sort=no&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')),
+			new TableColumn('message', __('chat.col.message'), 'width=44&sort=no&embedlink=yes'),
+			new TableColumn('map', __('maps.col.map'), 'width=16&sort=no')
 		];
 	}
 ?>
@@ -315,10 +315,10 @@
 					<input type="hidden" name="mode" value="chat" />
 					<input type="hidden" name="game" value="<?=$gameSafeHtml;?>">
 
-					<strong>&#8226;</strong> Show Chat from
+					<strong>&#8226;</strong> <?=__('chat.label.show_chat_from')?>
 
 					<select name="server_id">
-						<option value="0">All Servers</option>
+						<option value="0"><?=__('chat.option.all_servers')?></option>
 
 						<?php foreach($serversList as $srv) : ?>
 							<?php $selected = ($showserver == $srv['serverId']) ? 'selected' : ''; ?>
@@ -329,16 +329,16 @@
 						<?php endforeach; ?>
 					</select>
 
-					Filter: <input type="text" name="filter" value="<?=eHtml($filter);?>"> 
+					<?=__('chat.label.filter')?> <input type="text" name="filter" value="<?=eHtml($filter);?>"> 
 
-					<input type="submit" value="View" class="smallsubmit">
-					<input type="button" value="Clear" class="smallsubmit" onclick="window.location.href='?mode=chat&game=<?= urlencode($checkGame); ?>';">
+					<input type="submit" value="<?=__('chat.btn.view')?>" class="smallsubmit">
+					<input type="button" value="<?=__('chat.btn.clear')?>" class="smallsubmit" onclick="window.location.href='?mode=chat&game=<?= urlencode($checkGame); ?>';">
 				</form>
 			</span>
 
 			<?php if (!empty($delaySql)) : ?>
 				<div style="font-size:0.9em; color:#8d90a3; margin-top:10px;">
-					*Messages are delayed by <?=eHtml($delayChat);?> minutes to prevent real-time tracking.
+					<?=__('chat.msg.delay_pre')?><?=eHtml($delayChat);?><?=__('chat.msg.delay_post')?>
 				</div>
 			<?php endif; ?>
 		</div>
@@ -351,7 +351,7 @@
 
 	<div class="subblock">
 		<div style="float:right;">
-			Go to: <a href="<?=eHtml($fullUrl);?>"><?=eHtml($gamename);?></a>
+			<?=__('players.nav.goto_label')?> <a href="<?=eHtml($fullUrl);?>"><?=eHtml($gamename);?></a>
 		</div>
 	</div>
 </div>

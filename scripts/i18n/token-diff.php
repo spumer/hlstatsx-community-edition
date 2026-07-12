@@ -108,6 +108,10 @@ const BARE_CALL_QUOTE_OVERRIDES = [
     'web/pages/claninfo.php' => [
         'claninfo.no_clan_id' => '"',
     ],
+    'web/pages/chat.php' => [
+        'chat.default.all_servers'    => '"',
+        'chat.default.unknown_server' => '"',
+    ],
 ];
 
 /**

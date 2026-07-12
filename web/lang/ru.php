@@ -340,4 +340,19 @@ return [
     // pages/claninfo_mapperformance.php
     'claninfo_mapperformance.col.map_name' => 'Карта',
     'claninfo_mapperformance.title'        => 'Статистика карт *',
+
+    // pages/chat.php
+    'chat.title'                  => 'Чат',
+    'chat.default.all_servers'    => '(Все Серверы)',
+    'chat.default.unknown_server' => '(Неизвестный сервер)',
+    'chat.col.date'                => 'Дата',
+    'chat.col.message'             => 'Сообщение',
+    'chat.col.server'              => 'Сервер',
+    'chat.label.show_chat_from'   => 'Показать Чат',
+    'chat.option.all_servers'     => 'Все Серверы',
+    'chat.label.filter'            => 'Фильтр:',
+    'chat.btn.view'                 => 'Показать',
+    'chat.btn.clear'                => 'Очистить',
+    'chat.msg.delay_pre'           => '*Сообщения задерживаются на ',
+    'chat.msg.delay_post'          => ' минут для предотвращения отслеживания в реальном времени.',
 ];

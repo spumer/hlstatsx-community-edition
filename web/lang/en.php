@@ -370,4 +370,29 @@ return [
     // byte-identical labels as claninfo_weapons.php)
     'claninfo_mapperformance.col.map_name' => 'Map Name',
     'claninfo_mapperformance.title'        => 'Map Performance *',
+
+    // pages/chat.php (breadcrumb/title RU value follows zozo's own
+    // simplified wording for this position, common.nav.chat/common.col.
+    // player/maps.col.map reused for TableColumn labels; footer nav
+    // reuses players.nav.goto_label). error("No such game '$game'.")
+    // NOT extracted -- same deferred $-interpolation category as
+    // elsewhere. sprintf('%s %s Server Chat Log (Last %d Days)', ...)
+    // NOT extracted -- __f() candidate (3 placeholders), deferred per
+    // the batch-2 instruction to decide __f() adoption in one pass at
+    // the end. "Clear" button and the delay-notice message are fork-
+    // only additions with no zozo RU source; translated fresh here as
+    // unambiguous UI vocabulary (not flagged, unlike the __f() items).
+    'chat.title'                  => 'Server Chat Statistics',
+    'chat.default.all_servers'    => '(All Servers)',
+    'chat.default.unknown_server' => '(Unknown Server)',
+    'chat.col.date'                => 'Date',
+    'chat.col.message'             => 'Message',
+    'chat.col.server'              => 'Server',
+    'chat.label.show_chat_from'   => 'Show Chat from',
+    'chat.option.all_servers'     => 'All Servers',
+    'chat.label.filter'            => 'Filter:',
+    'chat.btn.view'                 => 'View',
+    'chat.btn.clear'                => 'Clear',
+    'chat.msg.delay_pre'           => '*Messages are delayed by ',
+    'chat.msg.delay_post'          => ' minutes to prevent real-time tracking.',
 ];
