@@ -437,4 +437,9 @@ return [
     'playerinfo_aliases.col.deaths'    => 'Смерти',
     'playerinfo_aliases.col.suicides'  => 'Самоубийств',
     'playerinfo_aliases.title'          => 'Ники Игрока',
+
+    // pages/playerinfo_playeractions.php
+    'playerinfo_playeractions.col.accumulated_points' => 'Получено очков',
+    'playerinfo_playeractions.title'                  => 'Действия игрока *',
+    'playerinfo_playeractions.col.earned_against'     => 'Стал Жертвой, раз(а)',
 ];

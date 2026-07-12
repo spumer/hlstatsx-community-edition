@@ -565,4 +565,17 @@ return [
     'playerinfo_aliases.col.deaths'    => 'Deaths',
     'playerinfo_aliases.col.suicides'  => 'Suicides',
     'playerinfo_aliases.title'          => 'Aliases',
+
+    // pages/playerinfo_playeractions.php (claninfo_actions.col.action and
+    // actions.col.earned reused byte-for-byte; the victims table's
+    // section title reuses claninfo_actions.title.victims exactly, since
+    // that phrase applies identically to a clan's or a single player's
+    // list of victim-actions). playerinfo_playeractions.title is a
+    // separate key from claninfo_actions.title.player_actions despite
+    // identical EN text: RU needs the singular ("игрока") on this
+    // single-player page vs the plural ("игроков") used for a clan's
+    // collective actions.
+    'playerinfo_playeractions.col.accumulated_points' => 'Accumulated Points',
+    'playerinfo_playeractions.title'                  => 'Player Actions *',
+    'playerinfo_playeractions.col.earned_against'     => 'Earned Against',
 ];

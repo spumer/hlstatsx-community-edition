@@ -47,19 +47,19 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'description',
-				'Action',
+				__('claninfo_actions.col.action'),
 				'width=45&link=' . urlencode("mode=actioninfo&amp;action=%k&amp;game=$game")
 			),
 			new TableColumn
 			(
 				'obj_count',
-				'Earned',
+				__('actions.col.earned'),
 				'width=25&align=right&append=+times'
 			),
 			new TableColumn
 			(
 				'obj_bonus',
-				'Accumulated Points',
+				__('playerinfo_playeractions.col.accumulated_points'),
 				'width=25&align=right'
 			)
 		),
@@ -122,7 +122,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?>
 		<div style="clear:both;padding-top:20px;"></div>
 <?php
-		printSectionTitle('Player Actions *');
+		printSectionTitle(__('playerinfo_playeractions.title'));
 		$tblPlayerActions->draw($result, $numitems, 95);
 ?>
 		<br /><br />
@@ -135,19 +135,19 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'description',
-				'Action',
+				__('claninfo_actions.col.action'),
 				'width=45&link=' . urlencode("mode=actioninfo&amp;action=%k&amp;game=$game#victims")
 			),
 			new TableColumn
 			(
 				'obj_count',
-				'Earned Against',
+				__('playerinfo_playeractions.col.earned_against'),
 				'width=25&align=right&append=+times'
 			),
 			new TableColumn
 			(
 				'obj_bonus',
-				'Accumulated Points',
+				__('playerinfo_playeractions.col.accumulated_points'),
 				'width=25&align=right'
 			)
 		),
@@ -194,7 +194,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 <?php
 		}
 		
-		printSectionTitle('Victims of Player-Player Actions *');
+		printSectionTitle(__('claninfo_actions.title.victims'));
 		$tblPlayerPlayerActionsV->draw($result, $numitems, 95);
 ?>
 		<br /><br />
