@@ -54,23 +54,23 @@ For support and installation notes visit http://www.hlxcommunity.com
 		array(
 			new TableColumn(
 				'weapon',
-				'Weapon',
+				__('claninfo_weapons.col.weapon'),
 				'width=15&type=weaponimg&align=center&link=' . urlencode("mode=weaponinfo&amp;weapon=%k&amp;game=$game"),
 				$fname
 			),
 			new TableColumn(
 				'modifier',
-				'Points Modifier',
+				__('claninfo_weapons.col.points_modifier'),
 				'width=10&align=right'
 			),
 			new TableColumn(
 				'kills',
-				'Kills',
+				__('common.col.kills'),
 				'width=11&align=right'
 			),
 			new TableColumn(
 				'kpercent',
-				'Percentage of Kills',
+				__('claninfo_weapons.col.percentage_of_kills'),
 				'width=18&sort=no&type=bargraph'
 			),
 			new TableColumn(
@@ -80,12 +80,12 @@ For support and installation notes visit http://www.hlxcommunity.com
 			),
 			new TableColumn(
 				'headshots',
-				'Headshots',
+				__('common.col.headshots'),
 				'width=8&align=right'
 			),
 			new TableColumn(
 				'hpercent',
-				'Percentage of Headshots',
+				__('claninfo_weapons.col.percentage_of_headshots'),
 				'width=18&sort=no&type=bargraph'
 			),
 			new TableColumn(
@@ -95,7 +95,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			),
 			new TableColumn(
 				'hpk',
-				'Hpk',
+				__('claninfo_weapons.col.hpk'),
 				'width=5&align=right'
 			)
 		),
@@ -138,7 +138,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			$tblWeapons->sort2 $tblWeapons->sortorder
 	");
 
-	printSectionTitle('Weapon Usage *');
+	printSectionTitle(__('claninfo_weapons.title.weapon_usage'));
 	$tblWeapons->draw($result, $db->num_rows($result), 95);
 ?>
 	<br /><br />
@@ -151,53 +151,53 @@ For support and installation notes visit http://www.hlxcommunity.com
 		array(
 			new TableColumn(
 				'smweapon',
-				'Weapon',
+				__('claninfo_weapons.col.weapon'),
 				'width=15&type=weaponimg&align=center&link=' . urlencode("mode=weaponinfo&amp;weapon=%k&amp;game=$game"),
 				$fname
 			),
 			new TableColumn(
 				'smshots',
-				'Shots',
+				__('claninfo_weapons.col.shots'),
 				'width=8&align=right'
 			),
 			new TableColumn(
 				'smhits',
-				'Hits',
+				__('claninfo_weapons.col.hits'),
 				'width=8&align=right'
 			),
 			new TableColumn(
 				'smdamage',
-				'Damage',
+				__('claninfo_weapons.col.damage'),
 				'width=8&align=right'
 			),
 			new TableColumn(
 				'smheadshots',
-				'Headshots',
+				__('common.col.headshots'),
 				'width=8&align=right'
 			),
 			new TableColumn(
 				'smkills',
-				'Kills',
+				__('common.col.kills'),
 				'width=7&align=right'
 			),
 			new TableColumn(
 				'smkdr',
-				'Kills per Death',
+				__('claninfo_weapons.col.kills_per_death'),
 				'width=12&align=right'
 			),
 			new TableColumn(
 				'smaccuracy',
-				'Accuracy',
+				__('common.col.accuracy'),
 				'width=8&align=right&append=' . urlencode('%')
 			),
 			new TableColumn(
 				'smdhr',
-				'Damage per Hit',
+				__('claninfo_weapons.col.damage_per_hit'),
 				'width=10&align=right'
 			),
 			new TableColumn(
 				'smspk',
-				'Shots per Kill',
+				__('claninfo_weapons.col.shots_per_kill'),
 				'width=11&align=right'
 			)
 		),
@@ -244,7 +244,7 @@ For support and installation notes visit http://www.hlxcommunity.com
     
 if ($db->num_rows($result) != 0)
 {
-	printSectionTitle('Weapon Stats *');
+	printSectionTitle(__('claninfo_weapons.title.weapon_stats'));
 	$tblWeaponstats->draw($result, $db->num_rows($result), 95);
 ?>
 	<br /><br />
@@ -260,28 +260,28 @@ if ($db->num_rows($result) != 0)
 			array(
 				new TableColumn(
 					'smweapon',
-					'Weapon',
+					__('claninfo_weapons.col.weapon'),
 					'width=35&type=weaponimg&align=center&link='.urlencode("javascript:switch_weapon('%k');"),
 					$fname
 				),
 				new TableColumn(
 					'smhits',
-					'Hits',
+					__('claninfo_weapons.col.hits'),
 					'width=15&align=right'
 				),
 				new TableColumn(
 					'smleft',
-					'Left',
+					__('claninfo_weapons.col.left'),
 					'width=15&align=right&append=' . urlencode('%')
 				),
 				new TableColumn(
 					'smmiddle',
-					'Middle',
+					__('claninfo_weapons.col.middle'),
 					'width=15&align=right&append=' . urlencode('%')
 				),
 				new TableColumn(
 					'smright',
-					'Right',
+					__('claninfo_weapons.col.right'),
 					'width=15&align=right&append=' . urlencode('%')
 				)
 			),
@@ -410,7 +410,7 @@ if ($db->num_rows($result) != 0)
 
 if ($db->num_rows($result) != 0)
 {
-	printSectionTitle('Weapon Targets *');
+	printSectionTitle(__('claninfo_weapons.title.weapon_targets'));
 	if ($g_options['show_weapon_target_flash'] == 1)
 	{
 ?>
@@ -599,7 +599,7 @@ if ($db->num_rows($result) != 0)
 	<div style="float:right;vertical-align:top;width:480px;">
 		<table class="data-table">
 			<tr class="data-table-head">
-				<td style="text-align:center;">Targets</td>
+				<td style="text-align:center;"><?=__('claninfo_weapons.col.targets_header')?></td>
 			</tr>
 			<tr class="bg1">
 				<td style="text-align:center;">
@@ -614,7 +614,7 @@ if ($db->num_rows($result) != 0)
 			</tr>
 			<tr class="bg2">
 				<td style="text-align:center;">
-					<a href="javascript:switch_weapon('All Weapons');">Show total target statistics</a>
+					<a href="javascript:switch_weapon('All Weapons');"><?=__('claninfo_weapons.link.show_total_stats')?></a>
 				</td>
 			</tr>
 		</table>

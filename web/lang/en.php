@@ -334,4 +334,33 @@ return [
     'claninfo_teams.col.percentage_of_times'  => 'Percentage of Times',
     'claninfo_teams.title.team_selection'     => 'Team Selection *',
     'claninfo_teams.title.role_selection'     => 'Role Selection *',
+
+    // pages/claninfo_weapons.php ('Weapon'/'Hits' reused across all 3
+    // tables on this page; Kills/Headshots/Accuracy reuse common.col.*).
+    // The 12-column "else" branch (used only when
+    // $g_options['show_weapon_target_flash'] == 0) and the Adobe Flash
+    // fallback message ("The hitbox display requires...") are NOT
+    // extracted -- zozo's own copy of this file left both untranslated
+    // (byte-identical to upstream English), so there is no RU source to
+    // draw from; flagged for a team decision (fresh-translate now under
+    // plan sect 5.4, or leave English as legacy/dead Flash-era code).
+    'claninfo_weapons.col.weapon'                  => 'Weapon',
+    'claninfo_weapons.col.points_modifier'         => 'Points Modifier',
+    'claninfo_weapons.col.percentage_of_kills'     => 'Percentage of Kills',
+    'claninfo_weapons.col.percentage_of_headshots' => 'Percentage of Headshots',
+    'claninfo_weapons.col.hpk'                      => 'Hpk',
+    'claninfo_weapons.title.weapon_usage'          => 'Weapon Usage *',
+    'claninfo_weapons.col.shots'                    => 'Shots',
+    'claninfo_weapons.col.hits'                     => 'Hits',
+    'claninfo_weapons.col.damage'                   => 'Damage',
+    'claninfo_weapons.col.kills_per_death'         => 'Kills per Death',
+    'claninfo_weapons.col.damage_per_hit'          => 'Damage per Hit',
+    'claninfo_weapons.col.shots_per_kill'          => 'Shots per Kill',
+    'claninfo_weapons.title.weapon_stats'          => 'Weapon Stats *',
+    'claninfo_weapons.col.left'                     => 'Left',
+    'claninfo_weapons.col.middle'                   => 'Middle',
+    'claninfo_weapons.col.right'                    => 'Right',
+    'claninfo_weapons.title.weapon_targets'        => 'Weapon Targets *',
+    'claninfo_weapons.col.targets_header'          => 'Targets',
+    'claninfo_weapons.link.show_total_stats'       => 'Show total target statistics',
 ];
