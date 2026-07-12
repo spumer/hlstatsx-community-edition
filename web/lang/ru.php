@@ -478,4 +478,7 @@ return [
     'playerinfo.status.good_standing'  => '<span style="color:green;font-weight:bold;">В порядке</span>',
     'playerinfo.tab.maps_servers'       => 'Карты/Серверы',
     'playerinfo.tab.killstats'          => 'Убийства',
+
+    // pages/playerinfo_teams.php
+    'playerinfo_teams.col.joined' => 'Играл',
 ];

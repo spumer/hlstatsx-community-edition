@@ -644,4 +644,15 @@ return [
     'playerinfo.status.good_standing'  => '<span style="color:green;font-weight:bold;">In good standing</span>',
     'playerinfo.tab.maps_servers'       => 'Maps &amp; Servers',
     'playerinfo.tab.killstats'          => 'Killstats',
+
+    // pages/playerinfo_teams.php (Team/Ratio/Role/Kills/Deaths/K:D and
+    // both section titles reuse claninfo_teams.*/roles.col.*/common.
+    // col.* byte-for-byte -- the section-title reuse is despite a
+    // capitalization-only RU difference in zozo's own translation,
+    // treated as a trivial inconsistency, not forked). playerinfo_teams.
+    // col.joined is a separate key from claninfo_teams.col.joined
+    // despite identical EN text: RU needs the singular ("Играл", a
+    // single player joining) vs the plural ("Играли") used for a clan's
+    // aggregate membership.
+    'playerinfo_teams.col.joined' => 'Joined',
 ];
