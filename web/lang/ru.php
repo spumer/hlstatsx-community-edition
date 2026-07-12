@@ -486,4 +486,9 @@ return [
     'playerhistory.title'          => 'История Событий',
     'playerhistory.col.type'        => 'Тип',
     'playerhistory.title_bar.pre'  => 'История событий игрока (за последние ',
+
+    // pages/playerinfo_weapons.php
+    'playerinfo_weapons.title.weapon_stats' => 'Статистика Оружия *',
+    'playerinfo_weapons.col.hits_flash'     => 'Попадания',
+    'playerinfo_weapons.col.targets_header' => 'Попадания',
 ];

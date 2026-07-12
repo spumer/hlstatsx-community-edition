@@ -682,4 +682,29 @@ return [
     'playerhistory.title'          => 'Event History',
     'playerhistory.col.type'        => 'Type',
     'playerhistory.title_bar.pre'  => 'Player Event History (Last ',
+
+    // pages/playerinfo_weapons.php (near-identical structure to
+    // claninfo_weapons.php -- claninfo_weapons.col.weapon/shots/damage/
+    // left/middle/right/damage_per_hit/shots_per_kill, weapons.col.
+    // modifier, common.col.kills/headshots/hpk/kpd/accuracy, roles.col.
+    // ratio, and the Weapon Usage/Targets section titles reused byte-
+    // for-byte; case-only RU differences in zozo's section-title
+    // translations here are treated as trivial, not forked).
+    // playerinfo_weapons.title.weapon_stats is a separate key from
+    // claninfo_weapons.title.weapon_stats: this page's literal EN text
+    // is "Weapon Statistics *" (spelled out), not "Weapon Stats *"
+    // (abbreviated) -- caught by the byte-for-byte gate. playerinfo_
+    // weapons.col.hits_flash and .col.targets_header are separate keys
+    // from claninfo_weapons.col.hits/targets_header despite identical EN
+    // text: zozo used different RU wording for both on this page (a
+    // different grammatical form for "Hits", and "Попадания" instead of
+    // "Цели оружия" for the Targets panel header).
+    //
+    // NOT extracted -- same flagged item as claninfo_weapons.php,
+    // affecting this page too: the 12-column non-flash TableColumn set
+    // and the Adobe Flash fallback message, both left untranslated by
+    // zozo here as well.
+    'playerinfo_weapons.title.weapon_stats' => 'Weapon Statistics *',
+    'playerinfo_weapons.col.hits_flash'     => 'Hits',
+    'playerinfo_weapons.col.targets_header' => 'Targets',
 ];
