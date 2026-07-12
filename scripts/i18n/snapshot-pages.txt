@@ -1,0 +1,82 @@
+# Render-snapshot page list for FEAT-0027-PLAN §6.3 (render-snapshot parity gate).
+#
+# One relative URL (path + query string, no scheme/host -- render-snapshot.sh
+# prepends BASE_URL) per line. Blank lines and lines starting with '#' are
+# ignored. An inline "# comment" after a URL documents which file(s) it
+# exercises; it is not parsed, purely for maintainers reading this file.
+#
+# Placeholder values (game=l4d2, player=1, clan=1, weapon=1, map=1, action=1,
+# award=1, rank=1, ribbon=1, role=1, flag=US) assume a seed database has at
+# least one row for each entity under game code "l4d2". If your seed uses a
+# different game code or these IDs don't resolve, the pages will still
+# render (empty tables / "no such X" error states) -- that's a valid parity
+# target too, since error() also resolves through the i18n facade. For a
+# richer diff (real table rows, not just headers), point these at IDs that
+# actually exist in your seed data and adjust the game code to match.
+#
+# Sub-pages of claninfo.php/playerinfo.php/awards.php are only reachable via
+# their own AJAX tab dispatch (mode=X&type=ajax&tab=Y), not as a standalone
+# mode -- see the routing notes below each family. header.php, footer.php,
+# livestats.php, search-class.php, and web/includes/{class_table,functions,
+# i18n}.php have no route of their own; they're exercised indirectly by
+# every URL below (header/footer wrap every page; livestats.php backs the
+# server tables on servers.php/game.php; search-class.php backs search.php).
+
+# --- Landing / cross-game ---
+/hlstats.php                                                                    # contents.php, default mode (no game selected -> game picker list) + voicecomm_serverlist.php
+/hlstats.php?game=l4d2                                                          # contents.php -> game.php (single/selected game landing) + livestats.php + voicecomm_serverlist.php
+
+# --- Rankings / listings (mode=X&game=...) ---
+/hlstats.php?mode=players&game=l4d2                                            # players.php
+/hlstats.php?mode=clans&game=l4d2                                              # clans.php
+/hlstats.php?mode=countryclans&game=l4d2                                       # countryclans.php
+/hlstats.php?mode=weapons&game=l4d2                                            # weapons.php
+/hlstats.php?mode=roles&game=l4d2                                              # roles.php
+/hlstats.php?mode=maps&game=l4d2                                               # maps.php
+/hlstats.php?mode=actions&game=l4d2                                            # actions.php
+/hlstats.php?mode=awards&game=l4d2                                             # awards.php (tab shell; also directly includes all 4 awards_*.php when playerinfo_tabs=0)
+/hlstats.php?mode=servers&game=l4d2                                            # servers.php (+ livestats.php)
+/hlstats.php?mode=bans&game=l4d2                                               # bans.php
+/hlstats.php?mode=chat&game=l4d2                                               # chat.php
+
+# --- Detail pages needing an entity ID/code ---
+/hlstats.php?mode=rolesinfo&game=l4d2&role=1                                   # rolesinfo.php
+/hlstats.php?mode=weaponinfo&game=l4d2&weapon=1                                # weaponinfo.php
+/hlstats.php?mode=mapinfo&game=l4d2&map=1                                      # mapinfo.php
+/hlstats.php?mode=actioninfo&game=l4d2&action=1                                # actioninfo.php
+/hlstats.php?mode=rankinfo&game=l4d2&rank=1                                    # rankinfo.php
+/hlstats.php?mode=ribboninfo&game=l4d2&ribbon=1                                # ribboninfo.php
+/hlstats.php?mode=dailyawardinfo&game=l4d2&award=1                             # dailyawardinfo.php
+/hlstats.php?mode=countryclansinfo&game=l4d2&flag=US                           # countryclansinfo.php
+
+# --- awards.php AJAX tabs (mode=awards&type=ajax&tab=<name>) ---
+/hlstats.php?mode=awards&type=ajax&tab=daily&game=l4d2                         # awards_daily.php
+/hlstats.php?mode=awards&type=ajax&tab=global&game=l4d2                        # awards_global.php
+/hlstats.php?mode=awards&type=ajax&tab=ranks&game=l4d2                         # awards_ranks.php
+/hlstats.php?mode=awards&type=ajax&tab=ribbons&game=l4d2                       # awards_ribbons.php
+
+# --- claninfo.php + AJAX tabs (mode=claninfo&type=ajax&tab=<name>, '|'-joined = both included) ---
+/hlstats.php?mode=claninfo&game=l4d2&clan=1                                    # claninfo.php (tab shell; also directly includes all sub-pages when playerinfo_tabs=0)
+/hlstats.php?mode=claninfo&type=ajax&tab=general&game=l4d2&clan=1              # claninfo_general.php
+/hlstats.php?mode=claninfo&type=ajax&tab=actions%7Cteams&game=l4d2&clan=1      # claninfo_actions.php + claninfo_teams.php
+/hlstats.php?mode=claninfo&type=ajax&tab=weapons&game=l4d2&clan=1              # claninfo_weapons.php
+/hlstats.php?mode=claninfo&type=ajax&tab=mapperformance&game=l4d2&clan=1       # claninfo_mapperformance.php
+
+# --- playerinfo.php + AJAX tabs (mode=playerinfo&type=ajax&tab=<name>, '_'-joined = both included) ---
+/hlstats.php?mode=playerinfo&game=l4d2&player=1                                # playerinfo.php (tab shell; also directly includes all sub-pages when playerinfo_tabs=0)
+/hlstats.php?mode=playerinfo&type=ajax&tab=general_aliases&game=l4d2&player=1   # playerinfo_general.php + playerinfo_aliases.php
+/hlstats.php?mode=playerinfo&type=ajax&tab=playeractions_teams&game=l4d2&player=1 # playerinfo_playeractions.php + playerinfo_teams.php
+/hlstats.php?mode=playerinfo&type=ajax&tab=weapons&game=l4d2&player=1           # playerinfo_weapons.php
+/hlstats.php?mode=playerinfo&type=ajax&tab=mapperformance_servers&game=l4d2&player=1 # playerinfo_mapperformance.php + playerinfo_servers.php
+/hlstats.php?mode=playerinfo&type=ajax&tab=killstats&game=l4d2&player=1&killLimit=0 # playerinfo_killstats.php
+
+# --- Player-scoped pages reached without an explicit game= (player id alone determines game) ---
+/hlstats.php?mode=playerhistory&player=1                                       # playerhistory.php
+/hlstats.php?mode=playersessions&player=1                                      # playersessions.php
+/hlstats.php?mode=playerawards&player=1                                        # playerawards.php
+/hlstats.php?mode=chathistory&player=1                                         # chathistory.php
+
+# --- Static / form pages ---
+/hlstats.php?mode=search                                                        # search.php (empty form) + search-class.php
+/hlstats.php?mode=search&st=player&q=a                                          # search.php with a query (+ search-class.php result-table path)
+/hlstats.php?mode=help                                                          # help.php
