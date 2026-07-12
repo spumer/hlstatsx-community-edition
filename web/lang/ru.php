@@ -425,4 +425,8 @@ return [
     'livestats.msg.unknown'    => 'Неизвестно',
     'livestats.suffix.wins'    => ' побед)',
     'livestats.msg.no_players' => 'Нет игроков',
+
+    // pages/playerinfo_servers.php
+    'playerinfo_servers.col.percentage_of_headshots' => 'Процент Хедшотов',
+    'playerinfo_servers.title' => 'Активность на Серверах *',
 ];

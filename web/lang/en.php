@@ -541,4 +541,13 @@ return [
     'livestats.msg.unknown'    => 'Unknown',
     'livestats.suffix.wins'    => ' wins)',
     'livestats.msg.no_players' => 'No Players',
+
+    // pages/playerinfo_servers.php (Server/Kills/Ratio/Deaths/K:D/
+    // Headshots/HS:K all reuse existing keys byte-for-byte).
+    // playerinfo_servers.col.percentage_of_headshots is a separate key
+    // from claninfo_weapons.col.percentage_of_headshots despite identical
+    // EN text -- zozo translated it differently on this page ("Percent
+    // of Headshots" vs "Ratio"), preserved as originally authored.
+    'playerinfo_servers.col.percentage_of_headshots' => 'Percentage of Headshots',
+    'playerinfo_servers.title' => 'Server Activity *',
 ];
