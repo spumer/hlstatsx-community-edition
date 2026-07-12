@@ -368,4 +368,18 @@ return [
     'actions.col.reward' => 'Вознаграждение',
     'actions.stats.pre'  => 'Всего ',
     'actions.stats.post' => ' выполненных действий',
+
+    // pages/actioninfo.php
+    'actioninfo.no_action_id'          => 'Не указан ID действия.',
+    'actioninfo.invalid_game'          => 'Некорректный ID игры или игра не указана.',
+    'actioninfo.title'                  => 'Действие Подробно',
+    'actioninfo.col.skill_bonus_total' => 'Получено вознаграждения',
+    'actioninfo.stats.mid1'            => ' всего ',
+    'actioninfo.stats.mid2'            => ' раз(а) (за последние  ',
+    'actioninfo.stats.post'            => ' дней)',
+    'actioninfo.back_to.label'         => 'Вернуться к ',
+    'actioninfo.back_to.action_stats'  => 'Действиям',
+    'actioninfo.title.victims'         => 'Жертвы',
+    'actioninfo.victims.label'         => 'Жертвы ',
+    'actioninfo.victims.days_pre'      => ' (за последние ',
 ];

@@ -112,6 +112,9 @@ const BARE_CALL_QUOTE_OVERRIDES = [
         'chat.default.all_servers'    => '"',
         'chat.default.unknown_server' => '"',
     ],
+    'web/pages/actioninfo.php' => [
+        'actioninfo.title.victims' => '"',
+    ],
 ];
 
 /**

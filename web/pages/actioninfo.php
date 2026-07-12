@@ -44,7 +44,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 	// Addon created by Rufus (rufus@nonstuff.de)
 	
-	$action = valid_request($_GET['action'], false) or error('No action ID specified.');
+	$action = valid_request($_GET['action'], false) or error(__('actioninfo.no_action_id'));
 
 	$action_escaped=$db->escape($action);
 	$game_escaped=$db->escape($game);
@@ -74,16 +74,16 @@ For support and installation notes visit http://www.hlxcommunity.com
 	
 	$db->query("SELECT name FROM hlstats_Games WHERE code='{$game_escaped}'");
 	if ($db->num_rows() != 1)
-		error('Invalid or no game specified.');
+		error(__('actioninfo.invalid_game'));
 	else
 		list($gamename) = $db->fetch_row();
 		
 	pageHeader(
-		array($gamename, 'Action Details', $act_name),
+		array($gamename, __('actioninfo.title'), $act_name),
 		array(
 			$gamename=>$g_options['scripturl'] . "?game=$game",
-			'Action Statistics'=>$g_options['scripturl'] . "?mode=actions&game=$game",
-			'Action Details'=>''
+			__('actions.title')=>$g_options['scripturl'] . "?mode=actions&game=$game",
+			__('actioninfo.title')=>''
 		),
 		$act_name
 	);
@@ -93,17 +93,17 @@ For support and installation notes visit http://www.hlxcommunity.com
 		array(
 			new TableColumn(
 				'playerName',
-				'Player',
+				__('common.col.player'),
 				'width=45&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k') 
 			),
 			new TableColumn(
 				'obj_count',
-				'Achieved',
+				__('claninfo_actions.col.achieved'),
 				'width=25&align=right'
 			),
 			new TableColumn(
 				'obj_bonus',
-				'Skill Bonus Total',
+				__('actioninfo.col.skill_bonus_total'),
 				'width=25&align=right&sort=no'
 			)
 		),
@@ -237,14 +237,14 @@ For support and installation notes visit http://www.hlxcommunity.com
 	}
 ?>
 <div class="block">
-	<?php printSectionTitle('Action Details'); ?>
+	<?php printSectionTitle(__('actioninfo.title')); ?>
 
 	<div class="subblock">
 		<div style="float:left;">
-			<strong><?php echo $act_name; ?></strong> from a total of <strong><?php echo number_format(intval($totalact)); ?></strong> achievements (Last <?php echo $g_options['DeleteDays']; ?> Days)
+			<strong><?php echo $act_name; ?></strong><?=__('actioninfo.stats.mid1')?><strong><?php echo number_format(intval($totalact)); ?></strong><?=__('actioninfo.stats.mid2')?><?php echo $g_options['DeleteDays']; ?><?=__('actioninfo.stats.post')?>
 		</div>
 		<div style="float:right;">
-			Back to <a href="<?php echo $g_options['scripturl'] . "?mode=actions&amp;game=$game"; ?>">Action Statistics</a>
+			<?=__('actioninfo.back_to.label')?><a href="<?php echo $g_options['scripturl'] . "?mode=actions&amp;game=$game"; ?>"><?=__('actioninfo.back_to.action_stats')?></a>
 		</div>
 	</div>
 	<div style="clear:both;padding:2px;"></div>
@@ -258,17 +258,17 @@ For support and installation notes visit http://www.hlxcommunity.com
 		array(
 			new TableColumn(
 				'playerName',
-				'Player',
+				__('common.col.player'),
 				'width=45&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k') 
 			),
 			new TableColumn(
 				'obj_count',
-				'Times Victimized',
+				__('claninfo_actions.col.times_victimized'),
 				'width=25&align=right'
 			),
 			new TableColumn(
 				'obj_bonus',
-				'Skill Bonus Total',
+				__('actioninfo.col.skill_bonus_total'),
 				'width=25&align=right&sort=no'
 			)
 		),
@@ -320,10 +320,10 @@ For support and installation notes visit http://www.hlxcommunity.com
 		list($numitems, $totalact) = $db->fetch_row($resultCount);
 ?>
 <div class="block">
-	<a name="victims"><?php printSectionTitle("Action Victim Details"); ?></a>
+	<a name="victims"><?php printSectionTitle(__('actioninfo.title.victims')); ?></a>
 	<div class="subblock">
 		<div style="float:left;">
-			<strong>Victims of <?php echo $act_name; ?></strong> (Last <?php echo $g_options['DeleteDays']; ?> Days)
+			<strong><?=__('actioninfo.victims.label')?><?php echo $act_name; ?></strong><?=__('actioninfo.victims.days_pre')?><?php echo $g_options['DeleteDays']; ?><?=__('actioninfo.stats.post')?>
 		</div>
 	</div>
 	<div style="clear:both;padding:2px;"></div>

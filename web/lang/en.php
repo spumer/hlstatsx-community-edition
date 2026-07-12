@@ -418,4 +418,25 @@ return [
     'actions.col.reward' => 'Reward',
     'actions.stats.pre'  => 'From a total of ',
     'actions.stats.post' => ' earned actions',
+
+    // pages/actioninfo.php (breadcrumb reuses actions.title;
+    // common.col.player/claninfo_actions.col.achieved/times_victimized
+    // reused byte-for-byte). "No action ID specified."/"Invalid or no
+    // game specified." are fresh-translated -- zozo left both in
+    // English on this page. actioninfo.back_to.action_stats is a
+    // separate key from actions.title despite identical EN text: the RU
+    // wording needs the dative case ("to the Actions") here, same
+    // pattern as rankinfo.back_to_link vs awards.tab.ranks.
+    'actioninfo.no_action_id'          => 'No action ID specified.',
+    'actioninfo.invalid_game'          => 'Invalid or no game specified.',
+    'actioninfo.title'                  => 'Action Details',
+    'actioninfo.col.skill_bonus_total' => 'Skill Bonus Total',
+    'actioninfo.stats.mid1'            => ' from a total of ',
+    'actioninfo.stats.mid2'            => ' achievements (Last ',
+    'actioninfo.stats.post'            => ' Days)',
+    'actioninfo.back_to.label'         => 'Back to ',
+    'actioninfo.back_to.action_stats'  => 'Action Statistics',
+    'actioninfo.title.victims'         => 'Action Victim Details',
+    'actioninfo.victims.label'         => 'Victims of ',
+    'actioninfo.victims.days_pre'      => ' (Last ',
 ];
