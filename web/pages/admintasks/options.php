@@ -165,17 +165,12 @@ For support and installation notes visit http://www.hlxcommunity.com
 					
 				case 'styles':
 					echo "<select name=\"$this->name\" style=\"width: 226px\">";
-					$d = dir('styles');
-					while (false !== ($e = $d->read()))  {
-						if (is_file("styles/$e") && ($e != '.') && ($e != '..')) {
-							$ename = ucwords(strtolower(str_replace(array('_','.css'), array(' ',''), $e)));
-							$sel = '';
-							if ($e==$g_options['style'])
-								$sel = 'selected="selected"';
-							echo "<option value=\"$e\"$sel>$ename</option>";
-						} 
+					foreach (theme()->listThemes() as $e => $ename) {
+						$sel = '';
+						if ($e==$g_options['style'])
+							$sel = 'selected="selected"';
+						echo "<option value=\"$e\"$sel>$ename</option>";
 					}
-					$d->close();
 					echo '</select>';
 					break;
 				
