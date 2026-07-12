@@ -45,12 +45,12 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 ?>
 
-	<?php printSectionTitle('Player Information'); ?>
+	<?php printSectionTitle(__('playerinfo_general.title')); ?>
 	<div class="subblock">
 		<div style="float:left;vertical-align:top;width:48.5%;">
 			<table class="data-table">
 			<tr class="data-table-head">
-					<td style="vertical-align:top;">Player Profile<br /><br /></td>
+					<td style="vertical-align:top;"><?=__('playerinfo_general.col.player_profile')?><br /><br /></td>
 					<td style="text-align:center; vertical-align:middle;" rowspan="7" id="player_avatar">
 						<?php
 							$db->query
@@ -107,7 +107,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 						<?php
 							if ($playerdata['country'])
 							{
-								echo 'Location: ';
+								echo __('playerinfo_general.label.location');
 								if ($playerdata['city']) {
 									echo htmlspecialchars($playerdata['city'], ENT_COMPAT) . ', ';
 								}
@@ -115,7 +115,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 							}
 							else
 							{
-								echo 'Location: (Unknown)';
+								echo __('playerinfo_general.location_unknown');
 							}
 						?>
 					</td>
@@ -129,18 +129,18 @@ For support and installation notes visit http://www.hlxcommunity.com
 					</td>
 				</tr>
 				<tr class="bg1">
-					<td>Status: <strong><?php echo $status; ?></strong></td>
+					<td><?=__('playerinfo_general.label.status')?> <strong><?php echo $status; ?></strong></td>
 				</tr>
 				<tr class="bg2">
 					<td>
-						<a href="steam://friends/add/<?php echo($coid); ?>" target="_blank">Click here to add as friend</a>
+						<a href="steam://friends/add/<?php echo($coid); ?>" target="_blank"><?=__('playerinfo_general.link.add_friend')?></a>
 					</td>
 				</tr>
 				<tr class="bg1">
 					<td><?php echo "Karma: $statusmsg"; ?></td>
 				</tr>
 				<tr class="bg2">
-					<td style="width:50%;">Member of Clan:</td>
+					<td style="width:50%;"><?=__('playerinfo_general.label.member_of_clan')?></td>
 					<td style="width:50%;">
 						<?php
 							if ($playerdata['clan'])
@@ -148,12 +148,12 @@ For support and installation notes visit http://www.hlxcommunity.com
 								echo '&nbsp;<a href="' . $g_options['scripturl'] . '?mode=claninfo&amp;clan=' . $playerdata['clan'] . '">' . htmlspecialchars($playerdata['clan_name'], ENT_COMPAT) . '</a>';
 							}
 							else
-								echo '(None)';
+								echo __('playerinfo_general.no_clan');
 						?>
 					</td>
 				</tr>
 				<tr class="bg1">
-					<td>Real Name:</td>
+					<td><?=__('playerinfo_general.label.real_name')?></td>
 					<td>
 						<?php
 							if ($playerdata['fullName'])
@@ -161,13 +161,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 								echo '<b>' . htmlspecialchars($playerdata['fullName'], ENT_COMPAT) . '</b>';
 							}
 							else
-								echo "(<a href=\"" . $g_options['scripturl'] . '?mode=help#set"><em>Not Specified</em></a>)';
+								echo "(<a href=\"" . $g_options['scripturl'] . __('playerinfo_general.link.not_specified_suffix');
 						?>
 					</td>
 				</tr>
 
 				<tr class="bg2">
-					<td>E-mail Address:</td>
+					<td><?=__('playerinfo_general.label.email')?></td>
 
 					<td>
 						<?php $emailLinkSafe = getEmailLink($playerdata['email']); ?>
@@ -175,13 +175,13 @@ For support and installation notes visit http://www.hlxcommunity.com
                         <?php if (!empty($emailLinkSafe)) : ?>
                             <?=$emailLinkSafe;?>
                         <?php else : ?>
-                            (<a href="<?=eHtml($g_options['scripturl']);?>?mode=help#set"><em>Not Specified</em></a>)
+                            (<a href="<?=eHtml($g_options['scripturl']);?>?mode=help#set"><em><?=__('playerinfo_general.msg.not_specified')?></em></a>)
                         <?php endif; ?>
 					</td>
 				</tr>
 
 				<tr class="bg1">
-					<td>Home Page:</td>
+					<td><?=__('claninfo_general.label.homepage')?></td>
 					<td>
 						<?php
 							if ($playerdata['homepage'])
@@ -189,13 +189,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 								echo getLink($playerdata['homepage']);
 							}
 							else
-								echo "(<a href=\"" . $g_options['scripturl'] . '?mode=help#set"><em>Not Specified</em></a>)';
+								echo "(<a href=\"" . $g_options['scripturl'] . __('playerinfo_general.link.not_specified_suffix');
 						?>
 					</td>
 				</tr>
 
 				<tr class="bg2">
-                        <td>MM Rank:</td>
+                        <td><?=__('playerinfo_general.label.mm_rank')?></td>
 
                         <td>
                             <?php
@@ -210,7 +210,7 @@ For support and installation notes visit http://www.hlxcommunity.com
                 </tr>
 
 				<tr class="bg1">
-					<td>Last Connect:*</td>
+					<td><?=__('playerinfo_general.label.last_connect')?></td>
 					<td>
 						<?php
 							$db->query
@@ -230,18 +230,18 @@ For support and installation notes visit http://www.hlxcommunity.com
 							if ($lastevent)
 								echo $lastevent;
 							else
-								echo '(Unknown)';
+								echo __('playerinfo_general.msg.unknown_paren');
 						?>
 					</td>
 				</tr>
 				<tr class="bg2">
-					<td>Total Connection Time:</td>
+					<td><?=__('countryclansinfo.row.total_connection_time')?></td>
 					<td>
 						<?php echo timestamp_to_str($playerdata['connection_time']); ?>
 					</td>
 				</tr>
 				<tr class="bg1">
-					<td>Average Ping:*</td>
+					<td><?=__('playerinfo_general.label.avg_ping')?></td>
 					<td>
 						<?php
 							$db->query
@@ -263,7 +263,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					</td>
 				</tr>
 				<tr class="bg2">
-					<td>Favorite Server:*</td>
+					<td><?=__('claninfo_general.label.favorite_server')?></td>
 					<td>
 						<?php
 							// leave this one
@@ -294,7 +294,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					</td>
 				</tr>
 				<tr class="bg1">
-					<td>Favorite Map:*</td>
+					<td><?=__('claninfo_general.label.favorite_map')?></td>
 					<td>
 						<?php
 							$db->query
@@ -319,7 +319,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					</td>
 				</tr>
 				<tr class="bg2">
-					<td>Favorite Weapon:*</td>
+					<td><?=__('claninfo_general.label.favorite_weapon')?></td>
 						<?php
 							$result = $db->query("
 								SELECT
@@ -377,10 +377,10 @@ For support and installation notes visit http://www.hlxcommunity.com
 		<div style="float:right;vertical-align:top;width:48.5%;">
 			<table class="data-table">
 				<tr class="data-table-head">
-					<td style="vertical-align:top;" colspan="3">Statistics Summary<br /><br /></td>
+					<td style="vertical-align:top;" colspan="3"><?=__('countryclansinfo.stats_summary')?><br /><br /></td>
 				</tr>
 				<tr class="bg1">
-					<td style="width:50%;">Activity:</td>
+					<td style="width:50%;"><?=__('countryclansinfo.row.activity')?></td>
 					<td style="width:35%;">
 	                                <meter min="0" max="100" low="25" high="50" optimum="75" value="<?php
                                         echo $playerdata['activity'] ?>"></meter>
@@ -388,7 +388,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					<td style="width:15%;"><?php echo $playerdata['activity'].'%'; ?></td>
 				</tr>
 				<tr class="bg2">
-					<td>Points:</td>
+					<td><?=__('playerinfo_general.row.points')?></td>
 					<td style="width:55%;" colspan="2">
 						<?php
 							echo '<b>' . number_format($playerdata['skill']) . '</b>';
@@ -396,10 +396,10 @@ For support and installation notes visit http://www.hlxcommunity.com
 					</td>
 				</tr>
 				<tr class="bg1">
-					<td style="width:45%;">Rank:</td>
+					<td style="width:45%;"><?=__('playerinfo_general.row.rank')?></td>
 					<td style="width:55%;" colspan="2">
 						<?php
-                            $rank = 'Unknown';
+                            $rank = __('livestats.msg.unknown');
 
 							if ($playerdata['activity'] > 0 && $playerdata['hideranking'] == 0)  {
                                 $plGame = $playerdata['game'];
@@ -411,15 +411,15 @@ For support and installation notes visit http://www.hlxcommunity.com
                                 $rank = $playerRepo->getPlayerRank($plGame, $rankType, $plValue, $plKills, $playerDeaths);
 
                                 if (is_null($rank)) {
-                                    $rank = 'Unknown';
+                                    $rank = __('livestats.msg.unknown');
                                 }
 							} else {
 								if ($playerdata['hideranking'] == 1) {
-									$rank = "Hidden";
+									$rank = __('playerinfo_general.rank.hidden');
 								} elseif ($playerdata['hideranking'] == 2) {
-									$rank = "<span style=\"color:red;\">Banned</span>";
+									$rank = __('playerinfo_general.rank.excluded');
 								} else {
-									$rank = 'Not active';
+									$rank = __('playerinfo_general.rank.not_active');
 								}
 							}
 
@@ -432,7 +432,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					</td>
 				</tr>
 				<tr class="bg2">
-					<td style="width:45%;">Kills per Minute:</td>
+					<td style="width:45%;"><?=__('playerinfo_general.row.kills_per_minute')?></td>
 					<td style="width:55%;" colspan="2">
 						<?php
 							if ($playerdata['connection_time'] > 0)
@@ -447,7 +447,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					</td>
 				</tr>
 				<tr class="bg1">
-					<td style="width:45%;">Kills per Death:</td>
+					<td style="width:45%;"><?=__('playerinfo_general.row.kills_per_death')?></td>
 					<td style="width:55%;" colspan="2">
 						<?php
 							$db->query
@@ -469,7 +469,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					</td>
 				</tr>
 				<tr class="bg2">
-					<td style="width:45%;">Headshots per Kill:</td>
+					<td style="width:45%;"><?=__('playerinfo_general.row.headshots_per_kill')?></td>
 					<td style="width:55%;" colspan="2">
 						<?php
 							$db->query
@@ -488,7 +488,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					</td>
 				</tr>
 				<tr class="bg1">
-					<td style="width:45%;">Shots per Kill:</td>
+					<td style="width:45%;"><?=__('playerinfo_general.row.shots_per_kill')?></td>
 					<td style="width:55%;" colspan="2">
 						<?php
 							$db->query
@@ -516,7 +516,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					</td>
 				</tr>
 				<tr class="bg2">
-					<td style="width:45%;">Weapon Accuracy:</td>
+					<td style="width:45%;"><?=__('playerinfo_general.row.weapon_accuracy')?></td>
 					<td style="width:55%;" colspan="2">
 						<?php
 							echo $playerdata['acc'] . '%';
@@ -525,7 +525,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					</td>
 				</tr>
 				<tr class="bg1">
-					<td style="width:45%;">Headshots:</td>
+					<td style="width:45%;"><?=__('playerinfo_general.row.headshots')?></td>
 					<td style="width:55%;" colspan="2">
 						<?php
 							if ($playerdata['headshots']==0) 
@@ -537,7 +537,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					</td>
 				</tr>
 				<tr class="bg2">
-					<td style="width:45%;">Kills:</td>
+					<td style="width:45%;"><?=__('playerinfo_general.row.kills')?></td>
 					<td style="width:55%;" colspan="2">
 						<?php
 							echo number_format($playerdata['kills']);
@@ -546,7 +546,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					</td>
 				</tr>
 				<tr class="bg1">
-					<td style="width:45%;">Deaths:</td>
+					<td style="width:45%;"><?=__('playerinfo_general.row.deaths')?></td>
 					<td style="width:55%;" colspan="2">
 						<?php
 							echo number_format($playerdata['deaths']);
@@ -555,7 +555,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					</td>
 				</tr>
 				<tr class="bg2">
-					<td style="width:45%;">Longest Kill Streak:</td>
+					<td style="width:45%;"><?=__('playerinfo_general.row.longest_kill_streak')?></td>
 					<td style="width:55%;" colspan="2">
 						<?php
 							$db->query
@@ -573,7 +573,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					</td>
 				</tr>
 				<tr class="bg1">
-					<td style="width:45%;">Longest Death Streak:</td>
+					<td style="width:45%;"><?=__('playerinfo_general.row.longest_death_streak')?></td>
 					<td style="width:55%;" colspan="2">
 						<?php
 							$db->query
@@ -591,13 +591,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 					</td>
 				</tr>
 				<tr class="bg2">
-					<td style="width:45%;">Suicides:</td>
+					<td style="width:45%;"><?=__('playerinfo_general.row.suicides')?></td>
 					<td style="width:55%;" colspan="2">
 						<?php echo number_format($playerdata['suicides']); ?>
 					</td>
 				</tr>
 				<tr class="bg1">
-					<td style="width:45%;">Teammate Kills:</td>
+					<td style="width:45%;"><?=__('playerinfo_general.row.teammate_kills')?></td>
 					<td style="width:55%;" colspan="2">
 						<?php
 							echo number_format($playerdata['teamkills']);
@@ -637,7 +637,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		<div style="float:left;vertical-align:top;width:48.5%;">
 			<table class="data-table">
 				<tr class="data-table-head">
-					<td>Player Trend</td>
+					<td><?=__('playerinfo_general.col.player_trend')?></td>
 				</tr>
 				<tr class="bg1">
 					<td style="text-align:center;">
@@ -649,7 +649,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		<div style="float:right;vertical-align:top;width:48.5%;">
 			<table class="data-table">
 				<tr class="data-table-head">
-					<td colspan="2">Forum Signature</td>
+					<td colspan="2"><?=__('playerinfo_general.col.forum_signature')?></td>
 				</tr>
 				<tr class="bg1">
 					<td style="text-align:center;">
@@ -694,7 +694,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 							/* ]]> */
 						</script>
 						<a href="" onclick="setForumText(1);return false">
-							bbCode 1 (phpBB, SMF)</a>&nbsp;|&nbsp;<a href="" onclick="setForumText(2);return false">bbCode 2 (IPB)</a>&nbsp;|&nbsp;<a href="" onclick="setForumText(0);return false">Direct Image
+							<?=__('playerinfo_general.bbcode.phpbb')?></a>&nbsp;|&nbsp;<a href="" onclick="setForumText(2);return false"><?=__('playerinfo_general.bbcode.ipb')?></a>&nbsp;|&nbsp;<a href="" onclick="setForumText(0);return false"><?=__('playerinfo_general.bbcode.direct_image')?>
 						</a>
 						<?php echo '<textarea style="width: 95%; height: 50px;" rows="2" cols="70" id="siglink" readonly="readonly" onclick="document.getElementById(\'siglink\').select();">[url='."$script_path/hlstats.php?mode=playerinfo&amp;player=$player"."][img]$imglink".'[/img][/url]</textarea>'; ?>
 					</td>
@@ -777,13 +777,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?>
 
 	<div style="clear:both;padding-top:24px;"></div>
-	<?php printSectionTitle('Ranks'); ?>
+	<?php printSectionTitle(__('playerinfo_general.title.ranks')); ?>
 	<div class="subblock">
 		<div style="float:left;vertical-align:top;width:48.5%;">
 			<table class="data-table">
 				<tr class="data-table-head">
 					<td colspan="2">
-						Current rank: <b><?php echo htmlspecialchars($rankName, ENT_COMPAT); ?></b>
+						<?=__('playerinfo_general.label.current_rank')?> <b><?php echo htmlspecialchars($rankName, ENT_COMPAT); ?></b>
 					</td>
 				</tr>
 				<tr class="bg1">
@@ -798,7 +798,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					
 					</td>
 					<td style="width:40%;">
-						Kills needed: <b><?php echo "$rankKillsNeeded (".number_format($rankPercent, 0, '.', '');?>%)</b>
+						<?=__('playerinfo_general.label.kills_needed')?> <b><?php echo "$rankKillsNeeded (".number_format($rankPercent, 0, '.', '');?>%)</b>
 					</td>
 				</tr>
 			</table>
@@ -806,7 +806,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		<div style="float:right;vertical-align:top;width:48.5%;">
 			<table class="data-table">
 				<tr class="data-table-head">
-					<td>Rank history</td>
+					<td><?=__('playerinfo_general.col.rank_history')?></td>
 				</tr>
 				<tr class="bg1">
 					<td style="text-align:center;"><?php echo $rankHistory; ?></td>
@@ -965,12 +965,12 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?>
 
 	<div style="clear:both;padding-top:24px;"></div>
-	<?php printSectionTitle('Awards (hover over image to see name)'); ?>
+	<?php printSectionTitle(__('playerinfo_general.title.awards')); ?>
 	<div class="subblock">
 		<div style="float:left;vertical-align:top;width:68.5%;">
 			<table class="data-table">
 				<tr class="data-table-head">
-					<td>Ribbons</td>
+					<td><?=__('playerinfo_general.col.ribbons')?></td>
 				</tr>
 				<tr class="bg1">
 					<td style="text-align:center;"><?php echo $ribbonList; ?></td>
@@ -980,7 +980,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		<div style="float:right;vertical-align:top;width:28.5%;">
 			<table class="data-table">
 				<tr class="data-table-head">
-					<td colspan="2">Global Awards</td>
+					<td colspan="2"><?=__('playerinfo_general.col.global_awards')?></td>
 				</tr>
 				<tr class="bg1">
 					<td style="text-align:center;"><?php echo $GlobalAwardsList; ?></td>

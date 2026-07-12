@@ -707,4 +707,83 @@ return [
     'playerinfo_weapons.title.weapon_stats' => 'Weapon Statistics *',
     'playerinfo_weapons.col.hits_flash'     => 'Hits',
     'playerinfo_weapons.col.targets_header' => 'Targets',
+
+    // pages/playerinfo_general.php (countryclansinfo.stats_summary/row.
+    // activity/total_connection_time, claninfo_general.label.homepage/
+    // favorite_server/favorite_map/favorite_weapon, and livestats.
+    // msg.unknown all reused byte-for-byte). zozo's own file diverges
+    // heavily here (VIP button, VAC/trade-ban status logic, multi-site
+    // cross-search links, a "profile created" field replacing MM Rank)
+    // so most keys below are matched by position/meaning per file
+    // rather than reused from zozo verbatim; a few (MM Rank, Status:,
+    // "Click here to add as friend") have no zozo equivalent at all and
+    // are fresh-translated as simple/unambiguous UI vocabulary.
+    // playerinfo_general.link.not_specified_suffix substitutes a whole
+    // pre-existing chain atom (safe, no new concatenation introduced),
+    // same technique as claninfo.admin_options_label; reused for the
+    // Real Name and Home Page fallbacks, while the Email fallback uses
+    // a plain Shape-1 word wrap since that occurrence has no
+    // surrounding PHP string chain at all.
+    //
+    // NOT extracted -- deferred, $-interpolated (each would require
+    // introducing new concatenation into a single atomic string, same
+    // rejected category as the mapinfo.php/servers.php wraps):
+    // - "Karma: $statusmsg"
+    // - "Steam: <a ...>$prefix$uqid</a>"
+    // - "$av_ping ms (Latency: $av_latency ms)"
+    // - the favorite-server/favorite-map inline link text
+    //   ("<a>...$favServerName</a>", "<a>...$favMap</a>")
+    // - the history/sessions/awards/chat link row near the bottom of
+    //   the page (4 links, each with $player interpolated inline)
+    // - all "(N*)" stat-annotation suffixes (kills, deaths, kpd, hpk,
+    //   accuracy, headshots, teamkills -- 7 occurrences)
+    // - image alt/title attributes throughout (avatar, history, search,
+    //   trend graph, rank images, forum signature)
+    // 'Unknown' ($fav_weapon fallback) NOT extracted -- same internal
+    // image-lookup sentinel precedent as claninfo_general.php.
+    'playerinfo_general.title'                => 'Player Information',
+    'playerinfo_general.col.player_profile'   => 'Player Profile',
+    'playerinfo_general.label.location'       => 'Location: ',
+    'playerinfo_general.location_unknown'     => 'Location: (Unknown)',
+    'playerinfo_general.label.status'         => 'Status:',
+    'playerinfo_general.link.add_friend'      => 'Click here to add as friend',
+    'playerinfo_general.label.member_of_clan' => 'Member of Clan:',
+    'playerinfo_general.no_clan'              => '(None)',
+    'playerinfo_general.label.real_name'      => 'Real Name:',
+    'playerinfo_general.link.not_specified_suffix' => '?mode=help#set"><em>Not Specified</em></a>)',
+    'playerinfo_general.msg.not_specified'    => 'Not Specified',
+    'playerinfo_general.label.email'          => 'E-mail Address:',
+    'playerinfo_general.label.mm_rank'        => 'MM Rank:',
+    'playerinfo_general.label.last_connect'   => 'Last Connect:*',
+    'playerinfo_general.msg.unknown_paren'    => '(Unknown)',
+    'playerinfo_general.label.avg_ping'       => 'Average Ping:*',
+    'playerinfo_general.row.points'                 => 'Points:',
+    'playerinfo_general.row.rank'                   => 'Rank:',
+    'playerinfo_general.rank.hidden'                => 'Hidden',
+    'playerinfo_general.rank.excluded'              => '<span style="color:red;">Banned</span>',
+    'playerinfo_general.rank.not_active'            => 'Not active',
+    'playerinfo_general.row.kills_per_minute'       => 'Kills per Minute:',
+    'playerinfo_general.row.kills_per_death'        => 'Kills per Death:',
+    'playerinfo_general.row.headshots_per_kill'     => 'Headshots per Kill:',
+    'playerinfo_general.row.shots_per_kill'         => 'Shots per Kill:',
+    'playerinfo_general.row.weapon_accuracy'        => 'Weapon Accuracy:',
+    'playerinfo_general.row.headshots'              => 'Headshots:',
+    'playerinfo_general.row.kills'                   => 'Kills:',
+    'playerinfo_general.row.deaths'                  => 'Deaths:',
+    'playerinfo_general.row.longest_kill_streak'    => 'Longest Kill Streak:',
+    'playerinfo_general.row.longest_death_streak'   => 'Longest Death Streak:',
+    'playerinfo_general.row.suicides'                => 'Suicides:',
+    'playerinfo_general.row.teammate_kills'          => 'Teammate Kills:',
+    'playerinfo_general.col.player_trend'     => 'Player Trend',
+    'playerinfo_general.col.forum_signature'  => 'Forum Signature',
+    'playerinfo_general.bbcode.phpbb'         => 'bbCode 1 (phpBB, SMF)',
+    'playerinfo_general.bbcode.ipb'           => 'bbCode 2 (IPB)',
+    'playerinfo_general.bbcode.direct_image'  => 'Direct Image',
+    'playerinfo_general.title.ranks'          => 'Ranks',
+    'playerinfo_general.label.current_rank'   => 'Current rank:',
+    'playerinfo_general.label.kills_needed'   => 'Kills needed:',
+    'playerinfo_general.col.rank_history'     => 'Rank history',
+    'playerinfo_general.title.awards'         => 'Awards (hover over image to see name)',
+    'playerinfo_general.col.ribbons'          => 'Ribbons',
+    'playerinfo_general.col.global_awards'    => 'Global Awards',
 ];

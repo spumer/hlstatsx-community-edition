@@ -132,6 +132,10 @@ const BARE_CALL_QUOTE_OVERRIDES = [
     'web/pages/playerinfo.php' => [
         'playerawards.no_player_id' => '"',
     ],
+    'web/pages/playerinfo_general.php' => [
+        'playerinfo_general.rank.hidden'   => '"',
+        'playerinfo_general.rank.excluded' => '"',
+    ],
 ];
 
 /**
