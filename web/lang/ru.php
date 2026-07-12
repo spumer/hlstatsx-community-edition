@@ -461,4 +461,10 @@ return [
     'playersessions.col.kill_streak'     => 'Серия убийств',
     'playersessions.section_title'        => 'История сессий игрока',
     'playersessions.footer_note.pre'      => 'Отмеченный "*" пункты сгенерированы за последние ',
+
+    // pages/playerinfo_killstats.php
+    'playerinfo_killstats.col.victim'         => 'Жертва',
+    'playerinfo_killstats.title'               => 'Статистика убийств игрока *',
+    'playerinfo_killstats.label.show_victims' => 'Показать жертв, которых убил этот игрок',
+    'playerinfo_killstats.label.or_more_times' => 'раз и более',
 ];

@@ -618,4 +618,11 @@ return [
     'playersessions.col.kill_streak'     => 'Kill Strk',
     'playersessions.section_title'        => 'Player Session History',
     'playersessions.footer_note.pre'      => 'Items above are generated from the last ',
+
+    // pages/playerinfo_killstats.php (Kills/Deaths/K:D/Headshots/HS:K and
+    // Ratio (used 3x) all reuse existing keys byte-for-byte).
+    'playerinfo_killstats.col.victim'         => 'Victim',
+    'playerinfo_killstats.title'               => 'Player Kill Statistics *',
+    'playerinfo_killstats.label.show_victims' => 'Show only victims this person has killed',
+    'playerinfo_killstats.label.or_more_times' => 'or more times',
 ];
