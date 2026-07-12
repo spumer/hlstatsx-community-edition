@@ -13,17 +13,27 @@ mkdir($root . '/styles', 0777, true);
 mkdir($root . '/hlstatsimg/icons/sourcebans', 0777, true);
 mkdir($root . '/themes/zozo/chrome', 0777, true);
 mkdir($root . '/themes/zozo/icons', 0777, true);
+mkdir($root . '/themes/gated/chrome', 0777, true);
 
 file_put_contents($root . '/styles/sourcebans.css', '/* stock */');
 file_put_contents($root . '/styles/classic.css', '/* stock */');
 file_put_contents($root . '/themes/zozo/theme.css', '/* zozo */');
 file_put_contents($root . '/themes/zozo/hlstats.css', '/* zozo base */');
+// zozo overrides chrome by convention (file presence, no manifest whitelist)
 file_put_contents($root . '/themes/zozo/chrome/header.php', '<?php /* chrome */');
+file_put_contents($root . '/themes/zozo/chrome/footer.php', '<?php /* chrome */');
 file_put_contents($root . '/themes/zozo/theme.json', json_encode([
     'name'     => 'ZoZo',
     'css'      => ['theme.css'],
     'base_css' => 'hlstats.css',
-    'chrome'   => ['header'],
+]));
+
+// gated ships both chrome files but its manifest whitelists only header
+file_put_contents($root . '/themes/gated/chrome/header.php', '<?php /* chrome */');
+file_put_contents($root . '/themes/gated/chrome/footer.php', '<?php /* chrome */');
+file_put_contents($root . '/themes/gated/theme.json', json_encode([
+    'name'   => 'Gated',
+    'chrome' => ['header'],
 ]));
 
 register_shutdown_function(function () use ($root) {
@@ -110,12 +120,43 @@ return [
         hlx_assert_same('sourcebans.css', $svc->resolve('nope'), 'unknown name -> default (not an error)');
     },
 
-    'ThemeService: chromePath is a PR-1 stub and always returns null' => function () use ($make) {
+    'ThemeService: package overrides chrome parts whose file exists' => function () use ($make, $root) {
         $svc = $make();
-        $svc->resolve('zozo'); // package that ships chrome/header.php
+        $svc->resolve('zozo');
 
-        hlx_assert_same(null, $svc->chromePath('header'), 'chrome override is wired in PR-2, not PR-1');
-        hlx_assert_same(null, $svc->chromePath('ingame_header'), 'ingame chrome is PR-2 too');
+        hlx_assert_same($root . '/themes/zozo/chrome/header.php', $svc->chromePath('header'), 'header override resolves to the package file');
+        hlx_assert_same($root . '/themes/zozo/chrome/footer.php', $svc->chromePath('footer'), 'footer override resolves to the package file');
+    },
+
+    'ThemeService: package does not override chrome parts without a file' => function () use ($make) {
+        $svc = $make();
+        $svc->resolve('zozo'); // ships no ingame chrome files
+
+        hlx_assert_same(null, $svc->chromePath('ingame_header'), 'no file -> stock ingame header');
+        hlx_assert_same(null, $svc->chromePath('ingame_footer'), 'no file -> stock ingame footer');
+    },
+
+    'ThemeService: an unknown chrome part is never overridden' => function () use ($make) {
+        $svc = $make();
+        $svc->resolve('zozo');
+
+        hlx_assert_same(null, $svc->chromePath('sidebar'), 'only the four known parts can be overridden');
+    },
+
+    'ThemeService: legacy skin never overrides chrome' => function () use ($make) {
+        $svc = $make();
+        $svc->resolve('sourcebans.css');
+
+        hlx_assert_same(null, $svc->chromePath('header'), 'legacy skins have no chrome');
+        hlx_assert_same(null, $svc->chromePath('footer'), 'legacy skins have no chrome');
+    },
+
+    'ThemeService: manifest chrome whitelist narrows overrides' => function () use ($make) {
+        $svc = $make();
+        $svc->resolve('gated'); // ships header.php AND footer.php, whitelists only header
+
+        hlx_assert_true($svc->chromePath('header') !== null, 'whitelisted part with a file is overridden');
+        hlx_assert_same(null, $svc->chromePath('footer'), 'part absent from the whitelist is not overridden even with a file');
     },
 
     'ThemeService: listThemes exposes both legacy skins and packages' => function () use ($make) {
