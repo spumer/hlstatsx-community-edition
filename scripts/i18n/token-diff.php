@@ -76,10 +76,29 @@ if (!is_file($args['before'])) {
  * one of those entry points. Keep this list to the smallest number of
  * blocks that keeps that guarantee true; each entry should cite, in the
  * commit that adds it, which entry points require it.
+ *
+ * web/pages/footer.php's three <?php echo "\n"; ?> statements exist for a
+ * different reason: PHP unconditionally swallows exactly one newline
+ * immediately following ANY closing "?>" (including "<?=...?>"). Each of
+ * these three wraps replaced raw HTML text that had a real trailing
+ * newline before the next tag (<br>, <a>); once wrapped, that newline
+ * sat right after the wrap's own "?>" and got silently eaten at runtime,
+ * even though this tool's source-level reconstruction still matched
+ * baseline byte-for-byte (it doesn't simulate PHP's swallow behavior).
+ * The echo statement supplies the missing newline explicitly, and its own
+ * closing "?>" swallows the template's original (unchanged) newline
+ * instead -- net effect: render output is byte-identical to baseline
+ * again, without altering the wrap, the catalog value, or any existing
+ * template whitespace.
  */
 const AUTHORIZED_INSERTIONS = [
     'web/includes/functions.php' => [
         "require_once __DIR__ . '/i18n.php';\n\n",
+    ],
+    'web/pages/footer.php' => [
+        '<?php echo "\n"; ?>',
+        '<?php echo "\n"; ?>',
+        '<?php echo "\n"; ?>',
     ],
 ];
 

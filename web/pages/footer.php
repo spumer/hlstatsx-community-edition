@@ -79,11 +79,11 @@
 
 			<div class="fSmall" style="text-align:center;">
 					<?php if (isset($_SESSION['nojs']) && $_SESSION['nojs'] == 1) : ?>
-						<?=__('footer.msg.nojs')?>
+						<?=__('footer.msg.nojs')?><?php echo "\n"; ?>
 						<br>
 					<?php endif; ?>
 					
-					<?=__('footer.label.generated_by')?>
+					<?=__('footer.label.generated_by')?><?php echo "\n"; ?>
 					<a href="http://www.hlxce.com" target="_blank">
 						HLstatsX Community Edition <?=$versionStats;?>
 					</a>
@@ -93,7 +93,7 @@
 						<?=$debugText;?>
 					<?php endif; ?>
 				<br>
-				<?=__('footer.msg.copyright')?>
+				<?=__('footer.msg.copyright')?><?php echo "\n"; ?>
 				<br><br>
 				[<a href="<?=$scriptUrl;?>?mode=admin"><?=__('footer.link.admin')?></a>]
 
