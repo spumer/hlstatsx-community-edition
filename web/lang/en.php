@@ -363,4 +363,11 @@ return [
     'claninfo_weapons.title.weapon_targets'        => 'Weapon Targets *',
     'claninfo_weapons.col.targets_header'          => 'Targets',
     'claninfo_weapons.link.show_total_stats'       => 'Show total target statistics',
+
+    // pages/claninfo_mapperformance.php (Kills/Deaths/Headshots reuse
+    // common.col.*; the four Percentage of Kills/Headshots, Kills per
+    // Death, and Hpk columns reuse claninfo_weapons.col.* -- same
+    // byte-identical labels as claninfo_weapons.php)
+    'claninfo_mapperformance.col.map_name' => 'Map Name',
+    'claninfo_mapperformance.title'        => 'Map Performance *',
 ];

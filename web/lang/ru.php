@@ -336,4 +336,8 @@ return [
     'claninfo_weapons.title.weapon_targets'        => 'Цели оружия *',
     'claninfo_weapons.col.targets_header'          => 'Цели оружия',
     'claninfo_weapons.link.show_total_stats'       => 'Показать общую статистику попаданий',
+
+    // pages/claninfo_mapperformance.php
+    'claninfo_mapperformance.col.map_name' => 'Карта',
+    'claninfo_mapperformance.title'        => 'Статистика карт *',
 ];
