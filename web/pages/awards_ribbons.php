@@ -102,7 +102,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				echo '</tr>';
 			}
 			$i = 0;
-			echo "<tr class=\"head\"><td colspan=\"5\"><strong>Ribbon Class #$i1 ($cnt awards required)</strong></td></tr>";
+			echo "<tr class=\"head\"><td colspan=\"5\"><strong>" . __f('awards_ribbons.header.ribbon_class', $i1, $cnt) . "</strong></td></tr>";
 		}
 
 		if ($i == $cols)

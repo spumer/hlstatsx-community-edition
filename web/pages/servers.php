@@ -156,7 +156,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		echo '<b>'.htmlspecialchars($rowdata['name']).'</b>';
                         ?></td>
 			<td class="game-table-cell"><?php
-		echo "$addr <a href=\"steam://connect/$addr\" style=\"color:black\">(Join)</a>";
+		echo "$addr <a href=\"steam://connect/$addr\" style=\"color:black\">(" . __('common.label.join') . ")</a>";
                     ?></td>
 			<td class="game-table-cell" style="text-align:center;"><?php
 		echo $rowdata['act_map'];

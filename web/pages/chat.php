@@ -119,7 +119,7 @@
 	$filter = getChatFilterParam();
 
 	$deleteDaysSafe = isset($g_options['DeleteDays']) ? (int)$g_options['DeleteDays'] : 30;
-	$pageTitle = sprintf('%s %s Server Chat Log (Last %d Days)', $gamename, $servername, $deleteDaysSafe);
+	$pageTitle = __f('chat.title.server_chat_log', $gamename, $servername, $deleteDaysSafe);
 
 	$columns = getChatColumns($showserver);
 	$table = new Table(

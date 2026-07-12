@@ -202,7 +202,7 @@
 			<?php
 				if (isset($_SESSION['loggedin']))
 				{
-					echo __('claninfo.admin_options_label') . '<a href="'.$g_options['scripturl']."?mode=admin&amp;task=tools_editdetails_clan&amp;id=$clan\">Edit Clan Details</a><br />";
+					echo __('claninfo.admin_options_label') . '<a href="'.$g_options['scripturl']."?mode=admin&amp;task=tools_editdetails_clan&amp;id=$clan\">" . __('claninfo.link.edit_clan_details') . "</a><br />";
 				}
 			?>
 			<?=__('players.nav.goto_label')?> <a href="<?php echo $g_options['scripturl'] . "?mode=players&amp;game=$game"; ?>"><?=__('players.nav.clan_rankings')?></a>

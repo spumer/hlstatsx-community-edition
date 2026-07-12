@@ -66,7 +66,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			header("Location: " . $g_options['scripturl'] . "&mode=search&st=uniqueid&q=$uniqueid&game=$game");
 			exit;
 		} elseif ($db->num_rows() < 1) {
-			error("No players found matching uniqueId '$uniqueid'");
+			error(__f('playerinfo.err.no_players_matching_uniqueid', $uniqueid));
 		} else {
 			list($player) = $db->fetch_row();
 			$player = intval($player);
@@ -309,7 +309,7 @@ $db->query("
 			<?php
 				if (isset($_SESSION['loggedin']))
 				{
-					echo __('claninfo.admin_options_label') . '<a href="'.$g_options['scripturl']."?mode=admin&amp;task=tools_editdetails_player&amp;id=$player\">Edit Player Details</a><br />";
+					echo __('claninfo.admin_options_label') . '<a href="'.$g_options['scripturl']."?mode=admin&amp;task=tools_editdetails_player&amp;id=$player\">" . __('playerinfo.link.edit_player_details') . "</a><br />";
 				}
 			?>
 			<?=__('players.nav.goto_label')?> <a href="<?php echo $g_options['scripturl'] . "?mode=players&amp;game=$game"; ?>"><?=__('players.title')?></a>

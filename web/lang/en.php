@@ -15,6 +15,10 @@
 return [
     // common.* -- class_table.php / includes/functions.php (shared across pages)
     'common.col.rank'        => 'Rank',
+    // common.label.join -- steam://connect anchor text, servers.php + game.php
+    // (2 occurrences x 2 files); previously left un-extracted because pulling
+    // it out means restructuring an interpolated string into a concatenation
+    'common.label.join'      => 'Join',
     'common.msg.error_heading' => 'ERROR',
     'common.msg.empty'       => '---',
     'common.msg.undefined'   => 'Undefined',
@@ -107,13 +111,17 @@ return [
     'awards.tab.ribbons' => 'Ribbons',
 
     // pages/awards_daily.php
-    // The " Awards ($awards_d_date)" suffix is one interpolated string
-    // (real $-interpolation, not just a plain literal) -- "Awards" inside
-    // it needs a structural split to extract safely; deferred, see batch
-    // report (same category as the search-class.php property-default
-    // refactor: token-diff can't fold across live interpolation).
+    // The " Awards ($awards_d_date)" suffix IS now extracted (structural
+    // package group б, __f()) as the shared awards.title.awards_for_date
+    // below -- also used by game.php's identically-shaped printSectionTitle
+    // call (which additionally now extracts its bare 'Daily'/"$n Day"
+    // literals into these same period_daily/period_day_suffix keys;
+    // game.php has its own pre-existing space between $awards_numdays and
+    // "Day" that awards_daily.php's concatenation never had -- preserved
+    // as-is, not a bug to fix here).
     'awards_daily.period_daily'     => 'Daily',
     'awards_daily.period_day_suffix' => 'Day',
+    'awards.title.awards_for_date' => ' Awards (%s)',
     'awards.no_winner'         => 'No Award Winner',
 
     // pages/awards_global.php
@@ -131,12 +139,10 @@ return [
 
     // pages/awards_ribbons.php (title reuses awards.tab.ribbons; prefix
     // reuses awards_ranks.achieved_prefix, byte-identical 'Achieved by ')
-    // "Ribbon Class #$i1 ($cnt awards required)" header NOT extracted:
-    // fully $-interpolated string (two variables mid-string), so
-    // splitting it into concatenation pieces is a structural change, not
-    // a plain wrap -- flagged, see batch report (candidate for __f() with
-    // two placeholders once that's sanctioned as a deliberate step).
+    // "Ribbon Class #$i1 ($cnt awards required)" header IS now extracted
+    // (structural package group б, __f() with two placeholders).
     'awards_ribbons.achieved_suffix' => ' players',
+    'awards_ribbons.header.ribbon_class' => 'Ribbon Class #%s (%s awards required)',
 
     // pages/dailyawardinfo.php
     'dailyawardinfo.no_award_id'         => 'No award ID specified.',
@@ -232,10 +238,9 @@ return [
     // table header/icon-alt reuse common.nav.players/clans where the
     // fork's English matches). The big interpolated summary paragraph
     // ("<strong>N</strong> players and <strong>M</strong> clans ranked
-    // in...") is NOT extracted -- three concatenated pieces, each with
-    // multiple live $-interpolations, would need a full sentence
-    // restructure into __f() with five placeholders; that's a deliberate
-    // future step, not a plain wrap. Flagged, see batch report.
+    // in...") IS now extracted (structural package group б, __f() with
+    // 5 placeholders folding the 3 pre-existing concatenated pieces into
+    // one catalog value).
     'contents.games_title'            => 'Games',
     'contents.col.game'                => 'Game',
     'contents.col.top_player'          => 'Top Player',
@@ -246,6 +251,7 @@ return [
     'contents.last_kill_label'        => 'Last Kill',
     'contents.stats_disclaimer.pre'   => 'All statistics are generated in real-time. Event history data expires after ',
     'contents.stats_disclaimer.post'  => ' days.',
+    'contents.summary.stats_sentence' => '<strong>%s</strong> players and <strong>%s</strong> clans ranked in <strong>%s</strong> games on <strong>%s</strong> servers with <strong>%s</strong> kills.',
 
     // pages/roles.php (title reuses itself for both pageHeader and
     // printSectionTitle; TableColumn reuses common.col.kills/deaths/kpd;
@@ -294,12 +300,12 @@ return [
     // pages/claninfo.php (breadcrumb/title reuse players.nav.
     // clan_rankings/players.title-family keys where applicable; tab
     // labels reuse common.nav.weapons/maps; footer nav reuses
-    // players.nav.goto_label/clan_rankings). error("No such clan
-    // '$clan'.") and the "Edit Clan Details" link text (inside a
-    // $clan-interpolated string) NOT extracted -- same deferred
-    // $-interpolation category. admin_options_label is a
-    // concatenation-fold verified isolated from the interpolated
-    // remainder by an intervening $g_options[...] array-access token.
+    // players.nav.goto_label/clan_rankings). "Edit Clan Details" link
+    // text IS now extracted (structural package group б, folded into
+    // the pre-existing admin_options_label concatenation).
+    // admin_options_label is a concatenation-fold verified isolated
+    // from the interpolated remainder by an intervening
+    // $g_options[...] array-access token.
     'claninfo.no_clan_id'         => 'No clan ID specified.',
     'claninfo.title'              => 'Clan Details',
     'claninfo.tab.general'        => 'General',
@@ -307,15 +313,16 @@ return [
     'claninfo.marked_note.pre'    => 'Items marked "*" above are generated from the last ',
     'claninfo.marked_note.post'   => ' days.',
     'claninfo.admin_options_label' => 'Admin Options: ',
+    'claninfo.link.edit_clan_details' => 'Edit Clan Details',
 
     // pages/claninfo_general.php (Statistics Summary table reuses
     // countryclansinfo.row.*/col.* -- same row set as countryclansinfo.php,
     // this page adds Home Page/Favorite Server/Map/Weapon rows on top).
-    // " active members ($totalclanplayers total)" NOT extracted -- $-
-    // interpolated, __f() candidate, same deferred category as elsewhere.
-    // 'Unknown' ($fav_weapon fallback) NOT extracted -- internal image-
-    // lookup sentinel, not user-facing text. '-' (empty-stat placeholder)
-    // NOT extracted -- bare literal, same as countryclansinfo.php precedent.
+    // " active members ($totalclanplayers total)" IS now extracted
+    // (structural package group б, __f()). 'Unknown' ($fav_weapon
+    // fallback) NOT extracted -- internal image-lookup sentinel, not
+    // user-facing text. '-' (empty-stat placeholder) NOT extracted --
+    // bare literal, same as countryclansinfo.php precedent.
     'claninfo_general.section_title'          => 'Clan Information',
     'claninfo_general.label.clan'              => 'Clan:',
     'claninfo_general.label.homepage'          => 'Home Page:',
@@ -323,6 +330,7 @@ return [
     'claninfo_general.label.favorite_server'   => 'Favorite Server:*',
     'claninfo_general.label.favorite_map'      => 'Favorite Map:*',
     'claninfo_general.label.favorite_weapon'   => 'Favorite Weapon:*',
+    'claninfo_general.label.active_members'    => ' active members (%s total)',
     'claninfo_general.col.player_locations'    => 'Player Locations',
 
     // pages/claninfo_actions.php ('Action'/'Points Bonus' each reused
@@ -382,15 +390,16 @@ return [
     // pages/chat.php (breadcrumb/title RU value follows zozo's own
     // simplified wording for this position, common.nav.chat/common.col.
     // player/maps.col.map reused for TableColumn labels; footer nav
-    // reuses players.nav.goto_label). error("No such game '$game'.")
-    // NOT extracted -- same deferred $-interpolation category as
-    // elsewhere. sprintf('%s %s Server Chat Log (Last %d Days)', ...)
-    // NOT extracted -- __f() candidate (3 placeholders), deferred per
-    // the batch-2 instruction to decide __f() adoption in one pass at
-    // the end. "Clear" button and the delay-notice message are fork-
-    // only additions with no zozo RU source; translated fresh here as
-    // unambiguous UI vocabulary (not flagged, unlike the __f() items).
+    // reuses players.nav.goto_label). sprintf('%s %s Server Chat Log
+    // (Last %d Days)', ...) IS now extracted (structural package group
+    // б, __f() with 3 placeholders -- catalog value is the exact
+    // original format string, since __f() is vsprintf(__($key), $args)
+    // and behaves identically to the original sprintf() call). "Clear"
+    // button and the delay-notice message are fork-only additions with
+    // no zozo RU source; translated fresh here as unambiguous UI
+    // vocabulary (not flagged, unlike the __f() items).
     'chat.title'                  => 'Server Chat Statistics',
+    'chat.title.server_chat_log' => '%s %s Server Chat Log (Last %d Days)',
     'chat.default.all_servers'    => '(All Servers)',
     'chat.default.unknown_server' => '(Unknown Server)',
     'chat.col.date'                => 'Date',
@@ -486,19 +495,22 @@ return [
     // separate key from maps.title despite identical EN text since RU
     // needs the dative case here.
     //
-    // NOT extracted -- deferred, $-interpolated (would require
+    // Still NOT extracted -- deferred, $-interpolated (would require
     // restructuring a single interpolated string into a concatenation,
     // not just substituting an existing dot-joined literal -- same
     // deferred category as elsewhere, unlike the claninfo.php
     // concatenation-folds which substituted into pre-existing dot chains):
     // - "Kills on $map" (TableColumn label)
-    // - "<p><a href=\"$map_dlurl\">Download this map...</a></p>"
     // - "Heatmap: $map" (image title attribute) -- also same ambiguous
     //   "heatmap" term as the documented maps.col.heatmap gap
+    // "<p><a href=\"$map_dlurl\">Download this map...</a></p>" IS now
+    // extracted (mapinfo.link.download_map, structural package group б) --
+    // see the key below, restructured into $map_dlurl . concatenation.
     'mapinfo.no_map'              => 'No map specified.',
     'mapinfo.title'                => 'Map Details',
     'mapinfo.stats.mid'            => ' kills (Last ',
     'mapinfo.back_to.map_stats'   => 'Map Statistics',
+    'mapinfo.link.download_map'   => 'Download this map...',
 
     // pages/servers.php (maps.col.map/weapons.col.kills/
     // claninfo_weapons.col.hpk reused byte-for-byte; period labels
@@ -510,11 +522,9 @@ return [
     // ("Хедшоты") vs the genitive used elsewhere ("Хедшотов").
     // "Invalid server ID provided." and the two printSectionTitle
     // strings are fresh-translated -- zozo left all three in English.
-    // error("No such game '$game'.") NOT extracted -- same deferred
-    // category as elsewhere. The "(Join)" text inside the $addr-
-    // interpolated steam:// link is NOT extracted -- would require
-    // introducing new concatenation not present in the baseline, same
-    // reasoning as the reverted mapinfo.php "Download this map..." wrap.
+    // The "(Join)" text inside the $addr-interpolated steam:// link IS
+    // now extracted (common.label.join, structural package group б) --
+    // restructured into a concatenation around the shared label.
     'servers.invalid_server_id' => 'Invalid server ID provided.',
     'servers.title.live_view'    => 'Server Live View',
     'servers.title.load_history' => 'Server Load History',
@@ -643,15 +653,17 @@ return [
     // literal -- the baseline had no pre-existing concatenation there,
     // so the whole HTML+text literal is one key rather than splitting it
     // (same reasoning as the reverted mapinfo.php wrap). "Edit Player
-    // Details" (inside the $player-interpolated admin-options string)
-    // NOT extracted for the same reason -- matches claninfo.php's
-    // deferred "Edit Clan Details". error("No players found matching
-    // uniqueId '$uniqueid'") and error("No such player '$player'.") NOT
-    // extracted -- same deferred $-interpolation category as elsewhere.
+    // Details" and the uniqueId-not-found error ARE now extracted
+    // (structural package group б, __f()) -- see playerinfo.link.
+    // edit_player_details / playerinfo.err.no_players_matching_uniqueid
+    // below. (web/pages/ingame/*.php has 6 more occurrences of the
+    // uniqueId message but is out of scope -- see group а commit.)
     'playerinfo.status.banned'          => '<span style="color:red;font-weight:bold;">Banned</span>',
     'playerinfo.status.good_standing'  => '<span style="color:green;font-weight:bold;">In good standing</span>',
     'playerinfo.tab.maps_servers'       => 'Maps &amp; Servers',
     'playerinfo.tab.killstats'          => 'Killstats',
+    'playerinfo.link.edit_player_details' => 'Edit Player Details',
+    'playerinfo.err.no_players_matching_uniqueid' => 'No players found matching uniqueId \'%s\'',
 
     // pages/playerinfo_teams.php (Team/Ratio/Role/Kills/Deaths/K:D and
     // both section titles reuse claninfo_teams.*/roles.col.*/common.
@@ -851,13 +863,11 @@ return [
     //   construct -- same flagged pattern as awards_daily.php from
     //   batch 1 (extracting "Awards" alone requires a new split inside
     //   the $awards_d_date-interpolated trailing atom)
-    // - "Steam"/"(Join)" connect-link text (2 separate occurrences,
-    //   each embedded in a $addr-interpolated string)
     // - "Player" (alt attribute inside the non-country award-winner
     //   image, embedded in a larger interpolated string)
     // - image alt/title attributes throughout (Server Load Graph, etc.)
-    // error("No such game '$game'.") NOT extracted -- same deferred
-    // category as elsewhere.
+    // The 2 "(Join)"/"Join" connect-link occurrences ARE now extracted
+    // (common.label.join, structural package group б).
     'game.title.participating_servers' => 'Participating Servers',
     'game.col.players'                  => 'Players',
     'game.range.24h'                     => '24h View',

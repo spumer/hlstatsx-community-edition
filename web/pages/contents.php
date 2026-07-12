@@ -265,9 +265,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		
 			<ul>
 				<li><?php
-					echo "<strong>$num_players</strong> players and <strong>$num_clans</strong> clans "
-						. "ranked in <strong>$num_games</strong> games on <strong>$num_servers</strong>"
-						. " servers with <strong>$num_kills</strong> kills."; ?></li>
+					echo __f('contents.summary.stats_sentence', $num_players, $num_clans, $num_games, $num_servers, $num_kills); ?></li>
 <?php
 		if ($lastevent)
 		{

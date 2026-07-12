@@ -10,6 +10,7 @@
 return [
     // common.* -- class_table.php / includes/functions.php (shared across pages)
     'common.col.rank'        => 'Ранг',
+    'common.label.join'      => 'Войти',
     'common.msg.error_heading' => 'ОШИБКА',
     'common.msg.empty'       => '---',
     'common.msg.undefined'   => 'Неизвестно',
@@ -116,6 +117,7 @@ return [
     // silently dropped.
     'awards_daily.period_daily'     => 'Ежедневные',
     'awards_daily.period_day_suffix' => 'дн.',
+    'awards.title.awards_for_date' => ' Награды (%s)',
     'awards.no_winner'         => 'Нет Награжденных',
 
     // pages/awards_global.php
@@ -133,6 +135,7 @@ return [
     // pages/awards_ribbons.php -- our RU source uses the same empty-prefix
     // restructuring here too (reuses awards_ranks.achieved_prefix).
     'awards_ribbons.achieved_suffix' => ' игроков заслужили',
+    'awards_ribbons.header.ribbon_class' => 'Класс ленты #%s (требуется наград: %s)',
 
     // pages/dailyawardinfo.php
     // breadcrumb_details/section_title both port from our source's
@@ -241,6 +244,7 @@ return [
     'contents.last_kill_label'        => 'Последнее Убийство',
     'contents.stats_disclaimer.pre'   => 'Вся статистика ведется в реальном времени. Данные об истории событий хранятся ',
     'contents.stats_disclaimer.post'  => ' дней.',
+    'contents.summary.stats_sentence' => 'Оценено <strong>%s</strong> игроков и <strong>%s</strong> кланов в <strong>%s</strong> играх на <strong>%s</strong> серверах с <strong>%s</strong> убийствами.',
 
     // pages/roles.php
     'roles.title'         => 'Роли',
@@ -294,6 +298,7 @@ return [
     'claninfo.marked_note.pre'    => 'Отмеченные "*" пункты сгенерированы за последние ',
     'claninfo.marked_note.post'   => ' дней.',
     'claninfo.admin_options_label' => 'Настройки Админа: ',
+    'claninfo.link.edit_clan_details' => 'Редактировать данные клана',
 
     // pages/claninfo_general.php
     'claninfo_general.section_title'          => 'Информация о клане',
@@ -303,6 +308,7 @@ return [
     'claninfo_general.label.favorite_server'   => 'Любимый сервер:*',
     'claninfo_general.label.favorite_map'      => 'Любимая карта:*',
     'claninfo_general.label.favorite_weapon'   => 'Любимое оружие:*',
+    'claninfo_general.label.active_members'    => ' активных участников (всего %s)',
     'claninfo_general.col.player_locations'    => 'Местоположение игроков',
 
     // pages/claninfo_actions.php
@@ -349,6 +355,7 @@ return [
 
     // pages/chat.php
     'chat.title'                  => 'Чат',
+    'chat.title.server_chat_log' => '%s %s — Журнал Чата Сервера (Последние %d Дней)',
     'chat.default.all_servers'    => '(Все Серверы)',
     'chat.default.unknown_server' => '(Неизвестный сервер)',
     'chat.col.date'                => 'Дата',
@@ -406,6 +413,7 @@ return [
     'mapinfo.title'                => 'Карта Подробно',
     'mapinfo.stats.mid'            => ' убийств (за последние ',
     'mapinfo.back_to.map_stats'   => 'Картам',
+    'mapinfo.link.download_map'   => 'Скачать эту карту...',
 
     // pages/servers.php
     'servers.invalid_server_id' => 'Указан некорректный ID сервера.',
@@ -484,6 +492,8 @@ return [
     'playerinfo.status.good_standing'  => '<span style="color:green;font-weight:bold;">В порядке</span>',
     'playerinfo.tab.maps_servers'       => 'Карты/Серверы',
     'playerinfo.tab.killstats'          => 'Убийства',
+    'playerinfo.link.edit_player_details' => 'Редактировать данные игрока',
+    'playerinfo.err.no_players_matching_uniqueid' => 'Игроки с uniqueId \'%s\' не найдены',
 
     // pages/playerinfo_teams.php
     'playerinfo_teams.col.joined' => 'Играл',

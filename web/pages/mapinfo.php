@@ -184,7 +184,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				$map_dlurl = str_replace("%GAME%", $game, $map_dlurl);
 				$mapdlheader = @get_headers($map_dlurl);
 				if (preg_match("|200|", $mapdlheader[0])) {
-					echo "<p><a href=\"$map_dlurl\">Download this map...</a></p>";
+					echo "<p><a href=\"$map_dlurl\">" . __('mapinfo.link.download_map') . "</a></p>";
 				}
 			}
 

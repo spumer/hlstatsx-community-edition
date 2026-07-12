@@ -84,7 +84,7 @@ printSectionTitle(__('claninfo_general.section_title'));
 				<td><?=__('countryclansinfo.row.members')?></td>
 				<td colspan="2"><?php
 					echo $clandata['nummembers'].
-					" active members ($totalclanplayers total)"; 
+					__f('claninfo_general.label.active_members', $totalclanplayers);
 				?></td>
 			</tr>
 

@@ -242,7 +242,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			echo '<b>' . $rowdata['name'] . '</b>';
 ?></td>
             <td class="game-table-cell"><?php
-			echo "$addr (<a href=\"steam://connect/$addr\">Join</a>)";
+			echo "$addr (<a href=\"steam://connect/$addr\">" . __('common.label.join') . "</a>)";
 ?></td>
             <td class="game-table-cell" style="text-align:center;"><?php
 			echo $rowdata['act_map'];
@@ -405,7 +405,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			echo "<b><a href=\"" . $g_options['scripturl'] . "?mode=servers&amp;server_id=$server_id&amp;game=$game\" style=\"text-decoration:none;\">" . htmlspecialchars($rowdata['name']) . "</a></b>";
 	?></td>
 						<td class="game-table-cell"><?php
-			echo "$addr <a href=\"steam://connect/$addr\" style=\"color:black\">(Join)</a>";
+			echo "$addr <a href=\"steam://connect/$addr\" style=\"color:black\">(" . __('common.label.join') . ")</a>";
 	?></td>
 						<td class="game-table-cell" style="text-align:center;"><?php
 			echo $rowdata['act_map'];
@@ -502,7 +502,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 <div class="block" style="padding-top:20px">
 
 <?php
-	printSectionTitle((($awards_numdays == 1) ? 'Daily' : "$awards_numdays Day")." Awards ($awards_d_date)");
+	printSectionTitle((($awards_numdays == 1) ? __('awards_daily.period_daily') : $awards_numdays . ' ' . __('awards_daily.period_day_suffix')) . __f('awards.title.awards_for_date', $awards_d_date));
 ?>
 	<div class="subblock">
 
