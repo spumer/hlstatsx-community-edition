@@ -143,7 +143,7 @@
         /**
          * Themes offered by the user selector and the admin option: every
          * legacy skin (web/styles/*.css, in directory order) plus every
-         * package (web/themes/*/), keyed by the value the resolver understands
+         * package (web/themes/<name>/), keyed by the value the resolver understands
          * (legacy 'foo.css', package 'foo') mapped to a display label.
          */
         public function listThemes(): array
