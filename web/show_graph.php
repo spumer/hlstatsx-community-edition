@@ -84,6 +84,10 @@ For support and installation notes visit http://www.hlxcommunity.com
 		error('Warning: Could not find any options in the database. Check HLStats configuration.');
 	}
 
+	$themeService = $container->get(\Service\ThemeService::class);
+	$themeService->resolve($_COOKIE['style'] ?? null);
+	theme_bind($themeService);
+
 	$width = 500;
 	if (isset($_GET['width']) && is_numeric($_GET['width'])) {
 		$width = valid_request($_GET['width'], true);
@@ -120,16 +124,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 		$bar_type = valid_request($_GET['type'], true);
 	}
 		
-	$selectedStyle = (isset($_COOKIE['style']) && $_COOKIE['style']) ? $_COOKIE['style'] : $g_options['style'];
-
-	
-	// Determine if we have custom nav images available
-	$selectedStyle = preg_replace('/\.css$/','',$selectedStyle);
-	
-	$iconpath = IMAGE_PATH . "/icons";
-	if (file_exists($iconpath . "/" . $selectedStyle)) {
-		$iconpath = $iconpath . "/" . $selectedStyle;
-	}		
+	// Style/icon resolution (cookie -> configured default, name-validated)
+	// now lives in ThemeService, bound as theme() above.
+	$iconpath = theme()->iconPath();
 
 	$bg_color = array('red' => 171, 'green' => 204, 'blue' => 214);
 	if (isset($_GET['bgcolor']) && is_string($_GET['bgcolor'])) {
