@@ -11,6 +11,7 @@
     use Repository\PlayerRepository;
     use Service\OptionService;
     use Service\LanguageService;
+    use Service\ThemeService;
     use Cache\CacheCleaner;
 
     $container = new class
@@ -73,6 +74,14 @@
         $lang = $g_options['language'] ?? 'en';
 
         return new LanguageService(ROOT_PATH . '/lang', $lang, 'en');
+    });
+
+    $container->set(ThemeService::class, function($c) {
+        global $g_options;
+
+        $default = $g_options['style'] ?? 'sourcebans.css';
+
+        return new ThemeService(ROOT_PATH . '/themes', ROOT_PATH . '/styles', IMAGE_PATH, $default);
     });
 
     $container->set(GameRepository::class, function($c) {

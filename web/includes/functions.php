@@ -41,6 +41,7 @@ if (!defined('IN_HLSTATS')) {
 }
 
 require_once __DIR__ . '/i18n.php';
+require_once __DIR__ . '/theme.php';
 
 function checkValidGame(string $gameStr, array $allowedGames, ?string &$retError) : bool
 {

@@ -156,6 +156,10 @@ if (empty($g_options)) {
 $languageService = $container->get(\Service\LanguageService::class);
 i18n_bind($languageService);
 
+$themeService = $container->get(\Service\ThemeService::class);
+$themeService->resolve($_POST['stylesheet'] ?? $_COOKIE['style'] ?? null);
+theme_bind($themeService);
+
 $cacheCleaner = $container->get(\Cache\CacheCleaner::class);
 $deleteFiles = $cacheCleaner->cleanOldTrendCache(
 	null,
