@@ -519,4 +519,26 @@ return [
     'servers.period.last_week'    => 'Last Week',
     'servers.period.last_month'   => 'Last Month',
     'servers.period.last_year'    => 'Last Year',
+
+    // pages/livestats.php (common.col.player/hpk and
+    // countryclansinfo.col.time reused byte-for-byte). livestats.col.kills
+    // is a separate key from common.col.kills/weapons.col.kills: this
+    // header spans a combined kills/deaths/hpk column cluster, and zozo
+    // translated it as the K:D abbreviation rather than literally
+    // "Kills". "Unknown team" (empty-team-name fallback) has no zozo
+    // equivalent at all -- zozo's file lacks this ternary entirely -- so
+    // it's fresh-translated, same as "Unknown" (connection-time fallback,
+    // 2 occurrences reusing one key) and " wins)" (safe to fold: the
+    // baseline already dot-concatenates '&nbsp;(' . $map_teama_wins .
+    // ' wins)', so replacing the existing trailing literal keeps the same
+    // 2-dot chain rather than introducing new structure).
+    'livestats.col.kills'      => 'Kills',
+    'livestats.col.hs'          => 'Hs',
+    'livestats.col.acc'         => 'Acc',
+    'livestats.col.lat'         => 'Lat',
+    'livestats.col.skill'       => 'Skill',
+    'livestats.unknown_team'   => 'Unknown team',
+    'livestats.msg.unknown'    => 'Unknown',
+    'livestats.suffix.wins'    => ' wins)',
+    'livestats.msg.no_players' => 'No Players',
 ];

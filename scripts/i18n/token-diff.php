@@ -118,6 +118,10 @@ const BARE_CALL_QUOTE_OVERRIDES = [
     'web/pages/servers.php' => [
         'servers.invalid_server_id' => '"',
     ],
+    'web/pages/livestats.php' => [
+        'livestats.unknown_team'    => '"',
+        'livestats.msg.no_players'  => '"',
+    ],
 ];
 
 /**

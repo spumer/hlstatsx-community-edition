@@ -414,4 +414,15 @@ return [
     'servers.period.last_week'    => 'Последняя Неделя',
     'servers.period.last_month'   => 'Последний Месяц',
     'servers.period.last_year'    => 'Последний Год',
+
+    // pages/livestats.php
+    'livestats.col.kills'      => 'Уб:См',
+    'livestats.col.hs'          => 'ХШ',
+    'livestats.col.acc'         => 'Точность',
+    'livestats.col.lat'         => 'Пинг',
+    'livestats.col.skill'       => 'Очки',
+    'livestats.unknown_team'   => 'Неизвестная команда',
+    'livestats.msg.unknown'    => 'Неизвестно',
+    'livestats.suffix.wins'    => ' побед)',
+    'livestats.msg.no_players' => 'Нет игроков',
 ];
