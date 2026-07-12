@@ -10,7 +10,10 @@
 return [
     // common.* -- class_table.php / includes/functions.php (shared across pages)
     'common.col.rank'        => 'Ранг',
-    'common.label.join'      => 'Войти',
+    // zozo's actual text for this link is "Steam" (referring to the
+    // connect protocol, not a literal translation of "Join") -- matches
+    // E:/sources/zozo/hlstatsx/web/pages/servers.php:160/game.php:245,408.
+    'common.label.join'      => 'Steam',
     'common.msg.error_heading' => 'ОШИБКА',
     'common.msg.empty'       => '---',
     'common.msg.undefined'   => 'Неизвестно',
@@ -136,7 +139,7 @@ return [
     // pages/awards_ribbons.php -- our RU source uses the same empty-prefix
     // restructuring here too (reuses awards_ranks.achieved_prefix).
     'awards_ribbons.achieved_suffix' => ' игроков заслужили',
-    'awards_ribbons.header.ribbon_class' => 'Класс ленты #%s (требуется наград: %s)',
+    'awards_ribbons.header.ribbon_class' => 'Медаль Класса #%s (%s наград необходимо)',
 
     // pages/dailyawardinfo.php
     // breadcrumb_details/section_title both port from our source's
@@ -299,7 +302,7 @@ return [
     'claninfo.marked_note.pre'    => 'Отмеченные "*" пункты сгенерированы за последние ',
     'claninfo.marked_note.post'   => ' дней.',
     'claninfo.admin_options_label' => 'Настройки Админа: ',
-    'claninfo.link.edit_clan_details' => 'Редактировать данные клана',
+    'claninfo.link.edit_clan_details' => 'Редактировать информацию о Клане',
 
     // pages/claninfo_general.php
     'claninfo_general.section_title'          => 'Информация о клане',
@@ -309,7 +312,7 @@ return [
     'claninfo_general.label.favorite_server'   => 'Любимый сервер:*',
     'claninfo_general.label.favorite_map'      => 'Любимая карта:*',
     'claninfo_general.label.favorite_weapon'   => 'Любимое оружие:*',
-    'claninfo_general.label.active_members'    => ' активных участников (всего %s)',
+    'claninfo_general.label.active_members'    => ' активных участников (%s всего)',
     'claninfo_general.col.player_locations'    => 'Местоположение игроков',
 
     // pages/claninfo_actions.php
@@ -414,7 +417,9 @@ return [
     'mapinfo.title'                => 'Карта Подробно',
     'mapinfo.stats.mid'            => ' убийств (за последние ',
     'mapinfo.back_to.map_stats'   => 'Картам',
-    'mapinfo.link.download_map'   => 'Скачать эту карту...',
+    // no entry for mapinfo.link.download_map -- zozo's own source leaves
+    // "Download this map..." untranslated too (falls back to en.php),
+    // same disputed-terminology precedent as heatmap/player_list_fallback.
 
     // pages/servers.php
     'servers.invalid_server_id' => 'Указан некорректный ID сервера.',
@@ -493,8 +498,11 @@ return [
     'playerinfo.status.good_standing'  => '<span style="color:green;font-weight:bold;">В порядке</span>',
     'playerinfo.tab.maps_servers'       => 'Карты/Серверы',
     'playerinfo.tab.killstats'          => 'Убийства',
-    'playerinfo.link.edit_player_details' => 'Редактировать данные игрока',
-    'playerinfo.err.no_players_matching_uniqueid' => 'Игроки с uniqueId \'%s\' не найдены',
+    'playerinfo.link.edit_player_details' => 'Редактировать Информацию об Игроке',
+    // no entry for playerinfo.err.no_players_matching_uniqueid -- zozo's
+    // own source leaves this error message untranslated too (falls back
+    // to en.php), same disputed-terminology precedent as heatmap/
+    // player_list_fallback/mapinfo.link.download_map above.
 
     // pages/playerinfo_teams.php
     'playerinfo_teams.col.joined' => 'Играл',
@@ -566,11 +574,13 @@ return [
     'playerinfo_general.label.last_connect'   => 'Последнее соединение:',
     'playerinfo_general.msg.unknown_paren'    => '(Неизвестно)',
     'playerinfo_general.label.avg_ping'       => 'Средний пинг:*',
-    'playerinfo_general.alt.avatar'           => 'Аватар Steam Community',
-    'playerinfo_general.label.steam'          => 'Steam: ',
+    // no entry for playerinfo_general.alt.avatar -- zozo leaves "Steam
+    // Community Avatar" untranslated too, same disputed-terminology
+    // precedent as heatmap/player_list_fallback above.
+    'playerinfo_general.label.steam'          => 'Steam ID: ',
     'playerinfo_general.label.karma'          => 'Карма: ',
     'playerinfo_general.alt.rank_icon'        => 'ранг',
-    'playerinfo_general.label.latency'        => ' мс (задержка: %s мс)',
+    'playerinfo_general.label.latency'        => ' мс (Задержка: %s мс)',
     'playerinfo_general.row.points'                 => 'Очков:',
     'playerinfo_general.row.rank'                   => 'Ранг:',
     'playerinfo_general.rank.hidden'                => 'Скрытый',
@@ -593,9 +603,10 @@ return [
     'playerinfo_general.link.events'          => 'События',
     'playerinfo_general.link.sessions'        => 'Сессии',
     'playerinfo_general.link.awards_count'    => 'Награды&nbsp;(%s)',
-    'playerinfo_general.alt.search'           => 'Поиск',
+    // no entry for playerinfo_general.alt.search -- zozo leaves "Search"
+    // untranslated too, same precedent as alt.avatar above.
     'playerinfo_general.link.find_similar_names' => 'Найти других игроков с таким же именем',
-    'playerinfo_general.title.misc_stats'     => 'Прочая Статистика',
+    'playerinfo_general.title.misc_stats'     => 'Разная статистика',
     'playerinfo_general.col.player_trend'     => 'График игрока',
     'playerinfo_general.alt.trend_graph'      => 'График игрока',
     'playerinfo_general.col.forum_signature'  => 'Подпись для Форума',

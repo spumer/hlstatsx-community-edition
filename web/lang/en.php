@@ -17,7 +17,10 @@ return [
     'common.col.rank'        => 'Rank',
     // common.label.join -- steam://connect anchor text, servers.php + game.php
     // (2 occurrences x 2 files); previously left un-extracted because pulling
-    // it out means restructuring an interpolated string into a concatenation
+    // it out means restructuring an interpolated string into a concatenation.
+    // ru.php's value is "Steam" -- zozo's actual choice for this link, not a
+    // literal translation of "Join" (confirmed against
+    // E:/sources/zozo/hlstatsx/web/pages/servers.php:160, game.php:245,408).
     'common.label.join'      => 'Join',
     'common.msg.error_heading' => 'ERROR',
     'common.msg.empty'       => '---',
@@ -144,7 +147,10 @@ return [
     // pages/awards_ribbons.php (title reuses awards.tab.ribbons; prefix
     // reuses awards_ranks.achieved_prefix, byte-identical 'Achieved by ')
     // "Ribbon Class #$i1 ($cnt awards required)" header IS now extracted
-    // (structural package group б, __f() with two placeholders).
+    // (structural package group б, __f() with two placeholders). ru.php's
+    // value ("Медаль Класса #%s (%s наград необходимо)") is zozo's actual
+    // wording, confirmed against
+    // E:/sources/zozo/hlstatsx/web/pages/awards_ribbons.php:106.
     'awards_ribbons.achieved_suffix' => ' players',
     'awards_ribbons.header.ribbon_class' => 'Ribbon Class #%s (%s awards required)',
 
@@ -244,7 +250,15 @@ return [
     // ("<strong>N</strong> players and <strong>M</strong> clans ranked
     // in...") IS now extracted (structural package group б, __f() with
     // 5 placeholders folding the 3 pre-existing concatenated pieces into
-    // one catalog value).
+    // one catalog value). ru.php's value is a FRESH translation, not
+    // zozo's text -- zozo's actual contents.php has a structurally
+    // different sentence here ("Отслеживание N игроков (+N новых за
+    // последние 24 часа) с N убийств... на N серверах", no mention of
+    // clans/games at all, a different variable set) --
+    // E:/sources/zozo/hlstatsx/web/pages/contents.php:162,164,191,193.
+    // The fork added clan/game counts zozo's version doesn't track here;
+    // no 1:1 mapping exists to correct against, worth a content call
+    // later if this divergence matters, not a simple wording fix.
     'contents.games_title'            => 'Games',
     'contents.col.game'                => 'Game',
     'contents.col.top_player'          => 'Top Player',
@@ -306,7 +320,10 @@ return [
     // labels reuse common.nav.weapons/maps; footer nav reuses
     // players.nav.goto_label/clan_rankings). "Edit Clan Details" link
     // text IS now extracted (structural package group б, folded into
-    // the pre-existing admin_options_label concatenation).
+    // the pre-existing admin_options_label concatenation). ru.php's
+    // value ("Редактировать информацию о Клане") is zozo's actual
+    // wording, confirmed against
+    // E:/sources/zozo/hlstatsx/web/pages/claninfo.php:206.
     // admin_options_label is a concatenation-fold verified isolated
     // from the interpolated remainder by an intervening
     // $g_options[...] array-access token.
@@ -323,7 +340,10 @@ return [
     // countryclansinfo.row.*/col.* -- same row set as countryclansinfo.php,
     // this page adds Home Page/Favorite Server/Map/Weapon rows on top).
     // " active members ($totalclanplayers total)" IS now extracted
-    // (structural package group б, __f()). 'Unknown' ($fav_weapon
+    // (structural package group б, __f()). ru.php's value confirmed
+    // against E:/sources/zozo/hlstatsx/web/pages/claninfo_general.php:99
+    // (zozo puts the number before "всего", not after -- word order
+    // matters here, not just wording). 'Unknown' ($fav_weapon
     // fallback) NOT extracted -- internal image-lookup sentinel, not
     // user-facing text. '-' (empty-stat placeholder) NOT extracted --
     // bare literal, same as countryclansinfo.php precedent.
@@ -508,8 +528,10 @@ return [
     // - "Heatmap: $map" (image title attribute) -- also same ambiguous
     //   "heatmap" term as the documented maps.col.heatmap gap
     // "<p><a href=\"$map_dlurl\">Download this map...</a></p>" IS now
-    // extracted (mapinfo.link.download_map, structural package group б) --
-    // see the key below, restructured into $map_dlurl . concatenation.
+    // extracted (mapinfo.link.download_map, structural package group б),
+    // restructured into $map_dlurl . concatenation. No ru.php entry --
+    // zozo's own source leaves this untranslated too (confirmed against
+    // E:/sources/zozo/hlstatsx/web/pages/mapinfo.php:194).
     'mapinfo.no_map'              => 'No map specified.',
     'mapinfo.title'                => 'Map Details',
     'mapinfo.stats.mid'            => ' kills (Last ',
@@ -662,6 +684,11 @@ return [
     // edit_player_details / playerinfo.err.no_players_matching_uniqueid
     // below. (web/pages/ingame/*.php has 6 more occurrences of the
     // uniqueId message but is out of scope -- see group а commit.)
+    // edit_player_details' ru.php value ("Редактировать Информацию об
+    // Игроке") is zozo's actual wording, not a literal translation of
+    // "Edit Player Details"; the uniqueId error has no ru.php entry --
+    // zozo leaves it untranslated too (both confirmed against
+    // E:/sources/zozo/hlstatsx/web/pages/playerinfo.php:71,305).
     'playerinfo.status.banned'          => '<span style="color:red;font-weight:bold;">Banned</span>',
     'playerinfo.status.good_standing'  => '<span style="color:green;font-weight:bold;">In good standing</span>',
     'playerinfo.tab.maps_servers'       => 'Maps &amp; Servers',
@@ -820,8 +847,21 @@ return [
     //   catalog (e.g. ChangeTeam's '" (' in playerhistory.php above).
     // "Karma: "/"Steam: " labels, and the img alt/title attributes
     // throughout (avatar, rank icons, trend graph, forum signature) are
-    // plain Shape-1/concatenation-fold wraps. Latency and the awards-
-    // count link use __f() since $av_latency/$numawards are ordinary PHP
+    // plain Shape-1/concatenation-fold wraps. Checked ru.php's values
+    // against E:/sources/zozo/hlstatsx/web/pages/playerinfo_general.php:
+    // Karma/Events/Sessions/Awards-count/Chat/history-alt all matched the
+    // draft exactly; label.steam is corrected to zozo's real "Steam ID: "
+    // (not a literal translation of "Steam: "); avatar-alt and search-alt
+    // have NO ru.php entry -- zozo leaves both untranslated too, same
+    // disputed-terminology fallback precedent as heatmap; misc_stats
+    // corrected to zozo's actual "Разная статистика". rank_icon alt,
+    // player_history label, find_similar_names link, trend_graph alt, and
+    // both forum-sig strings have no zozo equivalent at all (MM Rank,
+    // trend graph, and the forum-signature generator are fork-only
+    // features zozo's version doesn't have) -- fresh-translated as
+    // unambiguous UI vocabulary, same as add_friend/Status: above.
+    // Latency and the awards-count link use __f() since
+    // $av_latency/$numawards are ordinary PHP
     // variables at echo time (unlike playerhistory.php's SQL columns).
     // The history-row label uses __f() too, to let RU say "История
     // игрока %s:" instead of forcing an English-only possessive ("%s's
