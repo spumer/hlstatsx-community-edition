@@ -538,4 +538,11 @@ return [
     'playerinfo_general.title.awards'         => 'Награды (Наведите на картинку, чтобы увидеть название)',
     'playerinfo_general.col.ribbons'          => 'Медали',
     'playerinfo_general.col.global_awards'    => 'Общие награды',
+
+    // pages/footer.php
+    'footer.msg.nojs'          => 'Вы просматриваете базовую версию этой страницы. Включите JavaScript и перезагрузите страницу для полного функционала.',
+    'footer.label.generated_by' => 'Сгенерировано в реальном времени с помощью ',
+    'footer.msg.copyright'    => 'Все изображения защищены авторским правом их владельцев.',
+    'footer.link.admin'        => 'Admin',
+    'footer.link.logout'       => 'Logout',
 ];

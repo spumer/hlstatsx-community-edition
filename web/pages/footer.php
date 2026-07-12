@@ -79,11 +79,11 @@
 
 			<div class="fSmall" style="text-align:center;">
 					<?php if (isset($_SESSION['nojs']) && $_SESSION['nojs'] == 1) : ?>
-						You are currently viewing the basic version of this page, please enable JavaScript and reload the page to access full functionality.
+						<?=__('footer.msg.nojs')?>
 						<br>
 					<?php endif; ?>
 					
-					Generated in real-time by 
+					<?=__('footer.label.generated_by')?>
 					<a href="http://www.hlxce.com" target="_blank">
 						HLstatsX Community Edition <?=$versionStats;?>
 					</a>
@@ -93,12 +93,12 @@
 						<?=$debugText;?>
 					<?php endif; ?>
 				<br>
-				All images are copyrighted by their respective owners.
+				<?=__('footer.msg.copyright')?>
 				<br><br>
-				[<a href="<?=$scriptUrl;?>?mode=admin">Admin</a>]
+				[<a href="<?=$scriptUrl;?>?mode=admin"><?=__('footer.link.admin')?></a>]
 
 				<?php if (isset($_SESSION['loggedin'])) : ?>
-					&nbsp;[<a href="hlstats.php?logout=1">Logout</a>]
+					&nbsp;[<a href="hlstats.php?logout=1"><?=__('footer.link.logout')?></a>]
 				<?php endif; ?>
 			</div>
 

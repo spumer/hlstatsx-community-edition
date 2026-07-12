@@ -786,4 +786,16 @@ return [
     'playerinfo_general.title.awards'         => 'Awards (hover over image to see name)',
     'playerinfo_general.col.ribbons'          => 'Ribbons',
     'playerinfo_general.col.global_awards'    => 'Global Awards',
+
+    // pages/footer.php ("Generated in real-time by " reuses zozo's own
+    // translation exactly). "Admin"/"Logout" kept identical in RU --
+    // zozo left both in English too, treated here as established
+    // loanwords rather than gaps. debugText (the "Executed N queries..."
+    // performance line, admin-only via showqueries) NOT extracted --
+    // developer-facing debug output, same precedent as profile.php.
+    'footer.msg.nojs'          => 'You are currently viewing the basic version of this page, please enable JavaScript and reload the page to access full functionality.',
+    'footer.label.generated_by' => 'Generated in real-time by ',
+    'footer.msg.copyright'    => 'All images are copyrighted by their respective owners.',
+    'footer.link.admin'        => 'Admin',
+    'footer.link.logout'       => 'Logout',
 ];
