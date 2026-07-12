@@ -1,0 +1,5 @@
+{
+    "name": "ZoZo",
+    "base_css": "hlstats.css",
+    "css": ["theme.css"]
+}
