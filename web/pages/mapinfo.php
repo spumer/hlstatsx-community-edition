@@ -42,21 +42,21 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 	// Map Details
 	
-	$map = valid_request($_GET['map'], false) or error('No map specified.');
+	$map = valid_request($_GET['map'], false) or error(__('mapinfo.no_map'));
 	
 	$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
 	if ($db->num_rows() != 1) {
-		error('Invalid or no game specified.');
+		error(__('actioninfo.invalid_game'));
 	} else {
 		list($gamename) = $db->fetch_row();
 	}
 
 	pageHeader(
-		array($gamename, 'Map Details', $map),
+		array($gamename, __('mapinfo.title'), $map),
 		array(
 			$gamename=>$g_options['scripturl'] . "?game=$game",
-			'Map Statistics' => $g_options['scripturl'] . "?mode=maps&game=$game",
-			'Map Details' => ''
+			__('maps.title') => $g_options['scripturl'] . "?mode=maps&game=$game",
+			__('mapinfo.title') => ''
 		),
 		$map
 	);
@@ -65,7 +65,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		array(
 			new TableColumn(
 				'killerName',
-				'Player',
+				__('common.col.player'),
 				'width=50&align=left&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k') 
 			),
 			new TableColumn(
@@ -75,12 +75,12 @@ For support and installation notes visit http://www.hlxcommunity.com
 			),
 			new TableColumn(
 				'headshots',
-				'Headshots',
+				__('common.col.headshots'),
 				'width=15&align=right'
 			),
 			new TableColumn(
 				'hpk',
-				'Hpk',
+				__('claninfo_weapons.col.hpk'),
 				'width=5&align=right'
 			),
 			
@@ -134,13 +134,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?>
 
 <div class="block">
-	<?php printSectionTitle('Map Details'); ?>
+	<?php printSectionTitle(__('mapinfo.title')); ?>
 	<div class="subblock">
 		<div style="float:left;">
-			<strong><?php echo $map; ?></strong>: From a total of <strong><?php echo number_format(intval($totalkills)); ?></strong> kills (Last <?php echo $g_options['DeleteDays']; ?> Days)
+			<strong><?php echo $map; ?></strong>: <?=__('roles.stats.pre')?><strong><?php echo number_format(intval($totalkills)); ?></strong><?=__('mapinfo.stats.mid')?><?php echo $g_options['DeleteDays']; ?><?=__('actioninfo.stats.post')?>
 		</div>
 		<div style="float:right;">
-			Back to <a href="<?php echo $g_options['scripturl'] . "?mode=maps&amp;game=$game"; ?>">Map Statistics</a>
+			<?=__('actioninfo.back_to.label')?><a href="<?php echo $g_options['scripturl'] . "?mode=maps&amp;game=$game"; ?>"><?=__('mapinfo.back_to.map_stats')?></a>
 		</div>
 		<div style="clear:both;"></div>
 	</div>

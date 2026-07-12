@@ -469,4 +469,26 @@ return [
     'weaponinfo.col.kills_suffix'    => ' kills',
     'weaponinfo.stats.mid2'          => ' headshots (Last ',
     'weaponinfo.back_to.weapon_stats' => 'Weapon Statistics',
+
+    // pages/mapinfo.php (breadcrumb reuses maps.title; common.col.player/
+    // headshots and claninfo_weapons.col.hpk reused byte-for-byte;
+    // actioninfo.invalid_game/back_to.label/stats.post and roles.stats.pre
+    // reused byte-for-byte). "No map specified." fresh-translated -- zozo
+    // left it in English on this page too. mapinfo.back_to.map_stats is a
+    // separate key from maps.title despite identical EN text since RU
+    // needs the dative case here.
+    //
+    // NOT extracted -- deferred, $-interpolated (would require
+    // restructuring a single interpolated string into a concatenation,
+    // not just substituting an existing dot-joined literal -- same
+    // deferred category as elsewhere, unlike the claninfo.php
+    // concatenation-folds which substituted into pre-existing dot chains):
+    // - "Kills on $map" (TableColumn label)
+    // - "<p><a href=\"$map_dlurl\">Download this map...</a></p>"
+    // - "Heatmap: $map" (image title attribute) -- also same ambiguous
+    //   "heatmap" term as the documented maps.col.heatmap gap
+    'mapinfo.no_map'              => 'No map specified.',
+    'mapinfo.title'                => 'Map Details',
+    'mapinfo.stats.mid'            => ' kills (Last ',
+    'mapinfo.back_to.map_stats'   => 'Map Statistics',
 ];

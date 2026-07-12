@@ -394,4 +394,10 @@ return [
     'weaponinfo.col.kills_suffix'    => ' убито',
     'weaponinfo.stats.mid2'          => ' хедшотов (за последние ',
     'weaponinfo.back_to.weapon_stats' => 'Оружию',
+
+    // pages/mapinfo.php
+    'mapinfo.no_map'              => 'Карта не указана.',
+    'mapinfo.title'                => 'Карта Подробно',
+    'mapinfo.stats.mid'            => ' убийств (за последние ',
+    'mapinfo.back_to.map_stats'   => 'Картам',
 ];
