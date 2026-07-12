@@ -387,4 +387,11 @@ return [
     'weapons.title'        => 'Оружие',
     'weapons.col.modifier' => 'Коэффициент',
     'weapons.col.kills'    => 'Убито',
+
+    // pages/weaponinfo.php
+    'weaponinfo.no_weapon_id'        => 'Не указан ID оружия.',
+    'weaponinfo.title'                => 'Оружие Подробно',
+    'weaponinfo.col.kills_suffix'    => ' убито',
+    'weaponinfo.stats.mid2'          => ' хедшотов (за последние ',
+    'weaponinfo.back_to.weapon_stats' => 'Оружию',
 ];

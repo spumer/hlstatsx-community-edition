@@ -452,4 +452,21 @@ return [
     'weapons.title'        => 'Weapon Statistics',
     'weapons.col.modifier' => 'Modifier',
     'weapons.col.kills'    => 'Kills',
+
+    // pages/weaponinfo.php (breadcrumb value reuses weapons.title;
+    // common.col.player/headshots and claninfo_weapons.col.hpk reused
+    // byte-for-byte; error("Invalid or no game specified.") reuses
+    // actioninfo.invalid_game byte-for-byte; stats line reuses
+    // roles.stats.pre + maps.stats.mid; "Back to " reuses
+    // actioninfo.back_to.label). "No weapon ID specified." is fresh-
+    // translated -- zozo left it in English on this page too.
+    // weaponinfo.col.kills_suffix and weaponinfo.back_to.weapon_stats
+    // are separate keys from their same-EN-text counterparts
+    // (rolesinfo.col.kills_suffix, weapons.title) since RU differs
+    // (different verb; dative case).
+    'weaponinfo.no_weapon_id'        => 'No weapon ID specified.',
+    'weaponinfo.title'                => 'Weapon Details',
+    'weaponinfo.col.kills_suffix'    => ' kills',
+    'weaponinfo.stats.mid2'          => ' headshots (Last ',
+    'weaponinfo.back_to.weapon_stats' => 'Weapon Statistics',
 ];
