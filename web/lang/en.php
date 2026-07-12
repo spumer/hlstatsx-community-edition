@@ -858,4 +858,64 @@ return [
     'game.range.last_year'               => 'Last Year',
     'game.msg.unknown_country'          => 'Unknown Country',
     'game.msg.no_award_winner'          => '&nbsp;&nbsp; <em>No Award Winner</em>',
+
+    // pages/help.php (claninfo_actions.col.action, claninfo_weapons.
+    // col.weapon/points_modifier, and common.col.name reused byte-for-
+    // byte). This is a long-form FAQ page with a complete zozo RU
+    // translation (rare for this project -- most pages needed page-by-
+    // page reconciliation, this one ported almost entirely intact).
+    // The "NameTrack" and "LAN" mode branches (2 paragraphs) are NOT
+    // extracted: zozo's own copy leaves both in English, confirming
+    // they're unreachable for ZoZo's actual config (Steam/Normal mode),
+    // same category as profile.php/updater.php -- dead code for this
+    // deployment, not merely an untranslated gap. $uniqueid/
+    // $uniqueid_plural ('Unique ID'/'Unique IDs') are NOT translated --
+    // zozo also kept this specific term in English even though the
+    // surrounding sentences were translated, treated as an established
+    // technical term. help.link.search reused 2x; help.label.note
+    // reused 3x; help.col.game and help.formula.weapon_modifier each
+    // reused 2x.
+    'help.title'                => 'Help',
+    'help.title.questions'      => 'Questions',
+    'help.q.players'            => 'How are players tracked? Or, why is my name listed more than once?',
+    'help.q.points'              => 'How is the "points" rating calculated?',
+    'help.q.weaponmods'          => 'What are all the weapon points modifiers?',
+    'help.q.set'                 => 'How can I set my real name, e-mail address, and homepage?',
+    'help.q.hideranking'         => 'My rank is embarrassing. How can I opt out?',
+    'help.title.answers'        => 'Answers',
+    'help.text.name_tracking'   => 'A player may have more than one name. On the Player Rankings pages, players are shown with the most recent name they used in the game. If you click on a player\'s name, the Player Details page will show you a list of all other names that this player uses, if any, under the Aliases section (if the player has not used any other names, the Aliases section will not be displayed).',
+    'help.text.name_listed_pre'  => 'Your name may be listed more than once if somebody else (with a different ',
+    'help.text.name_listed_post' => ') uses the same name.',
+    'help.text.search_pre'       => 'You can use the ',
+    'help.link.search'           => 'Search',
+    'help.text.search_mid'       => ' function to find a player by name or ',
+    'help.text.search_post'      => '.',
+    'help.text.points_gain'      => 'A new player has 1000 points. Every time you make a kill, you gain a certain amount of points depending on a) the victim\'s points rating, and b) the weapon you used. If you kill someone with a higher points rating than you, then you gain more points than if you kill someone with a lower points rating than you. Therefore, killing newbies will not get you as far as killing the #1 player. And if you kill someone with your knife, you gain more points than if you kill them with a rifle, for example.',
+    'help.text.points_lose'      => 'When you are killed, you lose a certain amount of points, which again depends on the points rating of your killer and the weapon they used (you don\'t lose as many points for being killed by the #1 player with a rifle than you do for being killed by a low ranked player with a knife). This makes moving up the rankings easier, but makes staying in the top spots harder.',
+    'help.text.equations_intro'  => 'Specifically, the equations are:',
+    'help.formula.killer'          => 'Killer Points = Killer Points + (Victim Points / Killer Points)',
+    'help.formula.weapon_modifier' => 'Weapon Modifier',
+    'help.formula.victim'          => 'Victim Points = Victim Points - (Victim Points / Killer Points)',
+    'help.text.point_bonuses_intro' => 'Plus, the following point bonuses are available for completing objectives in some games:',
+    'help.col.game'              => 'Game',
+    'help.col.player_action'    => 'Player Action',
+    'help.col.plyrplyr_action'  => 'PlyrPlyr Action',
+    'help.col.team_action'       => 'Team Action',
+    'help.col.world_action'      => 'World Action',
+    'help.col.player_reward'    => 'Player Reward',
+    'help.col.team_reward'       => 'Team Reward',
+    'help.label.note'            => 'Note:',
+    'help.text.action_reward_note' => 'The player who triggers an action may receive both the player reward and the team reward.',
+    'help.text.weapon_modifiers'   => 'Weapon points modifiers are used to determine how many points you should gain or lose when you make a kill or are killed by another player. Higher modifiers indicate that more points will be gained when killing with that weapon (and similarly, more points will be lost when being killed <em>by</em> that weapon). Modifiers generally range from 0.00 to 2.00.',
+    'help.text.set_intro'        => 'Player profile options can be configured by saying the appropriate <strong>HLX_SET</strong> command while you are playing on a participating game server. To say commands, push your chat key and type the command text.',
+    'help.text.set_syntax'       => 'Syntax: say <strong>/hlx_set option value</strong>.',
+    'help.text.set_options_intro' => 'Acceptable "options" are:',
+    'help.text.set_realname'     => 'Sets your Real Name as shown in your profile.',
+    'help.label.example'         => 'Example:',
+    'help.text.set_email'        => 'Sets your E-mail Address as shown in your profile.',
+    'help.text.set_homepage'     => 'Sets your Home Page as shown in your profile.',
+    'help.text.set_note'         => 'These are not standard Half-Life console commands. If you type them in the console, Half-Life will give you an error.<br /><br />For a full list of supported ingame commands, type the word help into ingame chat.',
+    'help.text.hideranking'      => 'Say <b>/hlx_hideranking</b> while playing on a participating game server. This will toggle you between being visible on the Player Rankings and being invisible.',
+    'help.text.hideranking_note_pre'  => 'You will still be tracked and you can still view your Player Details page. Use the ',
+    'help.text.hideranking_note_post' => ' page to find yourself.',
 ];

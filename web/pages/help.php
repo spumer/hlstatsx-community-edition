@@ -60,35 +60,35 @@ For support and installation notes visit http://www.hlxcommunity.com
 // Help
 	pageHeader
 	(
-		array ('Help'),
-		array ('Help' => '')
+		array (__('help.title')),
+		array (__('help.title') => '')
 	);
 ?>
 
 <div class="block">
-	<?php printSectionTitle('Questions'); ?>
+	<?php printSectionTitle(__('help.title.questions')); ?>
 	<ol>
 		<li>
-			<a href="#players">How are players tracked? Or, why is my name listed more than once?</a><br />
+			<a href="#players"><?=__('help.q.players')?></a><br />
 		</li>
 		<li>
-			<a href="#points">How is the "points" rating calculated?</a><br />
+			<a href="#points"><?=__('help.q.points')?></a><br />
 		</li>
 		<li>
-			<a href="#weaponmods">What are all the weapon points modifiers?</a><br />
+			<a href="#weaponmods"><?=__('help.q.weaponmods')?></a><br />
 		</li>
 		<li>
-			<a href="#set">How can I set my real name, e-mail address, and homepage?</a><br />
+			<a href="#set"><?=__('help.q.set')?></a><br />
 		</li>
 		<li>
-			<a href="#hideranking">My rank is embarrassing. How can I opt out?</a>
+			<a href="#hideranking"><?=__('help.q.hideranking')?></a>
 		</li>
 	</ol>
 
-	<?php printSectionTitle('Answers'); ?>
+	<?php printSectionTitle(__('help.title.answers')); ?>
 
 	<div style="margin-left:2%;">
-		<h1 class="fTitle" style="padding-top:10px;"><a name="players">1. How are players tracked? Or, why is my name listed more than once?</a></h1><br /><br />
+		<h1 class="fTitle" style="padding-top:10px;"><a name="players">1. <?=__('help.q.players')?></a></h1><br /><br />
 			<?php
 				if ($g_options['Mode'] == 'NameTrack')
 				{
@@ -115,22 +115,22 @@ For support and installation notes visit http://www.hlxcommunity.com
 			<?php
 					}
 			?>
-			A player may have more than one name. On the Player Rankings pages, players are shown with the most recent name they used in the game. If you click on a player's name, the Player Details page will show you a list of all other names that this player uses, if any, under the Aliases section (if the player has not used any other names, the Aliases section will not be displayed).<br /><br />
-			Your name may be listed more than once if somebody else (with a different <?php echo $uniqueid; ?>) uses the same name.<br /><br />
-			You can use the <a href="<?php echo $g_options['scripturl']; ?>?mode=search">Search</a> function to find a player by name or <?php echo $uniqueid; ?>.<br /><br />
+			<?=__('help.text.name_tracking')?><br /><br />
+			<?=__('help.text.name_listed_pre')?><?php echo $uniqueid; ?><?=__('help.text.name_listed_post')?><br /><br />
+			<?=__('help.text.search_pre')?><a href="<?php echo $g_options['scripturl']; ?>?mode=search"><?=__('help.link.search')?></a><?=__('help.text.search_mid')?><?php echo $uniqueid; ?><?=__('help.text.search_post')?><br /><br />
 			<?php
 				}
 			?>
-			<h1 class="fTitle" style="padding-top:10px;"><a name="points">2. How is the "points" rating calculated?</a></h1><br /><br />
-			A new player has 1000 points. Every time you make a kill, you gain a certain amount of points depending on a) the victim's points rating, and b) the weapon you used. If you kill someone with a higher points rating than you, then you gain more points than if you kill someone with a lower points rating than you. Therefore, killing newbies will not get you as far as killing the #1 player. And if you kill someone with your knife, you gain more points than if you kill them with a rifle, for example.<br /><br />
-			When you are killed, you lose a certain amount of points, which again depends on the points rating of your killer and the weapon they used (you don't lose as many points for being killed by the #1 player with a rifle than you do for being killed by a low ranked player with a knife). This makes moving up the rankings easier, but makes staying in the top spots harder.<br /><br />
-			Specifically, the equations are:<br /><br />
-			<pre> Killer Points = Killer Points + (Victim Points / Killer Points)
-				 &times; Weapon Modifier &times; 5
+			<h1 class="fTitle" style="padding-top:10px;"><a name="points">2. <?=__('help.q.points')?></a></h1><br /><br />
+			<?=__('help.text.points_gain')?><br /><br />
+			<?=__('help.text.points_lose')?><br /><br />
+			<?=__('help.text.equations_intro')?><br /><br />
+			<pre> <?=__('help.formula.killer')?>
+				 &times; <?=__('help.formula.weapon_modifier')?> &times; 5
 
- Victim Points = Victim Points - (Victim Points / Killer Points)
-				 &times; Weapon Modifier &times; 5</pre><br /><br />
-			Plus, the following point bonuses are available for completing objectives in some games:<br /><br />
+ <?=__('help.formula.victim')?>
+				 &times; <?=__('help.formula.weapon_modifier')?> &times; 5</pre><br /><br />
+			<?=__('help.text.point_bonuses_intro')?><br /><br />
 			<a name="actions" />
 			<?php
 				$tblActions = new Table
@@ -140,49 +140,49 @@ For support and installation notes visit http://www.hlxcommunity.com
 						new TableColumn
 						(
 							'gamename',
-							'Game',
+							__('help.col.game'),
 							'width=24&sort=no'
 						),
 						new TableColumn
 						(
 							'for_PlayerActions',
-							'Player Action',
+							__('help.col.player_action'),
 							'width=4&sort=no&align=center'
 						),
 						new TableColumn
 						(
 							'for_PlayerPlayerActions',
-							'PlyrPlyr Action',
+							__('help.col.plyrplyr_action'),
 							'width=4&sort=no&align=center'
 						),
 						new TableColumn
 						(
 							'for_TeamActions',
-							'Team Action',
+							__('help.col.team_action'),
 							'width=4&sort=no&align=center'
 						),
 						new TableColumn
 						(
 							'for_WorldActions',
-							'World Action',
+							__('help.col.world_action'),
 							'width=4&sort=no&align=center'
 						),
 						new TableColumn
 						(
 							'description',
-							'Action',
+							__('claninfo_actions.col.action'),
 							'width=33'
 						),
 						new TableColumn
 						(
 							's_reward_player',
-							'Player Reward',
+							__('help.col.player_reward'),
 							'width=12'
 						),
 						new TableColumn
 						(
 							's_reward_team',
-							'Team Reward',
+							__('help.col.team_reward'),
 							'width=15'
 						)
 					),
@@ -229,9 +229,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 				$numitems = $db->num_rows($result);
 				$tblActions->draw($result, $numitems, 90, 'center');
 			?><br /><br />
-			<strong>Note:</strong> The player who triggers an action may receive both the player reward and the team reward.<br /><br />
-			<h1 class="fTitle" style="padding-top:10px;"><a name="weaponmods">3. What are all the weapon points modifiers?</a></h1><br /><br />
-			Weapon points modifiers are used to determine how many points you should gain or lose when you make a kill or are killed by another player. Higher modifiers indicate that more points will be gained when killing with that weapon (and similarly, more points will be lost when being killed <em>by</em> that weapon). Modifiers generally range from 0.00 to 2.00.<br /><br />
+			<strong><?=__('help.label.note')?></strong> <?=__('help.text.action_reward_note')?><br /><br />
+			<h1 class="fTitle" style="padding-top:10px;"><a name="weaponmods">3. <?=__('help.q.weaponmods')?></a></h1><br /><br />
+			<?=__('help.text.weapon_modifiers')?><br /><br />
 			<a name="weapons"></a>
 			<?php
 				$tblWeapons = new Table
@@ -241,25 +241,25 @@ For support and installation notes visit http://www.hlxcommunity.com
 						new TableColumn
 						(
 							'gamename',
-							'Game',
+							__('help.col.game'),
 							'width=24&sort=no'
 						),
 						new TableColumn
 						(
 							'code',
-							'Weapon',
+							__('claninfo_weapons.col.weapon'),
 							'width=14'
 						),
 						new TableColumn
 						(
 							'name',
-							'Name',
+							__('common.col.name'),
 							'width=50'
 						),
 						new TableColumn
 						(
 							'modifier',
-							'Points Modifier',
+							__('claninfo_weapons.col.points_modifier'),
 							'width=12'
 						)
 					),
@@ -296,29 +296,29 @@ For support and installation notes visit http://www.hlxcommunity.com
 				$numitems = $db->num_rows($result);
 				$tblWeapons->draw($result, $numitems, 90, "center");
 			?><br /><br />
-			<h1 class="fTitle" style="padding-top:10px;"><a name="set">4. How can I set my real name, e-mail address, and homepage?</a></h1><br /><br />
-			Player profile options can be configured by saying the appropriate <strong>HLX_SET</strong> command while you are playing on a participating game server. To say commands, push your chat key and type the command text.<br /><br />
-			Syntax: say <strong>/hlx_set option value</strong>.<br /><br />
-			Acceptable "options" are:
+			<h1 class="fTitle" style="padding-top:10px;"><a name="set">4. <?=__('help.q.set')?></a></h1><br /><br />
+			<?=__('help.text.set_intro')?><br /><br />
+			<?=__('help.text.set_syntax')?><br /><br />
+			<?=__('help.text.set_options_intro')?>
 			<ul>
 				<li><strong>realname</strong><br />
-					Sets your Real Name as shown in your profile.<br />
-					Example: &nbsp; <strong>/hlx_set realname Joe Bloggs</strong><br /><br />
+					<?=__('help.text.set_realname')?><br />
+					<?=__('help.label.example')?> &nbsp; <strong>/hlx_set realname Joe Bloggs</strong><br /><br />
 				</li>
 			
 				<li><strong>email</strong><br />
-					Sets your E-mail Address as shown in your profile.<br />
-					Example: &nbsp; <strong>/hlx_set email joe@joebloggs.com</strong><br /><br />
+					<?=__('help.text.set_email')?><br />
+					<?=__('help.label.example')?> &nbsp; <strong>/hlx_set email joe@joebloggs.com</strong><br /><br />
 				</li>
 				
 				<li><strong>homepage</strong><br />
-					Sets your Home Page as shown in your profile.<br />
-					Example: &nbsp; <strong>/hlx_set homepage http://www.joebloggs.com/</strong><br /><br />
+					<?=__('help.text.set_homepage')?><br />
+					<?=__('help.label.example')?> &nbsp; <strong>/hlx_set homepage http://www.joebloggs.com/</strong><br /><br />
 				</li>
 			</ul>
-			<strong>Note:</strong> These are not standard Half-Life console commands. If you type them in the console, Half-Life will give you an error.<br /><br />For a full list of supported ingame commands, type the word help into ingame chat.<br /><br />
-			<h1 class="fTitle" style="padding-top:10px;"><a name="hideranking">5. My rank is embarrassing. How can I opt out?</a></h1><br /><br />
-			Say <b>/hlx_hideranking</b> while playing on a participating game server. This will toggle you between being visible on the Player Rankings and being invisible.<br /><br />
-			<strong>Note:</strong> You will still be tracked and you can still view your Player Details page. Use the <a href="<?php echo $g_options['scripturl']; ?>?mode=search">Search</a> page to find yourself.
+			<strong><?=__('help.label.note')?></strong> <?=__('help.text.set_note')?><br /><br />
+			<h1 class="fTitle" style="padding-top:10px;"><a name="hideranking">5. <?=__('help.q.hideranking')?></a></h1><br /><br />
+			<?=__('help.text.hideranking')?><br /><br />
+			<strong><?=__('help.label.note')?></strong> <?=__('help.text.hideranking_note_pre')?><a href="<?php echo $g_options['scripturl']; ?>?mode=search"><?=__('help.link.search')?></a><?=__('help.text.hideranking_note_post')?>
 	</div>
 </div>
