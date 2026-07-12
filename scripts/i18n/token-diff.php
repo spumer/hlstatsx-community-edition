@@ -122,6 +122,10 @@ const BARE_CALL_QUOTE_OVERRIDES = [
         'livestats.unknown_team'    => '"',
         'livestats.msg.no_players'  => '"',
     ],
+    'web/pages/playerawards.php' => [
+        'playerawards.no_player_id'    => '"',
+        'playerawards.no_award_id_bug' => '"',
+    ],
 ];
 
 /**

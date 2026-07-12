@@ -578,4 +578,24 @@ return [
     'playerinfo_playeractions.col.accumulated_points' => 'Accumulated Points',
     'playerinfo_playeractions.title'                  => 'Player Actions *',
     'playerinfo_playeractions.col.earned_against'     => 'Earned Against',
+
+    // pages/playerawards.php (players.title/chathistory.nav.player_details
+    // /common.col.name/players.nav.goto_label/chathistory.suffix.statistics
+    // reused byte-for-byte). "No player ID specified." fresh-translated --
+    // zozo left it in English here too. playerawards.no_award_id_bug
+    // preserves an upstream copy-paste bug verbatim: this error fires for
+    // an invalid awardId but says "No clan ID specified." in both the
+    // fork and zozo's own file -- translated as-authored, not "fixed."
+    // $cnttext = 'Earned' (assigned then unconditionally overwritten
+    // before use, in both the fork and zozo) is dead code and NOT
+    // extracted. error("No such player '$player'.") NOT extracted --
+    // same deferred $-interpolation category as elsewhere.
+    'playerawards.no_player_id'          => 'No player ID specified.',
+    'playerawards.title'                  => 'Awards History',
+    'playerawards.no_award_id_bug'       => 'No clan ID specified.',
+    'playerawards.col.count'              => 'Kills on Day',
+    'playerawards.col.date'               => 'Date',
+    'playerawards.col.date_last_earned'  => 'Date Last Earned',
+    'playerawards.col.description'        => 'Description',
+    'playerawards.section_title'          => 'Player Awards History',
 ];

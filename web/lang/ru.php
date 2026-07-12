@@ -442,4 +442,14 @@ return [
     'playerinfo_playeractions.col.accumulated_points' => 'Получено очков',
     'playerinfo_playeractions.title'                  => 'Действия игрока *',
     'playerinfo_playeractions.col.earned_against'     => 'Стал Жертвой, раз(а)',
+
+    // pages/playerawards.php
+    'playerawards.no_player_id'          => 'Не указан ID игрока.',
+    'playerawards.title'                  => 'История Наград',
+    'playerawards.no_award_id_bug'       => 'Не указан ID клана.',
+    'playerawards.col.count'              => 'Кол-во',
+    'playerawards.col.date'               => 'Дата',
+    'playerawards.col.date_last_earned'  => 'Дата получения',
+    'playerawards.col.description'        => 'Описание',
+    'playerawards.section_title'          => 'История наград игрока',
 ];
