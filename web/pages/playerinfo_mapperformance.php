@@ -47,13 +47,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'map',
-				'Map',
+				__('maps.col.map'),
 				'width=22&align=left&link=' . urlencode("mode=mapinfo&amp;map=%k&amp;game=$game")
 			),
 			new TableColumn
 			(
 				'kills',
-				'Kills',
+				__('common.col.kills'),
 				'width=7&align=right'
 			),
 			new TableColumn
@@ -65,13 +65,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'kpercent',
-				'Ratio',
+				__('roles.col.ratio'),
 				'width=8&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
 				'deaths',
-				'Deaths',
+				__('common.col.deaths'),
 				'width=7&align=right'
 			),
 			new TableColumn
@@ -83,19 +83,19 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'dpercent',
-				'Ratio',
+				__('roles.col.ratio'),
 				'width=8&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
 				'kpd',
-				'K:D',
+				__('common.col.kpd'),
 				'width=5&align=right'
 			),
 			new TableColumn
 			(
 				'headshots',
-				'Headshots',
+				__('common.col.headshots'),
 				'width=7&align=right'
 			),
 			new TableColumn
@@ -107,13 +107,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'hpercent',
-				'Ratio',
+				__('roles.col.ratio'),
 				'width=8&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
 				'hpk',
-				'HS:K',
+				__('common.col.hpk'),
 				'width=5&align=right'
 			)
 		),
@@ -158,7 +158,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?>
 <div style="clear:both;padding-top:20px;"></div>
 <?php
-		printSectionTitle('Map Performance *');
+		printSectionTitle(__('claninfo_mapperformance.title'));
 		$tblMaps->draw($result, $numitems, 95);
 ?>
 <br /><br />
