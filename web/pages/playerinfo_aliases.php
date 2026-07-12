@@ -48,61 +48,61 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'name',
-				'Name',
+				__('playerinfo_aliases.col.name'),
 				'width=21'
 			),
 			new TableColumn
 			(
 				'connection_time',
-				'Time',
+				__('countryclansinfo.col.time'),
 				'width=8&align=right&type=timestamp'
 			),
 			new TableColumn
 			(
 				'lastuse',
-				'Last Use',
+				__('playerinfo_aliases.col.last_use'),
 				'width=15'
 			),
 			new TableColumn
 			(
 				'kills',
-				'Kills',
+				__('playerinfo_aliases.col.kills'),
 				'width=7&align=right'
 			),
 			new TableColumn
 			(
 				'deaths',
-				'Deaths',
+				__('playerinfo_aliases.col.deaths'),
 				'width=7&align=right'
 			),
 			new TableColumn
 			(
 				'kpd',
-				'K:D',
+				__('common.col.kpd'),
 				'width=11&align=right'
 			),
 			new TableColumn
 			(
 				'headshots',
-				'Headshots',
+				__('common.col.headshots'),
 				'width=8&align=right'
 			),
 			new TableColumn
 			(
 				'hpk',
-				'HS:K',
+				__('common.col.hpk'),
 				'width=6&align=right'
 			),
 			new TableColumn
 			(
 				'suicides',
-				'Suicides',
+				__('playerinfo_aliases.col.suicides'),
 				'width=6&align=right'
 			),
 			new TableColumn
 			(
 				'acc',
-				'Accuracy',
+				__('common.col.accuracy'),
 				'width=6&align=right&append=' . urlencode('%')
 			)
 		),
@@ -158,7 +158,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 <div style="clear:both;padding-top:24px;"></div>
 <?php
-		printSectionTitle('Aliases');
+		printSectionTitle(__('playerinfo_aliases.title'));
 		if ($numitems > 0)
 		{
 			$tblAliases->draw($result, $numitems, 95);

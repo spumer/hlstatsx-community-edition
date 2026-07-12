@@ -429,4 +429,12 @@ return [
     // pages/playerinfo_servers.php
     'playerinfo_servers.col.percentage_of_headshots' => 'Процент Хедшотов',
     'playerinfo_servers.title' => 'Активность на Серверах *',
+
+    // pages/playerinfo_aliases.php
+    'playerinfo_aliases.col.name'      => 'Ник',
+    'playerinfo_aliases.col.last_use'  => 'Послед. использование',
+    'playerinfo_aliases.col.kills'     => 'Убийства',
+    'playerinfo_aliases.col.deaths'    => 'Смерти',
+    'playerinfo_aliases.col.suicides'  => 'Самоубийств',
+    'playerinfo_aliases.title'          => 'Ники Игрока',
 ];

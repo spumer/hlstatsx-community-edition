@@ -550,4 +550,19 @@ return [
     // of Headshots" vs "Ratio"), preserved as originally authored.
     'playerinfo_servers.col.percentage_of_headshots' => 'Percentage of Headshots',
     'playerinfo_servers.title' => 'Server Activity *',
+
+    // pages/playerinfo_aliases.php (countryclansinfo.col.time and
+    // common.col.kpd/headshots/hpk/accuracy reused byte-for-byte).
+    // playerinfo_aliases.col.name is a separate key from common.col.name
+    // (different word entirely -- "nickname" in this player-alias
+    // context vs the generic "Название" used elsewhere). kills/deaths
+    // are separate keys from common.col.kills/deaths too: zozo used the
+    // nominative plural here ("Убийства"/"Смерти") instead of the
+    // genitive used elsewhere ("Убийств"/"Смертей").
+    'playerinfo_aliases.col.name'      => 'Name',
+    'playerinfo_aliases.col.last_use'  => 'Last Use',
+    'playerinfo_aliases.col.kills'     => 'Kills',
+    'playerinfo_aliases.col.deaths'    => 'Deaths',
+    'playerinfo_aliases.col.suicides'  => 'Suicides',
+    'playerinfo_aliases.title'          => 'Aliases',
 ];
