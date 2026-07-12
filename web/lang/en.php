@@ -491,4 +491,32 @@ return [
     'mapinfo.title'                => 'Map Details',
     'mapinfo.stats.mid'            => ' kills (Last ',
     'mapinfo.back_to.map_stats'   => 'Map Statistics',
+
+    // pages/servers.php (maps.col.map/weapons.col.kills/
+    // claninfo_weapons.col.hpk reused byte-for-byte; period labels
+    // reused for both the visible <td> text and the graph <img alt>
+    // attribute, unifying zozo's own inconsistency -- zozo translated
+    // the <td> text but left the alt attributes in English).
+    // servers.col.headshots is a separate key from common.col.headshots
+    // despite identical EN text: RU needs the nominative plural here
+    // ("Хедшоты") vs the genitive used elsewhere ("Хедшотов").
+    // "Invalid server ID provided." and the two printSectionTitle
+    // strings are fresh-translated -- zozo left all three in English.
+    // error("No such game '$game'.") NOT extracted -- same deferred
+    // category as elsewhere. The "(Join)" text inside the $addr-
+    // interpolated steam:// link is NOT extracted -- would require
+    // introducing new concatenation not present in the baseline, same
+    // reasoning as the reverted mapinfo.php "Download this map..." wrap.
+    'servers.invalid_server_id' => 'Invalid server ID provided.',
+    'servers.title.live_view'    => 'Server Live View',
+    'servers.title.load_history' => 'Server Load History',
+    'servers.col.server'          => 'Server',
+    'servers.col.address'         => 'Address',
+    'servers.col.played'          => 'Played',
+    'servers.col.players'         => 'Players',
+    'servers.col.headshots'       => 'Headshots',
+    'servers.period.24h'          => '24h View',
+    'servers.period.last_week'    => 'Last Week',
+    'servers.period.last_month'   => 'Last Month',
+    'servers.period.last_year'    => 'Last Year',
 ];

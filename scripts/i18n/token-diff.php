@@ -115,6 +115,9 @@ const BARE_CALL_QUOTE_OVERRIDES = [
     'web/pages/actioninfo.php' => [
         'actioninfo.title.victims' => '"',
     ],
+    'web/pages/servers.php' => [
+        'servers.invalid_server_id' => '"',
+    ],
 ];
 
 /**

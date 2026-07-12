@@ -55,7 +55,7 @@ For support and installation notes visit http://www.hlxcommunity.com
     if ((isset($_GET['server_id'])) && (is_numeric($_GET['server_id']))) {
         $server_id = valid_request($_GET['server_id'], true);
     } else {
-        error("Invalid server ID provided.", 0);
+        error(__('servers.invalid_server_id'), 0);
         pageFooter();
         die();
     }
@@ -116,7 +116,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 <div class="block">
 <?php
-	printSectionTitle('Server Live View');
+	printSectionTitle(__('servers.title.live_view'));
 	$i=0;
 	for ($i=0; $i<count($servers); $i++)
 	{
@@ -135,14 +135,14 @@ For support and installation notes visit http://www.hlxcommunity.com
 	<div class="subblock">
 		<table class="data-table">
 			<tr class="data-table-head">
-				<td class="fSmall" style="width:37%;">&nbsp;Server</td>
-				<td class="fSmall" style="width:23%;">&nbsp;Address</td>
-				<td class="fSmall" style="width:6%;text-align:center;">&nbsp;Map</td>
-				<td class="fSmall" style="width:6%;text-align:center;">&nbsp;Played</td>
-				<td class="fSmall" style="width:10%;text-align:center;">&nbsp;Players</td>
-				<td class="fSmall" style="width:6%;text-align:center;">&nbsp;Kills</td>
-				<td class="fSmall" style="width:6%;text-align:center;">&nbsp;Headshots</td>
-				<td class="fSmall" style="width:6%;text-align:center;">&nbsp;Hpk</td>
+				<td class="fSmall" style="width:37%;">&nbsp;<?=__('servers.col.server')?></td>
+				<td class="fSmall" style="width:23%;">&nbsp;<?=__('servers.col.address')?></td>
+				<td class="fSmall" style="width:6%;text-align:center;">&nbsp;<?=__('maps.col.map')?></td>
+				<td class="fSmall" style="width:6%;text-align:center;">&nbsp;<?=__('servers.col.played')?></td>
+				<td class="fSmall" style="width:10%;text-align:center;">&nbsp;<?=__('servers.col.players')?></td>
+				<td class="fSmall" style="width:6%;text-align:center;">&nbsp;<?=__('weapons.col.kills')?></td>
+				<td class="fSmall" style="width:6%;text-align:center;">&nbsp;<?=__('servers.col.headshots')?></td>
+				<td class="fSmall" style="width:6%;text-align:center;">&nbsp;<?=__('claninfo_weapons.col.hpk')?></td>
 			</tr>
 			<tr class="game-table-row">
 				<td class="game-table-cell"><?php
@@ -191,48 +191,48 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?>	</div>
 </div>
 <div class="block">
-	<?php printSectionTitle('Server Load History'); ?>
+	<?php printSectionTitle(__('servers.title.load_history')); ?>
 	<div class="subblock">
 		<table class="data-table">
 			<tr class="data-table-head">
-				<td class="fSmall">&nbsp;24h View</td>
+				<td class="fSmall">&nbsp;<?=__('servers.period.24h')?></td>
 			</tr>
 			<tr class="data-table-row">
 				<td style="text-align:center; height: 200px; vertical-align:middle;">
-					<img src="show_graph.php?type=0&amp;game=<?php echo $game; ?>&amp;width=870&amp;height=200&amp;server_id=<?php echo $server_id ?>&amp;bgcolor=<?php echo $g_options['graphbg_load']; ?>&amp;color=<?php echo $g_options['graphtxt_load']; ?>&amp;range=1" alt="24h View" />
+					<img src="show_graph.php?type=0&amp;game=<?php echo $game; ?>&amp;width=870&amp;height=200&amp;server_id=<?php echo $server_id ?>&amp;bgcolor=<?php echo $g_options['graphbg_load']; ?>&amp;color=<?php echo $g_options['graphtxt_load']; ?>&amp;range=1" alt="<?=__('servers.period.24h')?>" />
 				</td>
 			</tr>
 		</table>
 		<br /><br />
 		<table class="data-table">
 			<tr class="data-table-head">
-				<td class="fSmall">&nbsp;Last Week</td>
+				<td class="fSmall">&nbsp;<?=__('servers.period.last_week')?></td>
 			</tr>
 			<tr class="data-table-row">
 				<td style="text-align:center; height: 200px; vertical-align:middle;">
-					<img src="show_graph.php?type=0&amp;game=<?php echo $game; ?>&amp;width=870&amp;height=200&amp;server_id=<?php echo $server_id ?>&amp;bgcolor=<?php echo $g_options['graphbg_load']; ?>&amp;color=<?php echo $g_options['graphtxt_load']; ?>&amp;range=2" alt="Last Week" />
+					<img src="show_graph.php?type=0&amp;game=<?php echo $game; ?>&amp;width=870&amp;height=200&amp;server_id=<?php echo $server_id ?>&amp;bgcolor=<?php echo $g_options['graphbg_load']; ?>&amp;color=<?php echo $g_options['graphtxt_load']; ?>&amp;range=2" alt="<?=__('servers.period.last_week')?>" />
 				</td>
 			</tr>
 		</table>
 		<br /><br />
 		<table class="data-table">
 			<tr class="data-table-head">
-				<td class="fSmall">&nbsp;Last Month</td>
+				<td class="fSmall">&nbsp;<?=__('servers.period.last_month')?></td>
 			</tr>
 			<tr class="data-table-row">
 				<td style="text-align:center; height: 200px; vertical-align:middle;">
-					<img src="show_graph.php?type=0&amp;game=<?php echo $game; ?>&amp;width=870&amp;height=200&amp;server_id=<?php echo $server_id ?>&amp;bgcolor=<?php echo $g_options['graphbg_load']; ?>&amp;color=<?php echo $g_options['graphtxt_load']; ?>&amp;range=3" alt="Last Month" />
+					<img src="show_graph.php?type=0&amp;game=<?php echo $game; ?>&amp;width=870&amp;height=200&amp;server_id=<?php echo $server_id ?>&amp;bgcolor=<?php echo $g_options['graphbg_load']; ?>&amp;color=<?php echo $g_options['graphtxt_load']; ?>&amp;range=3" alt="<?=__('servers.period.last_month')?>" />
 				</td>
 			</tr>
 		</table>
 		<br /><br />
 		<table class="data-table">
 			<tr class="data-table-head">
-				<td class="fSmall">&nbsp;Last Year</td>
+				<td class="fSmall">&nbsp;<?=__('servers.period.last_year')?></td>
 			</tr>
 			<tr class="data-table-row">
 				<td style="text-align:center; height: 200px; vertical-align:middle;">
-					<img src="show_graph.php?type=0&amp;game=<?php echo $game; ?>&amp;width=870&amp;height=200&amp;server_id=<?php echo $server_id ?>&amp;bgcolor=<?php echo $g_options['graphbg_load']; ?>&amp;color=<?php echo $g_options['graphtxt_load']; ?>&amp;range=4" alt="Last Year" />
+					<img src="show_graph.php?type=0&amp;game=<?php echo $game; ?>&amp;width=870&amp;height=200&amp;server_id=<?php echo $server_id ?>&amp;bgcolor=<?php echo $g_options['graphbg_load']; ?>&amp;color=<?php echo $g_options['graphtxt_load']; ?>&amp;range=4" alt="<?=__('servers.period.last_year')?>" />
 				</td>
 			</tr>
 		</table>

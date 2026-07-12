@@ -400,4 +400,18 @@ return [
     'mapinfo.title'                => 'Карта Подробно',
     'mapinfo.stats.mid'            => ' убийств (за последние ',
     'mapinfo.back_to.map_stats'   => 'Картам',
+
+    // pages/servers.php
+    'servers.invalid_server_id' => 'Указан некорректный ID сервера.',
+    'servers.title.live_view'    => 'Сервер в реальном времени',
+    'servers.title.load_history' => 'История нагрузки сервера',
+    'servers.col.server'          => 'Сервер',
+    'servers.col.address'         => 'Адрес',
+    'servers.col.played'          => 'Время',
+    'servers.col.players'         => 'Игроки',
+    'servers.col.headshots'       => 'Хедшоты',
+    'servers.period.24h'          => '24h Часа',
+    'servers.period.last_week'    => 'Последняя Неделя',
+    'servers.period.last_month'   => 'Последний Месяц',
+    'servers.period.last_year'    => 'Последний Год',
 ];
