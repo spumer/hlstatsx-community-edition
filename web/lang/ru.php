@@ -452,4 +452,13 @@ return [
     'playerawards.col.date_last_earned'  => 'Дата получения',
     'playerawards.col.description'        => 'Описание',
     'playerawards.section_title'          => 'История наград игрока',
+
+    // pages/playersessions.php
+    'playersessions.title'                => 'История Игровых Сессий',
+    'playersessions.col.skill_change'    => 'Изменение Навыка',
+    'playersessions.col.hs'               => 'Хедшотов',
+    'playersessions.col.tks'              => 'Тимкилл',
+    'playersessions.col.kill_streak'     => 'Серия убийств',
+    'playersessions.section_title'        => 'История сессий игрока',
+    'playersessions.footer_note.pre'      => 'Отмеченный "*" пункты сгенерированы за последние ',
 ];

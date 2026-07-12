@@ -598,4 +598,24 @@ return [
     'playerawards.col.date_last_earned'  => 'Date Last Earned',
     'playerawards.col.description'        => 'Description',
     'playerawards.section_title'          => 'Player Awards History',
+
+    // pages/playersessions.php (players.title/chathistory.nav.
+    // player_details/chat.col.date/common.col.points/kills/deaths/kpd/
+    // hpk/countryclansinfo.col.time/playerinfo_aliases.col.suicides/
+    // players.nav.goto_label/chathistory.suffix.statistics all reused
+    // byte-for-byte). error("No such player '$player'.") NOT extracted --
+    // same deferred category as elsewhere.
+    //
+    // playersessions.footer_note.pre is a separate key from
+    // claninfo.marked_note.pre despite conveying the same meaning:
+    // this page's EN text omits the "marked \"*\"" phrase, but the tail
+    // (" days.") is byte-identical so claninfo.marked_note.post is
+    // reused directly.
+    'playersessions.title'                => 'Session History',
+    'playersessions.col.skill_change'    => 'Skill Change',
+    'playersessions.col.hs'               => 'HS',
+    'playersessions.col.tks'              => 'TKs',
+    'playersessions.col.kill_streak'     => 'Kill Strk',
+    'playersessions.section_title'        => 'Player Session History',
+    'playersessions.footer_note.pre'      => 'Items above are generated from the last ',
 ];

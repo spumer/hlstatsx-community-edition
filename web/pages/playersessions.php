@@ -41,7 +41,7 @@ For support and installation notes visit http://www.hlxcommunity.com
     }
 
     // Player History -> Sessions & Skill change
-	$player = valid_request(intval($_GET["player"]), true) or error("No player ID specified.");
+	$player = valid_request(intval($_GET["player"]), true) or error(__('playerawards.no_player_id'));
 
 	$db->query("
 		SELECT
@@ -87,13 +87,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 	pageHeader
 	(
-		array ($gamename, 'Session History', $pl_name),
+		array ($gamename, __('playersessions.title'), $pl_name),
 		array
 		(
 			$gamename => $g_options['scripturl']."?game=$game",
-			'Player Rankings' => $g_options['scripturl']."?mode=players&game=$game",
-			'Player Details' => $g_options['scripturl']."?mode=playerinfo&player=$player",
-			'Session History' => ''
+			__('players.title') => $g_options['scripturl']."?mode=players&game=$game",
+			__('chathistory.nav.player_details') => $g_options['scripturl']."?mode=playerinfo&player=$player",
+			__('playersessions.title') => ''
 		),
 		$playername = ""
 	);
@@ -105,73 +105,73 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'eventTime',
-				'Date',
+				__('chat.col.date'),
 				'width=11'
 			),
 			new TableColumn
 			(
 				'skill_change',
-				'Skill Change',
+				__('playersessions.col.skill_change'),
 				'width=10&align=right&skill_change=1'
 			),
 			new TableColumn
 			(
 				'skill',
-				'Points',
+				__('common.col.points'),
 				'width=10&align=right'
 			),
 			new TableColumn
 			(
 				'connection_time',
-				'Time',
+				__('countryclansinfo.col.time'),
 				'width=13&align=right&type=timestamp'
 			),
 			new TableColumn
 			(
 				'kills',
-				'Kills',
+				__('common.col.kills'),
 				'width=7&align=right'
 			),
 			new TableColumn
 			(
 				'deaths',
-				'Deaths',
+				__('common.col.deaths'),
 				'width=7&align=right'
 			),
 			new TableColumn
 			(
 				'kpd',
-				'K:D',
+				__('common.col.kpd'),
 				'width=7&align=right'
 			),
 			new TableColumn
 			(
 				'headshots',
-				'HS',
+				__('playersessions.col.hs'),
 				'width=7&align=right'
 			),
 			new TableColumn
 			(
 				'hpk',
-				'HS:K',
+				__('common.col.hpk'),
 				'width=7&align=right'
 			),
 			new TableColumn
 			(
 				'suicides',
-				'Suicides',
+				__('playerinfo_aliases.col.suicides'),
 				'width=7&align=right'
 			),
 			new TableColumn
 			(
 				'teamkills',
-				'TKs',
+				__('playersessions.col.tks'),
 				'width=7&align=right'
 			),
 			new TableColumn
 			(
 				'kill_streak',
-				'Kill Strk',
+				__('playersessions.col.kill_streak'),
 				'width=7&align=right'
 			),
 		),
@@ -227,7 +227,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 <div class="block">
 <?php
-	printSectionTitle('Player Session History');
+	printSectionTitle(__('playersessions.section_title'));
 	if ($numitems > 0)
 	{
 		$table->draw($result, $numitems, 95);
@@ -235,7 +235,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?><br /><br />
 	<div class="subblock">
 		<div style="float:left;">
-			Items above are generated from the last <?php echo $g_options['DeleteDays']; ?> days.
+			<?=__('playersessions.footer_note.pre')?><?php echo $g_options['DeleteDays']; ?><?=__('claninfo.marked_note.post')?>
 		</div>
 		<div style="float:right;">
 <?php 
@@ -250,7 +250,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	");
 	list($lastName) = $db->fetch_row();
 ?>
-			Go to: <a href="<?php echo $g_options['scripturl'] . "?mode=playerinfo&amp;player=$player"; ?>"><?php echo $lastName; ?>'s Statistics</a>
+			<?=__('players.nav.goto_label')?> <a href="<?php echo $g_options['scripturl'] . "?mode=playerinfo&amp;player=$player"; ?>"><?php echo $lastName; ?><?=__('chathistory.suffix.statistics')?></a>
 		</div>
 	</div>
 </div>
