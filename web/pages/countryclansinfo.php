@@ -73,7 +73,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	
 	$db->query($SQL);
 	if ($db->num_rows() != 1)
-		error("No such countryclan '$flag'.");
+		error(__f('common.err.no_such_countryclan', $flag));
 	
 	$clandata = $db->fetch_array();
 	$db->free_result();

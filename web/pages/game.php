@@ -43,7 +43,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	require (PAGE_PATH . '/livestats.php');
 	$db->query("SELECT name FROM hlstats_Games WHERE code='$game'");
 	if ($db->num_rows() < 1) {
-		error("No such game '$game'.");
+		error(__f('common.err.no_such_game', $game));
 	}
 
 	list($gamename) = $db->fetch_row();

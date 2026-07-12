@@ -14,6 +14,12 @@ return [
     'common.msg.empty'       => '---',
     'common.msg.undefined'   => 'Неизвестно',
 
+    // common.err.* -- see en.php comment above these same keys
+    'common.err.no_such_game'         => 'Нет такой игры \'%s\'.',
+    'common.err.no_such_player'       => 'Нет такого игрока \'%s\'.',
+    'common.err.no_such_clan'         => 'Нет такого клана \'%s\'.',
+    'common.err.no_such_countryclan'  => 'Нет такой страны \'%s\'.',
+
     // common.nav.* -- pages/header.php (site chrome, shown on every page)
     'common.nav.contents'    => 'Статистика',
     'common.nav.search'      => 'Поиск',

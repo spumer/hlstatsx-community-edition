@@ -72,7 +72,7 @@
 	");
 
 	if ($db->num_rows() != 1) {
-		error("No such clan '$clan'.");
+		error(__f('common.err.no_such_clan', $clan));
 	}
 	
 	$clandata = $db->fetch_array();

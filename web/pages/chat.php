@@ -92,7 +92,7 @@
 
 	$gamename = getGameNameByCode($db, $checkGame);
 	if ($gamename === false) {
-		error("No such game '{$gameSafeHtml}'.");
+		error(__f('common.err.no_such_game', $gameSafeHtml));
 	}
 
 	pageHeader

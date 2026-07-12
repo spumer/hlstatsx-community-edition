@@ -19,6 +19,14 @@ return [
     'common.msg.empty'       => '---',
     'common.msg.undefined'   => 'Undefined',
 
+    // common.err.* -- error()-page messages, unified across the page-family
+    // files that each validate one request param and bail with the same
+    // wording (__f() placeholders, one %s per call site's variable)
+    'common.err.no_such_game'         => 'No such game \'%s\'.',
+    'common.err.no_such_player'       => 'No such player \'%s\'.',
+    'common.err.no_such_clan'         => 'No such clan \'%s\'.',
+    'common.err.no_such_countryclan'  => 'No such countryclan \'%s\'.',
+
     // common.nav.* -- pages/header.php (site chrome, shown on every page)
     'common.nav.contents'    => 'Contents',
     'common.nav.search'      => 'Search',

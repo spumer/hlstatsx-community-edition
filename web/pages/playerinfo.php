@@ -118,7 +118,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	");
 
 	if ($db->num_rows() != 1) {
-		error("No such player '$player'.");
+		error(__f('common.err.no_such_player', $player));
 	}
 
 	$playerdata = $db->fetch_array();
