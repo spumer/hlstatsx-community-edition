@@ -37,6 +37,15 @@
 #     pointing at your seeded database (the checked-in config.php is a safe
 #     template with empty credentials -- never commit real ones)
 #   - hlstats_Options.language = 'en' in that seeded database for both runs
+#   - the seeded database actually has rows for the game(s)/entities the
+#     page list's query params reference (e.g. hlstats_Games has 'l4d2'),
+#     and web/updater/ is ABSENT from both docroots. Either gap makes every
+#     page short-circuit into a warning banner instead of rendering its
+#     real body ("no such game" / "updater folder was detected"), so both
+#     snapshot runs "agree" on the warning page and the diff comes back
+#     clean while telling you nothing -- silent false negative, not a
+#     passing gate. If a comparison run comes back suspiciously quiet,
+#     check for exactly this before trusting it.
 #
 # Fail-fast: the first URL that doesn't come back with HTTP 200 aborts the
 # whole run with a non-zero exit code and names the failing URL. This is
