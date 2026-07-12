@@ -105,6 +105,9 @@ const BARE_CALL_QUOTE_OVERRIDES = [
     'web/pages/countryclans.php' => [
         'clans.col.members' => '"',
     ],
+    'web/pages/claninfo.php' => [
+        'claninfo.no_clan_id' => '"',
+    ],
 ];
 
 /**

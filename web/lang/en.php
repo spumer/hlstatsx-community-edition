@@ -282,4 +282,21 @@ return [
     'maps.col.heatmap'  => 'HeatMap',
     'maps.stats.mid'    => ' kills with ',
     'maps.stats.post'   => ' headshots',
+
+    // pages/claninfo.php (breadcrumb/title reuse players.nav.
+    // clan_rankings/players.title-family keys where applicable; tab
+    // labels reuse common.nav.weapons/maps; footer nav reuses
+    // players.nav.goto_label/clan_rankings). error("No such clan
+    // '$clan'.") and the "Edit Clan Details" link text (inside a
+    // $clan-interpolated string) NOT extracted -- same deferred
+    // $-interpolation category. admin_options_label is a
+    // concatenation-fold verified isolated from the interpolated
+    // remainder by an intervening $g_options[...] array-access token.
+    'claninfo.no_clan_id'         => 'No clan ID specified.',
+    'claninfo.title'              => 'Clan Details',
+    'claninfo.tab.general'        => 'General',
+    'claninfo.tab.teams_actions'  => 'Teams &amp; Actions',
+    'claninfo.marked_note.pre'    => 'Items marked "*" above are generated from the last ',
+    'claninfo.marked_note.post'   => ' days.',
+    'claninfo.admin_options_label' => 'Admin Options: ',
 ];

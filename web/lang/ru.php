@@ -279,4 +279,13 @@ return [
     'maps.col.map'      => 'Карта',
     'maps.stats.mid'    => ' убийств, из них ',
     'maps.stats.post'   => ' хедшотов',
+
+    // pages/claninfo.php
+    'claninfo.no_clan_id'         => 'Не указан ID клана.',
+    'claninfo.title'              => 'Клан Подробно',
+    'claninfo.tab.general'        => 'Общее',
+    'claninfo.tab.teams_actions'  => 'Командные',
+    'claninfo.marked_note.pre'    => 'Отмеченные "*" пункты сгенерированы за последние ',
+    'claninfo.marked_note.post'   => ' дней.',
+    'claninfo.admin_options_label' => 'Настройки Админа: ',
 ];

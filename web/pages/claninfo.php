@@ -42,7 +42,7 @@
 	
 	// Clan Details
 	
-	$clan = valid_request(intval($_GET["clan"]), true) or error("No clan ID specified.");
+	$clan = valid_request(intval($_GET["clan"]), true) or error(__('claninfo.no_clan_id'));
 
 	$db->query("
 		SELECT
@@ -122,11 +122,11 @@
 	}
 
 	pageHeader(
-		array($gamename, 'Clan Details', $cl_full),
+		array($gamename, __('claninfo.title'), $cl_full),
 		array(
 			$gamename=>$g_options['scripturl'] . "?game=$game",
-			'Clan Rankings'=>$g_options['scripturl'] . "?mode=clans&game=$game",
-			'Clan Details'=>''
+			__('players.nav.clan_rankings')=>$g_options['scripturl'] . "?mode=clans&game=$game",
+			__('claninfo.title')=>''
 		),
 		$clandata['name']
 	);
@@ -147,16 +147,16 @@
 ?>
 	<ul class="subsection_tabs" id="tabs_claninfo">
 		<li>
-			<a href="#" id="tab_general" id="general">General</a>
+			<a href="#" id="tab_general" id="general"><?=__('claninfo.tab.general')?></a>
 		</li>
 		<li>
-			<a href="#" id="tab_actions|teams">Teams &amp; Actions</a>
+			<a href="#" id="tab_actions|teams"><?=__('claninfo.tab.teams_actions')?></a>
 		</li>
 		<li>
-			<a href="#" id="tab_weapons">Weapons</a>
+			<a href="#" id="tab_weapons"><?=__('common.nav.weapons')?></a>
 		</li>
 		<li>
-			<a href="#" id="tab_mapperformance">Maps</a>
+			<a href="#" id="tab_mapperformance"><?=__('common.nav.maps')?></a>
 		</li>
 	</ul><br />
 	<div id="main_content"></div>
@@ -196,16 +196,16 @@
 <div class="block" style="clear:both;padding-top:12px;">
 	<div class="subblock">
 		<div style="float:left;">
-			Items marked "*" above are generated from the last <?php echo $g_options['DeleteDays']; ?> days.
+			<?=__('claninfo.marked_note.pre')?><?php echo $g_options['DeleteDays']; ?><?=__('claninfo.marked_note.post')?>
 		</div>
 		<div style="float:right;">
 			<?php
 				if (isset($_SESSION['loggedin']))
 				{
-					echo 'Admin Options: <a href="'.$g_options['scripturl']."?mode=admin&amp;task=tools_editdetails_clan&amp;id=$clan\">Edit Clan Details</a><br />";
+					echo __('claninfo.admin_options_label') . '<a href="'.$g_options['scripturl']."?mode=admin&amp;task=tools_editdetails_clan&amp;id=$clan\">Edit Clan Details</a><br />";
 				}
 			?>
-			Go to: <a href="<?php echo $g_options['scripturl'] . "?mode=players&amp;game=$game"; ?>">Clan Rankings</a>
+			<?=__('players.nav.goto_label')?> <a href="<?php echo $g_options['scripturl'] . "?mode=players&amp;game=$game"; ?>"><?=__('players.nav.clan_rankings')?></a>
 		</div>
 	</div>
 </div>
