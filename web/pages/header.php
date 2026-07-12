@@ -57,51 +57,25 @@ For support and installation notes visit http://www.hlxcommunity.com
      
 	global $game,$mode;
 
-	// see if they have a defined style or a new style they'd like
-	$selectedStyle = (isset($_COOKIE['style']) && $_COOKIE['style']) ? $_COOKIE['style'] : "";
-	$selectedStyle = isset($_POST['stylesheet']) ? $_POST['stylesheet'] : $selectedStyle; 
+	// Style name resolution (validation + whitelist) now lives in ThemeService,
+	// bound as the theme() facade in hlstats.php. Keep $selectedStyle/$iconpath
+	// as aliases for the rest of this header.
+	$selectedStyle = theme()->name();
 
-	// if they do make sure it exists
-	if(!empty($selectedStyle))
-	{
-		// this assumes that styles is up a directory from page_path, this might be a bad assumption
-		$testfile=sprintf("%s/%s/%s", PAGE_PATH, '../styles', $selectedStyle);
-		if(!file_exists($testfile))
-		{
-			$selectedStyle = "";
-		}
-	}
-	
-	// if they don't have one defined or the defined was is invalid use the default	
-	if(empty($selectedStyle))
-	{
-		$selectedStyle=$g_options['style'];
-	}	
-
-	// if they had one, or tried to have one, set it to whatever we resolved it to
+	// if they had one, or tried to have one, persist it for 30 days
 	if (isset($_POST['stylesheet']) || isset($_COOKIE['style']))
 	{
 		setcookie('style', $selectedStyle, time()+60*60*24*30);
 	}
 
-// this code here assumes that styles end with .css (the selector box for users and for admin does NOT check), someone may want to change this -octo
-	// Determine if we have custom nav images available
-    if ($selectedStyle) {
-        $style = preg_replace('/\.css$/','',$selectedStyle);
-    } else {
-        $style = preg_replace('/\.css$/','',$g_options['style']);
-    }
-	$iconpath = IMAGE_PATH . "/icons";
-	if (file_exists($iconpath . "/" . $style)) {
-			$iconpath = $iconpath . "/" . $style;
-	}
-	
+	$iconpath = theme()->iconPath();
+
 ?>
 <!DOCTYPE html>
 <head>
-	<link rel="stylesheet" type="text/css" href="hlstats.css" />
-	<link rel="stylesheet" type="text/css" href="styles/<?php echo $selectedStyle; ?>" />
-	<link rel="stylesheet" type="text/css" href="css/SqueezeBox.css" />
+<?php foreach (theme()->styleHrefs() as $__href) { ?>
+	<link rel="stylesheet" type="text/css" href="<?php echo $__href; ?>" />
+<?php } ?>
 	<!-- U R A SMACKHEAD -->
 
 	<link rel="SHORTCUT ICON" href="favicon.ico" />
@@ -230,15 +204,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 			<form name="style_selection" id="style_selection" action="" method="post"> Style: 
 				<select name="stylesheet" onchange="document.style_selection.submit()"> 
 				<?php 
-					$d = dir('styles'); 
-					while (false !== ($e = $d->read())) { 
-						if (is_file("styles/$e") && ($e != '.') && ($e != '..') && $e != $g_options['style']) { 
-							$ename = ucwords(strtolower(str_replace(array('_','.css'), array(' ',''), $e))); 
-							$styles[$e] = $ename; 
-						} 
-					}
-					$d->close(); 
-					asort($styles); 
+					$styles = theme()->listThemes();
+					unset($styles[$g_options['style']]);
+					asort($styles);
 					$styles = array_merge(array($g_options['style'] => 'Default'),$styles);
 					foreach ($styles as $e => $ename) { 
 						$sel = ''; 
