@@ -299,4 +299,21 @@ return [
     'claninfo.marked_note.pre'    => 'Items marked "*" above are generated from the last ',
     'claninfo.marked_note.post'   => ' days.',
     'claninfo.admin_options_label' => 'Admin Options: ',
+
+    // pages/claninfo_general.php (Statistics Summary table reuses
+    // countryclansinfo.row.*/col.* -- same row set as countryclansinfo.php,
+    // this page adds Home Page/Favorite Server/Map/Weapon rows on top).
+    // " active members ($totalclanplayers total)" NOT extracted -- $-
+    // interpolated, __f() candidate, same deferred category as elsewhere.
+    // 'Unknown' ($fav_weapon fallback) NOT extracted -- internal image-
+    // lookup sentinel, not user-facing text. '-' (empty-stat placeholder)
+    // NOT extracted -- bare literal, same as countryclansinfo.php precedent.
+    'claninfo_general.section_title'          => 'Clan Information',
+    'claninfo_general.label.clan'              => 'Clan:',
+    'claninfo_general.label.homepage'          => 'Home Page:',
+    'claninfo_general.homepage_not_specified'  => '(Not specified.)',
+    'claninfo_general.label.favorite_server'   => 'Favorite Server:*',
+    'claninfo_general.label.favorite_map'      => 'Favorite Map:*',
+    'claninfo_general.label.favorite_weapon'   => 'Favorite Weapon:*',
+    'claninfo_general.col.player_locations'    => 'Player Locations',
 ];

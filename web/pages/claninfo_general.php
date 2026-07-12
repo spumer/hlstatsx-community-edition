@@ -40,23 +40,23 @@ For support and installation notes visit http://www.hlxcommunity.com
         die('Do not access this file directly.');
     }
 
-printSectionTitle('Clan Information');
+printSectionTitle(__('claninfo_general.section_title'));
 ?>
 <div class="subblock">
 	<div style="float:left;vertical-align:top;width:48.5%;">
 		<table class="data-table">
 		
 			<tr class="data-table-head">
-				<td colspan="3">Statistics Summary</td>
+				<td colspan="3"><?=__('countryclansinfo.stats_summary')?></td>
 			</tr>
 			
 			<tr class="bg1">
-				<td>Clan:</td>
+				<td><?=__('claninfo_general.label.clan')?></td>
 				<td colspan="2"><strong><?php echo $clandata['name']; ?></strong></td>
 			</tr>
 
 			<tr class="bg2">
-				<td>Home Page:</td>
+				<td><?=__('claninfo_general.label.homepage')?></td>
 				<td colspan="2"><?php
 					if ($url = getLink($clandata['homepage']))
 					{
@@ -64,13 +64,13 @@ printSectionTitle('Clan Information');
 					}
 					else
 					{
-						echo '(Not specified.)';
+						echo __('claninfo_general.homepage_not_specified');
 					}
 				?></td>
 			</tr>
 
 			<tr class="bg1">
-				<td style="width:45%;">Activity:</td>
+				<td style="width:45%;"><?=__('countryclansinfo.row.activity')?></td>
 				<td style="width:40%;">
 				<meter min="0" max="100" low="25" high="50" optimum="75" value="<?php
 					echo $clandata['activity'] ?>"></meter>
@@ -81,7 +81,7 @@ printSectionTitle('Clan Information');
 			</tr>
 
 			<tr class="bg2">
-				<td>Members:</td>
+				<td><?=__('countryclansinfo.row.members')?></td>
 				<td colspan="2"><?php
 					echo $clandata['nummembers'].
 					" active members ($totalclanplayers total)"; 
@@ -89,35 +89,35 @@ printSectionTitle('Clan Information');
 			</tr>
 
 			<tr class="bg1">
-				<td>Avg. Member Points:</td>
+				<td><?=__('countryclansinfo.row.avg_member_points')?></td>
 				<td colspan="2"><strong><?php
 					echo number_format($clandata['avgskill']);
 				?></strong></td>
 			</tr>
 
 			<tr class="bg2">
-				<td>Total Kills:</td>
+				<td><?=__('countryclansinfo.row.total_kills')?></td>
 				<td colspan="2"><?php
 					echo number_format($clandata['kills']);
 				?></td>
 			</tr>
 				
 			<tr class="bg1">
-				<td>Total Deaths:</td>
+				<td><?=__('countryclansinfo.row.total_deaths')?></td>
 				<td colspan="2"><?php
 					echo number_format($clandata['deaths']);
 				?></td>
 			</tr>
             
 			<tr class="bg2">
-				<td>Avg. Kills:</td>
+				<td><?=__('countryclansinfo.row.avg_kills')?></td>
 				<td colspan="2"><?php
 					echo number_format($clandata['kills'] / ($clandata['nummembers']));
 				?></td>
 			</tr>
 				
 			<tr class="bg1">
-				<td>Kills per Death:</td>
+				<td><?=__('countryclansinfo.row.kills_per_death')?></td>
 				<td colspan="2"><?php
 					if ($clandata['deaths'] != 0)
 					{
@@ -131,7 +131,7 @@ printSectionTitle('Clan Information');
 			</tr>
         
 			<tr class="bg2">
-		    	<td style="width:45%;">Kills per Minute:</td>
+		    	<td style="width:45%;"><?=__('countryclansinfo.row.kills_per_minute')?></td>
 				<td colspan="2" style="width:55%;"><?php
 					if ($clandata['connection_time'] > 0) {
 						echo sprintf("%.2f", ($clandata['kills'] / ($clandata['connection_time'] / 60)));
@@ -142,14 +142,14 @@ printSectionTitle('Clan Information');
 			</tr>
 
 			<tr class="bg1">
-				<td>Total Connection Time:</td>
+				<td><?=__('countryclansinfo.row.total_connection_time')?></td>
 				<td colspan="2"><?php
 					echo timestamp_to_str($clandata['connection_time']);
 				?></td>
 			</tr>
 
 			<tr class="bg2">
-				<td>Avg. Connection Time:</td>
+				<td><?=__('countryclansinfo.row.avg_connection_time')?></td>
 				<td colspan="2"><?php
 					if ($clandata['connection_time'] > 0) {
 						echo timestamp_to_str($clandata['connection_time'] / ($clandata['nummembers']));
@@ -160,7 +160,7 @@ printSectionTitle('Clan Information');
             </tr>
 
 			<tr class="bg1">
-				<td>Favorite Server:*</td>
+				<td><?=__('claninfo_general.label.favorite_server')?></td>
 				<td colspan="2"><?php
 					$db->query("
 						SELECT
@@ -193,7 +193,7 @@ printSectionTitle('Clan Information');
 		    </tr>
 
             <tr class="bg2">
-		    	<td>Favorite Map:*</td>
+		    	<td><?=__('claninfo_general.label.favorite_map')?></td>
     			<td colspan="2"><?php
 					$db->query("
 						SELECT
@@ -221,7 +221,7 @@ printSectionTitle('Clan Information');
 			</tr>
 
             <tr class="bg1">
-                <td>Favorite Weapon:*</td>
+                <td><?=__('claninfo_general.label.favorite_weapon')?></td>
                 <td colspan="2"><?php
 					$result = $db->query("
 						SELECT
@@ -281,7 +281,7 @@ printSectionTitle('Clan Information');
 	<div style="float:right;vertical-align:top;width:48.5%;">
 		<table class="data-table">
 			<tr class="data-table-head">
-				<td colspan="3">Player Locations</td>
+				<td colspan="3"><?=__('claninfo_general.col.player_locations')?></td>
 			</tr>
 			<tr class="bg1">
 				<td>
@@ -299,37 +299,37 @@ printSectionTitle('Clan Information');
 		array(
 			new TableColumn(
 				'lastName',
-				'Name',
+				__('countryclansinfo.col.name'),
 				'width=28&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
 			),
                         new TableColumn(
                                 'mmrank',
-                                'Rank',
+                                __('players.col.mmrank'),
                                 'width=4&type=elorank'
                         ),
 			new TableColumn(
 				'skill',
-				'Points',
+				__('common.col.points'),
 				'width=6&align=right'
 			),
 			new TableColumn(
 				'activity',
-				'Activity',
+				__('common.col.activity'),
 				'width=10&sort=no&type=bargraph'
 			),
 			new TableColumn(
 				'connection_time',
-				'Time',
+				__('countryclansinfo.col.time'),
 				'width=13&align=right&type=timestamp'
 			),
 			new TableColumn(
 				'kills',
-				'Kills',
+				__('common.col.kills'),
 				'width=6&align=right'
 			),
 			new TableColumn(
 				'percent',
-				'Clan Kills',
+				__('countryclansinfo.col.clan_kills'),
 				'width=10&sort=no&type=bargraph'
 			),
 			new TableColumn(
@@ -339,12 +339,12 @@ printSectionTitle('Clan Information');
 			),
 			new TableColumn(
 				'deaths',
-				'Deaths',
+				__('common.col.deaths'),
 				'width=6&align=right'
 			),
 			new TableColumn(
 				'kpd',
-				'Kpd',
+				__('countryclansinfo.col.kpd'),
 				'width=6&align=right'
 			),
 		),
@@ -404,7 +404,7 @@ printSectionTitle('Clan Information');
 
 <div style="clear:both;padding-top:20px;"></div>
 <?php 
-	printSectionTitle('Members');
+	printSectionTitle(__('countryclansinfo.members_title'));
 	$tblMembers->draw($result, $numitems, 95);
 ?>
 <br /><br />

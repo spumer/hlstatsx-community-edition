@@ -288,4 +288,14 @@ return [
     'claninfo.marked_note.pre'    => 'Отмеченные "*" пункты сгенерированы за последние ',
     'claninfo.marked_note.post'   => ' дней.',
     'claninfo.admin_options_label' => 'Настройки Админа: ',
+
+    // pages/claninfo_general.php
+    'claninfo_general.section_title'          => 'Информация о клане',
+    'claninfo_general.label.clan'              => 'Клан:',
+    'claninfo_general.label.homepage'          => 'Домашняя страница:',
+    'claninfo_general.homepage_not_specified'  => '(Не указано)',
+    'claninfo_general.label.favorite_server'   => 'Любимый сервер:*',
+    'claninfo_general.label.favorite_map'      => 'Любимая карта:*',
+    'claninfo_general.label.favorite_weapon'   => 'Любимое оружие:*',
+    'claninfo_general.col.player_locations'    => 'Местоположение игроков',
 ];
