@@ -106,6 +106,10 @@ if (empty($g_options)) {
 	error('Warning: Could not find any options in the database. Check HLStats configuration.');
 }
 
+$themeService = $container->get(\Service\ThemeService::class);
+$themeService->resolve($g_options['style']);
+theme_bind($themeService);
+
 
 $g_options['scriptbase'] = str_replace('/status.php', '', $g_options['scripturl']);
 
@@ -267,8 +271,11 @@ if ($server_data['addr'] != '')  {
 	echo '<head>';
 	echo '<title>'.$g_options["sitename"].'</title>';
 	echo '<style type="text/css">{margin:0px;padding:0px;}</style>';
-	echo '<link rel="stylesheet" type="text/css" href="hlstats.css">';
-	echo '<link rel="stylesheet" type="text/css" href="styles/'.$g_options['style'].'">';
+	$__hrefs = theme()->styleHrefs();
+	array_pop($__hrefs); // status head never linked SqueezeBox.css -- drop it for byte-parity
+	foreach ($__hrefs as $__href) {
+		echo '<link rel="stylesheet" type="text/css" href="'.$__href.'">';
+	}
 	echo '</head>';
 	echo '<body style="background:#'.$body_color.';color:#'.$color.';"  class="'.$fsize.'">';
 	echo '<table border="0" cellpadding="0" cellspacing="0" style="border:'.$border_width.'px solid #'.$border_color.';background:#'.$background_color.';color:#'.$color.';width:'.$width.'px;">';
