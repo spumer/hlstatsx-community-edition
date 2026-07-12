@@ -43,8 +43,8 @@
 	// Player Chat History
 	$player = filter_input(INPUT_GET, 'player', FILTER_VALIDATE_INT);
 	if ($player === null || $player === false) {
-		error('No player ID specified or invalid ID.');
-		die('No player ID specified or invalid ID.');
+		error(__('chathistory.no_player_id'));
+		die(__('chathistory.no_player_id'));
 	}
 
 	$player = (int)$player;
@@ -96,13 +96,13 @@
 
 	pageHeader
 	(
-		array ($gamename, 'Chat History', $pl_name),
+		array ($gamename, __('chathistory.title'), $pl_name),
 		array
 		(
 			$gamename => $g_options['scripturl'] . "?game={$game}",
-			'Player Rankings' => $g_options['scripturl'] . "?mode=players&game={$game}",
-			'Player Details' => $g_options['scripturl'] . "?mode=playerinfo&player={$player}",
-			'Chat History' => ''
+			__('players.title') => $g_options['scripturl'] . "?mode=players&game={$game}",
+			__('chathistory.nav.player_details') => $g_options['scripturl'] . "?mode=playerinfo&player={$player}",
+			__('chathistory.title') => ''
 		),
 
 		$playername = ""
@@ -116,26 +116,26 @@
 			new TableColumn
 			(
 				'eventTime',
-				'Date',
+				__('chat.col.date'),
 				'width=16'
 			),
 
 			new TableColumn
 			(
 				'message',
-				'Message',
+				__('chat.col.message'),
 				'width=44&sort=no&append=.&embedlink=yes'
 			),
 			new TableColumn
 			(
 				'serverName',
-				'Server',
+				__('chat.col.server'),
 				'width=24'
 			),
 			new TableColumn
 			(
 				'map',
-				'Map',
+				__('maps.col.map'),
 				'width=16'
 			)
 		),
@@ -213,9 +213,9 @@
 				<input type="hidden" name="mode" value="chathistory" />
 				<input type="hidden" name="player" value="<?=$player;?>" />
 				<strong>&#8226;</strong>
-				Filter: <input type="text" name="filter" id="filter_input" value="<?=eHtml($filter);?>" /> 
-				<input type="submit" value="View" class="smallsubmit" />
-				<input type="button" value="Clear" class="smallsubmit" onclick="document.getElementById('filter_input').value=''; this.form.submit();">
+				<?=__('chat.label.filter')?> <input type="text" name="filter" id="filter_input" value="<?=eHtml($filter);?>" /> 
+				<input type="submit" value="<?=__('chat.btn.view')?>" class="smallsubmit" />
+				<input type="button" value="<?=__('chat.btn.clear')?>" class="smallsubmit" onclick="document.getElementById('filter_input').value=''; this.form.submit();">
 			</form>
 			</span>
 		</div>
@@ -231,7 +231,7 @@
 
 	<div class="subblock">
 		<div style="float:right;">
-			Go to: <a href="<?=$playerInfoUrl;?>"><?=$pl_name;?>'s Statistics</a>
+			<?=__('players.nav.goto_label')?> <a href="<?=$playerInfoUrl;?>"><?=$pl_name;?><?=__('chathistory.suffix.statistics')?></a>
 		</div>
 	</div>
 </div>

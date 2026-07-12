@@ -355,4 +355,10 @@ return [
     'chat.btn.clear'                => 'Очистить',
     'chat.msg.delay_pre'           => '*Сообщения задерживаются на ',
     'chat.msg.delay_post'          => ' минут для предотвращения отслеживания в реальном времени.',
+
+    // pages/chathistory.php
+    'chathistory.no_player_id'          => 'ID игрока не указан или некорректен.',
+    'chathistory.title'                  => 'История Чата',
+    'chathistory.nav.player_details'    => 'Игрок Подробно',
+    'chathistory.suffix.statistics'     => ' - статистика',
 ];

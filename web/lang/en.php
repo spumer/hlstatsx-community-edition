@@ -395,4 +395,18 @@ return [
     'chat.btn.clear'                => 'Clear',
     'chat.msg.delay_pre'           => '*Messages are delayed by ',
     'chat.msg.delay_post'          => ' minutes to prevent real-time tracking.',
+
+    // pages/chathistory.php (players.title/chat.col.date/message/server,
+    // maps.col.map, chat.label.filter/btn.view/btn.clear, and
+    // players.nav.goto_label all reused byte-identical). "No player ID
+    // specified or invalid ID." is fresh-translated (no zozo RU source --
+    // zozo left this exact message in English on every page that has it).
+    // error("No such player '$player'.") and
+    // sprintf('Player Chat History (Last %d Days)', $deleteDaysSafe) NOT
+    // extracted -- same deferred $-interpolation/__f() categories as
+    // elsewhere.
+    'chathistory.no_player_id'          => 'No player ID specified or invalid ID.',
+    'chathistory.title'                  => 'Chat History',
+    'chathistory.nav.player_details'    => 'Player Details',
+    'chathistory.suffix.statistics'     => '\'s Statistics',
 ];
