@@ -55,8 +55,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 	$db->free_result();
 	pageHeader
 	(
-		array ($gamename, 'Weapon Statistics'),
-		array ($gamename => "%s?game=$game", 'Weapon Statistics' => '')
+		array ($gamename, __('weapons.title')),
+		array ($gamename => "%s?game=$game", __('weapons.title') => '')
 	);
 	$result = $db->query
 	("
@@ -80,20 +80,20 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'weapon',
-				'Weapon',
+				__('claninfo_weapons.col.weapon'),
 				'width=20&type=weaponimg&align=center&link=' . urlencode("mode=weaponinfo&amp;weapon=%k&amp;game=$game"),
 				$fname
 			),
 			new TableColumn
 			(
 				'modifier',
-				'Modifier',
+				__('weapons.col.modifier'),
 				'width=8&align=right'
 			),
 			new TableColumn
 			(
 				'kills',
-				'Kills',
+				__('weapons.col.kills'),
 				'width=8&align=right'
 			),
 			new TableColumn
@@ -105,13 +105,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'kpercent',
-				'Ratio',
+				__('roles.col.ratio'),
 				'width=18&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
 				'headshots',
-				'Headshots',
+				__('common.col.headshots'),
 				'width=8&align=right'
 			),
 			new TableColumn
@@ -123,13 +123,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'hpercent',
-				'Ratio',
+				__('roles.col.ratio'),
 				'width=18&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
 				'hpk',
-				'HS:K',
+				__('common.col.hpk'),
 				'width=5&align=right'
 			)
 			
@@ -178,15 +178,15 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?>
 
 <div class="block">
-	<?php printSectionTitle('Weapon Statistics'); ?>
+	<?php printSectionTitle(__('weapons.title')); ?>
 	<div class="subblock">
-		From a total of <strong><?php echo number_format($realkills); ?></strong> kills with <strong><?php echo number_format($realheadshots); ?></strong> headshots
+		<?=__('roles.stats.pre')?><strong><?php echo number_format($realkills); ?></strong><?=__('maps.stats.mid')?><strong><?php echo number_format($realheadshots); ?></strong><?=__('maps.stats.post')?>
 	</div>
 	<br /><br />
 	<?php $tblWeapons->draw($result, $db->num_rows($result), 95); ?><br /><br />
 	<div class="subblock">
 		<div style="float:right;">
-			Go to: <a href="<?php echo $g_options["scripturl"] . "?game=$game"; ?>"><?php echo $gamename; ?></a>
+			<?=__('players.nav.goto_label')?> <a href="<?php echo $g_options["scripturl"] . "?game=$game"; ?>"><?php echo $gamename; ?></a>
 		</div>
 	</div>
 </div>

@@ -382,4 +382,9 @@ return [
     'actioninfo.title.victims'         => 'Жертвы',
     'actioninfo.victims.label'         => 'Жертвы ',
     'actioninfo.victims.days_pre'      => ' (за последние ',
+
+    // pages/weapons.php
+    'weapons.title'        => 'Оружие',
+    'weapons.col.modifier' => 'Коэффициент',
+    'weapons.col.kills'    => 'Убито',
 ];

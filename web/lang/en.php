@@ -439,4 +439,17 @@ return [
     'actioninfo.title.victims'         => 'Action Victim Details',
     'actioninfo.victims.label'         => 'Victims of ',
     'actioninfo.victims.days_pre'      => ' (Last ',
+
+    // pages/weapons.php (Weapon column reuses claninfo_weapons.col.weapon;
+    // Ratio/Headshots/HS:K reuse roles.col.ratio/common.col.headshots/hpk
+    // byte-for-byte; stats line reuses roles.stats.pre + maps.stats.mid/
+    // post; footer nav reuses players.nav.goto_label). error(
+    // "No such game '$game'.") NOT extracted -- same deferred category.
+    // weapons.col.kills is a separate key from common.col.kills despite
+    // identical EN text ('Kills') -- zozo used a different RU word here
+    // ('Убито' vs 'Убийств'), a stylistic choice preserved as-authored
+    // rather than silently unified.
+    'weapons.title'        => 'Weapon Statistics',
+    'weapons.col.modifier' => 'Modifier',
+    'weapons.col.kills'    => 'Kills',
 ];
