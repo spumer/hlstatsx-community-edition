@@ -628,6 +628,7 @@ return [
     'footer.msg.nojs'          => 'Вы просматриваете базовую версию этой страницы. Включите JavaScript и перезагрузите страницу для полного функционала.',
     'footer.label.generated_by' => 'Сгенерировано в реальном времени с помощью ',
     'footer.msg.copyright'    => 'Все изображения защищены авторским правом их владельцев.',
+    'footer.msg.translation_credit' => 'Перевод и Конфигурирование -',
     'footer.link.admin'        => 'Admin',
     'footer.link.logout'       => 'Logout',
 

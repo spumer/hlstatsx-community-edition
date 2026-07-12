@@ -941,6 +941,7 @@ return [
     'footer.msg.nojs'          => 'You are currently viewing the basic version of this page, please enable JavaScript and reload the page to access full functionality.',
     'footer.label.generated_by' => 'Generated in real-time by ',
     'footer.msg.copyright'    => 'All images are copyrighted by their respective owners.',
+    'footer.msg.translation_credit' => 'Translation and Configuration -',
     'footer.link.admin'        => 'Admin',
     'footer.link.logout'       => 'Logout',
 
