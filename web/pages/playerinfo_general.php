@@ -90,7 +90,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 								$avatar_full = $xmlDoc->avatarFull;
 							}
 						
-							echo("<img src=\"$avatar_full\" style=\"height:158px;width:158px;\" alt=\"Steam Community Avatar\" />");
+							echo("<img src=\"$avatar_full\" style=\"height:158px;width:158px;\" alt=\"" . __('playerinfo_general.alt.avatar') . "\" />");
 						?>
 					</td>
 				</tr>
@@ -124,7 +124,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					<td>
 						<?php 
 							$prefix = ((!preg_match('/^BOT/i',$uqid)) && $g_options['Mode'] == 'Normal') ? 'STEAM_0:' : '';
-							echo "Steam: <a href=\"http://steamcommunity.com/profiles/$coid\" target=\"_blank\">$prefix" . "$uqid</a>";
+							echo __('playerinfo_general.label.steam') . "<a href=\"http://steamcommunity.com/profiles/$coid\" target=\"_blank\">$prefix" . "$uqid</a>";
 						?>
 					</td>
 				</tr>
@@ -137,7 +137,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					</td>
 				</tr>
 				<tr class="bg1">
-					<td><?php echo "Karma: $statusmsg"; ?></td>
+					<td><?php echo __('playerinfo_general.label.karma') . $statusmsg; ?></td>
 				</tr>
 				<tr class="bg2">
 					<td style="width:50%;"><?=__('playerinfo_general.label.member_of_clan')?></td>
@@ -201,10 +201,10 @@ For support and installation notes visit http://www.hlxcommunity.com
                             <?php
                                 if ($playerdata['mmrank'])
                                 {
-                                        echo '<img src=hlstatsimg/mmranks/' . $playerdata['mmrank'] . '.png alt="rank" style=\"height:20px;width:50px; />';
+                                        echo '<img src=hlstatsimg/mmranks/' . $playerdata['mmrank'] . '.png alt="' . __('playerinfo_general.alt.rank_icon') . '" style=\"height:20px;width:50px; />';
                                 }
                                 else
-                                echo '<img src=hlstatsimg/mmranks/0.png alt="rank" style=\"height:20px;width:50px; />';
+                                echo '<img src=hlstatsimg/mmranks/0.png alt="' . __('playerinfo_general.alt.rank_icon') . '" style=\"height:20px;width:50px; />';
                             ?>
                         </td>
                 </tr>
@@ -256,7 +256,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 							");
 							list($av_ping, $av_latency) = $db->fetch_row();
 							if ($av_ping)
-								echo $av_ping." ms (Latency: $av_latency ms)";
+								echo $av_ping.__f('playerinfo_general.label.latency', $av_latency);
 							else
 								echo '-';
 						?>

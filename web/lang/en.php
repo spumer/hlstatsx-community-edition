@@ -802,22 +802,28 @@ return [
     // a plain Shape-1 word wrap since that occurrence has no
     // surrounding PHP string chain at all.
     //
-    // NOT extracted -- deferred, $-interpolated (each would require
-    // introducing new concatenation into a single atomic string, same
-    // rejected category as the mapinfo.php/servers.php wraps):
-    // - "Karma: $statusmsg"
-    // - "Steam: <a ...>$prefix$uqid</a>"
-    // - "$av_ping ms (Latency: $av_latency ms)"
-    // - the favorite-server/favorite-map inline link text
-    //   ("<a>...$favServerName</a>", "<a>...$favMap</a>")
-    // - the history/sessions/awards/chat link row near the bottom of
-    //   the page (4 links, each with $player interpolated inline)
+    // The deferred bucket below IS now extracted (structural package
+    // group в), except two items confirmed to have no actual
+    // translatable content on inspection:
+    // - the favorite-server/favorite-map inline link text -- the anchor
+    //   text is just "$favServerName"/"$favMap" (a data value), no
+    // English word anywhere in either line to extract.
     // - all "(N*)" stat-annotation suffixes (kills, deaths, kpd, hpk,
-    //   accuracy, headshots, teamkills -- 7 occurrences)
-    // - image alt/title attributes throughout (avatar, history, search,
-    //   trend graph, rank images, forum signature)
-    // 'Unknown' ($fav_weapon fallback) NOT extracted -- same internal
-    // image-lookup sentinel precedent as claninfo_general.php.
+    //   accuracy, headshots, teamkills) -- literally just " (" + number
+    //   + "*)", pure symbols, nothing for a translator to act on, same
+    //   reasoning as not extracting bare punctuation elsewhere in this
+    //   catalog (e.g. ChangeTeam's '" (' in playerhistory.php above).
+    // "Karma: "/"Steam: " labels, and the img alt/title attributes
+    // throughout (avatar, rank icons, trend graph, forum signature) are
+    // plain Shape-1/concatenation-fold wraps. Latency and the awards-
+    // count link use __f() since $av_latency/$numawards are ordinary PHP
+    // variables at echo time (unlike playerhistory.php's SQL columns).
+    // The history-row label uses __f() too, to let RU say "История
+    // игрока %s:" instead of forcing an English-only possessive ("%s's
+    // History:") onto the translation.
+    // 'Unknown' ($fav_weapon fallback, and $status's initial default
+    // before the Steam API call resolves it) NOT extracted -- same
+    // internal-sentinel precedent as claninfo_general.php.
     'playerinfo_general.title'                => 'Player Information',
     'playerinfo_general.col.player_profile'   => 'Player Profile',
     'playerinfo_general.label.location'       => 'Location: ',
@@ -834,6 +840,11 @@ return [
     'playerinfo_general.label.last_connect'   => 'Last Connect:*',
     'playerinfo_general.msg.unknown_paren'    => '(Unknown)',
     'playerinfo_general.label.avg_ping'       => 'Average Ping:*',
+    'playerinfo_general.alt.avatar'           => 'Steam Community Avatar',
+    'playerinfo_general.label.steam'          => 'Steam: ',
+    'playerinfo_general.label.karma'          => 'Karma: ',
+    'playerinfo_general.alt.rank_icon'        => 'rank',
+    'playerinfo_general.label.latency'        => ' ms (Latency: %s ms)',
     'playerinfo_general.row.points'                 => 'Points:',
     'playerinfo_general.row.rank'                   => 'Rank:',
     'playerinfo_general.rank.hidden'                => 'Hidden',
@@ -851,8 +862,19 @@ return [
     'playerinfo_general.row.longest_death_streak'   => 'Longest Death Streak:',
     'playerinfo_general.row.suicides'                => 'Suicides:',
     'playerinfo_general.row.teammate_kills'          => 'Teammate Kills:',
+    'playerinfo_general.alt.history'          => 'History',
+    'playerinfo_general.label.player_history' => '<b>%s</b>\'s History:',
+    'playerinfo_general.link.events'          => 'Events',
+    'playerinfo_general.link.sessions'        => 'Sessions',
+    'playerinfo_general.link.awards_count'    => 'Awards&nbsp;(%s)',
+    'playerinfo_general.alt.search'           => 'Search',
+    'playerinfo_general.link.find_similar_names' => 'Find other players with the same name',
+    'playerinfo_general.title.misc_stats'     => 'Miscellaneous Statistics',
     'playerinfo_general.col.player_trend'     => 'Player Trend',
+    'playerinfo_general.alt.trend_graph'      => 'Player Trend Graph',
     'playerinfo_general.col.forum_signature'  => 'Forum Signature',
+    'playerinfo_general.title.forum_sig'      => 'Copy &amp; Paste the whole URL below in your forum signature',
+    'playerinfo_general.alt.forum_sig_image'  => 'forum sig image',
     'playerinfo_general.bbcode.phpbb'         => 'bbCode 1 (phpBB, SMF)',
     'playerinfo_general.bbcode.ipb'           => 'bbCode 2 (IPB)',
     'playerinfo_general.bbcode.direct_image'  => 'Direct Image',
