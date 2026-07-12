@@ -46,17 +46,17 @@ For support and installation notes visit http://www.hlxcommunity.com
 		array(
 			new TableColumn(
 				'name',
-				'Team',
+				__('claninfo_teams.col.team'),
 				'width=35'
 			),
 			new TableColumn(
 				'teamcount',
-				'Joined',
+				__('claninfo_teams.col.joined'),
 				'width=10&align=right&append=+times'
 			),
 			new TableColumn(
 				'percent',
-				'Percentage of Times',
+				__('claninfo_teams.col.percentage_of_times'),
 				'width=40&sort=no&type=bargraph'
 			),
 			new TableColumn(
@@ -123,7 +123,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	
 	if ($numitems > 0)
 	{
-		printSectionTitle('Team Selection *');
+		printSectionTitle(__('claninfo_teams.title.team_selection'));
 		$tblTeams->draw($result, $numitems, 95);
 ?>
 	<br /><br />
@@ -138,14 +138,14 @@ For support and installation notes visit http://www.hlxcommunity.com
             new TableColumn
 			(
                 'code',
-                'Role',
+                __('roles.col.role'),
                 'width=25&type=roleimg&align=left&link=' . urlencode("mode=rolesinfo&amp;role=%k&amp;game=$game"),
 				$fname
             ),
             new TableColumn
 			(
                 'rolecount',
-				'Joined',
+				__('claninfo_teams.col.joined'),
 				'width=10&align=right&append=+times'
 			),
 			new TableColumn
@@ -157,25 +157,25 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
                 'percent',
-                'Ratio',
+                __('roles.col.ratio'),
                 'width=20&sort=no&type=bargraph'            
 			),
             new TableColumn
 			(
                 'killsTotal',
-                'Kills',
+                __('common.col.kills'),
                 'width=10&align=right'
             ),
             new TableColumn
 			(
                 'deathsTotal',
-                'Deaths',
+                __('common.col.deaths'),
                 'width=10&align=right'
             ),
             new TableColumn
 			(
                 'kpd',
-                'K:D',
+                __('common.col.kpd'),
                 'width=10&align=right'
 			)
 		),
@@ -335,7 +335,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	
 	if ($numitems > 0)
 	{
-		printSectionTitle('Role Selection *');
+		printSectionTitle(__('claninfo_teams.title.role_selection'));
 		$tblRoles->draw($result, $numitems, 95);
 ?>
 	<br /><br />

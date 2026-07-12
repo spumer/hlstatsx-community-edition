@@ -325,4 +325,13 @@ return [
     'claninfo_actions.title.player_actions'   => 'Player Actions *',
     'claninfo_actions.col.times_victimized'   => 'Times Victimized',
     'claninfo_actions.title.victims'          => 'Victims of Player-Player Actions *',
+
+    // pages/claninfo_teams.php ('Joined' reused across the teamcount
+    // and rolecount columns; Role/Ratio/Kills/Deaths/K:D columns reuse
+    // roles.col.role/ratio + common.col.kills/deaths/kpd)
+    'claninfo_teams.col.team'                 => 'Team',
+    'claninfo_teams.col.joined'               => 'Joined',
+    'claninfo_teams.col.percentage_of_times'  => 'Percentage of Times',
+    'claninfo_teams.title.team_selection'     => 'Team Selection *',
+    'claninfo_teams.title.role_selection'     => 'Role Selection *',
 ];

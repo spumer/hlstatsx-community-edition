@@ -306,4 +306,13 @@ return [
     'claninfo_actions.title.player_actions'   => 'Действия игроков *',
     'claninfo_actions.col.times_victimized'   => 'Стали Жертвами, раз(а)',
     'claninfo_actions.title.victims'          => 'Жертвы взаимодействий Игрок-Игрок *',
+
+    // pages/claninfo_teams.php ('Percentage of Times' is a semantic
+    // adaptation, not a literal translation -- zozo labels this column
+    // the same as the Role Ratio column below)
+    'claninfo_teams.col.team'                 => 'Команда',
+    'claninfo_teams.col.joined'               => 'Играли',
+    'claninfo_teams.col.percentage_of_times'  => 'Соотношение',
+    'claninfo_teams.title.team_selection'     => 'Выбор команды *',
+    'claninfo_teams.title.role_selection'     => 'Выбор роли *',
 ];
