@@ -607,10 +607,10 @@ For support and installation notes visit http://www.hlxcommunity.com
 				</tr>
 			</table><br />
 			<?php
-				echo '&nbsp;&nbsp;<img src="' . IMAGE_PATH . '/history.gif" style="padding-left:3px;padding-right:3px;" alt="History" />&nbsp;<b>'
-					. htmlspecialchars($playerdata['lastName'], ENT_COMPAT) . '</b>\'s History:<br />';
-				echo '&nbsp;&nbsp;<a href="' . $g_options['scripturl'] . "?mode=playerhistory&amp;player=$player\">Events</a>&nbsp;|&nbsp;";
-				echo '<a href="' . $g_options['scripturl'] . "?mode=playersessions&amp;player=$player\">Sessions</a>&nbsp;|&nbsp;";
+				echo '&nbsp;&nbsp;<img src="' . IMAGE_PATH . '/history.gif" style="padding-left:3px;padding-right:3px;" alt="' . __('playerinfo_general.alt.history') . '" />&nbsp;'
+					. __f('playerinfo_general.label.player_history', htmlspecialchars($playerdata['lastName'], ENT_COMPAT)) . '<br />';
+				echo '&nbsp;&nbsp;<a href="' . $g_options['scripturl'] . "?mode=playerhistory&amp;player=$player\">" . __('playerinfo_general.link.events') . "</a>&nbsp;|&nbsp;";
+				echo '<a href="' . $g_options['scripturl'] . "?mode=playersessions&amp;player=$player\">" . __('playerinfo_general.link.sessions') . "</a>&nbsp;|&nbsp;";
 				$resultCount = $db->query
 				("
 					SELECT
@@ -621,18 +621,18 @@ For support and installation notes visit http://www.hlxcommunity.com
 						hlstats_Players_Awards.playerId = $player
 				");
 				list($numawards) = $db->fetch_row($resultCount);
-				echo "<a href=\"" . $g_options['scripturl'] . "?mode=playerawards&amp;player=$player\">Awards&nbsp;($numawards)</a>&nbsp;|&nbsp;";
+				echo "<a href=\"" . $g_options['scripturl'] . "?mode=playerawards&amp;player=$player\">" . __f('playerinfo_general.link.awards_count', $numawards) . "</a>&nbsp;|&nbsp;";
 				if ($g_options["nav_globalchat"] == 1)
 				{
-					echo "<a href=\"" . $g_options['scripturl'] . "?mode=chathistory&amp;player=$player\">Chat</a>";
+					echo "<a href=\"" . $g_options['scripturl'] . "?mode=chathistory&amp;player=$player\">" . __('common.nav.chat') . "</a>";
 				}
 			?>
-			<br />&nbsp;&nbsp;<a href="<?php echo $g_options['scripturl']; ?>?mode=search&amp;st=player&amp;q=<?php echo $pl_urlname; ?>"><img src="<?php echo IMAGE_PATH; ?>/search.gif" style="margin-left:3px;margin-right:3px;" alt="Search" />&nbsp;Find other players with the same name</a>
+			<br />&nbsp;&nbsp;<a href="<?php echo $g_options['scripturl']; ?>?mode=search&amp;st=player&amp;q=<?php echo $pl_urlname; ?>"><img src="<?php echo IMAGE_PATH; ?>/search.gif" style="margin-left:3px;margin-right:3px;" alt="<?=__('playerinfo_general.alt.search')?>" />&nbsp;<?=__('playerinfo_general.link.find_similar_names')?></a>
 		</div>
 	</div>
 	<br /><br />
 	<div style="clear:both;padding-top:24px;"></div>
-	<?php printSectionTitle('Miscellaneous Statistics'); ?>
+	<?php printSectionTitle(__('playerinfo_general.title.misc_stats')); ?>
 	<div class="subblock">
 		<div style="float:left;vertical-align:top;width:48.5%;">
 			<table class="data-table">
@@ -641,7 +641,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				</tr>
 				<tr class="bg1">
 					<td style="text-align:center;">
-						<?php echo "<img src=\"trend_graph.php?bgcolor=".$g_options['graphbg_trend'].'&amp;color='.$g_options['graphtxt_trend']."&amp;player=$player\" alt=\"Player Trend Graph\" />"; ?>
+						<?php echo "<img src=\"trend_graph.php?bgcolor=".$g_options['graphbg_trend'].'&amp;color='.$g_options['graphtxt_trend']."&amp;player=$player\" alt=\"" . __('playerinfo_general.alt.trend_graph') . "\" />"; ?>
 					</td>
 				</tr>
 			</table>
@@ -666,7 +666,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 								$jimglink = $imglink;
 							}
 							
-							echo "<img src=\"$imglink\" title=\"Copy &amp; Paste the whole URL below in your forum signature\" alt=\"forum sig image\"/>";
+							echo "<img src=\"$imglink\" title=\"" . __('playerinfo_general.title.forum_sig') . "\" alt=\"" . __('playerinfo_general.alt.forum_sig_image') . "\"/>";
 							$script_path = (isset($_SERVER['SSL']) || (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on")) ? 'https://' : 'http://';
 							$script_path .= $_SERVER['HTTP_HOST'];
 							$script_path .= str_replace('\\','/',dirname($_SERVER['PHP_SELF']));
