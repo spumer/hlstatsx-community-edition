@@ -54,8 +54,15 @@ $lastpage = isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:"";
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="stylesheet" type="text/css" href="hlstats.css">
-	<link rel="stylesheet" type="text/css" href="styles/<?php echo $g_options['style']; ?>">
+<?php
+	$__hrefs = theme()->styleHrefs();
+	array_pop($__hrefs); // ingame head never linked SqueezeBox.css -- drop it for byte-parity
+	foreach ($__hrefs as $__href) {
+?>
+	<link rel="stylesheet" type="text/css" href="<?php echo $__href; ?>">
+<?php
+	}
+?>
 	<title>HLstatsX</title>
 </head>
 <body style="margin:0px;padding:0px;" id="ingame"> 

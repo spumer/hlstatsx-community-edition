@@ -103,6 +103,10 @@ if (empty($g_options)) {
 	error('Warning: Could not find any options in the database. Check HLStats configuration.');
 }
 
+$themeService = $container->get(\Service\ThemeService::class);
+$themeService->resolve($g_options['style']);
+theme_bind($themeService);
+
 ////
 //// Main
 ////
