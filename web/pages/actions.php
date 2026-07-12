@@ -61,8 +61,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 	pageHeader
 	(
-		array ($gamename, 'Action Statistics'),
-		array ($gamename=>"%s?game=$game", 'Action Statistics'=>'')
+		array ($gamename, __('actions.title')),
+		array ($gamename=>"%s?game=$game", __('actions.title')=>'')
 	);
 
 	$tblPlayerActions = new Table
@@ -72,19 +72,19 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'description',
-				'Action',
+				__('claninfo_actions.col.action'),
 				'width=45&link=' . urlencode('mode=actioninfo&amp;action=%k&amp;game='.$game)
 			),
 			new TableColumn
 			(
 				'obj_count',
-				'Earned',
+				__('actions.col.earned'),
 				'width=25&align=right&append=+times'
 			),
 			new TableColumn
 			(
 				'obj_bonus',
-				'Reward',
+				__('actions.col.reward'),
 				'width=25&align=right'
 			)
 		),
@@ -117,7 +117,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	");
 ?>
 <div class="block">
-	<?php printSectionTitle('Action Statistics'); ?>
+	<?php printSectionTitle(__('actions.title')); ?>
 	<div class="subblock">
 		<?php
 			$db->query
@@ -130,14 +130,14 @@ For support and installation notes visit http://www.hlxcommunity.com
 					hlstats_Actions.game = '$game'
 			");
 			list($totalactions) = $db->fetch_row();
-			?>From a total of <strong><?php echo number_format($totalactions); ?></strong> earned actions
+			?><?=__('actions.stats.pre')?><strong><?php echo number_format($totalactions); ?></strong><?=__('actions.stats.post')?>
 	</div><br /><br />
 	<?php
 		$tblPlayerActions->draw($result, $db->num_rows($result), 95);
 	?><br /><br />
 	<div class="subblock">
 		<div style="float:right;">
-			Go to: <a href="<?php echo $g_options['scripturl'] . "?game=$game"; ?>"><?php echo $gamename; ?></a>
+			<?=__('players.nav.goto_label')?> <a href="<?php echo $g_options['scripturl'] . "?game=$game"; ?>"><?php echo $gamename; ?></a>
 		</div>
 	</div>
 </div>

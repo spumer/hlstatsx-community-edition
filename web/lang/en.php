@@ -409,4 +409,13 @@ return [
     'chathistory.title'                  => 'Chat History',
     'chathistory.nav.player_details'    => 'Player Details',
     'chathistory.suffix.statistics'     => '\'s Statistics',
+
+    // pages/actions.php (Action column reuses claninfo_actions.col.action
+    // byte-for-byte; footer nav reuses players.nav.goto_label). error(
+    // "No such game '$game'.") NOT extracted -- same deferred category.
+    'actions.title'      => 'Action Statistics',
+    'actions.col.earned' => 'Earned',
+    'actions.col.reward' => 'Reward',
+    'actions.stats.pre'  => 'From a total of ',
+    'actions.stats.post' => ' earned actions',
 ];

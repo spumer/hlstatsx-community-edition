@@ -361,4 +361,11 @@ return [
     'chathistory.title'                  => 'История Чата',
     'chathistory.nav.player_details'    => 'Игрок Подробно',
     'chathistory.suffix.statistics'     => ' - статистика',
+
+    // pages/actions.php
+    'actions.title'      => 'Действия',
+    'actions.col.earned' => 'Выполнено',
+    'actions.col.reward' => 'Вознаграждение',
+    'actions.stats.pre'  => 'Всего ',
+    'actions.stats.post' => ' выполненных действий',
 ];
