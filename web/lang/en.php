@@ -798,4 +798,25 @@ return [
     'footer.msg.copyright'    => 'All images are copyrighted by their respective owners.',
     'footer.link.admin'        => 'Admin',
     'footer.link.logout'       => 'Logout',
+
+    // pages/bans.php (common.col.player/points/activity/kills/deaths/
+    // headshots/kpd/hpk/accuracy and players.nav.goto_label all reused
+    // byte-for-byte). zozo left this entire page in English -- likely
+    // because ZoZo's actual ban list/search lives on the separate
+    // SourceBans++ site (bans.zozo.gg), making this built-in HLstatsX
+    // "hideranking=2" list a redundant, unpromoted duplicate feature.
+    // Unlike the voicecomm/teamspeak/ventrilo subsystem (byte-identical
+    // to zozo, clearly abandoned code), this file has been actively
+    // refactored on both sides, so it's treated as reachable and
+    // in scope; translated fresh using established, unambiguous UI
+    // vocabulary. error("No such game '$game'.") NOT extracted -- same
+    // deferred category as elsewhere.
+    'bans.title'                        => 'Cheaters &amp; Banned Players',
+    'bans.col.ban_date'                  => 'Ban Date',
+    'bans.label.find_a_player'          => 'Find a player:',
+    'bans.btn.search'                    => 'Search',
+    'bans.label.show_only_players_with' => 'Show only players with',
+    'bans.stats.mid'                     => 'or more kills from a total ',
+    'bans.stats.post'                    => ' banned players',
+    'bans.btn.apply'                     => 'Apply',
 ];

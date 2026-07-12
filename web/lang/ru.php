@@ -545,4 +545,14 @@ return [
     'footer.msg.copyright'    => 'Все изображения защищены авторским правом их владельцев.',
     'footer.link.admin'        => 'Admin',
     'footer.link.logout'       => 'Logout',
+
+    // pages/bans.php
+    'bans.title'                        => 'Читеры и Забаненные Игроки',
+    'bans.col.ban_date'                  => 'Дата бана',
+    'bans.label.find_a_player'          => 'Найти игрока:',
+    'bans.btn.search'                    => 'Поиск',
+    'bans.label.show_only_players_with' => 'Показывать только игроков с',
+    'bans.stats.mid'                     => 'или более убийств из общего числа ',
+    'bans.stats.post'                    => ' забаненных игроков',
+    'bans.btn.apply'                     => 'Применить',
 ];

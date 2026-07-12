@@ -67,8 +67,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 	pageHeader
 	(
-		array ($gamename, 'Cheaters &amp; Banned Players'),
-		array ($gamename=>"%s?game=$game", 'Cheaters &amp; Banned Players'=>'')
+		array ($gamename, __('bans.title')),
+		array ($gamename=>"%s?game=$game", __('bans.title')=>'')
 	);
 
 	$table = new Table
@@ -77,61 +77,61 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'lastName',
-				'Player',
+				__('common.col.player'),
 				'width=26&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')
 			),
 			new TableColumn
 			(
 				'ban_date',
-				'Ban Date',
+				__('bans.col.ban_date'),
 				'width=15&align=right'
 			),
 			new TableColumn
 			(
 				'skill',
-				'Points',
+				__('common.col.points'),
 				'width=6&align=right'
 			),
 			new TableColumn
 			(
 				'activity',
-				'Activity',
+				__('common.col.activity'),
 				'width=10&sort=no&type=bargraph'
 			),
 			new TableColumn
 			(
 				'kills',
-				'Kills',
+				__('common.col.kills'),
 				'width=5&align=right'
 			),
 			new TableColumn
 			(
 				'deaths',
-				'Deaths',
+				__('common.col.deaths'),
 				'width=5&align=right'
 			),
 			new TableColumn
 			(
 				'headshots',
-				'Headshots',
+				__('common.col.headshots'),
 				'width=7&align=right'
 			),
 			new TableColumn
 			(
 				'kpd',
-				'K:D',
+				__('common.col.kpd'),
 				'width=10&align=right'
 			),
 			new TableColumn
 			(
 				'hpk',
-				'HS:K',
+				__('common.col.hpk'),
 				'width=5&align=right'
 			),
 			new TableColumn
 			(
 				'acc',
-				'Accuracy',
+				__('common.col.accuracy'),
 				'width=6&align=right&append=' . urlencode('%')
 			)
 		),
@@ -189,16 +189,16 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?>
 
 <div class="block">
-	<?php printSectionTitle('Cheaters &amp; Banned Players'); ?>
+	<?php printSectionTitle(__('bans.title')); ?>
 		<div class="subblock">
 			<div style="float:left;">
 				<form method="get" action="<?php echo $g_options['scripturl']; ?>">
 					<input type="hidden" name="mode" value="search" />
 					<input type="hidden" name="game" value="<?php echo $game; ?>" />
 					<input type="hidden" name="st" value="player" />
-					<strong>&#8226;</strong> Find a player:
+					<strong>&#8226;</strong> <?=__('bans.label.find_a_player')?>
 					<input type="text" name="q" size="20" maxlength="64" class="textbox" />
-					<input type="submit" value="Search" class="smallsubmit" />
+					<input type="submit" value="<?=__('bans.btn.search')?>" class="smallsubmit" />
 				</form>
 			</div>
 		</div><br /><br />
@@ -217,13 +217,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 							}
 						}
 					?>
-					<strong>&#8226;</strong> Show only players with
-					<input type="text" name="minkills" size="4" maxlength="2" value="<?php echo $minkills; ?>" class="textbox" /> or more kills from a total <strong><?php echo number_format($numitems); ?></strong> banned players
-					<input type="submit" value="Apply" class="smallsubmit" />
+					<strong>&#8226;</strong> <?=__('bans.label.show_only_players_with')?>
+					<input type="text" name="minkills" size="4" maxlength="2" value="<?php echo $minkills; ?>" class="textbox" /> <?=__('bans.stats.mid')?><strong><?php echo number_format($numitems); ?></strong><?=__('bans.stats.post')?>
+					<input type="submit" value="<?=__('bans.btn.apply')?>" class="smallsubmit" />
 				</form>
 			</div>
 			<div style="float:right;">
-				Go to: <a href="<?php echo $g_options["scripturl"] . "?game=$game"; ?>"><?php echo $gamename; ?></a>
+				<?=__('players.nav.goto_label')?> <a href="<?php echo $g_options["scripturl"] . "?game=$game"; ?>"><?php echo $gamename; ?></a>
 			</div>
 	</div>
 </div>
