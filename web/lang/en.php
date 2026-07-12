@@ -316,4 +316,13 @@ return [
     'claninfo_general.label.favorite_map'      => 'Favorite Map:*',
     'claninfo_general.label.favorite_weapon'   => 'Favorite Weapon:*',
     'claninfo_general.col.player_locations'    => 'Player Locations',
+
+    // pages/claninfo_actions.php ('Action'/'Points Bonus' each reused
+    // across both the Player Actions and Victims tables on this page)
+    'claninfo_actions.col.action'             => 'Action',
+    'claninfo_actions.col.achieved'           => 'Achieved',
+    'claninfo_actions.col.points_bonus'       => 'Points Bonus',
+    'claninfo_actions.title.player_actions'   => 'Player Actions *',
+    'claninfo_actions.col.times_victimized'   => 'Times Victimized',
+    'claninfo_actions.title.victims'          => 'Victims of Player-Player Actions *',
 ];

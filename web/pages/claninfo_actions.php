@@ -46,17 +46,17 @@ For support and installation notes visit http://www.hlxcommunity.com
 		array(
 			new TableColumn(
 				'description',
-				'Action',
+				__('claninfo_actions.col.action'),
 				'width=45&link=' . urlencode("mode=actioninfo&amp;action=%k&amp;game=$game")
 			),
 			new TableColumn(
 				'obj_count',
-				'Achieved',
+				__('claninfo_actions.col.achieved'),
 				'width=25&align=right&append=+times'
 			),
 			new TableColumn(
 				'obj_bonus',
-				'Points Bonus',
+				__('claninfo_actions.col.points_bonus'),
 				'width=25&align=right'
 			)
 		),
@@ -122,7 +122,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	
 	if ($numitems > 0)
 	{
-		printSectionTitle('Player Actions *');
+		printSectionTitle(__('claninfo_actions.title.player_actions'));
 		$tblPlayerActions->draw($result, $numitems, 95);
 ?>
 		<br /><br />
@@ -133,17 +133,17 @@ For support and installation notes visit http://www.hlxcommunity.com
 		array(
 			new TableColumn(
 				'description',
-				'Action',
+				__('claninfo_actions.col.action'),
 				'width=45&link=' . urlencode("mode=actioninfo&amp;action=%k&amp;game=$game#victims")
 			),
 			new TableColumn(
 				'obj_count',
-				'Times Victimized',
+				__('claninfo_actions.col.times_victimized'),
 				'width=25&align=right&append=+times'
 			),
 			new TableColumn(
 				'obj_bonus',
-				'Points Bonus',
+				__('claninfo_actions.col.points_bonus'),
 				'width=25&align=right'
 			)
 		),
@@ -185,7 +185,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	
 	if ($numitems > 0)
 	{
-		printSectionTitle('Victims of Player-Player Actions *');
+		printSectionTitle(__('claninfo_actions.title.victims'));
 		$tblPlayerPlayerActionsV->draw($result, $numitems, 95);
 ?>
 	<br /><br />

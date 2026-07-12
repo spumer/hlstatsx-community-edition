@@ -298,4 +298,12 @@ return [
     'claninfo_general.label.favorite_map'      => 'Любимая карта:*',
     'claninfo_general.label.favorite_weapon'   => 'Любимое оружие:*',
     'claninfo_general.col.player_locations'    => 'Местоположение игроков',
+
+    // pages/claninfo_actions.php
+    'claninfo_actions.col.action'             => 'Действие',
+    'claninfo_actions.col.achieved'           => 'Выполнено',
+    'claninfo_actions.col.points_bonus'       => 'Вознаграждение',
+    'claninfo_actions.title.player_actions'   => 'Действия игроков *',
+    'claninfo_actions.col.times_victimized'   => 'Стали Жертвами, раз(а)',
+    'claninfo_actions.title.victims'          => 'Жертвы взаимодействий Игрок-Игрок *',
 ];
