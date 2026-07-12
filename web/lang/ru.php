@@ -555,4 +555,14 @@ return [
     'bans.stats.mid'                     => 'или более убийств из общего числа ',
     'bans.stats.post'                    => ' забаненных игроков',
     'bans.btn.apply'                     => 'Применить',
+
+    // pages/game.php
+    'game.title.participating_servers' => 'Действующие Серверы',
+    'game.col.players'                  => 'Игроков',
+    'game.range.24h'                     => '24 Часа',
+    'game.range.last_week'               => 'Неделя',
+    'game.range.last_month'              => 'Месяц',
+    'game.range.last_year'               => 'Год',
+    'game.msg.unknown_country'          => 'Неизвестная страна',
+    'game.msg.no_award_winner'          => '&nbsp;&nbsp; <em>Нет Награжденных</em>',
 ];

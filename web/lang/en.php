@@ -819,4 +819,43 @@ return [
     'bans.stats.mid'                     => 'or more kills from a total ',
     'bans.stats.post'                    => ' banned players',
     'bans.btn.apply'                     => 'Apply',
+
+    // pages/game.php (servers.col.server/address/played/headshots,
+    // maps.col.map, weapons.col.kills, common.col.hpk all reused byte-
+    // for-byte). game.col.players is a separate key from servers.col.
+    // players despite identical EN text ('Players'): zozo used the
+    // genitive here ("Игроков") vs the nominative used on servers.php
+    // ("Игроки"). The 4 accordion range labels are separate keys from
+    // servers.period.* too, despite identical EN text: zozo used
+    // shorter forms on this page ("24 Часа"/"Неделя"/"Месяц"/"Год" vs
+    // "24h Часа"/"Последняя Неделя"/etc). 'Unknown Country' and 'No
+    // Award Winner' are bare literals with no surrounding concatenation,
+    // safe direct wraps (the latter includes the full "&nbsp;&nbsp;
+    // <em>...</em>" markup as one key rather than splitting it, same
+    // reasoning as playerinfo.status.banned). 'Unknown Country' is
+    // fresh-translated -- zozo left it in English here too.
+    //
+    // NOT extracted -- deferred, $-interpolated (same rejected category
+    // as elsewhere):
+    // - both "Tracking <b>N</b> players..." summary sentences (2
+    //   variants x 2 occurrences each)
+    // - the printSectionTitle(...'Daily'/'$n Day'." Awards ($date)")
+    //   construct -- same flagged pattern as awards_daily.php from
+    //   batch 1 (extracting "Awards" alone requires a new split inside
+    //   the $awards_d_date-interpolated trailing atom)
+    // - "Steam"/"(Join)" connect-link text (2 separate occurrences,
+    //   each embedded in a $addr-interpolated string)
+    // - "Player" (alt attribute inside the non-country award-winner
+    //   image, embedded in a larger interpolated string)
+    // - image alt/title attributes throughout (Server Load Graph, etc.)
+    // error("No such game '$game'.") NOT extracted -- same deferred
+    // category as elsewhere.
+    'game.title.participating_servers' => 'Participating Servers',
+    'game.col.players'                  => 'Players',
+    'game.range.24h'                     => '24h View',
+    'game.range.last_week'               => 'Last Week',
+    'game.range.last_month'              => 'Last Month',
+    'game.range.last_year'               => 'Last Year',
+    'game.msg.unknown_country'          => 'Unknown Country',
+    'game.msg.no_award_winner'          => '&nbsp;&nbsp; <em>No Award Winner</em>',
 ];

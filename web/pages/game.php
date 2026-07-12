@@ -145,7 +145,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 <div class="block">
 
-<?php	printSectionTitle('Participating Servers'); ?>
+<?php	printSectionTitle(__('game.title.participating_servers')); ?>
 		<div class="subblock">
 <?php
 	if (count($servers) == 1)
@@ -194,14 +194,14 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?></td>
       </tr>
       <tr class="data-table-head">
-		<td class="fSmall" style="width:37%;">&nbsp;Server</td>
-		<td class="fSmall" style="width:19%;">&nbsp;Address</td>
-		<td class="fSmall" style="width:7%;text-align:center;">&nbsp;Map</td>
-		<td class="fSmall" style="width:7%;text-align:center;">&nbsp;Played</td>
-		<td class="fSmall" style="width:10%;text-align:center;">&nbsp;Players</td>
-		<td class="fSmall" style="width:7%;text-align:center;">&nbsp;Kills</td>
-		<td class="fSmall" style="width:7%;text-align:center;">&nbsp;Headshots</td>
-		<td class="fSmall" style="width:6%;text-align:center;">&nbsp;HS:K</td>
+		<td class="fSmall" style="width:37%;">&nbsp;<?=__('servers.col.server')?></td>
+		<td class="fSmall" style="width:19%;">&nbsp;<?=__('servers.col.address')?></td>
+		<td class="fSmall" style="width:7%;text-align:center;">&nbsp;<?=__('maps.col.map')?></td>
+		<td class="fSmall" style="width:7%;text-align:center;">&nbsp;<?=__('servers.col.played')?></td>
+		<td class="fSmall" style="width:10%;text-align:center;">&nbsp;<?=__('game.col.players')?></td>
+		<td class="fSmall" style="width:7%;text-align:center;">&nbsp;<?=__('weapons.col.kills')?></td>
+		<td class="fSmall" style="width:7%;text-align:center;">&nbsp;<?=__('servers.col.headshots')?></td>
+		<td class="fSmall" style="width:6%;text-align:center;">&nbsp;<?=__('common.col.hpk')?></td>
       </tr>
 
 <?php
@@ -279,7 +279,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					<?php printserverstats($server_id); ?>
 					<div class="subblock">
 <?php
-				$range_arr = array(1=>"24h View", 2=>"Last Week", 3=>"Last Month", 4=>"Last Year");
+				$range_arr = array(1=>__('game.range.24h'), 2=>__('game.range.last_week'), 3=>__('game.range.last_month'), 4=>__('game.range.last_year'));
 				foreach($range_arr as $range_code => $range_name) {
 					print('<table class="data-table"><tr class="data-table-head">');
 					print('<td class="fSmall">&nbsp;'.$range_name.'</td></tr>');
@@ -384,14 +384,14 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?>
 		  <table class="data-table">
 					<tr class="data-table-head">
-						<td class="fSmall" style="width:37%;">&nbsp;Server</td>
-						<td class="fSmall" style="width:19%;">&nbsp;Address</td>
-						<td class="fSmall" style="width:7%;text-align:center;">&nbsp;Map</td>
-						<td class="fSmall" style="width:7%;text-align:center;">&nbsp;Played</td>
-						<td class="fSmall" style="width:10%;text-align:center;">&nbsp;Players</td>
-						<td class="fSmall" style="width:7%;text-align:center;">&nbsp;Kills</td>
-						<td class="fSmall" style="width:7%;text-align:center;">&nbsp;Headshots</td>
-						<td class="fSmall" style="width:6%;text-align:center;">&nbsp;HS:K</td>
+						<td class="fSmall" style="width:37%;">&nbsp;<?=__('servers.col.server')?></td>
+						<td class="fSmall" style="width:19%;">&nbsp;<?=__('servers.col.address')?></td>
+						<td class="fSmall" style="width:7%;text-align:center;">&nbsp;<?=__('maps.col.map')?></td>
+						<td class="fSmall" style="width:7%;text-align:center;">&nbsp;<?=__('servers.col.played')?></td>
+						<td class="fSmall" style="width:10%;text-align:center;">&nbsp;<?=__('game.col.players')?></td>
+						<td class="fSmall" style="width:7%;text-align:center;">&nbsp;<?=__('weapons.col.kills')?></td>
+						<td class="fSmall" style="width:7%;text-align:center;">&nbsp;<?=__('servers.col.headshots')?></td>
+						<td class="fSmall" style="width:6%;text-align:center;">&nbsp;<?=__('common.col.hpk')?></td>
 					</tr>
 					<tr class="game-table-row">
 						<td class="game-table-cell"><?php
@@ -525,7 +525,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				if ($awarddata['d_winner_id']) {
 					if ($g_options['countrydata'] == 1) {
 						$flag = '0.gif';
-						$alt = 'Unknown Country';
+						$alt = __('game.msg.unknown_country');
 						if ($awarddata['flag'] != '') {
 							$alt = ucfirst(strtolower($awarddata['country']));
 						}
@@ -536,7 +536,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				}
 				else
 				{
-					echo '&nbsp;&nbsp; <em>No Award Winner</em>';
+					echo __('game.msg.no_award_winner');
 				}
 ?></td>
 </tr>

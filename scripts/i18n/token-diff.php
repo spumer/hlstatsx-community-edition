@@ -136,6 +136,12 @@ const BARE_CALL_QUOTE_OVERRIDES = [
         'playerinfo_general.rank.hidden'   => '"',
         'playerinfo_general.rank.excluded' => '"',
     ],
+    'web/pages/game.php' => [
+        'game.range.24h'        => '"',
+        'game.range.last_week'  => '"',
+        'game.range.last_month' => '"',
+        'game.range.last_year'  => '"',
+    ],
 ];
 
 /**
