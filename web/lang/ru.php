@@ -467,4 +467,15 @@ return [
     'playerinfo_killstats.title'               => 'Статистика убийств игрока *',
     'playerinfo_killstats.label.show_victims' => 'Показать жертв, которых убил этот игрок',
     'playerinfo_killstats.label.or_more_times' => 'раз и более',
+
+    // pages/playerinfo.php ("Banned"/"In good standing" are fresh-
+    // translated: zozo's playerinfo_general.php has a structurally
+    // different feature (VAC/trade-ban status) in this position, not a
+    // direct equivalent of the fork's hideranking-based status, so its
+    // wording ("Испорчена"/"В порядке") wasn't reused directly except
+    // where the "good" state phrase is generically applicable.)
+    'playerinfo.status.banned'          => '<span style="color:red;font-weight:bold;">Забанен</span>',
+    'playerinfo.status.good_standing'  => '<span style="color:green;font-weight:bold;">В порядке</span>',
+    'playerinfo.tab.maps_servers'       => 'Карты/Серверы',
+    'playerinfo.tab.killstats'          => 'Убийства',
 ];

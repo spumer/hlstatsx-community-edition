@@ -72,7 +72,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			$player = intval($player);
 		}
 	} elseif (!$player && !$uniqueid) {
-		error("No player ID specified.");
+		error(__('playerawards.no_player_id'));
 	}
 
 	$db->query("
@@ -154,9 +154,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 	$hideranking = $playerdata['hideranking'];
 
     if ($hideranking == 2) {
-		$statusmsg = '<span style="color:red;font-weight:bold;">Banned</span>';
+		$statusmsg = __('playerinfo.status.banned');
 	} else {
-		$statusmsg = '<span style="color:green;font-weight:bold;">In good standing</span>';
+		$statusmsg = __('playerinfo.status.good_standing');
 	}
 // Required on a few pages, just decided to add it here
 // May get moved in the future
@@ -226,12 +226,12 @@ $db->query("
 
 	pageHeader
 	(
-		array ($gamename, 'Player Details', $pl_name),
+		array ($gamename, __('chathistory.nav.player_details'), $pl_name),
 		array
 		(
 			$gamename=>$g_options['scripturl'] . "?game=$game",
-			'Player Rankings'=>$g_options['scripturl'] . "?mode=players&game=$game",
-			'Player Details'=>""
+			__('players.title')=>$g_options['scripturl'] . "?mode=players&game=$game",
+			__('chathistory.nav.player_details')=>""
 		),
 		$pl_name
 	);
@@ -243,19 +243,19 @@ $db->query("
 ?>
 	<ul class="subsection_tabs" id="tabs_playerinfo">
 		<li>
-			<a href="#" id="tab_general_aliases">General</a>
+			<a href="#" id="tab_general_aliases"><?=__('claninfo.tab.general')?></a>
 		</li>
 		<li>
-			<a href="#" id="tab_playeractions_teams">Teams &amp; Actions</a>
+			<a href="#" id="tab_playeractions_teams"><?=__('claninfo.tab.teams_actions')?></a>
 		</li>
 		<li>
-			<a href="#" id="tab_weapons">Weapons</a>
+			<a href="#" id="tab_weapons"><?=__('common.nav.weapons')?></a>
 		</li>
 		<li>
-			<a href="#" id="tab_mapperformance_servers">Maps &amp; Servers</a>
+			<a href="#" id="tab_mapperformance_servers"><?=__('playerinfo.tab.maps_servers')?></a>
 		</li>
 		<li>
-			<a href="#" id="tab_killstats">Killstats</a>
+			<a href="#" id="tab_killstats"><?=__('playerinfo.tab.killstats')?></a>
 		</li>
 	</ul><br />
 	<div id="main_content"></div>
@@ -303,16 +303,16 @@ $db->query("
 <div class="block" style="clear:both;padding-top:12px;">
 	<div class="subblock">
 		<div style="float:left;">
-			Items marked "*" above are generated from the last <?php echo $g_options['DeleteDays']; ?> days.
+			<?=__('claninfo.marked_note.pre')?><?php echo $g_options['DeleteDays']; ?><?=__('claninfo.marked_note.post')?>
 		</div>
 		<div style="float:right;">
 			<?php
 				if (isset($_SESSION['loggedin']))
 				{
-					echo 'Admin Options: <a href="'.$g_options['scripturl']."?mode=admin&amp;task=tools_editdetails_player&amp;id=$player\">Edit Player Details</a><br />";
+					echo __('claninfo.admin_options_label') . '<a href="'.$g_options['scripturl']."?mode=admin&amp;task=tools_editdetails_player&amp;id=$player\">Edit Player Details</a><br />";
 				}
 			?>
-			Go to: <a href="<?php echo $g_options['scripturl'] . "?mode=players&amp;game=$game"; ?>">Player Rankings</a>
+			<?=__('players.nav.goto_label')?> <a href="<?php echo $g_options['scripturl'] . "?mode=players&amp;game=$game"; ?>"><?=__('players.title')?></a>
 		</div>
 	</div>
 </div>

@@ -625,4 +625,23 @@ return [
     'playerinfo_killstats.title'               => 'Player Kill Statistics *',
     'playerinfo_killstats.label.show_victims' => 'Show only victims this person has killed',
     'playerinfo_killstats.label.or_more_times' => 'or more times',
+
+    // pages/playerinfo.php (breadcrumb reuses chathistory.nav.
+    // player_details; players.title/claninfo.tab.general/teams_actions/
+    // common.nav.weapons/claninfo.marked_note.pre/post/claninfo.
+    // admin_options_label/players.nav.goto_label/playerawards.
+    // no_player_id all reused byte-for-byte). playerinfo.status.banned/
+    // good_standing include the full <span> markup as a single bare
+    // literal -- the baseline had no pre-existing concatenation there,
+    // so the whole HTML+text literal is one key rather than splitting it
+    // (same reasoning as the reverted mapinfo.php wrap). "Edit Player
+    // Details" (inside the $player-interpolated admin-options string)
+    // NOT extracted for the same reason -- matches claninfo.php's
+    // deferred "Edit Clan Details". error("No players found matching
+    // uniqueId '$uniqueid'") and error("No such player '$player'.") NOT
+    // extracted -- same deferred $-interpolation category as elsewhere.
+    'playerinfo.status.banned'          => '<span style="color:red;font-weight:bold;">Banned</span>',
+    'playerinfo.status.good_standing'  => '<span style="color:green;font-weight:bold;">In good standing</span>',
+    'playerinfo.tab.maps_servers'       => 'Maps &amp; Servers',
+    'playerinfo.tab.killstats'          => 'Killstats',
 ];
