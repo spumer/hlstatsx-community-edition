@@ -279,9 +279,9 @@ function pageHeader($title = '', $location = '')
 {
 	global $db, $g_options;
 	if ( defined('PAGE') && PAGE == 'HLSTATS' )
-		include (PAGE_PATH . '/header.php');
+		include theme()->chromePath('header') ?? (PAGE_PATH . '/header.php');
 	elseif ( defined('PAGE') && PAGE == 'INGAME' )
-		include (PAGE_PATH . '/ingame/header.php');
+		include theme()->chromePath('ingame_header') ?? (PAGE_PATH . '/ingame/header.php');
 }
 
 
@@ -300,9 +300,9 @@ function pageFooter()
 {
 	global $g_options;
 	if ( defined('PAGE') && PAGE == 'HLSTATS' )
-		include (PAGE_PATH . '/footer.php');
+		include theme()->chromePath('footer') ?? (PAGE_PATH . '/footer.php');
 	elseif ( defined('PAGE') && PAGE == 'INGAME' )
-		include (PAGE_PATH . '/ingame/footer.php');
+		include theme()->chromePath('ingame_footer') ?? (PAGE_PATH . '/ingame/footer.php');
 }
 
 /**

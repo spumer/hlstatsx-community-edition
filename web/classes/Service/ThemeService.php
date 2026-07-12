@@ -129,15 +129,33 @@
         }
 
         /**
-         * PR-1 stub. Chrome override (header/footer, incl. ingame) is wired in
-         * PR-2 via functions.php; until then no theme overrides chrome, so this
-         * always returns null and the stock chrome file is used.
+         * Filesystem path of a package theme's chrome override for $part, or
+         * null to fall back to the stock chrome file. Legacy skins never
+         * override chrome. A package overrides a part when themes/<name>/chrome/
+         * <part>.php exists; an optional manifest "chrome" whitelist can narrow
+         * that (a part absent from the list is not overridden even if present).
          *
          * @param string $part 'header'|'footer'|'ingame_header'|'ingame_footer'
          */
         public function chromePath(string $part): ?string
         {
-            return null;
+            if (!$this->isPackage) {
+                return null;
+            }
+
+            if (!in_array($part, ['header', 'footer', 'ingame_header', 'ingame_footer'], true)) {
+                return null;
+            }
+
+            $manifest = $this->manifest();
+            if (isset($manifest['chrome']) && is_array($manifest['chrome'])
+                && !in_array($part, $manifest['chrome'], true)) {
+                return null;
+            }
+
+            $path = $this->themesDir . '/' . $this->name . '/chrome/' . $part . '.php';
+
+            return is_file($path) ? $path : null;
         }
 
         /**
