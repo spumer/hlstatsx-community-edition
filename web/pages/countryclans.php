@@ -219,8 +219,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 		}
 	}
 ?>
-				<strong>&#8226;</strong> <?=__('countryclans.minmembers.pre')?>
-					<input type="text" name="minmembers" size="4" maxlength="2" value="<?php echo $minmembers; ?>" class="textbox" /> <?=__('countryclans.minmembers.post')?><b><?php echo number_format($total_countrys); ?></b><?=__('countryclans.minmembers.total_suffix')?>
+				<strong>&#8226;</strong> <?=__('countryclans.minmembers.pre')?><?php echo "\n"; ?>
+					<input type="text" name="minmembers" size="4" maxlength="2" value="<?php echo $minmembers; ?>" class="textbox" /> <?=__('countryclans.minmembers.post')?><b><?php echo number_format($total_countrys); ?></b><?=__('countryclans.minmembers.total_suffix')?><?php echo "\n"; ?>
 					<input type="submit" value="<?=__('players.minkills.submit')?>" class="smallsubmit" />
 			</form>
 		</div>

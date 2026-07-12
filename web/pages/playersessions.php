@@ -235,7 +235,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?><br /><br />
 	<div class="subblock">
 		<div style="float:left;">
-			<?=__('playersessions.footer_note.pre')?><?php echo $g_options['DeleteDays']; ?><?=__('claninfo.marked_note.post')?>
+			<?=__('playersessions.footer_note.pre')?><?php echo $g_options['DeleteDays']; ?><?=__('claninfo.marked_note.post')?><?php echo "\n"; ?>
 		</div>
 		<div style="float:right;">
 <?php 

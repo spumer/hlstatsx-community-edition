@@ -241,7 +241,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 	<div class="subblock">
 		<div style="float:left;">
-			<strong><?php echo $act_name; ?></strong><?=__('actioninfo.stats.mid1')?><strong><?php echo number_format(intval($totalact)); ?></strong><?=__('actioninfo.stats.mid2')?><?php echo $g_options['DeleteDays']; ?><?=__('actioninfo.stats.post')?>
+			<strong><?php echo $act_name; ?></strong><?=__('actioninfo.stats.mid1')?><strong><?php echo number_format(intval($totalact)); ?></strong><?=__('actioninfo.stats.mid2')?><?php echo $g_options['DeleteDays']; ?><?=__('actioninfo.stats.post')?><?php echo "\n"; ?>
 		</div>
 		<div style="float:right;">
 			<?=__('actioninfo.back_to.label')?><a href="<?php echo $g_options['scripturl'] . "?mode=actions&amp;game=$game"; ?>"><?=__('actioninfo.back_to.action_stats')?></a>
@@ -323,7 +323,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	<a name="victims"><?php printSectionTitle(__('actioninfo.title.victims')); ?></a>
 	<div class="subblock">
 		<div style="float:left;">
-			<strong><?=__('actioninfo.victims.label')?><?php echo $act_name; ?></strong><?=__('actioninfo.victims.days_pre')?><?php echo $g_options['DeleteDays']; ?><?=__('actioninfo.stats.post')?>
+			<strong><?=__('actioninfo.victims.label')?><?php echo $act_name; ?></strong><?=__('actioninfo.victims.days_pre')?><?php echo $g_options['DeleteDays']; ?><?=__('actioninfo.stats.post')?><?php echo "\n"; ?>
 		</div>
 	</div>
 	<div style="clear:both;padding:2px;"></div>

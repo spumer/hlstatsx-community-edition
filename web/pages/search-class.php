@@ -550,7 +550,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?>
 	<br /><br />
 	<div class="subblock" style="text-align:center;">
-		<?=__('search.results.count_prefix')?> <strong><?php echo $numitems; ?></strong> <?=__('search.results.count_suffix')?>
+		<?=__('search.results.count_prefix')?> <strong><?php echo $numitems; ?></strong> <?=__('search.results.count_suffix')?><?php echo "\n"; ?>
 	</div>
 </div>
 <?php

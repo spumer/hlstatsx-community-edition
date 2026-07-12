@@ -170,7 +170,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 		}
 ?>
 		<div style="float:left;">
-			<?php echo $wep_content ?>&nbsp;<?=__('roles.stats.pre')?><b><?php echo number_format(intval($totalkills)); ?></b><?=__('maps.stats.mid')?><b><?php echo number_format($totalheadshots); ?></b><?=__('weaponinfo.stats.mid2')?><?php echo $g_options['DeleteDays']; ?><?=__('actioninfo.stats.post')?>
+			<?php echo $wep_content ?>&nbsp;<?=__('roles.stats.pre')?><b><?php echo number_format(intval($totalkills)); ?></b><?=__('maps.stats.mid')?><b><?php echo number_format($totalheadshots); ?></b><?=__('weaponinfo.stats.mid2')?><?php echo $g_options['DeleteDays']; ?><?=__('actioninfo.stats.post')?><?php echo "\n"; ?>
 		</div>
 		<div style="float:right;">
 			<?=__('actioninfo.back_to.label')?><a href="<?php echo $g_options['scripturl']. "?mode=weapons&amp;game=$game"; ?>"><?=__('weaponinfo.back_to.weapon_stats')?></a>

@@ -315,7 +315,7 @@
 					<input type="hidden" name="mode" value="chat" />
 					<input type="hidden" name="game" value="<?=$gameSafeHtml;?>">
 
-					<strong>&#8226;</strong> <?=__('chat.label.show_chat_from')?>
+					<strong>&#8226;</strong> <?=__('chat.label.show_chat_from')?><?php echo "\n"; ?>
 
 					<select name="server_id">
 						<option value="0"><?=__('chat.option.all_servers')?></option>
@@ -338,7 +338,7 @@
 
 			<?php if (!empty($delaySql)) : ?>
 				<div style="font-size:0.9em; color:#8d90a3; margin-top:10px;">
-					<?=__('chat.msg.delay_pre')?><?=eHtml($delayChat);?><?=__('chat.msg.delay_post')?>
+					<?=__('chat.msg.delay_pre')?><?=eHtml($delayChat);?><?=__('chat.msg.delay_post')?><?php echo "\n"; ?>
 				</div>
 			<?php endif; ?>
 		</div>

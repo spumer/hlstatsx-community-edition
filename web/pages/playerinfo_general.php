@@ -694,7 +694,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 							/* ]]> */
 						</script>
 						<a href="" onclick="setForumText(1);return false">
-							<?=__('playerinfo_general.bbcode.phpbb')?></a>&nbsp;|&nbsp;<a href="" onclick="setForumText(2);return false"><?=__('playerinfo_general.bbcode.ipb')?></a>&nbsp;|&nbsp;<a href="" onclick="setForumText(0);return false"><?=__('playerinfo_general.bbcode.direct_image')?>
+							<?=__('playerinfo_general.bbcode.phpbb')?></a>&nbsp;|&nbsp;<a href="" onclick="setForumText(2);return false"><?=__('playerinfo_general.bbcode.ipb')?></a>&nbsp;|&nbsp;<a href="" onclick="setForumText(0);return false"><?=__('playerinfo_general.bbcode.direct_image')?><?php echo "\n"; ?>
 						</a>
 						<?php echo '<textarea style="width: 95%; height: 50px;" rows="2" cols="70" id="siglink" readonly="readonly" onclick="document.getElementById(\'siglink\').select();">[url='."$script_path/hlstats.php?mode=playerinfo&amp;player=$player"."][img]$imglink".'[/img][/url]</textarea>'; ?>
 					</td>

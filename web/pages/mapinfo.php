@@ -137,7 +137,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	<?php printSectionTitle(__('mapinfo.title')); ?>
 	<div class="subblock">
 		<div style="float:left;">
-			<strong><?php echo $map; ?></strong>: <?=__('roles.stats.pre')?><strong><?php echo number_format(intval($totalkills)); ?></strong><?=__('mapinfo.stats.mid')?><?php echo $g_options['DeleteDays']; ?><?=__('actioninfo.stats.post')?>
+			<strong><?php echo $map; ?></strong>: <?=__('roles.stats.pre')?><strong><?php echo number_format(intval($totalkills)); ?></strong><?=__('mapinfo.stats.mid')?><?php echo $g_options['DeleteDays']; ?><?=__('actioninfo.stats.post')?><?php echo "\n"; ?>
 		</div>
 		<div style="float:right;">
 			<?=__('actioninfo.back_to.label')?><a href="<?php echo $g_options['scripturl'] . "?mode=maps&amp;game=$game"; ?>"><?=__('mapinfo.back_to.map_stats')?></a>

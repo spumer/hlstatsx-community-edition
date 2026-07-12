@@ -125,10 +125,10 @@ For support and installation notes visit http://www.hlxcommunity.com
 			<?=__('help.text.points_gain')?><br /><br />
 			<?=__('help.text.points_lose')?><br /><br />
 			<?=__('help.text.equations_intro')?><br /><br />
-			<pre> <?=__('help.formula.killer')?>
+			<pre> <?=__('help.formula.killer')?><?php echo "\n"; ?>
 				 &times; <?=__('help.formula.weapon_modifier')?> &times; 5
 
- <?=__('help.formula.victim')?>
+ <?=__('help.formula.victim')?><?php echo "\n"; ?>
 				 &times; <?=__('help.formula.weapon_modifier')?> &times; 5</pre><br /><br />
 			<?=__('help.text.point_bonuses_intro')?><br /><br />
 			<a name="actions" />
@@ -299,7 +299,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			<h1 class="fTitle" style="padding-top:10px;"><a name="set">4. <?=__('help.q.set')?></a></h1><br /><br />
 			<?=__('help.text.set_intro')?><br /><br />
 			<?=__('help.text.set_syntax')?><br /><br />
-			<?=__('help.text.set_options_intro')?>
+			<?=__('help.text.set_options_intro')?><?php echo "\n"; ?>
 			<ul>
 				<li><strong>realname</strong><br />
 					<?=__('help.text.set_realname')?><br />
@@ -319,6 +319,6 @@ For support and installation notes visit http://www.hlxcommunity.com
 			<strong><?=__('help.label.note')?></strong> <?=__('help.text.set_note')?><br /><br />
 			<h1 class="fTitle" style="padding-top:10px;"><a name="hideranking">5. <?=__('help.q.hideranking')?></a></h1><br /><br />
 			<?=__('help.text.hideranking')?><br /><br />
-			<strong><?=__('help.label.note')?></strong> <?=__('help.text.hideranking_note_pre')?><a href="<?php echo $g_options['scripturl']; ?>?mode=search"><?=__('help.link.search')?></a><?=__('help.text.hideranking_note_post')?>
+			<strong><?=__('help.label.note')?></strong> <?=__('help.text.hideranking_note_pre')?><a href="<?php echo $g_options['scripturl']; ?>?mode=search"><?=__('help.link.search')?></a><?=__('help.text.hideranking_note_post')?><?php echo "\n"; ?>
 	</div>
 </div>

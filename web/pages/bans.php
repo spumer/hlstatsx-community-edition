@@ -196,7 +196,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					<input type="hidden" name="mode" value="search" />
 					<input type="hidden" name="game" value="<?php echo $game; ?>" />
 					<input type="hidden" name="st" value="player" />
-					<strong>&#8226;</strong> <?=__('bans.label.find_a_player')?>
+					<strong>&#8226;</strong> <?=__('bans.label.find_a_player')?><?php echo "\n"; ?>
 					<input type="text" name="q" size="20" maxlength="64" class="textbox" />
 					<input type="submit" value="<?=__('bans.btn.search')?>" class="smallsubmit" />
 				</form>
@@ -217,8 +217,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 							}
 						}
 					?>
-					<strong>&#8226;</strong> <?=__('bans.label.show_only_players_with')?>
-					<input type="text" name="minkills" size="4" maxlength="2" value="<?php echo $minkills; ?>" class="textbox" /> <?=__('bans.stats.mid')?><strong><?php echo number_format($numitems); ?></strong><?=__('bans.stats.post')?>
+					<strong>&#8226;</strong> <?=__('bans.label.show_only_players_with')?><?php echo "\n"; ?>
+					<input type="text" name="minkills" size="4" maxlength="2" value="<?php echo $minkills; ?>" class="textbox" /> <?=__('bans.stats.mid')?><strong><?php echo number_format($numitems); ?></strong><?=__('bans.stats.post')?><?php echo "\n"; ?>
 					<input type="submit" value="<?=__('bans.btn.apply')?>" class="smallsubmit" />
 				</form>
 			</div>

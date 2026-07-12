@@ -125,7 +125,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				<input type="hidden" name="mode" value="search" />
 				<input type="hidden" name="game" value="<?php echo $game; ?>" />
 				<input type="hidden" name="st" value="player" />
-				<strong>&#8226;</strong> <?=__('players.search.label')?>
+				<strong>&#8226;</strong> <?=__('players.search.label')?><?php echo "\n"; ?>
 				<input type="text" name="q" size="20" maxlength="64" class="textbox" id="playersearch" />
 				<input type="submit" value="<?=__('players.search.submit')?>" class="smallsubmit" />
 			</form>
@@ -135,7 +135,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				<input type="hidden" name="mode" value="players" />
 				<input type="hidden" name="game" value="<?php echo $game; ?>" />
 
-				<strong>&#8226;</strong> <?=__('players.rankview.label')?>
+				<strong>&#8226;</strong> <?=__('players.rankview.label')?><?php echo "\n"; ?>
 
 				<select name="rank_type">
 					 <?php foreach ($options as $value => $label): ?>
@@ -416,8 +416,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 						}
 					}
 				?>
-				<strong>&#8226;</strong> <?=__('players.minkills.pre')?>
-					<input type="text" name="minkills" size="4" maxlength="2" value="<?php echo $minkills; ?>" class="textbox" /> <?=__('players.minkills.post')?>
+				<strong>&#8226;</strong> <?=__('players.minkills.pre')?><?php echo "\n"; ?>
+					<input type="text" name="minkills" size="4" maxlength="2" value="<?php echo $minkills; ?>" class="textbox" /> <?=__('players.minkills.post')?><?php echo "\n"; ?>
 					<input type="submit" value="<?=__('players.minkills.submit')?>" class="smallsubmit" />
 			</form>
 		</div>

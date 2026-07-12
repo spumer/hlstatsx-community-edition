@@ -253,7 +253,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	<br /><br />
 	<div class="subblock">
 	<form method="get" action="<?php echo $g_options['scripturl']; ?>">
-		<strong>&#8226;</strong> <?=__('playerinfo_killstats.label.show_victims')?>
+		<strong>&#8226;</strong> <?=__('playerinfo_killstats.label.show_victims')?><?php echo "\n"; ?>
 		<select name="killLimit" onchange="Tabs.refreshTab({'killLimit': this.options[this.selectedIndex].value, 'playerkills_page': 1})">
 			<?php
 				for($j = 0; $j < 16; $j++)
@@ -267,7 +267,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				}
 			?>
 		</select>
-		<?=__('playerinfo_killstats.label.or_more_times')?>
+		<?=__('playerinfo_killstats.label.or_more_times')?><?php echo "\n"; ?>
 	</form>
 	</div>
 	<br /><br />

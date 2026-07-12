@@ -303,7 +303,7 @@ $db->query("
 <div class="block" style="clear:both;padding-top:12px;">
 	<div class="subblock">
 		<div style="float:left;">
-			<?=__('claninfo.marked_note.pre')?><?php echo $g_options['DeleteDays']; ?><?=__('claninfo.marked_note.post')?>
+			<?=__('claninfo.marked_note.pre')?><?php echo $g_options['DeleteDays']; ?><?=__('claninfo.marked_note.post')?><?php echo "\n"; ?>
 		</div>
 		<div style="float:right;">
 			<?php

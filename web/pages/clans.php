@@ -200,7 +200,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				<input type="hidden" name="mode" value="search" />
 				<input type="hidden" name="game" value="<?php echo $game; ?>" />
 				<input type="hidden" name="st" value="clan" />
-				<strong>&#8226;</strong> <?=__('clans.search.label')?>
+				<strong>&#8226;</strong> <?=__('clans.search.label')?><?php echo "\n"; ?>
 				<input type="text" name="q" size="20" maxlength="64" class="textbox" />
 				<input type="submit" value="<?=__('players.search.submit')?>" class="smallsubmit" />
 			</form>
@@ -233,8 +233,8 @@ For support and installation notes visit http://www.hlxcommunity.com
 						}
 					}
 				?>
-				<strong>&#8226;</strong> <?=__('clans.minmembers.pre')?>
-					<input type="text" name="minmembers" size="4" maxlength="2" value="<?php echo $minmembers; ?>" class="textbox" /> <?=__('clans.minmembers.post')?><strong><?php echo number_format($total_clans); ?></strong><?=__('clans.minmembers.total_suffix')?>
+				<strong>&#8226;</strong> <?=__('clans.minmembers.pre')?><?php echo "\n"; ?>
+					<input type="text" name="minmembers" size="4" maxlength="2" value="<?php echo $minmembers; ?>" class="textbox" /> <?=__('clans.minmembers.post')?><strong><?php echo number_format($total_clans); ?></strong><?=__('clans.minmembers.total_suffix')?><?php echo "\n"; ?>
 					<input type="submit" value="<?=__('players.minkills.submit')?>" class="smallsubmit" />
 			</form>
 		</div>

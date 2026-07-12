@@ -130,7 +130,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					hlstats_Actions.game = '$game'
 			");
 			list($totalactions) = $db->fetch_row();
-			?><?=__('actions.stats.pre')?><strong><?php echo number_format($totalactions); ?></strong><?=__('actions.stats.post')?>
+			?><?=__('actions.stats.pre')?><strong><?php echo number_format($totalactions); ?></strong><?=__('actions.stats.post')?><?php echo "\n"; ?>
 	</div><br /><br />
 	<?php
 		$tblPlayerActions->draw($result, $db->num_rows($result), 95);

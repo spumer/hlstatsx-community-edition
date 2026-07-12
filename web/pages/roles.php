@@ -196,7 +196,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 <div class="block">
 	<?php printSectionTitle(__('roles.title')); ?>
 	<div class="subblock">
-		<?=__('roles.stats.pre')?><strong><?php echo number_format($realkills); ?></strong><?=__('roles.stats.mid')?><strong><?php echo number_format($realdeaths); ?></strong><?=__('roles.stats.post')?>
+		<?=__('roles.stats.pre')?><strong><?php echo number_format($realkills); ?></strong><?=__('roles.stats.mid')?><strong><?php echo number_format($realdeaths); ?></strong><?=__('roles.stats.post')?><?php echo "\n"; ?>
 	</div>
 	<br /><br />
 	<?php $tblRoles->draw($result, $db->num_rows($result), 95); ?><br /><br />

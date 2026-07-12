@@ -160,7 +160,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 				{
 					echo ' ' . __('rolesinfo.headshots_with') . ' <b>' . number_format($totalheadshots) . '</b> ' . __('rolesinfo.headshots_word') . ' ';
 				}
-				?> <?=__('rolesinfo.stats.days_pre')?><?php echo $g_options['DeleteDays']; ?><?=__('rolesinfo.stats.days_post')?>
+				?> <?=__('rolesinfo.stats.days_pre')?><?php echo $g_options['DeleteDays']; ?><?=__('rolesinfo.stats.days_post')?><?php echo "\n"; ?>
 		</div>
 		<div style="float:right;">
 			<?=__('dailyawardinfo.back_to')?><a href="<?php echo $g_options['scripturl'] . "?mode=roles&amp;game=$game"; ?>"><?=__('rolesinfo.back_to_link')?></a>

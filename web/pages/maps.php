@@ -165,7 +165,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 	<?php printSectionTitle(__('maps.title')); ?>
 	<div class="subblock">
 		<div style="float:left;">
-			<?=__('roles.stats.pre')?><strong><?php echo number_format($realkills); ?></strong><?=__('maps.stats.mid')?><strong><?php echo number_format($realheadshots); ?></strong><?=__('maps.stats.post')?>
+			<?=__('roles.stats.pre')?><strong><?php echo number_format($realkills); ?></strong><?=__('maps.stats.mid')?><strong><?php echo number_format($realheadshots); ?></strong><?=__('maps.stats.post')?><?php echo "\n"; ?>
 		</div>
 		<div style="clear:both;"></div>
 	</div>

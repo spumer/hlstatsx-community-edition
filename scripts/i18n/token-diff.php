@@ -100,6 +100,80 @@ const AUTHORIZED_INSERTIONS = [
         '<?php echo "\n"; ?>',
         '<?php echo "\n"; ?>',
     ],
+    'web/pages/help.php' => [
+        '<?php echo "\n"; ?>',
+        '<?php echo "\n"; ?>',
+        '<?php echo "\n"; ?>',
+        '<?php echo "\n"; ?>',
+    ],
+    'web/pages/bans.php' => [
+        '<?php echo "\n"; ?>',
+        '<?php echo "\n"; ?>',
+        '<?php echo "\n"; ?>',
+    ],
+    'web/pages/playerinfo_general.php' => [
+        '<?php echo "\n"; ?>',
+    ],
+    'web/pages/playerinfo.php' => [
+        '<?php echo "\n"; ?>',
+    ],
+    'web/pages/playersessions.php' => [
+        '<?php echo "\n"; ?>',
+    ],
+    'web/pages/claninfo.php' => [
+        '<?php echo "\n"; ?>',
+    ],
+    'web/pages/playerinfo_killstats.php' => [
+        '<?php echo "\n"; ?>',
+        '<?php echo "\n"; ?>',
+    ],
+    'web/pages/mapinfo.php' => [
+        '<?php echo "\n"; ?>',
+    ],
+    'web/pages/weaponinfo.php' => [
+        '<?php echo "\n"; ?>',
+    ],
+    'web/pages/weapons.php' => [
+        '<?php echo "\n"; ?>',
+    ],
+    'web/pages/actioninfo.php' => [
+        '<?php echo "\n"; ?>',
+        '<?php echo "\n"; ?>',
+    ],
+    'web/pages/actions.php' => [
+        '<?php echo "\n"; ?>',
+    ],
+    'web/pages/maps.php' => [
+        '<?php echo "\n"; ?>',
+    ],
+    'web/pages/rolesinfo.php' => [
+        '<?php echo "\n"; ?>',
+    ],
+    'web/pages/roles.php' => [
+        '<?php echo "\n"; ?>',
+    ],
+    'web/pages/chat.php' => [
+        '<?php echo "\n"; ?>',
+        '<?php echo "\n"; ?>',
+    ],
+    'web/pages/countryclans.php' => [
+        '<?php echo "\n"; ?>',
+        '<?php echo "\n"; ?>',
+    ],
+    'web/pages/clans.php' => [
+        '<?php echo "\n"; ?>',
+        '<?php echo "\n"; ?>',
+        '<?php echo "\n"; ?>',
+    ],
+    'web/pages/search-class.php' => [
+        '<?php echo "\n"; ?>',
+    ],
+    'web/pages/players.php' => [
+        '<?php echo "\n"; ?>',
+        '<?php echo "\n"; ?>',
+        '<?php echo "\n"; ?>',
+        '<?php echo "\n"; ?>',
+    ],
 ];
 
 /**
