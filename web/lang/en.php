@@ -47,6 +47,7 @@ return [
     'common.nav.actions'     => 'Actions',
     'common.nav.weapons'     => 'Weapons',
     'common.nav.maps'        => 'Maps',
+    'common.nav.menu'        => 'Menu',
     'common.nav.roles'       => 'Roles',
     'common.nav.bans'        => 'Bans',
     'header.banner_alt'      => 'Banner',

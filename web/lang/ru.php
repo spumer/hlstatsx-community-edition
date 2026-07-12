@@ -37,6 +37,7 @@ return [
     'common.nav.actions'     => 'Действия',
     'common.nav.weapons'     => 'Оружие',
     'common.nav.maps'        => 'Карты',
+    'common.nav.menu'        => 'Меню',
     'common.nav.roles'       => 'Роли',
     'common.nav.bans'        => 'Баны',
     'header.banner_alt'      => 'Баннер',
