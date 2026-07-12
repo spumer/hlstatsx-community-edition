@@ -41,7 +41,7 @@ For support and installation notes visit http://www.hlxcommunity.com
     }
 
     // Player History
-	$player = valid_request(intval($_GET['player']), true) or error('No player ID specified.');
+	$player = valid_request(intval($_GET['player']), true) or error(__('playerawards.no_player_id'));
 
 	$db->query("
 		SELECT
@@ -87,13 +87,13 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 	pageHeader
 	(
-		array ($gamename, 'Event History', $pl_name),
+		array ($gamename, __('playerhistory.title'), $pl_name),
 		array
 		(
 			$gamename=>$g_options['scripturl'] . "?game=$game",
-			'Player Rankings'=>$g_options['scripturl'] . "?mode=players&game=$game",
-			'Player Details'=>$g_options['scripturl'] . "?mode=playerinfo&player=$player",
-			'Event History'=>''
+			__('players.title')=>$g_options['scripturl'] . "?mode=players&game=$game",
+			__('chathistory.nav.player_details')=>$g_options['scripturl'] . "?mode=playerinfo&player=$player",
+			__('playerhistory.title')=>''
 		),
 		$playername = ""
 	);
@@ -105,31 +105,31 @@ For support and installation notes visit http://www.hlxcommunity.com
 			new TableColumn
 			(
 				'eventTime',
-				'Date',
+				__('chat.col.date'),
 				'width=20'
 			),
 			new TableColumn
 			(
 				'eventType',
-				'Type',
+				__('playerhistory.col.type'),
 				'width=10&align=center'
 			),
 			new TableColumn
 			(
 				'eventDesc',
-				'Description',
+				__('playerawards.col.description'),
 				'width=40&sort=no&append=.&embedlink=yes'
 			),
 			new TableColumn
 			(
 				'serverName',
-				'Server',
+				__('chat.col.server'),
 				'width=20'
 			),
 			new TableColumn
 			(
 				'map',
-				'Map',
+				__('maps.col.map'),
 				'width=10'
 			)
 		),
@@ -545,7 +545,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 
 <div class="block">
 <?php
-	printSectionTitle('Player Event History (Last '.$g_options['DeleteDays'].' Days)');
+	printSectionTitle(__('playerhistory.title_bar.pre').$g_options['DeleteDays'].__('actioninfo.stats.post'));
 	if ($numitems > 0)
 	{
 		$table->draw($result, $numitems, 95);
@@ -553,7 +553,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 ?><br /><br />
 	<div class="subblock">
 		<div style="float:right;">
-			Go to: <a href="<?php echo $g_options['scripturl'] . "?mode=playerinfo&amp;player=$player"; ?>"><?php echo $pl_name; ?>'s Statistics</a>
+			<?=__('players.nav.goto_label')?> <a href="<?php echo $g_options['scripturl'] . "?mode=playerinfo&amp;player=$player"; ?>"><?php echo $pl_name; ?><?=__('chathistory.suffix.statistics')?></a>
 		</div>
 	</div>
 </div>

@@ -655,4 +655,31 @@ return [
     // single player joining) vs the plural ("Играли") used for a clan's
     // aggregate membership.
     'playerinfo_teams.col.joined' => 'Joined',
+
+    // pages/playerhistory.php (players.title/chathistory.nav.
+    // player_details/chat.col.date/server/maps.col.map/playerawards.
+    // col.description/actioninfo.stats.post/players.nav.goto_label/
+    // chathistory.suffix.statistics/playerawards.no_player_id all reused
+    // byte-for-byte). $uqIdStr ("IP Address:"/"Unique ID:") is assigned
+    // but never read anywhere in this file -- dead code, NOT extracted.
+    //
+    // NOT extracted, flagged for a team decision (not a simple per-page
+    // gap): the entire event-narrative system across all 13
+    // insertEvents() calls -- the short eventType labels ('Team Bonus',
+    // 'Connect', 'Kill', etc.) AND the longer CONCAT(...) sentences
+    // ("I killed...", "I connected to the server", etc.). Each
+    // insertEvents() body is one big PHP double-quoted string (SQL query
+    // text with $player/$game interpolated directly in it) with zero
+    // pre-existing PHP-level `.` concatenation -- wrapping any substring
+    // inside it would mean introducing brand-new concatenation splits
+    // into what PHP's tokenizer sees as a single atomic string, the same
+    // category of change already rejected for the mapinfo.php/servers.php
+    // wraps. zozo has full RU translations for all of it (confirmed), so
+    // there's no ambiguity of meaning -- this is purely a mechanical/
+    // architectural question of how to restructure ~13 call sites and
+    // ~30 phrases safely, better decided as its own item than folded
+    // into page-by-page judgment calls.
+    'playerhistory.title'          => 'Event History',
+    'playerhistory.col.type'        => 'Type',
+    'playerhistory.title_bar.pre'  => 'Player Event History (Last ',
 ];

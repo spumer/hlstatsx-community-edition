@@ -481,4 +481,9 @@ return [
 
     // pages/playerinfo_teams.php
     'playerinfo_teams.col.joined' => 'Играл',
+
+    // pages/playerhistory.php
+    'playerhistory.title'          => 'История Событий',
+    'playerhistory.col.type'        => 'Тип',
+    'playerhistory.title_bar.pre'  => 'История событий игрока (за последние ',
 ];
