@@ -65,3 +65,18 @@ function __f(string $key, ...$args): string
         return $format;
     }
 }
+
+/**
+ * SQL-safe variant of __() for catalog values spliced directly into raw
+ * SQL string literals (e.g. CONCAT(...) built by playerhistory.php's
+ * event-narrative INSERT statements) rather than echoed as HTML. Escapes
+ * the resolved translation via the global $db connection's own escaping
+ * (mysqli_real_escape_string under the hood, see class_db.php::escape())
+ * so a translated value can never break the surrounding SQL syntax.
+ */
+function __sql(string $key): string
+{
+    global $db;
+
+    return $db->escape(__($key));
+}

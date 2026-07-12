@@ -181,9 +181,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 	insertEvents
 	('TeamBonuses', "
 		SELECT
-			'Team Bonus',
+			'" . __sql('playerhistory.event_type.team_bonus') . "',
 			<table>.eventTime,
-			CONCAT('My team received a points bonus of ', bonus, ' for triggering \"', IFNULL(hlstats_Actions.description,'Unknown'), '\"'),
+			CONCAT('" . __sql('playerhistory.event.team_bonus.pre') . "', bonus, '" . __sql('playerhistory.event.suffix.for_triggering') . "', IFNULL(hlstats_Actions.description,'Unknown'), '" . __sql('playerhistory.event.suffix.closing_quote') . "'),
 			IFNULL(hlstats_Servers.name, 'Unknown'),
 			<table>.map
 		FROM
@@ -212,9 +212,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 	insertEvents
 	('Connects', "
 		SELECT
-			'Connect',
+			'" . __sql('playerhistory.event_type.connect') . "',
 			<table>.eventTime,
-			CONCAT('I connected to the server'),
+			CONCAT('" . __sql('playerhistory.event.connected') . "'),
 			IFNULL(hlstats_Servers.name, 'Unknown'),
 			<table>.map
 		FROM
@@ -229,9 +229,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 	insertEvents
 	('Disconnects', "
 		SELECT
-			'Disconnect',
+			'" . __sql('playerhistory.event_type.disconnect') . "',
 			<table>.eventTime,
-			'I left the game',
+			'" . __sql('playerhistory.event.disconnected') . "',
 			IFNULL(hlstats_Servers.name, 'Unknown'),
 			<table>.map
 		FROM
@@ -246,9 +246,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 	insertEvents
 	('Entries', "
 		SELECT
-			'Entry',
+			'" . __sql('playerhistory.event_type.entry') . "',
 			<table>.eventTime,
-			'I entered the game',
+			'" . __sql('playerhistory.event.entered') . "',
 			IFNULL(hlstats_Servers.name, 'Unknown'),
 			<table>.map
 		FROM
@@ -263,9 +263,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 	insertEvents
 	('Frags', "
 		SELECT
-			'Kill',
+			'" . __sql('playerhistory.event_type.kill') . "',
 			<table>.eventTime,
-			CONCAT('I killed %A%$surl?mode=playerinfo&player=', victimId, '%', IFNULL(hlstats_Players.lastName,'Unknown'), '%/A%', ' with ', weapon),
+			CONCAT('" . __sql('playerhistory.event.kill.pre') . "%A%$surl?mode=playerinfo&player=', victimId, '%', IFNULL(hlstats_Players.lastName,'Unknown'), '%/A%', '" . __sql('playerhistory.event.suffix.with_weapon') . "', weapon),
 			IFNULL(hlstats_Servers.name, 'Unknown'),
 			<table>.map
 		FROM
@@ -285,9 +285,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 	insertEvents
 	('Frags', "
 		SELECT
-			'Kill',
+			'" . __sql('playerhistory.event_type.kill') . "',
 			<table>.eventTime,
-			CONCAT('I killed %A%$surl?mode=playerinfo&player=', victimId, '%', IFNULL(hlstats_Players.lastName,'Unknown'), '%/A%', ' with a headshot from ', weapon),
+			CONCAT('" . __sql('playerhistory.event.kill.pre') . "%A%$surl?mode=playerinfo&player=', victimId, '%', IFNULL(hlstats_Players.lastName,'Unknown'), '%/A%', '" . __sql('playerhistory.event.kill_headshot.with_weapon') . "', weapon),
 			IFNULL(hlstats_Servers.name, 'Unknown'),
 			<table>.map
 		FROM
@@ -307,9 +307,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 	insertEvents
 	('Frags', "
 		SELECT
-			'Death',
+			'" . __sql('playerhistory.event_type.death') . "',
 			<table>.eventTime,
-			CONCAT('%A%$surl?mode=playerinfo&player=', killerId, '%', IFNULL(hlstats_Players.lastName,'Unknown'), '%/A%', ' killed me with ', weapon),
+			CONCAT('%A%$surl?mode=playerinfo&player=', killerId, '%', IFNULL(hlstats_Players.lastName,'Unknown'), '%/A%', '" . __sql('playerhistory.event.suffix.killed_me_with') . "', weapon),
 			IFNULL(hlstats_Servers.name, 'Unknown'),
 			<table>.map
 		FROM
@@ -328,9 +328,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 	insertEvents
 	('Teamkills', "
 		SELECT
-			'Team Kill',
+			'" . __sql('playerhistory.event_type.team_kill') . "',
 			<table>.eventTime,
-			CONCAT('I killed teammate %A%$surl?mode=playerinfo&player=', victimId, '%', IFNULL(hlstats_Players.lastName,'Unknown'), '%/A%', ' with ', weapon),
+			CONCAT('" . __sql('playerhistory.event.team_kill.pre') . "%A%$surl?mode=playerinfo&player=', victimId, '%', IFNULL(hlstats_Players.lastName,'Unknown'), '%/A%', '" . __sql('playerhistory.event.suffix.with_weapon') . "', weapon),
 			IFNULL(hlstats_Servers.name, 'Unknown'),
 			<table>.map
 		FROM
@@ -349,9 +349,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 	insertEvents
 	('Teamkills', "
 		SELECT
-			'Friendly Fire',
+			'" . __sql('playerhistory.event_type.friendly_fire') . "',
 			<table>.eventTime,
-			CONCAT('My teammate %A%$surl?mode=playerinfo&player=', killerId, '%', IFNULL(hlstats_Players.lastName, 'Unknown'), '%/A%', ' killed me with ', weapon),
+			CONCAT('" . __sql('playerhistory.event.friendly_fire.pre') . "%A%$surl?mode=playerinfo&player=', killerId, '%', IFNULL(hlstats_Players.lastName, 'Unknown'), '%/A%', '" . __sql('playerhistory.event.suffix.killed_me_with') . "', weapon),
 			IFNULL(hlstats_Servers.name, 'Unknown'),
 			<table>.map
 		FROM
@@ -370,9 +370,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 	insertEvents
 	('ChangeRole', "
 		SELECT
-			'Role',
+			'" . __sql('playerhistory.event_type.role') . "',
 			<table>.eventTime,
-			CONCAT('I changed role to ', role),
+			CONCAT('" . __sql('playerhistory.event.role.pre') . "', role),
 			IFNULL(hlstats_Servers.name, 'Unknown'),
 			<table>.map
 		FROM
@@ -387,9 +387,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 	insertEvents
 	('ChangeName', "
 		SELECT
-			'Name',
+			'" . __sql('playerhistory.event_type.name') . "',
 			<table>.eventTime,
-			CONCAT('I changed my name from \"', oldName, '\" to \"', newName, '\"'),
+			CONCAT('" . __sql('playerhistory.event.name.pre') . "', oldName, '" . __sql('playerhistory.event.name.mid') . "', newName, '" . __sql('playerhistory.event.suffix.closing_quote') . "'),
 			IFNULL(hlstats_Servers.name, 'Unknown'),
 			<table>.map
 		FROM
@@ -404,9 +404,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 	insertEvents
 	('PlayerActions', "
 		SELECT
-			'Action',
+			'" . __sql('playerhistory.event_type.action') . "',
 			<table>.eventTime,
-			CONCAT('I received a points bonus of ', bonus, ' for triggering \"', IFNULL(hlstats_Actions.description,'Unknown'), '\"'),
+			CONCAT('" . __sql('playerhistory.event.action.pre') . "', bonus, '" . __sql('playerhistory.event.suffix.for_triggering') . "', IFNULL(hlstats_Actions.description,'Unknown'), '" . __sql('playerhistory.event.suffix.closing_quote') . "'),
 			IFNULL(hlstats_Servers.name, 'Unknown'),
 			<table>.map
 		FROM
@@ -427,9 +427,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 	insertEvents
 	('PlayerPlayerActions', "
 		SELECT
-			'Action',
+			'" . __sql('playerhistory.event_type.action') . "',
 			<table>.eventTime,
-			CONCAT('I received a points bonus of ', bonus, ' for triggering \"', IFNULL(hlstats_Actions.description,'Unknown'), '\" against %A%$surl?mode=playerinfo&player=', victimId, '%', IFNULL(hlstats_Players.lastName,'Unknown'), '%/A%'),
+			CONCAT('" . __sql('playerhistory.event.action.pre') . "', bonus, '" . __sql('playerhistory.event.suffix.for_triggering') . "', IFNULL(hlstats_Actions.description,'Unknown'), '" . __sql('playerhistory.event.action.quote_against') . "%A%$surl?mode=playerinfo&player=', victimId, '%', IFNULL(hlstats_Players.lastName,'Unknown'), '%/A%'),
 			IFNULL(hlstats_Servers.name, 'Unknown'),
 			<table>.map
 		FROM
@@ -452,9 +452,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 	insertEvents
 	('PlayerPlayerActions', "
 		SELECT
-			'Action',
+			'" . __sql('playerhistory.event_type.action') . "',
 			<table>.eventTime,
-			CONCAT('%A%$surl?mode=playerinfo&player=', <table>.playerId, '%', IFNULL(hlstats_Players.lastName,'Unknown'), '%/A% triggered \"', IFNULL(hlstats_Actions.description,'Unknown'), '\" against me'),
+			CONCAT('%A%$surl?mode=playerinfo&player=', <table>.playerId, '%', IFNULL(hlstats_Players.lastName,'Unknown'), '%/A%" . __sql('playerhistory.event.action.triggered_quote') . "', IFNULL(hlstats_Actions.description,'Unknown'), '" . __sql('playerhistory.event.action.quote_against_me') . "'),
 			IFNULL(hlstats_Servers.name, 'Unknown'),
 			<table>.map
 		FROM
@@ -479,9 +479,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 	insertEvents
 	('Suicides', "
 		SELECT
-			'Suicide',
+			'" . __sql('playerhistory.event_type.suicide') . "',
 			<table>.eventTime,
-			CONCAT('I committed suicide with \"', weapon, '\"'),
+			CONCAT('" . __sql('playerhistory.event.suicide.pre') . "', weapon, '" . __sql('playerhistory.event.suffix.closing_quote') . "'),
 			IFNULL(hlstats_Servers.name, 'Unknown'),
 			<table>.map
 		FROM
@@ -496,9 +496,9 @@ For support and installation notes visit http://www.hlxcommunity.com
 	insertEvents
 	('ChangeTeam', "
 		SELECT
-			'Team',
+			'" . __sql('playerhistory.event_type.team') . "',
 			<table>.eventTime,
-			IF(hlstats_Teams.name IS NULL, CONCAT('I joined team \"', team, '\"'), CONCAT('I joined team \"', team, '\" (', hlstats_Teams.name, ')')),
+			IF(hlstats_Teams.name IS NULL, CONCAT('" . __sql('playerhistory.event.team.pre') . "', team, '" . __sql('playerhistory.event.suffix.closing_quote') . "'), CONCAT('" . __sql('playerhistory.event.team.pre') . "', team, '\" (', hlstats_Teams.name, ')')),
 			IFNULL(hlstats_Servers.name, 'Unknown'),
 			<table>.map
 		FROM

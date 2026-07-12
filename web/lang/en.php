@@ -683,25 +683,78 @@ return [
     // byte-for-byte). $uqIdStr ("IP Address:"/"Unique ID:") is assigned
     // but never read anywhere in this file -- dead code, NOT extracted.
     //
-    // NOT extracted, flagged for a team decision (not a simple per-page
-    // gap): the entire event-narrative system across all 13
-    // insertEvents() calls -- the short eventType labels ('Team Bonus',
-    // 'Connect', 'Kill', etc.) AND the longer CONCAT(...) sentences
-    // ("I killed...", "I connected to the server", etc.). Each
-    // insertEvents() body is one big PHP double-quoted string (SQL query
-    // text with $player/$game interpolated directly in it) with zero
-    // pre-existing PHP-level `.` concatenation -- wrapping any substring
-    // inside it would mean introducing brand-new concatenation splits
-    // into what PHP's tokenizer sees as a single atomic string, the same
-    // category of change already rejected for the mapinfo.php/servers.php
-    // wraps. zozo has full RU translations for all of it (confirmed), so
-    // there's no ambiguity of meaning -- this is purely a mechanical/
-    // architectural question of how to restructure ~13 call sites and
-    // ~30 phrases safely, better decided as its own item than folded
-    // into page-by-page judgment calls.
+    // The event-narrative system across all 16 insertEvents() calls IS
+    // now extracted (structural package group в) -- both the short
+    // eventType labels ('Team Bonus', 'Connect', 'Kill', etc., 13
+    // distinct values reused across the 16 calls) and the longer
+    // CONCAT(...) narrative sentences ("I killed...", "I connected to
+    // the server", etc.). These are SQL string literals inside a raw
+    // query built as one big PHP double-quoted string and sent straight
+    // to $db->query() -- not HTML/PHP-echoed text -- so neither __()
+    // Shape 1 nor __f() applies: the values interleaved with the
+    // narrative fragments (bonus, weapon, victimId, role, oldName,
+    // newName, team, hlstats_Teams.name) are SQL COLUMN references
+    // resolved by the database engine at query time, not PHP variables
+    // available when the string is built. Each translatable fragment is
+    // spliced in via __sql($key) (web/includes/i18n.php) -- __() through
+    // the normal fallback chain, then $db->escape() (mysqli_real_escape_
+    // string) so a translated value can never contain an unescaped quote
+    // that breaks the surrounding SQL syntax. Table this text writes to
+    // (hlstats_EventHistory) is CREATE TEMPORARY, dropped and rebuilt on
+    // every page load -- no stale/persisted pre-i18n rows to worry about.
+    // Fragment keys follow the same pre/mid/post convention as everywhere
+    // else in this catalog, reused byte-for-byte across call sites where
+    // the SQL literal is identical (e.g. suffix.with_weapon/
+    // killed_me_with/for_triggering/closing_quote). The bare structural
+    // punctuation around hlstats_Teams.name ('" (' / ')' in ChangeTeam's
+    // second CONCAT branch) is NOT extracted -- it's pure symbols with no
+    // actual words, nothing for a translator to act on, same reasoning as
+    // not extracting bare literals like '-' elsewhere in this catalog.
+    // IFNULL(..., 'Unknown') fallbacks (used in every one of the 16 calls
+    // for description/serverName/playerName) are NOT extracted either --
+    // same internal-sentinel precedent as claninfo_general.php's
+    // $fav_weapon 'Unknown' fallback, not a narrative-text gap.
+    // RU values below are a fresh translation (this pass had no access to
+    // zozo's actual prod wording to confirm against) -- swap-in-place if
+    // it turns out to diverge, same one-line-catalog-fix precedent as the
+    // disputed-terminology items.
     'playerhistory.title'          => 'Event History',
     'playerhistory.col.type'        => 'Type',
     'playerhistory.title_bar.pre'  => 'Player Event History (Last ',
+    'playerhistory.event_type.team_bonus'   => 'Team Bonus',
+    'playerhistory.event_type.connect'      => 'Connect',
+    'playerhistory.event_type.disconnect'   => 'Disconnect',
+    'playerhistory.event_type.entry'        => 'Entry',
+    'playerhistory.event_type.kill'         => 'Kill',
+    'playerhistory.event_type.death'        => 'Death',
+    'playerhistory.event_type.team_kill'    => 'Team Kill',
+    'playerhistory.event_type.friendly_fire' => 'Friendly Fire',
+    'playerhistory.event_type.role'         => 'Role',
+    'playerhistory.event_type.name'         => 'Name',
+    'playerhistory.event_type.action'       => 'Action',
+    'playerhistory.event_type.suicide'      => 'Suicide',
+    'playerhistory.event_type.team'         => 'Team',
+    'playerhistory.event.team_bonus.pre'    => 'My team received a points bonus of ',
+    'playerhistory.event.suffix.for_triggering' => ' for triggering "',
+    'playerhistory.event.suffix.closing_quote'  => '"',
+    'playerhistory.event.connected'         => 'I connected to the server',
+    'playerhistory.event.disconnected'      => 'I left the game',
+    'playerhistory.event.entered'           => 'I entered the game',
+    'playerhistory.event.kill.pre'          => 'I killed ',
+    'playerhistory.event.suffix.with_weapon' => ' with ',
+    'playerhistory.event.kill_headshot.with_weapon' => ' with a headshot from ',
+    'playerhistory.event.suffix.killed_me_with' => ' killed me with ',
+    'playerhistory.event.team_kill.pre'     => 'I killed teammate ',
+    'playerhistory.event.friendly_fire.pre' => 'My teammate ',
+    'playerhistory.event.role.pre'          => 'I changed role to ',
+    'playerhistory.event.name.pre'          => 'I changed my name from "',
+    'playerhistory.event.name.mid'          => '" to "',
+    'playerhistory.event.action.pre'        => 'I received a points bonus of ',
+    'playerhistory.event.action.quote_against' => '" against ',
+    'playerhistory.event.action.triggered_quote' => ' triggered "',
+    'playerhistory.event.action.quote_against_me' => '" against me',
+    'playerhistory.event.suicide.pre'       => 'I committed suicide with "',
+    'playerhistory.event.team.pre'          => 'I joined team "',
 
     // pages/playerinfo_weapons.php (near-identical structure to
     // claninfo_weapons.php -- claninfo_weapons.col.weapon/shots/damage/
