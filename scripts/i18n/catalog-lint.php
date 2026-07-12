@@ -50,8 +50,8 @@ if (!$missingEn && !$orphanedRu && !$untranslated) {
 exit($missingEn ? 1 : 0);
 
 /**
- * @return string[] keys referenced via __()/_e()/__f() anywhere under web/,
- *                   excluding the catalog files themselves.
+ * @return string[] keys referenced via __()/_e()/__f()/__sql() anywhere
+ *                   under web/, excluding the catalog files themselves.
  */
 function collectKeysFromCode(string $webDir): array
 {
@@ -96,7 +96,7 @@ function extractKeysFromFile(string $file): array
     for ($i = 0; $i < $n; $i++) {
         $token = $tokens[$i];
 
-        if (!is_array($token) || $token[0] !== T_STRING || !in_array($token[1], ['__', '_e', '__f'], true)) {
+        if (!is_array($token) || $token[0] !== T_STRING || !in_array($token[1], ['__', '_e', '__f', '__sql'], true)) {
             continue;
         }
 
