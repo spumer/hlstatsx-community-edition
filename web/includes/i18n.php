@@ -73,6 +73,10 @@ function __f(string $key, ...$args): string
  * the resolved translation via the global $db connection's own escaping
  * (mysqli_real_escape_string under the hood, see class_db.php::escape())
  * so a translated value can never break the surrounding SQL syntax.
+ *
+ * Requires a live $db connection to be already established -- only call
+ * this from query-building code (e.g. inside/around a $db->query() call),
+ * never at bootstrap time or anywhere $db might not be connected yet.
  */
 function __sql(string $key): string
 {

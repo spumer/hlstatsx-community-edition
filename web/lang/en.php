@@ -718,10 +718,15 @@ return [
     // for description/serverName/playerName) are NOT extracted either --
     // same internal-sentinel precedent as claninfo_general.php's
     // $fav_weapon 'Unknown' fallback, not a narrative-text gap.
-    // RU values below are a fresh translation (this pass had no access to
-    // zozo's actual prod wording to confirm against) -- swap-in-place if
-    // it turns out to diverge, same one-line-catalog-fix precedent as the
-    // disputed-terminology items.
+    // RU values (ru.php) are zozo's actual production wording, pulled
+    // from E:/sources/zozo/hlstatsx/web/pages/playerhistory.php and
+    // mapped by eventType -- not a fresh translation. Note zozo's own
+    // source leaves 'Team Bonus' untranslated too (ru.php has no entry
+    // for that one key, same disputed-terminology fallback precedent as
+    // heatmap/player_list_fallback), and several fragments read English-
+    // literally in RU (e.g. event_type.kill is the plural "Убийства" for
+    // a singular event) -- preserved as-is rather than "corrected",
+    // since matching zozo's actual deployed text is the point.
     'playerhistory.title'          => 'Event History',
     'playerhistory.col.type'        => 'Type',
     'playerhistory.title_bar.pre'  => 'Player Event History (Last ',
