@@ -1,0 +1,581 @@
+@charset "utf-8";
+
+/* ============================================================
+   ZoZo Dark — HLstatsX theme (FEAT-0029, phase 2)
+   Dark re-skin of the legacy HLstatsX classes against the ZoZo
+   design system (flat snapshot of bans.zozo.gg html.dark palette).
+   Ported rule-for-rule from themes/zozo/theme.css: layout is kept
+   identical, only the presentation (colours, background images ->
+   solid token surfaces) changes. Self-contained package: tokens are
+   literal here, the engine does not forward SBPP variables. Page
+   bodies (web/pages) are never touched — this file only repaints
+   existing classes plus a few dark-only additions (meter, row hover,
+   forms, error-table compromises C-1/C-2).
+   Source of every value: DESIGN-hlstats-zozo-dark.md sections 2 / B.
+   ============================================================ */
+
+/* ---- Vendored fonts (Inter + JetBrains Mono, ../fonts relative) ---- */
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url('../fonts/Inter-Variable.woff2') format('woff2-variations'),
+	     url('../fonts/Inter-Variable.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'JetBrains Mono';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('../fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+
+/* ---- Tokens (literal html.dark snapshot + ZoZo override) ---- */
+:root {
+	/* color-scheme paints native UA surfaces (open <select> panel,
+	   scrollbars, date/color pickers) dark — the theme is "always dark". */
+	color-scheme: dark;
+
+	--bg-page: #09090b;        /* zinc-950 */
+	--bg-surface: #18181b;     /* zinc-900 */
+	--bg-surface-1: #1f1f23;   /* bg1 stripe, interpolated zinc-850 */
+	--bg-muted: #27272a;       /* zinc-800 */
+	--border: #27272a;         /* zinc-800 */
+	--text: #f4f4f5;           /* zinc-100 */
+	--text-muted: #a1a1aa;     /* zinc-400 */
+	--text-faint: #52525b;     /* zinc-600 */
+	--accent: #ea580c;         /* brand-600 */
+	--accent-hover: #c2410c;   /* brand-700 */
+	--danger: #dc2626;
+	--danger-bg: rgb(127 29 29 / 0.4);
+	--status-online: #22c55e;
+	--status-online-fill: #27ae60;
+
+	--radius-md: 0;            /* ZoZo DS: sharp corners */
+
+	--font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+	--font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ---- Base ---- */
+body {
+	background: var(--bg-page);
+	color: var(--text);
+	margin: 0;
+	font-family: var(--font-sans);
+}
+
+.content {
+	background: var(--bg-surface);
+	color: var(--text);
+	margin-left: 8%;
+	margin-right: 8%;
+	margin-top: -10px;
+	margin-bottom: 20px;
+}
+
+tr, td, div, span, body {
+	font-family: var(--font-sans);
+	font-size: 8pt;
+}
+
+a:link,
+a:visited,
+a:active {
+	color: var(--accent);
+	text-decoration: none;
+}
+
+a:hover {
+	color: var(--accent-hover);
+	text-decoration: none;
+}
+
+#ingame .headerblock a:visited {
+	color: var(--text);
+}
+
+a:focus {
+	text-decoration: none;
+}
+
+ul {
+	margin-left: 6px;
+	padding-left: 6px;
+}
+
+li {
+	margin-bottom: 8px;
+}
+
+img {
+	text-align: center;
+	vertical-align: middle;
+	border: none;
+}
+
+/* ---- Typography classes ---- */
+.fHeading {
+	font-family: var(--font-sans);
+	font-size: 8pt;
+	font-weight: bold;
+	color: var(--text);
+}
+
+.fSmall {
+	font-family: var(--font-sans);
+	font-size: 7pt;
+	color: var(--text-muted);
+}
+
+.fTitle {
+	font-family: var(--font-sans);
+	font-size: 12px;
+	font-weight: bold;
+	color: var(--text);
+}
+
+.fNormal {
+	font-family: var(--font-sans);
+	font-size: 10px;
+	font-weight: bold;
+	padding-left: 12%;
+	color: var(--text-muted);
+}
+
+/* ---- Column stripes (vertical bg1/bg2 heritage look) ---- */
+.bg1 { background-color: var(--bg-surface-1); }
+.bg2 { background-color: var(--bg-surface); }
+
+/* ---- Data tables ---- */
+.data-table {
+	background: var(--bg-surface);
+	border: 1px solid var(--border);
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.data-table td {
+	padding: 4px;
+	text-align: left;
+	border: 1px solid var(--border);
+	border-bottom: 0;
+	color: var(--text);
+	font-variant-numeric: tabular-nums;
+}
+
+.data-table-row {
+	background-color: var(--bg-surface);
+	border: 1px solid var(--border);
+	color: var(--text);
+	vertical-align: bottom;
+}
+
+.data-table-head {
+	background-color: var(--bg-muted);
+	border: 1px solid var(--border);
+	color: var(--text-faint);
+	text-transform: uppercase;
+	vertical-align: bottom;
+}
+
+.data-table-head a:link,
+.data-table-head a:active,
+.data-table-head a:visited,
+.data-table-head a.head {
+	color: var(--text-muted);
+}
+
+.data-table-head a:hover,
+.data-table-head a.head:hover {
+	color: var(--text);
+	text-decoration: underline;
+	text-decoration-color: var(--accent);
+}
+
+/* Row hover — new DS affordance; overrides the column stripe while
+   the pointer reads a full row (Designer/Player tension resolved for
+   readability, spec 3.1). The header row is already --bg-muted so it
+   shows no visible change on hover. */
+.data-table tr:hover td {
+	background-color: var(--bg-muted);
+}
+
+/* ---- Native <meter> (activity / accuracy bars) ---- */
+meter {
+	background: var(--bg-muted);
+}
+meter::-webkit-meter-bar {
+	background: var(--bg-muted);
+	border: 1px solid var(--border);
+}
+meter::-webkit-meter-optimum-value { background: var(--status-online); }
+meter::-webkit-meter-suboptimum-value { background: var(--accent); }
+meter::-webkit-meter-even-less-good-value { background: var(--danger); }
+meter::-moz-meter-bar { background: var(--status-online); }
+meter:-moz-meter-sub-optimum::-moz-meter-bar { background: var(--accent); }
+meter:-moz-meter-sub-sub-optimum::-moz-meter-bar { background: var(--danger); }
+
+/* ---- Google-maps tab links ---- */
+.gmapstab a:link,
+.gmapstab a:active,
+.dgmapstab a:visited {
+	color: var(--accent);
+	text-decoration: none;
+}
+
+.gmapstab a:hover {
+	color: var(--accent-hover);
+}
+
+/* ---- Game / server tables ---- */
+.game-table-row {
+	border: 1px solid var(--border);
+	background-color: var(--bg-surface);
+	border-bottom: 0;
+}
+
+.game-table-row-hover {
+	background-color: var(--bg-muted);
+	border-bottom: 0;
+	color: var(--text);
+}
+
+.game-table-cell {
+	color: var(--text);
+	vertical-align: middle;
+	padding: 4px;
+	border: 1px solid var(--border);
+}
+
+.game-table-cell a { color: var(--accent); }
+
+/* ---- Live stats table ---- */
+.livestats-table {
+	border: 1px solid var(--border);
+	border-collapse: collapse;
+	width: 100%;
+	background: var(--bg-surface);
+}
+
+.livestats-table td {
+	border: 0;
+	padding: 1px;
+	text-align: center;
+	color: var(--text);
+}
+
+/* C-1: empty-state cells carry inline background:#EFEFEF;color:black
+   (livestats.php:531,534). Scoped by attribute literal so the live
+   team-colour rows (livestats.php:228-229, semantic game data) keep
+   their colours — repainting those would drop scoreboard information. */
+.livestats-table td[style*="EFEFEF"] {
+	background: var(--bg-surface) !important;
+	color: var(--text) !important;
+}
+
+/* ---- Chrome: breadcrumb / location ---- */
+.location a:link,
+.location a:visited,
+.location a:active {
+	color: var(--accent);
+	text-decoration: none;
+}
+
+.location a:hover {
+	color: var(--accent-hover);
+	text-decoration: none;
+}
+
+.location {
+	height: 22px;
+	background: var(--bg-muted);
+	width: 100%;
+	color: var(--text-muted);
+}
+
+.location .arrow {
+	color: var(--text-faint);
+}
+
+.location_under {
+	height: 15px;
+	background: transparent;
+	border-bottom: 1px solid var(--border);
+	width: 100%;
+}
+
+.location ul {
+	list-style-type: none;
+	list-style-image: none;
+	padding-left: 13%;
+	margin: 0 auto;
+	color: var(--text-muted);
+}
+
+.location li {
+	margin-left: 5px;
+	display: inline;
+}
+
+/* ---- Chrome: game chips ---- */
+.header_gameslist {
+	padding-right: 10%;
+	padding-top: 22px;
+}
+
+.header_gameslist img {
+	padding: 0 2px;
+	padding-bottom: 20px;
+	background-color: var(--bg-muted);
+	border-radius: var(--radius-md);
+	border: 1px solid var(--border);
+}
+
+ul.header_gameslist {
+	list-style: none;
+}
+
+.header_gameslist img#gameslist-active-game {
+	border-color: var(--accent);
+}
+
+/* ---- Layout wrappers ---- */
+.block {
+	margin: 0 auto;
+}
+
+.subblock {
+	margin: 0 auto;
+	width: 95%;
+}
+
+/* ---- Chrome: navbar (mode links) ---- */
+.navbar img {
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+.navbar {
+	list-style-type: none;
+	list-style-image: none;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	padding-bottom: 10px;
+}
+
+.navbar li {
+	margin-right: 12px;
+	display: inline;
+}
+
+.navbar a.fHeading:link,
+.navbar a.fHeading:visited {
+	color: var(--text);
+}
+
+.navbar a.fHeading:hover {
+	color: var(--accent);
+}
+
+/* ---- Chrome: header block / title ---- */
+.headerblock {
+	background: var(--bg-surface);
+	border: 0;
+	border-bottom: 1px solid var(--border);
+	height: 86px;
+	width: 100%;
+	position: relative;
+}
+
+.title {
+	margin-left: 13%;
+	padding-top: 12px;
+}
+
+.tableicon {
+	margin-bottom: 0px;
+	margin-left: 4px;
+	margin-right: 4px;
+	margin-top: 0px;
+}
+
+/* ---- Chrome: header tabs ---- */
+.headertabs ul {
+	list-style-type: none;
+	list-style-image: none;
+	margin: 0;
+	padding: 0;
+}
+
+.headertabs li {
+	margin: 0px;
+	display: inline;
+}
+
+.headertabs {
+	margin-left: 13%;
+	padding-top: 14px;
+	bottom: 0px;
+}
+
+.bargraph {
+	height: 10px;
+}
+
+/* ---- Errors ---- */
+.errorhead {
+	background-color: var(--danger);
+	color: var(--text);
+	font-family: var(--font-sans);
+	font-size: 12pt;
+	font-weight: bold;
+}
+
+.errortext {
+	background-color: var(--danger-bg);
+	color: var(--text);
+	font-family: var(--font-sans);
+	font-size: 12pt;
+}
+
+/* C-2: inline error table rendered by functions.php:211,213 has no
+   class hook (border:1px solid red;background:#fee; thead color:#673636).
+   Scoped by the inline literals, !important beats the inline style. */
+table[style*="#fee"] {
+	background: var(--danger-bg) !important;
+	border-color: var(--danger) !important;
+}
+thead[style*="673636"] {
+	color: var(--danger) !important;
+}
+
+/* ---- Google-maps tab body ---- */
+.gmapstab td {
+	border: 0;
+	padding: 0;
+}
+
+.gmapstab a {
+	color: var(--accent);
+	text-decoration: underline;
+}
+
+.gmapstabtitle {
+	color: var(--accent);
+	font-weight: bold;
+	text-align: left;
+}
+
+/* ---- Forms ---- */
+input.textbox,
+input.checkbox,
+textarea,
+input[type="text"],
+input[type="password"] {
+	background: var(--bg-surface);
+	border: 1px solid var(--border);
+	color: var(--text);
+}
+
+select {
+	background: var(--bg-surface);
+	border: 1px solid var(--border);
+	color: var(--text);
+}
+
+input.textbox:focus,
+textarea:focus,
+select:focus {
+	outline: 2px solid var(--accent);
+	outline-offset: 1px;
+}
+
+input::placeholder,
+textarea::placeholder {
+	color: var(--text-faint);
+}
+
+input.submit,
+input.smallsubmit {
+	background: var(--accent);
+	color: #fff;
+	border: 1px solid var(--accent);
+	cursor: pointer;
+}
+
+input.submit:hover,
+input.smallsubmit:hover {
+	background: var(--accent-hover);
+	border-color: var(--accent-hover);
+}
+
+/* ---- Subsection tabs (playerinfo / claninfo / awards) ---- */
+#main ul.subsection_tabs {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	clear: both;
+	border-bottom: 1px solid var(--border);
+	height: 18px;
+}
+
+#main ul.subsection_tabs li {
+	float: left;
+	margin-right: 7px;
+	padding-top: 2px;
+	text-align: center;
+}
+
+#main ul.subsection_tabs li a {
+	display: block;
+	height: 16px;
+	padding: 0 6px 0 6px;
+	background-color: var(--bg-surface);
+	color: var(--text-muted);
+	width: 120px;
+	font-weight: bold;
+	font-family: var(--font-sans);
+	font-size: 8pt;
+}
+
+#main ul.subsection_tabs li a:hover {
+	color: var(--text);
+}
+
+#main ul.subsection_tabs li a.active {
+	background-color: var(--bg-muted);
+	color: var(--text);
+	border-bottom: 2px solid var(--accent);
+}
+
+#main ul.register_tabs {
+	border-bottom: none;
+}
+
+#main ul.register_tabs li a.active {
+	background-color: var(--accent);
+	color: #fff;
+}
+
+/* ---- Footer ---- */
+a.footer_link:link,
+a.footer_link:visited {
+	color: var(--text-muted);
+	text-decoration: none;
+}
+
+a.footer_link:hover {
+	color: var(--accent);
+	text-decoration: underline;
+}
+
+#footer {
+	clear: both;
+	color: var(--text-muted);
+	width: 80%;
+	margin-left: 10%;
+	background-repeat: repeat-x;
+}
