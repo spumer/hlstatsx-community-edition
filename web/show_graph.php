@@ -185,6 +185,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 					}
 				}
 				$mod_date = date('D, d M Y H:i:s \G\M\T', $file_timestamp);
+				header('Content-Type: image/png');
 				header('Last-Modified:' . $mod_date);
 				$image = imagecreatefrompng(IMAGE_PATH . '/progress/server_' . $width . '_' . $height . '_' . $bar_type . '_' . $game . '_' . $server_id . '_' . $bg_id . '_' . $server_load_type . '.png');
 				imagepng($image);
