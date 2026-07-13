@@ -210,7 +210,14 @@ For support and installation notes visit http://www.hlxcommunity.com
 	$drawbg = true;
 
 	$normal_color = imagecolorallocate($image, 0xEF, 0xEF, 0xEF);
-	$light_color = imagecolorallocate($image, 0xFF, 0xFF, 0xFF);
+	// Plot-area fill. Historically hard-coded white, which ignored the
+	// requested bgcolor: a graph rendered with a dark bgcolor (the admin
+	// graphbg_* option, or any ?bgcolor=) got a dark frame but a white
+	// plot, and the paired graphtxt/?color -- tuned to read against
+	// bgcolor -- became unreadable on it (this hits the stock dark default
+	// 282828/white too). Derive the plot fill from bgcolor so it blends
+	// with the requested surface and the text/lines stay legible.
+	$light_color = imagecolorallocate($image, $bg_color['red'], $bg_color['green'], $bg_color['blue']);
 	$dark_color = imagecolorallocate($image, 0x99, 0xAA, 0xAA);
 
 	$font_color = imagecolorallocate($image, $color['red'], $color['green'], $color['blue']);
