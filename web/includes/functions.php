@@ -208,7 +208,27 @@ function timestamp_to_str($seconds)
  */
 function error(string $message, bool $exit = true) : void
 {
-    $html = '<table style="border:1px solid red;padding:1em;margin:1em;background:#fee;">';
+    $html = '';
+
+    // On an early die (e.g. a DB failure before the page chrome renders)
+    // this table is emitted standalone, with no <link> to the active
+    // stylesheet -- a package theme's body background and .errorhead /
+    // .errortext rules never load, leaving a bare white page. When the
+    // theme service is already bound (theme_bind() ran) AND the active
+    // theme is a self-contained package, prepend its stylesheet links so
+    // the error inherits the theme (page background + styled plaque).
+    // Read straight from the global, not via theme(): theme() throws when
+    // unbound, which is exactly the earliest-error case. Legacy/stock
+    // themes and the unbound path fall through and emit the byte-for-byte
+    // original output (parity invariant).
+    $themeService = $GLOBALS['__theme_service'] ?? null;
+    if ($themeService instanceof \Service\ThemeService && $themeService->isPackage()) {
+        foreach ($themeService->styleHrefs() as $__href) {
+            $html .= '<link rel="stylesheet" type="text/css" href="' . $__href . '" />' . "\n";
+        }
+    }
+
+    $html .= '<table style="border:1px solid red;padding:1em;margin:1em;background:#fee;">';
 
     $html .= '<thead style="text-align:center; color:#673636;">';
     $html .= '<tr>';
