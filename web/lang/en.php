@@ -22,6 +22,7 @@ return [
     // literal translation of "Join" (confirmed against
     // E:/sources/zozo/hlstatsx/web/pages/servers.php:160, game.php:245,408).
     'common.label.join'      => 'Join',
+    'common.label.online'    => 'Online',
     'common.msg.error_heading' => 'ERROR',
     'common.msg.empty'       => '---',
     'common.msg.undefined'   => 'Undefined',

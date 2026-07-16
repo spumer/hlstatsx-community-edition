@@ -14,6 +14,7 @@ return [
     // connect protocol, not a literal translation of "Join") -- matches
     // E:/sources/zozo/hlstatsx/web/pages/servers.php:160/game.php:245,408.
     'common.label.join'      => 'Steam',
+    'common.label.online'    => 'Онлайн',
     'common.msg.error_heading' => 'ОШИБКА',
     'common.msg.empty'       => '---',
     'common.msg.undefined'   => 'Неизвестно',
