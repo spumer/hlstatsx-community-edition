@@ -1,0 +1,7 @@
+{
+    "name": "ZoZo Dark",
+    "base_css": "hlstats.css",
+    "css": ["theme.css"],
+    "chrome": ["header", "footer"],
+    "pages": ["game", "players", "playerinfo", "playerinfo_general"]
+}

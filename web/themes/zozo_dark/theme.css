@@ -1,0 +1,620 @@
+@charset "utf-8";
+
+/* ============================================================
+   ZoZo Dark — HLstatsX theme (FEAT-0029, phase 2 · v2)
+   Foundation layer: canon tokens + dark repaint of the legacy
+   HLstatsX classes. The design authority is exactly one file —
+   sourcebans-pp/_design_mockups_zozo_dark/claude-design-sync/
+   colors_and_type.css (ZoZo DS). Tokens below are copied literal
+   from it (green-tinted --dk-* surfaces, red --accent #d63031,
+   sharp corners). NO zinc ramp, NO orange #ea580c, NO Inter —
+   those came from another project's theme and were rejected.
+
+   This file repaints the classes the stock pages still emit
+   (clans / weapons / maps / awards / bans / chat and every page
+   not redesigned in PR-D), so the whole site reads dark and
+   legible. The three redesigned bodies (game / players /
+   playerinfo) ship their own markup in themes/zozo_dark/pages/
+   and add their component styles on top of this foundation.
+
+   Fonts: JetBrains Mono is vendored (fonts/, next to this file).
+   Nunito Sans and Teko are NOT vendored — no woff2 exists in the
+   DS package and external fetch is forbidden; the canon stacks
+   already fall back to Segoe UI / system-ui / Impact, which is
+   exactly what the approved mockups render.
+   ============================================================ */
+
+/* ---- Vendored font: JetBrains Mono (data / mono) ---- */
+@font-face {
+	font-family: 'JetBrains Mono';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+
+/* ---- Canon tokens (verbatim from colors_and_type.css) ---- */
+:root {
+	/* color-scheme paints native UA surfaces (open <select> panel,
+	   scrollbars, date/color pickers) dark — the theme is always dark. */
+	color-scheme: dark;
+
+	/* Brand core */
+	--brand:          #334734;
+	--brand-light:    #5a845a;
+	--brand-sage:     #9EC2A1;
+	--accent:         #d63031;
+	--accent-dim:     #7a1c1d;
+	/* derived brighter red for link hover (not invented — mix of accent) */
+	--accent-hover:   color-mix(in srgb, var(--accent) 72%, #ffffff);
+
+	/* Dark surfaces */
+	--dk-bg-deep:     #060806;
+	--dk-bg:          #0c100c;
+	--dk-bg-surface:  #111611;
+	--dk-bg-card:     #181f18;
+	--dk-bg-hover:    #212b21;
+	--dk-border:      #1e2e1e;
+	--dk-border-light:#2a3d2a;
+	--dk-text:        #c8d6c4;
+	--dk-text-dim:    #8a9e86;
+	--dk-text-muted:  #4e6248;
+
+	/* Semantic / state */
+	--gold:    #e8b931;
+	--green:   #27ae60;
+	--blue:    #3498db;
+	--purple:  #8e44ad;
+	--error:   #c84448;
+	--warning: #dcda54;
+	--error-bg: color-mix(in oklab, var(--error) 20%, var(--dk-bg));
+
+	/* Skill-rating tier colours (L4D2 infected) */
+	--tier-tank:    #d63031;
+	--tier-witch:   #e8b931;
+	--tier-hunter:  #8e44ad;
+	--tier-charger: #3498db;
+	--tier-smoker:  #27ae60;
+	--tier-common:  #5a6e56;
+
+	/* Signal ramp (dots / badges / KPI data colours) */
+	--sig-red:     oklch(0.63 0.21 25);
+	--sig-orange:  oklch(0.70 0.17 50);
+	--sig-amber:   oklch(0.79 0.14 82);
+	--sig-gold:    oklch(0.82 0.13 95);
+	--sig-green:   oklch(0.72 0.16 150);
+	--sig-blue:    oklch(0.66 0.14 258);
+
+	/* Typography — Teko/Nunito not vendored, canon fallbacks apply */
+	--font-display:    'Teko', 'Impact', 'Oswald', sans-serif;
+	--font-display-ru: 'Nunito Sans', 'Segoe UI', system-ui, sans-serif;
+	--font-body:       'Nunito Sans', 'Segoe UI', system-ui, sans-serif;
+	--font-mono:       'JetBrains Mono', 'Menlo', 'Consolas', monospace;
+
+	/* Geometry — sharp by default (tactical) */
+	--r-0:  0;
+	--r-sm: 2px;
+	--r-pill: 999px;
+
+	/* Spacing (8px base) */
+	--sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+	--sp-5: 24px; --sp-6: 32px; --sp-7: 48px;
+}
+
+/* ---- Base ---- */
+body {
+	background: var(--dk-bg-deep);
+	color: var(--dk-text);
+	margin: 0;
+	font-family: var(--font-body);
+}
+
+.content {
+	background: var(--dk-bg-surface);
+	color: var(--dk-text);
+	margin-left: 8%;
+	margin-right: 8%;
+	margin-top: -10px;
+	margin-bottom: 20px;
+}
+
+tr, td, div, span, body {
+	font-family: var(--font-body);
+	font-size: 8pt;
+}
+
+a:link,
+a:visited,
+a:active {
+	color: var(--accent);
+	text-decoration: none;
+}
+
+a:hover {
+	color: var(--accent-hover);
+	text-decoration: none;
+}
+
+#ingame .headerblock a:visited {
+	color: var(--dk-text);
+}
+
+a:focus {
+	text-decoration: none;
+}
+
+ul {
+	margin-left: 6px;
+	padding-left: 6px;
+}
+
+li {
+	margin-bottom: 8px;
+}
+
+img {
+	text-align: center;
+	vertical-align: middle;
+	border: none;
+}
+
+/* ---- Typography classes ---- */
+.fHeading {
+	font-family: var(--font-body);
+	font-size: 8pt;
+	font-weight: bold;
+	color: var(--dk-text);
+}
+
+.fSmall {
+	font-family: var(--font-body);
+	font-size: 7pt;
+	color: var(--dk-text-dim);
+}
+
+.fTitle {
+	font-family: var(--font-body);
+	font-size: 12px;
+	font-weight: bold;
+	color: var(--dk-text);
+}
+
+.fNormal {
+	font-family: var(--font-body);
+	font-size: 10px;
+	font-weight: bold;
+	padding-left: 12%;
+	color: var(--dk-text-dim);
+}
+
+/* ---- Column stripes (legacy vertical bg1/bg2 heritage) ---- */
+.bg1 { background-color: var(--dk-bg-card); }
+.bg2 { background-color: var(--dk-bg-surface); }
+
+/* ---- Data tables ---- */
+.data-table {
+	background: var(--dk-bg-surface);
+	border: 1px solid var(--dk-border);
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.data-table td {
+	padding: 4px;
+	text-align: left;
+	border: 1px solid var(--dk-border);
+	border-bottom: 0;
+	color: var(--dk-text);
+	font-variant-numeric: tabular-nums;
+}
+
+.data-table-row {
+	background-color: var(--dk-bg-surface);
+	border: 1px solid var(--dk-border);
+	color: var(--dk-text);
+	vertical-align: bottom;
+}
+
+.data-table-head {
+	background-color: var(--dk-bg-card);
+	border: 1px solid var(--dk-border);
+	color: var(--dk-text-muted);
+	text-transform: uppercase;
+	vertical-align: bottom;
+}
+
+.data-table-head a:link,
+.data-table-head a:active,
+.data-table-head a:visited,
+.data-table-head a.head {
+	color: var(--dk-text-dim);
+}
+
+.data-table-head a:hover,
+.data-table-head a.head:hover {
+	color: var(--dk-text);
+	text-decoration: underline;
+	text-decoration-color: var(--accent);
+}
+
+/* Row hover — full-row read affordance over the column stripe. */
+.data-table tr:hover td {
+	background-color: var(--dk-bg-hover);
+}
+
+/* ---- Native <meter> (activity / accuracy bars) ---- */
+meter {
+	background: var(--dk-bg-card);
+}
+meter::-webkit-meter-bar {
+	background: var(--dk-bg-card);
+	border: 1px solid var(--dk-border);
+}
+meter::-webkit-meter-optimum-value { background: var(--green); }
+meter::-webkit-meter-suboptimum-value { background: var(--accent); }
+meter::-webkit-meter-even-less-good-value { background: var(--error); }
+meter::-moz-meter-bar { background: var(--green); }
+meter:-moz-meter-sub-optimum::-moz-meter-bar { background: var(--accent); }
+meter:-moz-meter-sub-sub-optimum::-moz-meter-bar { background: var(--error); }
+
+/* ---- Google-maps tab links ---- */
+.gmapstab a:link,
+.gmapstab a:active,
+.dgmapstab a:visited {
+	color: var(--accent);
+	text-decoration: none;
+}
+
+.gmapstab a:hover {
+	color: var(--accent-hover);
+}
+
+/* ---- Game / server tables ---- */
+.game-table-row {
+	border: 1px solid var(--dk-border);
+	background-color: var(--dk-bg-surface);
+	border-bottom: 0;
+}
+
+.game-table-row-hover {
+	background-color: var(--dk-bg-hover);
+	border-bottom: 0;
+	color: var(--dk-text);
+}
+
+.game-table-cell {
+	color: var(--dk-text);
+	vertical-align: middle;
+	padding: 4px;
+	border: 1px solid var(--dk-border);
+}
+
+.game-table-cell a { color: var(--accent); }
+
+/* ---- Live stats table ---- */
+.livestats-table {
+	border: 1px solid var(--dk-border);
+	border-collapse: collapse;
+	width: 100%;
+	background: var(--dk-bg-surface);
+}
+
+.livestats-table td {
+	border: 0;
+	padding: 1px;
+	text-align: center;
+	color: var(--dk-text);
+}
+
+/* Empty-state cells carry inline background:#EFEFEF;color:black
+   (livestats.php:531,534). Scoped by the inline literal so the live
+   team-colour rows (semantic scoreboard data) keep their colours. */
+.livestats-table td[style*="EFEFEF"] {
+	background: var(--dk-bg-surface) !important;
+	color: var(--dk-text) !important;
+}
+
+/* ---- Chrome: breadcrumb / location ---- */
+.location a:link,
+.location a:visited,
+.location a:active {
+	color: var(--accent);
+	text-decoration: none;
+}
+
+.location a:hover {
+	color: var(--accent-hover);
+	text-decoration: none;
+}
+
+.location {
+	height: 22px;
+	background: var(--dk-bg-card);
+	width: 100%;
+	color: var(--dk-text-dim);
+}
+
+.location .arrow {
+	color: var(--dk-text-muted);
+}
+
+.location_under {
+	height: 15px;
+	background: transparent;
+	border-bottom: 1px solid var(--dk-border);
+	width: 100%;
+}
+
+.location ul {
+	list-style-type: none;
+	list-style-image: none;
+	padding-left: 13%;
+	margin: 0 auto;
+	color: var(--dk-text-dim);
+}
+
+.location li {
+	margin-left: 5px;
+	display: inline;
+}
+
+/* ---- Chrome: game chips ---- */
+.header_gameslist {
+	padding-right: 10%;
+	padding-top: 22px;
+}
+
+.header_gameslist img {
+	padding: 0 2px;
+	padding-bottom: 20px;
+	background-color: var(--dk-bg-card);
+	border-radius: var(--r-0);
+	border: 1px solid var(--dk-border);
+}
+
+ul.header_gameslist {
+	list-style: none;
+}
+
+.header_gameslist img#gameslist-active-game {
+	border-color: var(--accent);
+}
+
+/* ---- Layout wrappers ---- */
+.block {
+	margin: 0 auto;
+}
+
+.subblock {
+	margin: 0 auto;
+	width: 95%;
+}
+
+/* ---- Chrome: navbar (mode links) ---- */
+.navbar img {
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+.navbar {
+	list-style-type: none;
+	list-style-image: none;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	padding-bottom: 10px;
+}
+
+.navbar li {
+	margin-right: 12px;
+	display: inline;
+}
+
+.navbar a.fHeading:link,
+.navbar a.fHeading:visited {
+	color: var(--dk-text);
+}
+
+.navbar a.fHeading:hover {
+	color: var(--accent);
+}
+
+/* ---- Chrome: header block / title ---- */
+.headerblock {
+	background: var(--dk-bg-surface);
+	border: 0;
+	border-bottom: 1px solid var(--dk-border);
+	height: 86px;
+	width: 100%;
+	position: relative;
+}
+
+.title {
+	margin-left: 13%;
+	padding-top: 12px;
+}
+
+.tableicon {
+	margin-bottom: 0px;
+	margin-left: 4px;
+	margin-right: 4px;
+	margin-top: 0px;
+}
+
+/* ---- Chrome: header tabs ---- */
+.headertabs ul {
+	list-style-type: none;
+	list-style-image: none;
+	margin: 0;
+	padding: 0;
+}
+
+.headertabs li {
+	margin: 0px;
+	display: inline;
+}
+
+.headertabs {
+	margin-left: 13%;
+	padding-top: 14px;
+	bottom: 0px;
+}
+
+.bargraph {
+	height: 10px;
+}
+
+/* ---- Errors ---- */
+.errorhead {
+	background-color: var(--error);
+	color: #ffffff;
+	font-family: var(--font-body);
+	font-size: 12pt;
+	font-weight: bold;
+}
+
+.errortext {
+	background-color: var(--error-bg);
+	color: var(--dk-text);
+	font-family: var(--font-body);
+	font-size: 12pt;
+}
+
+/* Inline error table rendered by functions.php:211,213 has no class
+   hook (border:1px solid red;background:#fee; thead color:#673636).
+   Scoped by the inline literals; !important beats the inline style. */
+table[style*="#fee"] {
+	background: var(--error-bg) !important;
+	border-color: var(--error) !important;
+}
+thead[style*="673636"] {
+	color: var(--error) !important;
+}
+
+/* ---- Google-maps tab body ---- */
+.gmapstab td {
+	border: 0;
+	padding: 0;
+}
+
+.gmapstab a {
+	color: var(--accent);
+	text-decoration: underline;
+}
+
+.gmapstabtitle {
+	color: var(--accent);
+	font-weight: bold;
+	text-align: left;
+}
+
+/* ---- Forms ---- */
+input.textbox,
+input.checkbox,
+textarea,
+input[type="text"],
+input[type="password"] {
+	background: var(--dk-bg-surface);
+	border: 1px solid var(--dk-border);
+	color: var(--dk-text);
+}
+
+select {
+	background: var(--dk-bg-surface);
+	border: 1px solid var(--dk-border);
+	color: var(--dk-text);
+}
+
+input.textbox:focus,
+textarea:focus,
+select:focus {
+	outline: 2px solid var(--accent);
+	outline-offset: 1px;
+}
+
+input::placeholder,
+textarea::placeholder {
+	color: var(--dk-text-muted);
+}
+
+input.submit,
+input.smallsubmit {
+	background: var(--accent);
+	color: #ffffff;
+	border: 1px solid var(--accent);
+	cursor: pointer;
+}
+
+input.submit:hover,
+input.smallsubmit:hover {
+	background: var(--accent-dim);
+	border-color: var(--accent-dim);
+}
+
+/* ---- Subsection tabs (playerinfo / claninfo / awards) ---- */
+#main ul.subsection_tabs {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	clear: both;
+	border-bottom: 1px solid var(--dk-border);
+	height: 18px;
+}
+
+#main ul.subsection_tabs li {
+	float: left;
+	margin-right: 7px;
+	padding-top: 2px;
+	text-align: center;
+}
+
+#main ul.subsection_tabs li a {
+	display: block;
+	height: 16px;
+	padding: 0 6px 0 6px;
+	background-color: var(--dk-bg-surface);
+	color: var(--dk-text-dim);
+	width: 120px;
+	font-weight: bold;
+	font-family: var(--font-body);
+	font-size: 8pt;
+}
+
+#main ul.subsection_tabs li a:hover {
+	color: var(--dk-text);
+}
+
+#main ul.subsection_tabs li a.active {
+	background-color: var(--dk-bg-card);
+	color: var(--dk-text);
+	border-bottom: 2px solid var(--accent);
+}
+
+#main ul.register_tabs {
+	border-bottom: none;
+}
+
+#main ul.register_tabs li a.active {
+	background-color: var(--accent);
+	color: #ffffff;
+}
+
+/* ---- Footer ---- */
+a.footer_link:link,
+a.footer_link:visited {
+	color: var(--dk-text-dim);
+	text-decoration: none;
+}
+
+a.footer_link:hover {
+	color: var(--accent);
+	text-decoration: underline;
+}
+
+#footer {
+	clear: both;
+	color: var(--dk-text-dim);
+	width: 80%;
+	margin-left: 10%;
+	background-repeat: repeat-x;
+}
