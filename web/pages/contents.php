@@ -64,7 +64,7 @@ For support and installation notes visit http://www.hlxcommunity.com
 			list($game) = $db->fetch_row($resultGames);
 		}
 		
-		include(PAGE_PATH . '/game.php');
+		include(theme()->pagePath('game') ?? (PAGE_PATH . '/game.php'));
 	} else {
 		unset($_SESSION['game']);
 		

@@ -217,7 +217,7 @@ $db->query("
 
 		foreach ($tabs as $tab) {
 			if (file_exists(PAGE_PATH . "/playerinfo_$tab.php")) {
-				@include(PAGE_PATH . "/playerinfo_$tab.php");
+				@include(theme()->pagePath("playerinfo_$tab") ?? (PAGE_PATH . "/playerinfo_$tab.php"));
 			}
 		}
 
@@ -280,7 +280,7 @@ $db->query("
 	else
 	{
 		echo "\n<div id=\"tabgeneral\" class=\"tab\">\n";
-			require_once PAGE_PATH.'/playerinfo_general.php';
+			require_once theme()->pagePath('playerinfo_general') ?? (PAGE_PATH.'/playerinfo_general.php');
 			require_once PAGE_PATH.'/playerinfo_aliases.php';
 		echo '</div>';
 		echo "\n<div id=\"tabteams\" class=\"tab\">\n";

@@ -159,6 +159,40 @@
         }
 
         /**
+         * Filesystem path of a package theme's body override for page $name, or
+         * null to fall back to the stock pages/<name>.php. The counterpart of
+         * chromePath() for page bodies (game, players, playerinfo, ...). Because
+         * $name is request-derived ($mode / an AJAX $tab), it is validated with
+         * the same basename + charset anti-traversal guard as sanitize().
+         *
+         * A package overrides a page when themes/<name>/pages/<name>.php exists;
+         * an optional manifest "pages" whitelist can narrow that (a page absent
+         * from the list is not overridden even if the file is present). Legacy
+         * skins never override page bodies, so the default output stays byte-parity.
+         */
+        public function pagePath(string $name): ?string
+        {
+            if (!$this->isPackage) {
+                return null;
+            }
+
+            if ($name === '' || basename($name) !== $name
+                || !preg_match('/^[A-Za-z0-9._-]+$/', $name)) {
+                return null;
+            }
+
+            $manifest = $this->manifest();
+            if (isset($manifest['pages']) && is_array($manifest['pages'])
+                && !in_array($name, $manifest['pages'], true)) {
+                return null;
+            }
+
+            $path = $this->themesDir . '/' . $this->name . '/pages/' . $name . '.php';
+
+            return is_file($path) ? $path : null;
+        }
+
+        /**
          * Themes offered by the user selector and the admin option: every
          * legacy skin (web/styles/*.css, in directory order) plus every
          * package (web/themes/<name>/), keyed by the value the resolver understands

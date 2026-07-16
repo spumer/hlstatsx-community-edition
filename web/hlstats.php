@@ -251,7 +251,7 @@ if ( !in_array($mode, $valid_modes) )
 
 if ( file_exists(PAGE_PATH . "/$mode.php") )
 {
-	@include(PAGE_PATH . "/$mode.php");
+	@include(theme()->pagePath($mode) ?? (PAGE_PATH . "/$mode.php"));
 	pageFooter();
 }
 else
