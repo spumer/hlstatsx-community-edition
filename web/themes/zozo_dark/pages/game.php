@@ -203,7 +203,7 @@
 <div class="grid2">
 	<section class="panel">
 		<div class="panel-head">
-			<span class="ptitle"><?=__('game.range.24h')?></span>
+			<span class="ptitle"><?=__('game.panel.activity_24h')?></span>
 			<span class="pmeta"><?=__('common.label.online')?></span>
 		</div>
 		<div class="chart-wrap">

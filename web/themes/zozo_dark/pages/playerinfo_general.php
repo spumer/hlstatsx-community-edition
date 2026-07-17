@@ -193,7 +193,7 @@
 		<div class="rank-legend"><span><?php echo htmlspecialchars($rankName); ?></span><span><b><?php echo $nf($rankKillsNeeded); ?></b> &rarr; <?php echo htmlspecialchars($nextRankName); ?></span></div>
 <?php } else { ?>
 		<div class="rank-bar"><div class="rank-fill" style="width:100%"></div></div>
-		<div class="rank-legend"><span><?php echo htmlspecialchars($rankName); ?></span><span class="faint">max</span></div>
+		<div class="rank-legend"><span><?php echo htmlspecialchars($rankName); ?></span><span class="faint"><?=__('playerinfo.rank.max')?></span></div>
 <?php } ?>
 	</div>
 </section>
