@@ -186,7 +186,7 @@
 				<td class="map"><?php echo htmlspecialchars($s['act_map']); ?></td>
 				<td><div class="pcell"><div class="pbar"><div class="pfill" style="width:<?php echo $pct; ?>%"></div></div><span class="pcount"><?php echo $act; ?> <span class="den">/ <?php echo $max; ?></span></span></div></td>
 				<td class="num r"><?php echo $nf($s['kills']); ?></td>
-				<td class="r"><a class="connect" href="steam://connect/<?php echo htmlspecialchars($addr); ?>"><?=__('common.label.join')?></a></td>
+				<td class="r"><a class="connect" href="steam://connect/<?php echo htmlspecialchars($addr); ?>"><?=__('common.label.play')?></a></td>
 			</tr>
 <?php } ?>
 		</tbody>
