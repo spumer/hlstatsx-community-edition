@@ -18,6 +18,8 @@
         die('Do not access this file directly.');
     }
 
+	require_once __DIR__ . '/_rank_ru.php';
+
 	// Player Details
 	$player = valid_request(intval($_GET['player'] ?? ''), true);
 	$uniqueid = valid_request(strval($_GET['uniqueid'] ?? ''), false);
@@ -128,7 +130,11 @@
 	}
 	$rankName = '';
 	$rr = $db->query("SELECT rankName FROM hlstats_Ranks WHERE game='$game' AND '" . (int) $playerdata['kills'] . "' BETWEEN minKills AND maxKills LIMIT 1");
-	if ($db->num_rows($rr) > 0) { list($rankName) = $db->fetch_row($rr); }
+	if ($db->num_rows($rr) > 0) { list($rankRaw) = $db->fetch_row($rr); $rankName = zozo_rank_ru($rankRaw); }
+	$rankTier = zozo_rank_tier((int) $playerdata['kills']);
+	$db->query("SELECT kill_streak FROM hlstats_Players WHERE playerId = '$player'");
+	list($kill_streak) = $db->fetch_row();
+	$kills_per_min = ($playerdata['connection_time'] > 0) ? sprintf('%.1f', ($playerdata['kills'] / ($playerdata['connection_time'] / 60))) : '0';
 
 	$avatarTint = function ($seed) {
 		$palette = array('#5a845a', '#8e44ad', '#27ae60', '#3498db', '#d63031', '#e8b931', '#14b8a6', '#6366f1');
@@ -159,15 +165,15 @@
 	<div class="hero-body">
 		<h1 class="hero-name"><?php echo $flagImg; ?><?php echo $pl_name; ?></h1>
 		<div class="hero-meta">
-<?php if ($rankName !== '') { ?><span class="tier-badge"><span class="tier-glyph" aria-hidden="true"></span><?php echo htmlspecialchars($rankName); ?></span><?php } ?>
+<?php if ($rankName !== '') { ?><span class="tier-badge"><span class="tier-glyph t<?php echo $rankTier; ?>" aria-hidden="true"></span><?php echo htmlspecialchars($rankName); ?></span><?php } ?>
 <?php if ($steamid !== '') { ?><span class="mono hero-id"><?php echo htmlspecialchars($steamid); ?></span><?php } ?>
 			<span class="hero-status <?php echo ($hideranking == 2) ? 'bad' : 'ok'; ?>"><?php echo $statusmsg; ?></span>
 <?php if (!empty($playerdata['clan_name'])) { ?><span class="hero-clan"><?php echo htmlspecialchars($playerdata['clan_name']); ?></span><?php } ?>
 		</div>
 	</div>
 	<div class="hero-actions">
-<?php if ($steamid !== '') { ?><a class="hero-btn" href="https://steamcommunity.com/profiles/<?php echo urlencode($steamid); ?>" target="_blank" rel="noopener">Steam</a><?php } ?>
-		<a class="hero-btn ghost" href="<?php echo $g_options['scripturl']; ?>?mode=search&amp;st=player&amp;q=<?php echo $pl_urlname; ?>"><?=__('common.nav.search')?></a>
+<?php if ($steamid !== '') { ?><a class="hero-btn" href="https://steamcommunity.com/profiles/<?php echo urlencode($steamid); ?>" target="_blank" rel="noopener"><?=__('playerinfo.hero.steam_profile')?></a><?php } ?>
+		<a class="hero-btn ghost" href="<?php echo $g_options['scripturl']; ?>?mode=search&amp;st=player&amp;q=<?php echo $pl_urlname; ?>"><?=__('playerinfo.hero.similar')?></a>
 	</div>
 </div>
 
@@ -177,12 +183,12 @@
 	ob_start();
 ?>
 <section class="tiles">
-	<div class="tile"><span class="tile-label"><?=__('common.col.points')?></span><span class="tile-val s-red"><?php echo $nf($playerdata['skill']); ?></span></div>
-	<div class="tile"><span class="tile-label"><?=__('common.col.kills')?></span><span class="tile-val"><?php echo $nf($playerdata['kills']); ?></span></div>
-	<div class="tile"><span class="tile-label"><?=__('common.col.deaths')?></span><span class="tile-val"><?php echo $nf($playerdata['deaths']); ?></span></div>
+	<div class="tile"><span class="tile-label"><?=__('common.col.points')?></span><span class="tile-val s-red"><?php echo $nf($playerdata['skill']); ?></span><span class="tile-sub"><?php echo sprintf(__('playerinfo.tile.sub.kpm'), $kills_per_min); ?></span></div>
+	<div class="tile"><span class="tile-label"><?=__('common.col.kills')?></span><span class="tile-val"><?php echo $nf($playerdata['kills']); ?></span><span class="tile-sub"><?php echo sprintf(__('playerinfo.tile.sub.streak'), $nf($kill_streak)); ?></span></div>
+	<div class="tile"><span class="tile-label"><?=__('common.col.deaths')?></span><span class="tile-val"><?php echo $nf($playerdata['deaths']); ?></span><span class="tile-sub"><?php echo sprintf(__('playerinfo.tile.sub.suicides'), $nf($playerdata['suicides'])); ?></span></div>
 	<div class="tile"><span class="tile-label"><?=__('common.col.kpd')?></span><span class="tile-val"><?php echo is_numeric($playerdata['kpd']) ? number_format((float) $playerdata['kpd'], 2) : htmlspecialchars($playerdata['kpd']); ?></span></div>
-	<div class="tile"><span class="tile-label"><?=__('common.col.headshots')?></span><span class="tile-val"><?php echo $nf($playerdata['headshots']); ?></span></div>
-	<div class="tile"><span class="tile-label"><?=__('common.col.accuracy')?></span><span class="tile-val"><?php echo htmlspecialchars($playerdata['acc']); ?>%</span></div>
+	<div class="tile"><span class="tile-label"><?=__('common.col.headshots')?></span><span class="tile-val"><?php echo $nf($playerdata['headshots']); ?></span><span class="tile-sub"><?php echo htmlspecialchars($playerdata['acc']); ?>% <?=__('common.col.accuracy')?></span></div>
+	<div class="tile"><span class="tile-label"><?=__('common.col.connection_time')?></span><span class="tile-val"><?php echo timestamp_to_str($playerdata['connection_time']); ?></span></div>
 </section>
 <?php
 	$tilesHtml = ob_get_clean();

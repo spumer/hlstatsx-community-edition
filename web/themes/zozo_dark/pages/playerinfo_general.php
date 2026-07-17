@@ -25,6 +25,8 @@
         die('Do not access this file directly.');
     }
 
+    require_once __DIR__ . '/_rank_ru.php';
+
     $container = require ROOT_PATH . '/bootstrap.php';
     $playerRepo = $container->get(\Repository\PlayerRepository::class);
 
@@ -96,7 +98,8 @@
     // --- Rank progress (current + next rank; stock verbatim) ---
     $db->query("SELECT hlstats_Ranks.rankName, hlstats_Ranks.image, hlstats_Ranks.minKills FROM hlstats_Ranks WHERE hlstats_Ranks.minKills <= " . (int) $playerdata['kills'] . " AND hlstats_Ranks.game = '$game' ORDER BY hlstats_Ranks.minKills DESC LIMIT 1");
     $curRank = $db->fetch_array();
-    $rankName = $curRank ? $curRank['rankName'] : '';
+    $rankName = $curRank ? zozo_rank_ru($curRank['rankName']) : '';
+    $rankTier = zozo_rank_tier((int) $playerdata['kills']);
     $rankCurMinKills = $curRank ? $curRank['minKills'] : 0;
     $db->query("SELECT hlstats_Ranks.rankName, hlstats_Ranks.minKills FROM hlstats_Ranks WHERE hlstats_Ranks.minKills > " . (int) $playerdata['kills'] . " AND hlstats_Ranks.game = '$game' ORDER BY hlstats_Ranks.minKills LIMIT 1");
     if ($db->num_rows() == 0) {
@@ -105,7 +108,7 @@
         $rankPercent = 100;
     } else {
         $nextRank = $db->fetch_array();
-        $nextRankName = $nextRank['rankName'];
+        $nextRankName = zozo_rank_ru($nextRank['rankName']);
         $rankKillsNeeded = $nextRank['minKills'] - $playerdata['kills'];
         $span = ($nextRank['minKills'] - $rankCurMinKills);
         $rankPercent = $span > 0 ? round(($playerdata['kills'] - $rankCurMinKills) * 100 / $span, 1) : 0;
@@ -179,7 +182,7 @@
 	<div class="panel-head"><span class="ptitle"><?=__('playerinfo_general.row.rank')?></span></div>
 	<div class="rankcard">
 		<div class="rank-top">
-			<span class="rank-ins"><span class="tier-glyph big" aria-hidden="true"></span></span>
+			<span class="rank-ins"><span class="tier-glyph big t<?php echo $rankTier; ?>" aria-hidden="true"></span></span>
 			<div>
 				<div class="rank-name"><?php echo $rankName !== '' ? htmlspecialchars($rankName) : '&mdash;'; ?></div>
 				<div class="rank-sub"><?php echo $nf($playerdata['kills']); ?> <?=__('playerinfo_general.row.kills')?></div>

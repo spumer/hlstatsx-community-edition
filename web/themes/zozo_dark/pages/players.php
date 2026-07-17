@@ -17,6 +17,8 @@
 		die('Do not access this file directly.');
 	}
 
+	require_once __DIR__ . '/_rank_ru.php';
+
 	// Player Rankings
 	$db->query("SELECT hlstats_Games.name FROM hlstats_Games WHERE hlstats_Games.code = '$game'");
 	if ($db->num_rows() < 1) {
@@ -208,31 +210,64 @@
 	<p class="sub"><?php echo htmlspecialchars($gamename); ?> <span class="dot">·</span> <?php echo number_format((int)$numitems, 0, '.', ' '); ?> <?=__('common.nav.players')?></p>
 </div>
 
-<!-- Filter toolbar -->
+<!-- Filter toolbar (MOCKUP 02: search + Period + Sort + apply/clear + chips;
+     the "Server" filter is dropped per founder decision — stock ranking is
+     game-scoped, so that control would be dead). -->
+<?php
+	// Sortable columns for the Sort dropdown (value = SQL sort key).
+	$sortCols = array(
+		'skill'           => __('common.col.points'),
+		'kills'           => __('common.col.kills'),
+		'deaths'          => __('common.col.deaths'),
+		'kpd'             => __('common.col.kpd'),
+		'acc'             => __('common.col.accuracy'),
+		'headshots'       => __('common.col.headshots'),
+		'connection_time' => __('common.col.connection_time'),
+	);
+?>
 <div class="toolbar">
 	<form class="tb-search" method="get" action="<?php echo $g_options['scripturl']; ?>">
 		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
 		<input type="hidden" name="mode" value="search" />
 		<input type="hidden" name="game" value="<?php echo $game; ?>" />
 		<input type="hidden" name="st" value="player" />
-		<input type="text" name="q" maxlength="64" placeholder="<?=__('players.search.label')?>" />
+		<input type="text" name="q" maxlength="64" placeholder="<?=__('players.search.placeholder')?>" />
 	</form>
-	<form class="tb-group" method="get" action="<?php echo $g_options['scripturl']; ?>">
+	<form class="tb-filter" method="get" action="<?php echo $g_options['scripturl']; ?>">
 		<input type="hidden" name="mode" value="players" />
 		<input type="hidden" name="game" value="<?php echo $game; ?>" />
-		<label class="tb-label"><?=__('players.rankview.label')?></label>
-		<select name="rank_type" onchange="this.form.submit()">
-			<?php foreach ($options as $value => $label): ?>
-				<option value="<?=$value?>" <?=($rank_type == $value) ? 'selected' : ''?>><?=htmlspecialchars($label)?></option>
-			<?php endforeach; ?>
-		</select>
+		<div class="tb-group">
+			<label class="tb-label"><?=__('players.filter.period')?></label>
+			<select name="rank_type">
+				<?php foreach ($options as $value => $label): ?>
+					<option value="<?=$value?>" <?=($rank_type == $value) ? 'selected' : ''?>><?=htmlspecialchars($label)?></option>
+				<?php endforeach; ?>
+			</select>
+		</div>
+		<div class="tb-group">
+			<label class="tb-label"><?=__('players.filter.sort')?></label>
+			<select name="sort">
+				<?php foreach ($sortCols as $col => $label): ?>
+					<option value="<?=$col?>" <?=($table->sort == $col) ? 'selected' : ''?>><?=htmlspecialchars($label)?></option>
+				<?php endforeach; ?>
+			</select>
+		</div>
+		<button class="tb-btn" type="submit"><?=__('players.filter.apply')?></button>
 	</form>
-	<form class="tb-group" method="get" action="<?php echo $g_options['scripturl']; ?>">
-		<?php foreach ($_GET as $k => $v) { $v = valid_request($v, false); if ($k != 'minkills') { echo '<input type="hidden" name="' . htmlspecialchars($k) . '" value="' . htmlspecialchars($v) . '" />'; } } ?>
-		<label class="tb-label"><?=__('players.minkills.pre')?></label>
-		<input class="tb-mini" type="text" name="minkills" maxlength="4" value="<?php echo $minkills; ?>" />
-		<button class="tb-btn" type="submit"><?=__('players.minkills.submit')?></button>
-	</form>
+<?php
+	$hasFilters = ($rank_type != 0) || ($table->sort != $g_options['rankingtype']);
+	if ($hasFilters) {
+?>
+	<div class="tb-chips">
+<?php if ($rank_type != 0 && isset($options[$rank_type])) { ?>
+		<span class="chip flt"><?=__('players.filter.period')?>: <?php echo htmlspecialchars($options[$rank_type]); ?></span>
+<?php } ?>
+<?php if ($table->sort != $g_options['rankingtype'] && isset($sortCols[$table->sort])) { ?>
+		<span class="chip flt"><?=__('players.filter.sort')?>: <?php echo htmlspecialchars($sortCols[$table->sort]); ?></span>
+<?php } ?>
+		<a class="tb-clear" href="<?php echo $g_options['scripturl']; ?>?mode=players&amp;game=<?php echo $game; ?>"><?=__('players.filter.clear')?></a>
+	</div>
+<?php } ?>
 </div>
 
 <section class="panel">
@@ -242,7 +277,7 @@
 				<th class="r"><?=__('common.col.rank')?></th>
 				<th></th>
 				<?php $th('lastName', __('common.col.player')); ?>
-				<th><?php /* DEF-10: tier column; label pending founder-approved key common.col.rank_title ("Звание"). Empty for now removes the duplicate "Ранг" header. */ ?></th>
+				<th><?=__('common.col.rank_title')?></th>
 				<?php $th('skill', __('common.col.points'), true, true); ?>
 				<?php $th('kills', __('common.col.kills'), true, true); ?>
 				<?php $th('deaths', __('common.col.deaths'), true, true); ?>
@@ -257,7 +292,9 @@
 	while ($row = $db->fetch_array($result)) {
 		$nm = $row['lastName'];
 		$initial = mb_strtoupper(mb_substr($nm, 0, 1, 'UTF-8'), 'UTF-8');
-		$rankName = $rankOf((int) $row['kills']);
+		$rankNameRaw = $rankOf((int) $row['kills']);
+		$rankName = zozo_rank_ru($rankNameRaw);
+		$rankTier = zozo_rank_tier((int) $row['kills']);
 		$flagImg = '';
 		if ($g_options['countrydata'] == 1 && !empty($row['flag'])) {
 			$alt = ucfirst(strtolower($row['country']));
@@ -268,7 +305,7 @@
 				<td class="idx r"><?php echo $rank; ?></td>
 				<td><span class="avatar sm" style="background:<?php echo $avatarTint($nm); ?>"><?php echo htmlspecialchars($initial); ?></span></td>
 				<td class="pl"><a href="<?php echo $g_options['scripturl']; ?>?mode=playerinfo&amp;player=<?php echo $row['playerId']; ?>"><?php echo $flagImg; ?><span class="nm"><?php echo htmlspecialchars($nm); ?></span></a></td>
-				<td class="tier"><?php if ($rankName !== '') { ?><span class="tier-glyph" aria-hidden="true"></span><span class="tier-name"><?php echo htmlspecialchars($rankName); ?></span><?php } else { ?><span class="num dim">?</span><?php } ?></td>
+				<td class="tier"><?php if ($rankName !== '') { ?><span class="tier-glyph t<?php echo $rankTier; ?>" aria-hidden="true"></span><span class="tier-name"><?php echo htmlspecialchars($rankName); ?></span><?php } else { ?><span class="num dim">?</span><?php } ?></td>
 				<td class="num r pts"><?php echo number_format((int) $row['skill'], 0, '.', ' '); ?></td>
 				<td class="num r"><?php echo number_format((int) $row['kills'], 0, '.', ' '); ?></td>
 				<td class="num r"><?php echo number_format((int) $row['deaths'], 0, '.', ' '); ?></td>

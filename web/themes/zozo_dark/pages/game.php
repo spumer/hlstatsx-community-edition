@@ -71,6 +71,12 @@
 	}
 	$hpk = ($total_kills > 0) ? sprintf('%.2f', ($total_headshots / $total_kills) * 100) : '0.00';
 
+	// --- KPI subtext data: maps in rotation + 24h online peak ---
+	$r = $db->query("SELECT COUNT(DISTINCT act_map) FROM hlstats_Servers WHERE game='$game' AND act_map != ''");
+	list($maps_rotation) = $db->fetch_row($r);
+	$r = $db->query("SELECT MAX(players) FROM hlstats_Trend WHERE game='$game' AND timestamp >= " . (time() - 86400));
+	list($peak_24h) = $db->fetch_row($r);
+
 	// --- Top players (leaderboard preview) ---
 	$topPlayers = array();
 	$r = $db->query("
@@ -117,15 +123,15 @@
 	<div class="stat-card">
 		<div class="stat-head">
 			<span class="stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20a5.5 5.5 0 0 1 11 0"/><path d="M16 8.5a3 3 0 0 1 0 5"/></svg></span>
-			<span class="stat-label"><?=__('common.nav.players')?></span>
+			<span class="stat-label"><?=__('game.kpi.players_in_base')?></span>
 		</div>
 		<div class="stat-val s-blue"><?php echo $nf($total_players); ?></div>
-		<div class="stat-sub"><?php if ($players_last_day > -1) { ?><b>+<?php echo $nf($players_last_day); ?></b> / 24h<?php } ?></div>
+		<div class="stat-sub"><?php if ($players_last_day > -1) { echo sprintf(__('game.kpi.sub.new_24h'), '<b>+' . $nf($players_last_day) . '</b>'); } ?></div>
 	</div>
 	<div class="stat-card">
 		<div class="stat-head">
 			<span class="stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 3l7 7-4 1-1 4-7-7z"/><path d="M9 12l-5 5"/><path d="M4 14v5h5"/></svg></span>
-			<span class="stat-label"><?=__('weapons.col.kills')?></span>
+			<span class="stat-label"><?=__('game.kpi.total_kills')?></span>
 		</div>
 		<div class="stat-val s-red"><?php echo $kfmt($total_kills); ?></div>
 		<div class="stat-sub"><?php echo $nf($total_kills); ?> · HS <?php echo $hpk; ?>%</div>
@@ -133,18 +139,18 @@
 	<div class="stat-card">
 		<div class="stat-head">
 			<span class="stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg></span>
-			<span class="stat-label"><?=__('common.nav.servers')?></span>
+			<span class="stat-label"><?=__('game.kpi.servers_online')?></span>
 		</div>
 		<div class="stat-val s-green"><?php echo $nf($servers_online); ?> <span style="font-size:1rem;color:var(--text-faint)">/ <?php echo $nf($total_servers); ?></span></div>
-		<div class="stat-sub"><?=__('common.label.online')?></div>
+		<div class="stat-sub"><?php echo sprintf(__('game.kpi.sub.maps_rotation'), $nf($maps_rotation)); ?></div>
 	</div>
 	<div class="stat-card">
 		<div class="stat-head">
 			<span class="stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="7" r="4"/><path d="M5 21a7 7 0 0 1 14 0"/></svg></span>
-			<span class="stat-label"><?=__('common.label.online')?></span>
+			<span class="stat-label"><?=__('game.kpi.players_online')?></span>
 		</div>
 		<div class="stat-val s-orange"><?php echo $nf($players_online); ?> <span style="font-size:1rem;color:var(--text-faint)">/ <?php echo $nf($players_capacity); ?></span></div>
-		<div class="stat-sub"><?php echo $nf($total_headshots); ?> HS</div>
+		<div class="stat-sub"><?php echo sprintf(__('game.kpi.sub.peak_24h'), $nf($peak_24h)); ?></div>
 	</div>
 </section>
 
@@ -164,7 +170,7 @@
 				<th><?=__('maps.col.map')?></th>
 				<th><?=__('game.col.players')?></th>
 				<th class="r"><?=__('weapons.col.kills')?></th>
-				<th class="r"><?=__('common.label.join')?></th>
+				<th class="r"><?=__('game.col.connect')?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -218,8 +224,8 @@
 
 	<section class="panel">
 		<div class="panel-head">
-			<span class="ptitle"><?=__('common.nav.players')?></span>
-			<a class="plink" href="<?php echo $g_options['scripturl']; ?>?mode=players&amp;game=<?php echo $game; ?>"><?=__('players.title')?> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+			<span class="ptitle"><?=__('game.panel.top_players')?></span>
+			<a class="plink" href="<?php echo $g_options['scripturl']; ?>?mode=players&amp;game=<?php echo $game; ?>"><?=__('game.link.full_ranking')?> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 		</div>
 		<div class="tp-list">
 <?php

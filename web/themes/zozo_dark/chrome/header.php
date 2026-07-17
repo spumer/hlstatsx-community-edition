@@ -176,6 +176,7 @@
 
 	<div class="content-shell">
 		<header class="topbar">
+			<button class="iconbtn" type="button" aria-label="<?=__('common.nav.menu')?>"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
 			<nav class="breadcrumb" aria-label="<?=__('common.nav.menu')?>">
 				<a class="crumb" href="<?php echo $scripturl; ?>">HLstatsX</a>
 <?php
@@ -194,7 +195,8 @@
 			<form class="search-top" action="<?php echo $scripturl; ?>" method="get" role="search">
 				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
 				<input type="hidden" name="mode" value="search" />
-				<input type="text" name="q" placeholder="<?=__('common.nav.search')?>" aria-label="<?=__('common.nav.search')?>" />
+				<input type="text" name="q" placeholder="<?=__('players.search.placeholder')?>" aria-label="<?=__('common.nav.search')?>" />
+				<span class="kbd">Ctrl K</span>
 			</form>
 		</header>
 
