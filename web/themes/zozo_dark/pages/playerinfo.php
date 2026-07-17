@@ -249,9 +249,8 @@
 </div>
 <div class="block" style="clear:both;padding-top:12px;">
 	<div class="subblock">
-		<div style="float:left;">
-			<?=__('claninfo.marked_note.pre')?><?php echo $g_options['DeleteDays']; ?><?=__('claninfo.marked_note.post')?><?php echo "\n"; ?>
-		</div>
+		<?php // VRTF r3: the "*"-note footnote was removed — its referent (the
+		      // starred summary values) is gone from the general tab. ?>
 		<div style="float:right;">
 			<?php
 				if (isset($_SESSION['loggedin'])) {
