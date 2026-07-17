@@ -242,13 +242,13 @@
 				<th class="r"><?=__('common.col.rank')?></th>
 				<th></th>
 				<?php $th('lastName', __('common.col.player')); ?>
-				<?php $th('mmrank', __('players.col.mmrank'), false); ?>
+				<th><?php /* DEF-10: tier column; label pending founder-approved key common.col.rank_title ("Звание"). Empty for now removes the duplicate "Ранг" header. */ ?></th>
 				<?php $th('skill', __('common.col.points'), true, true); ?>
 				<?php $th('kills', __('common.col.kills'), true, true); ?>
 				<?php $th('deaths', __('common.col.deaths'), true, true); ?>
 				<?php $th('kpd', __('common.col.kpd'), true, true); ?>
-				<?php $th('hpk', __('common.col.hpk'), true, true); ?>
 				<?php $th('acc', __('common.col.accuracy'), true, true); ?>
+				<?php $th('headshots', __('common.col.headshots'), true, true); ?>
 				<?php $th('connection_time', __('common.col.connection_time'), true, true); ?>
 			</tr>
 		</thead>
@@ -273,8 +273,8 @@
 				<td class="num r"><?php echo number_format((int) $row['kills'], 0, '.', ' '); ?></td>
 				<td class="num r"><?php echo number_format((int) $row['deaths'], 0, '.', ' '); ?></td>
 				<td class="num r"><?php echo htmlspecialchars($row['kpd']); ?></td>
-				<td class="num r"><?php echo htmlspecialchars($row['hpk']); ?></td>
 				<td class="num r"><?php echo htmlspecialchars($row['acc']); ?>%</td>
+				<td class="num r"><?php echo number_format((int) $row['headshots'], 0, '.', ' '); ?></td>
 				<td class="num r dim"><?php echo timestamp_to_str($row['connection_time']); ?></td>
 			</tr>
 <?php $rank++; } ?>
