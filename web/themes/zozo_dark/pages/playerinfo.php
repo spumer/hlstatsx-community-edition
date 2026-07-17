@@ -171,6 +171,11 @@
 	</div>
 </div>
 
+<?php
+	// Stat tiles captured once; emitted AFTER the tab bar (mockup order:
+	// hero -> tabs -> tiles -> tab content). DEF-13.
+	ob_start();
+?>
 <section class="tiles">
 	<div class="tile"><span class="tile-label"><?=__('common.col.points')?></span><span class="tile-val s-red"><?php echo $nf($playerdata['skill']); ?></span></div>
 	<div class="tile"><span class="tile-label"><?=__('common.col.kills')?></span><span class="tile-val"><?php echo $nf($playerdata['kills']); ?></span></div>
@@ -179,6 +184,9 @@
 	<div class="tile"><span class="tile-label"><?=__('common.col.headshots')?></span><span class="tile-val"><?php echo $nf($playerdata['headshots']); ?></span></div>
 	<div class="tile"><span class="tile-label"><?=__('common.col.accuracy')?></span><span class="tile-val"><?php echo htmlspecialchars($playerdata['acc']); ?>%</span></div>
 </section>
+<?php
+	$tilesHtml = ob_get_clean();
+?>
 
 <div class="block" id="main">
 <?php
@@ -191,6 +199,7 @@
 		<li><a href="#" id="tab_mapperformance_servers"><?=__('playerinfo.tab.maps_servers')?></a></li>
 		<li><a href="#" id="tab_killstats"><?=__('playerinfo.tab.killstats')?></a></li>
 	</ul><br />
+	<?php echo $tilesHtml; ?>
 	<div id="main_content"></div>
 	<script type="text/javascript">
 		var Tabs = new Tabs
@@ -210,6 +219,7 @@
 	</script>
 <?php
 	} else {
+		echo $tilesHtml;
 		echo "\n<div id=\"tabgeneral\" class=\"tab\">\n";
 			require_once theme()->pagePath('playerinfo_general') ?? (PAGE_PATH.'/playerinfo_general.php');
 			require_once PAGE_PATH.'/playerinfo_aliases.php';

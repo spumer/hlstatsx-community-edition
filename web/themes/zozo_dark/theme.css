@@ -648,7 +648,16 @@ a.footer_link:hover {
 	--fs-xs: .75rem; --fs-sm: .8125rem; --fs-base: .875rem; --fs-2xl: 1.5rem;
 }
 
-.app { display: flex; min-height: 100vh; }
+/* The DS mockups assume border-box everywhere; the legacy base does not.
+   Without this, main's width:100% + padding overflowed the shell (DEF-2). */
+.app, .app *, .app *::before, .app *::after { box-sizing: border-box; }
+.app { display: flex; min-height: 100vh; font-size: var(--fs-base); line-height: 1.45; }
+/* Neutralise the legacy `div, span { font-size: 8pt }` repaint inside the
+   app-shell so shell spans/divs inherit their component size (fixes the
+   wordmark .z2 rendering at 10.67px and the same leak on hero id/status,
+   breadcrumb current, etc.). Zero-specificity :where() lets any component
+   rule with its own font-size still win; legacy <td> density is untouched. */
+.app :where(div, span) { font-size: inherit; }
 .app .sidebar {
 	width: 220px; flex: 0 0 220px;
 	background: var(--surface); border-right: 1px solid var(--border);
@@ -730,7 +739,10 @@ a.footer_link:hover {
 .app .search-top input::placeholder { color: var(--text-faint); }
 .app .search-top input:focus { border-color: var(--accent); outline: none; }
 
-.app main { flex: 1; width: 100%; max-width: 1400px; margin: 0 auto; padding: 1.25rem 1.5rem 2.5rem; }
+.app main { flex: 1; min-width: 0; width: 100%; max-width: 1400px; margin: 0 auto; padding: 1.25rem 1.5rem 2.5rem; }
+/* Wide nowrap tables (servers / leaderboard) scroll inside their panel
+   instead of forcing the shell wider than the viewport (DEF-2 overflow). */
+.app .panel { overflow-x: auto; }
 .app .foot {
 	max-width: 1400px; margin: 0 auto; padding: 1.5rem;
 	color: var(--text-faint); font-size: var(--fs-xs); text-align: center;
