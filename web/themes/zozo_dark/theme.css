@@ -892,6 +892,36 @@ a.footer_link:hover {
 @media (max-width: 1180px) { .app .tiles { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 700px) { .app .tiles { grid-template-columns: repeat(2, 1fr); } .app .hero { flex-wrap: wrap; } }
 
+/* ---- Profile general tab (MOCKUP 03): info/summary lists + rank card ---- */
+.app .grid2.profile-grid { grid-template-columns: 1fr 1fr; }
+.app .tier-glyph.big { width: 24px; height: 24px; margin: 0; }
+.app .rank-ins { width: 44px; height: 44px; flex: 0 0 44px; border-radius: var(--r-0); background: var(--muted); border: 1px solid var(--border-2); display: grid; place-items: center; }
+
+.app .dl { display: flex; flex-direction: column; }
+.app .dl .r { display: flex; align-items: center; gap: 1rem; padding: .5rem 1.1rem; border-bottom: 1px solid var(--border); }
+.app .dl .r:last-child { border-bottom: 0; }
+.app .dl .r:nth-child(even) { background: var(--surface-2); }
+.app .dl .k { flex: 0 0 42%; font-size: var(--fs-sm); color: var(--text-muted); }
+.app .dl .v { flex: 1; font-size: var(--fs-sm); color: var(--text); text-align: right; min-width: 0; overflow-wrap: anywhere; }
+.app .dl .v.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.app .dl .v.faint, .app .dl .v .faint { color: var(--text-faint); }
+.app .dl .v.link { color: var(--accent-2); }
+.app .dl .v a.lnk, .app .dl-links a.lnk, .app .sigbox a.lnk { color: var(--accent-2); }
+.app .dl .v a.lnk:hover, .app .dl-links a.lnk:hover, .app .sigbox a.lnk:hover { color: var(--accent); }
+.app .dl .v .tableicon { height: 12px; margin-right: .2rem; }
+.app .dl-links { display: flex; flex-wrap: wrap; gap: .3rem 1rem; padding: .75rem 1.1rem; border-top: 1px solid var(--border); font-size: var(--fs-sm); }
+
+.app .rankcard { padding: 1.1rem 1.1rem 1.2rem; }
+.app .rank-top { display: flex; align-items: center; gap: .9rem; margin-bottom: .9rem; }
+.app .rank-name { font-size: var(--fs-lg); font-weight: 700; color: var(--text); }
+.app .rank-sub { font-size: var(--fs-xs); color: var(--text-faint); font-family: var(--mono); margin-top: .1rem; }
+.app .rank-bar { height: 8px; border-radius: var(--r-pill); background: var(--muted); overflow: hidden; }
+.app .rank-fill { height: 100%; border-radius: var(--r-pill); background: linear-gradient(90deg, var(--brand-light), var(--sage)); }
+.app .rank-legend { display: flex; justify-content: space-between; margin-top: .5rem; font-size: var(--fs-xs); color: var(--text-muted); }
+.app .rank-legend b { color: var(--text); font-family: var(--mono); }
+.app .sigbox textarea { background: var(--bg); border: 1px solid var(--border); color: var(--text-muted); font-family: var(--mono); font-size: var(--fs-xs); margin-top: .6rem; padding: .4rem; }
+.app .sigbox img { max-width: 100%; }
+
 /* Pagination */
 .app .pager { display: flex; flex-wrap: wrap; gap: .3rem; justify-content: center; margin-top: 1.25rem; }
 .app .pager .pg { min-width: 32px; text-align: center; padding: .35rem .5rem; font-family: var(--mono); font-size: var(--fs-sm); color: var(--text-muted); border: 1px solid var(--border); background: var(--surface); }
