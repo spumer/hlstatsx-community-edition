@@ -183,10 +183,10 @@
 	ob_start();
 ?>
 <section class="tiles">
-	<div class="tile"><span class="tile-label"><?=__('common.col.points')?></span><span class="tile-val s-red"><?php echo $nf($playerdata['skill']); ?></span><span class="tile-sub"><?php echo sprintf(__('playerinfo.tile.sub.kpm'), $kills_per_min); ?></span></div>
-	<div class="tile"><span class="tile-label"><?=__('common.col.kills')?></span><span class="tile-val"><?php echo $nf($playerdata['kills']); ?></span><span class="tile-sub"><?php echo sprintf(__('playerinfo.tile.sub.streak'), $nf($kill_streak)); ?></span></div>
+	<div class="tile"><span class="tile-label"><?=__('common.col.points')?></span><span class="tile-val s-red"><?php echo $nf($playerdata['skill']); ?></span></div>
+	<div class="tile"><span class="tile-label"><?=__('common.col.kills')?></span><span class="tile-val"><?php echo $nf($playerdata['kills']); ?></span><span class="tile-sub"><?php echo sprintf(__('playerinfo.tile.sub.kpm'), $kills_per_min); ?></span></div>
 	<div class="tile"><span class="tile-label"><?=__('common.col.deaths')?></span><span class="tile-val"><?php echo $nf($playerdata['deaths']); ?></span><span class="tile-sub"><?php echo sprintf(__('playerinfo.tile.sub.suicides'), $nf($playerdata['suicides'])); ?></span></div>
-	<div class="tile"><span class="tile-label"><?=__('common.col.kpd')?></span><span class="tile-val"><?php echo is_numeric($playerdata['kpd']) ? number_format((float) $playerdata['kpd'], 2) : htmlspecialchars($playerdata['kpd']); ?></span></div>
+	<div class="tile"><span class="tile-label"><?=__('common.col.kpd')?></span><span class="tile-val"><?php echo is_numeric($playerdata['kpd']) ? number_format((float) $playerdata['kpd'], 2) : htmlspecialchars($playerdata['kpd']); ?></span><span class="tile-sub"><?php echo sprintf(__('playerinfo.tile.sub.streak'), $nf($kill_streak)); ?></span></div>
 	<div class="tile"><span class="tile-label"><?=__('common.col.headshots')?></span><span class="tile-val"><?php echo $nf($playerdata['headshots']); ?></span><span class="tile-sub"><?php echo htmlspecialchars($playerdata['acc']); ?>% <?=__('common.col.accuracy')?></span></div>
 	<div class="tile"><span class="tile-label"><?=__('common.col.connection_time')?></span><span class="tile-val"><?php echo timestamp_to_str($playerdata['connection_time']); ?></span></div>
 </section>

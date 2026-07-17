@@ -237,7 +237,7 @@
 		<input type="hidden" name="mode" value="players" />
 		<input type="hidden" name="game" value="<?php echo $game; ?>" />
 		<div class="tb-group">
-			<label class="tb-label"><?=__('players.filter.period')?></label>
+			<label class="tb-label"><?=__('players.rankview.label')?></label>
 			<select name="rank_type">
 				<?php foreach ($options as $value => $label): ?>
 					<option value="<?=$value?>" <?=($rank_type == $value) ? 'selected' : ''?>><?=htmlspecialchars($label)?></option>
@@ -255,19 +255,19 @@
 		<button class="tb-btn" type="submit"><?=__('players.filter.apply')?></button>
 	</form>
 <?php
+	// Active-filter chips (always show current view + sort as removable chips;
+	// "Очистить фильтры" only when something differs from defaults).
 	$hasFilters = ($rank_type != 0) || ($table->sort != $g_options['rankingtype']);
-	if ($hasFilters) {
 ?>
 	<div class="tb-chips">
-<?php if ($rank_type != 0 && isset($options[$rank_type])) { ?>
-		<span class="chip flt"><?=__('players.filter.period')?>: <?php echo htmlspecialchars($options[$rank_type]); ?></span>
-<?php } ?>
-<?php if ($table->sort != $g_options['rankingtype'] && isset($sortCols[$table->sort])) { ?>
+		<span class="chip flt"><?=__('players.rankview.label')?>: <?php echo htmlspecialchars($options[$rank_type] ?? ''); ?></span>
+<?php if (isset($sortCols[$table->sort])) { ?>
 		<span class="chip flt"><?=__('players.filter.sort')?>: <?php echo htmlspecialchars($sortCols[$table->sort]); ?></span>
 <?php } ?>
+<?php if ($hasFilters) { ?>
 		<a class="tb-clear" href="<?php echo $g_options['scripturl']; ?>?mode=players&amp;game=<?php echo $game; ?>"><?=__('players.filter.clear')?></a>
-	</div>
 <?php } ?>
+	</div>
 </div>
 
 <section class="panel">

@@ -153,17 +153,17 @@
 			<div class="r"><span class="k"><?=__('playerinfo_general.row.points')?></span><span class="v mono link"><?php echo $nf($playerdata['skill']); ?></span></div>
 			<div class="r"><span class="k"><?=__('playerinfo_general.row.rank')?></span><span class="v mono"><?php echo htmlspecialchars($rankDisplay); ?></span></div>
 			<div class="r"><span class="k"><?=__('playerinfo_general.row.kills_per_minute')?></span><span class="v mono"><?php echo $kills_per_min; ?></span></div>
-			<div class="r"><span class="k"><?=__('playerinfo_general.row.kills_per_death')?></span><span class="v mono"><?php echo htmlspecialchars($playerdata['kpd']); ?> <span class="faint">(<?php echo htmlspecialchars($realkpd); ?>*)</span></span></div>
-			<div class="r"><span class="k"><?=__('playerinfo_general.row.headshots_per_kill')?></span><span class="v mono"><?php echo htmlspecialchars($playerdata['hpk']); ?> <span class="faint">(<?php echo htmlspecialchars($realhpk); ?>*)</span></span></div>
+			<div class="r"><span class="k"><?=__('playerinfo_general.row.kills_per_death')?></span><span class="v mono"><?php echo is_numeric($playerdata['kpd']) ? number_format((float) $playerdata['kpd'], 2) : htmlspecialchars($playerdata['kpd']); ?> <span class="faint">(<?php echo is_numeric($realkpd) ? number_format((float) $realkpd, 2) : htmlspecialchars($realkpd); ?>)</span></span></div>
+			<div class="r"><span class="k"><?=__('playerinfo_general.row.headshots_per_kill')?></span><span class="v mono"><?php echo is_numeric($playerdata['hpk']) ? number_format((float) $playerdata['hpk'], 2) : htmlspecialchars($playerdata['hpk']); ?> <span class="faint">(<?php echo is_numeric($realhpk) ? number_format((float) $realhpk, 2) : htmlspecialchars($realhpk); ?>)</span></span></div>
 			<div class="r"><span class="k"><?=__('playerinfo_general.row.shots_per_kill')?></span><span class="v mono"><?php echo $shots_per_kill; ?></span></div>
-			<div class="r"><span class="k"><?=__('playerinfo_general.row.weapon_accuracy')?></span><span class="v mono"><?php echo htmlspecialchars($playerdata['acc']); ?>% <span class="faint">(<?php echo sprintf('%.0f', $sm_accuracy); ?>%*)</span></span></div>
-			<div class="r"><span class="k"><?=__('playerinfo_general.row.headshots')?></span><span class="v mono"><?php echo $nf($headshots_display); ?> <span class="faint">(<?php echo $nf($realheadshots); ?>*)</span></span></div>
-			<div class="r"><span class="k"><?=__('playerinfo_general.row.kills')?></span><span class="v mono"><?php echo $nf($playerdata['kills']); ?> <span class="faint">(<?php echo $nf($realkills); ?>*)</span></span></div>
-			<div class="r"><span class="k"><?=__('playerinfo_general.row.deaths')?></span><span class="v mono"><?php echo $nf($playerdata['deaths']); ?> <span class="faint">(<?php echo $nf($realdeaths); ?>*)</span></span></div>
+			<div class="r"><span class="k"><?=__('playerinfo_general.row.weapon_accuracy')?></span><span class="v mono"><?php echo htmlspecialchars($playerdata['acc']); ?>% <span class="faint">(<?php echo sprintf('%.0f', $sm_accuracy); ?>%)</span></span></div>
+			<div class="r"><span class="k"><?=__('playerinfo_general.row.headshots')?></span><span class="v mono"><?php echo $nf($headshots_display); ?> <span class="faint">(<?php echo $nf($realheadshots); ?>)</span></span></div>
+			<div class="r"><span class="k"><?=__('playerinfo_general.row.kills')?></span><span class="v mono"><?php echo $nf($playerdata['kills']); ?> <span class="faint">(<?php echo $nf($realkills); ?>)</span></span></div>
+			<div class="r"><span class="k"><?=__('playerinfo_general.row.deaths')?></span><span class="v mono"><?php echo $nf($playerdata['deaths']); ?> <span class="faint">(<?php echo $nf($realdeaths); ?>)</span></span></div>
 			<div class="r"><span class="k"><?=__('playerinfo_general.row.longest_kill_streak')?></span><span class="v mono"><?php echo $nf($kill_streak); ?></span></div>
 			<div class="r"><span class="k"><?=__('playerinfo_general.row.longest_death_streak')?></span><span class="v mono"><?php echo $nf($death_streak); ?></span></div>
 			<div class="r"><span class="k"><?=__('playerinfo_general.row.suicides')?></span><span class="v mono"><?php echo $nf($playerdata['suicides']); ?></span></div>
-			<div class="r"><span class="k"><?=__('playerinfo_general.row.teammate_kills')?></span><span class="v mono"><?php echo $nf($playerdata['teamkills']); ?> <span class="faint">(<?php echo $nf($realteamkills); ?>*)</span></span></div>
+			<div class="r"><span class="k"><?=__('playerinfo_general.row.teammate_kills')?></span><span class="v mono"><?php echo $nf($playerdata['teamkills']); ?> <span class="faint">(<?php echo $nf($realteamkills); ?>)</span></span></div>
 		</div>
 		<div class="dl-links">
 			<a class="lnk" href="<?php echo $g_options['scripturl']; ?>?mode=playerhistory&amp;player=<?php echo $player; ?>"><?=__('playerinfo_general.link.events')?></a>
