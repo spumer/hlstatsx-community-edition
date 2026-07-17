@@ -839,14 +839,14 @@ a.footer_link:hover {
 @media (max-width: 1180px) { .app .stats { grid-template-columns: repeat(2, 1fr); } .app .grid2 { grid-template-columns: 1fr; } }
 
 /* ---- Leaderboard (MOCKUP 02): filter toolbar + flat table ---- */
-.app .toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; margin-bottom: 1.15rem; }
-.app .tb-search { position: relative; flex: 1 1 260px; max-width: 360px; }
+.app .toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem 1.1rem; margin-bottom: 1.15rem; }
+.app .tb-search { position: relative; flex: 0 0 300px; max-width: 100%; }
 .app .tb-search svg { position: absolute; left: .65rem; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--text-faint); stroke-width: 1.75; pointer-events: none; }
 .app .tb-search input { width: 100%; background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: .5rem .65rem .5rem 2.1rem; font-size: var(--fs-sm); border-radius: var(--r-0); }
 .app .tb-search input::placeholder { color: var(--text-faint); }
 .app .tb-search input:focus { border-color: var(--accent); outline: none; }
-.app .tb-group { display: flex; align-items: center; gap: .5rem; }
-.app .tb-label { font-size: var(--fs-xs); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); }
+.app .tb-group { display: flex; align-items: center; gap: .5rem; flex: 0 0 auto; }
+.app .tb-label { font-size: var(--fs-xs); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; }
 .app .toolbar select, .app .tb-mini { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: .45rem .6rem; font-size: var(--fs-sm); border-radius: var(--r-0); }
 .app .tb-mini { width: 4rem; font-family: var(--mono); }
 .app .toolbar select:focus, .app .tb-mini:focus { border-color: var(--accent); outline: none; }
