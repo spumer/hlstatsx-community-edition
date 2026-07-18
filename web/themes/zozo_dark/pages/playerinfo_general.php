@@ -173,7 +173,7 @@
 	<div class="panel-head"><span class="ptitle"><?=__('playerinfo_general.row.rank')?></span></div>
 	<div class="rankcard">
 		<div class="rank-top">
-			<span class="rank-ins"><span class="tier-glyph big t<?php echo $rankTier; ?>" aria-hidden="true"></span></span>
+			<span class="rank-ins"><span class="tier-glyph big tier--<?php echo $rankTier; ?>" aria-hidden="true"></span></span>
 			<div>
 				<div class="rank-name"><?php echo $rankName !== '' ? htmlspecialchars($rankName) : '&mdash;'; ?></div>
 				<div class="rank-sub"><?php echo $nf($playerdata['kills']); ?> <?=__('playerinfo_general.row.kills')?></div>

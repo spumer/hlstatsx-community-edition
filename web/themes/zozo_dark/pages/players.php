@@ -305,7 +305,7 @@
 				<td class="idx r"><?php echo $rank; ?></td>
 				<td><span class="avatar sm" style="background:<?php echo $avatarTint($nm); ?>"><?php echo htmlspecialchars($initial); ?></span></td>
 				<td class="pl"><a href="<?php echo $g_options['scripturl']; ?>?mode=playerinfo&amp;player=<?php echo $row['playerId']; ?>"><?php echo $flagImg; ?><span class="nm"><?php echo htmlspecialchars($nm); ?></span></a></td>
-				<td class="tier"><?php if ($rankName !== '') { ?><span class="tier-glyph t<?php echo $rankTier; ?>" aria-hidden="true"></span><span class="tier-name"><?php echo htmlspecialchars($rankName); ?></span><?php } else { ?><span class="num dim">?</span><?php } ?></td>
+				<td class="tier"><?php if ($rankName !== '') { ?><span class="tier-glyph tier--<?php echo $rankTier; ?>" aria-hidden="true"></span><span class="tier-name"><?php echo htmlspecialchars($rankName); ?></span><?php } else { ?><span class="num dim">?</span><?php } ?></td>
 				<td class="num r pts"><?php echo number_format((int) $row['skill'], 0, '.', ' '); ?></td>
 				<td class="num r"><?php echo number_format((int) $row['kills'], 0, '.', ' '); ?></td>
 				<td class="num r"><?php echo number_format((int) $row['deaths'], 0, '.', ' '); ?></td>

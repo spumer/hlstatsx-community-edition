@@ -881,16 +881,19 @@ a.footer_link:hover {
 .app table.lb .avatar.sm { width: 24px; height: 24px; flex: 0 0 24px; font-size: .65rem; }
 .app table.lb td.pts { color: var(--accent-2); font-weight: 600; }
 .app table.lb td.tier { color: var(--text-muted); }
-.app .tier-glyph { display: inline-block; width: 14px; height: 14px; margin-right: .4rem; vertical-align: -2px; background: var(--sage); -webkit-mask: var(--tier-mask) center/contain no-repeat; mask: var(--tier-mask) center/contain no-repeat; }
-:root { --tier-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2 3 6v6c0 5 3.8 8.5 9 10 5.2-1.5 9-5 9-10V6z'/%3E%3C/svg%3E"); }
+/* Tier glyph: monochrome PNG mask tinted by the tier token (designer #33).
+   NB: mask-image url() does NOT load over file:// — render only over http(s). */
+.app .tier-glyph { display: inline-block; width: 14px; height: 14px; margin-right: .4rem; vertical-align: -2px; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
+/* --tier-1..6 alias the canon tier tokens (colors_and_type.css :51-56) */
+:root { --tier-1: var(--tier-common); --tier-2: var(--tier-smoker); --tier-3: var(--tier-charger); --tier-4: var(--tier-hunter); --tier-5: var(--tier-witch); --tier-6: var(--tier-tank); }
 .app .tier-name { font-size: var(--fs-sm); }
 /* 6-tier glyph colour by kill-band (hybrid ranks, DEF-11) */
-.app .tier-glyph.t1 { background: var(--tier-common); }
-.app .tier-glyph.t2 { background: var(--tier-smoker); }
-.app .tier-glyph.t3 { background: var(--tier-charger); }
-.app .tier-glyph.t4 { background: var(--tier-hunter); }
-.app .tier-glyph.t5 { background: var(--tier-witch); }
-.app .tier-glyph.t6 { background: var(--tier-tank); }
+.app .tier-glyph.tier--1 { background: var(--tier-1); -webkit-mask-image: url(icons/tier-1.png); mask-image: url(icons/tier-1.png); }
+.app .tier-glyph.tier--2 { background: var(--tier-2); -webkit-mask-image: url(icons/tier-2.png); mask-image: url(icons/tier-2.png); }
+.app .tier-glyph.tier--3 { background: var(--tier-3); -webkit-mask-image: url(icons/tier-3.png); mask-image: url(icons/tier-3.png); }
+.app .tier-glyph.tier--4 { background: var(--tier-4); -webkit-mask-image: url(icons/tier-4.png); mask-image: url(icons/tier-4.png); }
+.app .tier-glyph.tier--5 { background: var(--tier-5); -webkit-mask-image: url(icons/tier-5.png); mask-image: url(icons/tier-5.png); }
+.app .tier-glyph.tier--6 { background: var(--tier-6); -webkit-mask-image: url(icons/tier-6.png); mask-image: url(icons/tier-6.png); }
 .app .tableicon { height: 11px; vertical-align: middle; margin-right: .15rem; }
 
 /* ---- Player profile (MOCKUP 03): hero + stat tiles ---- */

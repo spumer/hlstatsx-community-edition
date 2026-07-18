@@ -168,7 +168,7 @@
 	<div class="hero-body">
 		<h1 class="hero-name"><?php echo $flagImg; ?><?php echo $pl_name; ?></h1>
 		<div class="hero-meta">
-<?php if ($rankName !== '') { ?><span class="tier-badge"><span class="tier-glyph t<?php echo $rankTier; ?>" aria-hidden="true"></span><?php echo htmlspecialchars($rankName); ?></span><?php } ?>
+<?php if ($rankName !== '') { ?><span class="tier-badge"><span class="tier-glyph tier--<?php echo $rankTier; ?>" aria-hidden="true"></span><?php echo htmlspecialchars($rankName); ?></span><?php } ?>
 <?php if ($steamid !== '') { ?><span class="mono hero-id"><?php echo htmlspecialchars($steamid); ?></span><?php } ?>
 			<span class="hero-status <?php echo ($hideranking == 2) ? 'bad' : 'ok'; ?>"><?php echo $statusmsg; ?></span>
 <?php if (!empty($playerdata['clan_name'])) { ?><span class="hero-clan"><?php echo htmlspecialchars($playerdata['clan_name']); ?></span><?php } ?>
