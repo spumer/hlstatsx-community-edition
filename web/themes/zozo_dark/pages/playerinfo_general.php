@@ -165,15 +165,6 @@
 			<div class="r"><span class="k"><?=__('playerinfo_general.row.suicides')?></span><span class="v mono"><?php echo $nf($playerdata['suicides']); ?></span></div>
 			<div class="r"><span class="k"><?=__('playerinfo_general.row.teammate_kills')?></span><span class="v mono"><?php echo $nf($playerdata['teamkills']); ?> <span class="faint">(<?php echo $nf($realteamkills); ?>)</span></span></div>
 		</div>
-		<div class="dl-links">
-			<a class="lnk" href="<?php echo $g_options['scripturl']; ?>?mode=playerhistory&amp;player=<?php echo $player; ?>"><?=__('playerinfo_general.link.events')?></a>
-			<a class="lnk" href="<?php echo $g_options['scripturl']; ?>?mode=playersessions&amp;player=<?php echo $player; ?>"><?=__('playerinfo_general.link.sessions')?></a>
-			<a class="lnk" href="<?php echo $g_options['scripturl']; ?>?mode=playerawards&amp;player=<?php echo $player; ?>"><?php echo __f('playerinfo_general.link.awards_count', $numawards); ?></a>
-<?php if ($g_options["nav_globalchat"] == 1) { ?>
-			<a class="lnk" href="<?php echo $g_options['scripturl']; ?>?mode=chathistory&amp;player=<?php echo $player; ?>"><?=__('common.nav.chat')?></a>
-<?php } ?>
-			<a class="lnk" href="<?php echo $g_options['scripturl']; ?>?mode=search&amp;st=player&amp;q=<?php echo $pl_urlname; ?>"><?=__('playerinfo_general.link.find_similar_names')?></a>
-		</div>
 	</section>
 </div>
 

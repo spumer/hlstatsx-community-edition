@@ -40,6 +40,7 @@ return [
     'playerinfo.tile.sub.streak' => 'серия: %s',
     'playerinfo.hero.steam_profile' => 'Профиль Steam',
     'playerinfo.hero.similar'   => 'Похожие ники',
+    'playerinfo.logs.title'     => 'Журналы',
     'common.msg.error_heading' => 'ОШИБКА',
     'common.msg.empty'       => '---',
     'common.msg.undefined'   => 'Неизвестно',

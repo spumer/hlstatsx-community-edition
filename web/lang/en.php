@@ -48,6 +48,7 @@ return [
     'playerinfo.tile.sub.streak' => 'streak: %s',
     'playerinfo.hero.steam_profile' => 'Steam Profile',
     'playerinfo.hero.similar'   => 'Similar names',
+    'playerinfo.logs.title'     => 'Logs',
     'common.msg.error_heading' => 'ERROR',
     'common.msg.empty'       => '---',
     'common.msg.undefined'   => 'Undefined',

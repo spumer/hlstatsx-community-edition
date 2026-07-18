@@ -135,6 +135,9 @@
 	$db->query("SELECT kill_streak FROM hlstats_Players WHERE playerId = '$player'");
 	list($kill_streak) = $db->fetch_row();
 	$kills_per_min = ($playerdata['connection_time'] > 0) ? sprintf('%.1f', ($playerdata['kills'] / ($playerdata['connection_time'] / 60))) : '0';
+	// Awards count for the "Журналы" quick-links row (#32 variant A).
+	$db->query("SELECT COUNT(*) FROM hlstats_Players_Awards WHERE playerId = '$player'");
+	list($numawards) = $db->fetch_row();
 
 	$avatarTint = function ($seed) {
 		$palette = array('#5a845a', '#8e44ad', '#27ae60', '#3498db', '#d63031', '#e8b931', '#14b8a6', '#6366f1');
@@ -176,6 +179,17 @@
 		<a class="hero-btn ghost" href="<?php echo $g_options['scripturl']; ?>?mode=search&amp;st=player&amp;q=<?php echo $pl_urlname; ?>"><?=__('playerinfo.hero.similar')?></a>
 	</div>
 </div>
+
+<!-- Quick links: operational player logs (#32 variant A — row under hero) -->
+<nav class="quicklinks" aria-label="<?=__('playerinfo.logs.title')?>">
+	<span class="ql-label"><?=__('playerinfo.logs.title')?></span>
+	<a class="ql-btn" href="<?php echo $g_options['scripturl']; ?>?mode=playerhistory&amp;player=<?php echo $player; ?>"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><?=__('playerinfo_general.link.events')?></a>
+	<a class="ql-btn" href="<?php echo $g_options['scripturl']; ?>?mode=playersessions&amp;player=<?php echo $player; ?>"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="4" width="16" height="16" rx="0"/><path d="M4 9h16M9 4v16"/></svg><?=__('playerinfo_general.link.sessions')?></a>
+	<a class="ql-btn" href="<?php echo $g_options['scripturl']; ?>?mode=playerawards&amp;player=<?php echo $player; ?>"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="9" r="5"/><path d="M9 13.5 7.5 21l4.5-2.5L16.5 21 15 13.5"/></svg><?=__('common.nav.awards')?> <span class="ql-count"><?php echo (int) $numawards; ?></span></a>
+<?php if ($g_options['nav_globalchat'] == 1) { ?>
+	<a class="ql-btn" href="<?php echo $g_options['scripturl']; ?>?mode=chathistory&amp;player=<?php echo $player; ?>"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 4H4v12h4v4l5-4h7z"/></svg><?=__('common.nav.chat')?></a>
+<?php } ?>
+</nav>
 
 <?php
 	// Stat tiles captured once; emitted AFTER the tab bar (mockup order:

@@ -918,6 +918,14 @@ a.footer_link:hover {
 .app .tile-val { font-family: var(--mono); font-weight: 700; font-size: 1.35rem; line-height: 1; color: var(--text); font-variant-numeric: tabular-nums; }
 .app .tile-val.s-red { color: var(--accent-2); }
 .app .tile-sub { font-size: .68rem; color: var(--text-faint); }
+
+/* Quick links: operational player logs (#32 variant A — row under hero) */
+.app .quicklinks { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
+.app .ql-label { font-size: var(--fs-xs); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-faint); margin-right: .3rem; }
+.app .ql-btn { display: inline-flex; align-items: center; gap: .45rem; font-size: var(--fs-sm); font-weight: 600; color: var(--text-muted); background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-0); padding: .45rem .8rem; transition: color .12s, border-color .12s, background .12s; }
+.app .ql-btn:hover { color: var(--text); border-color: var(--border-2); background: var(--surface-2); }
+.app .ql-btn svg { width: 15px; height: 15px; stroke-width: 1.9; color: var(--accent); }
+.app .ql-btn .ql-count { font-family: var(--mono); font-size: var(--fs-xs); color: var(--text-faint); }
 @media (max-width: 1180px) { .app .tiles { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 700px) { .app .tiles { grid-template-columns: repeat(2, 1fr); } .app .hero { flex-wrap: wrap; } }
 
