@@ -36,6 +36,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 For support and installation notes visit http://www.hlxcommunity.com
 */
 
+	// Binary (image/png) endpoint: PHP 8.1+ emits E_DEPRECATED for the implicit
+	// float->int conversions in the GD graph renderer (functions_graph.php). With
+	// display_errors on, that HTML gets printed BEFORE the image header, breaking
+	// the "headers already sent" state and prepending bytes to the PNG -> broken
+	// image (RB-3). Suppress only the deprecation class here so it can never
+	// corrupt the binary stream; real warnings/errors stay visible.
+	error_reporting(error_reporting() & ~E_DEPRECATED);
+
 	foreach ($_SERVER as $key => $entry) {
 		if ($key !== 'HTTP_COOKIE') {
 			$search_pattern  = array('/<script>/', '/<\/script>/', '/[^A-Za-z0-9.\-\/=:;_?#&~]/');

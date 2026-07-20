@@ -43,6 +43,11 @@
     declare(strict_types = 1);
     const IN_HLSTATS = true;
 
+    // Binary (image/png) endpoint: silence only PHP 8.1+ E_DEPRECATED (implicit
+    // float->int in pChart) so deprecation HTML can't be printed before the image
+    // header and corrupt the PNG stream (RB-3, same class as show_graph.php).
+    error_reporting(error_reporting() & ~E_DEPRECATED);
+
     // Load components
     require ('config.php');
     require (INCLUDE_PATH . '/functions.php');

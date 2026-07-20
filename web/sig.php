@@ -90,7 +90,10 @@ if (empty($g_options)) {
 	error('Warning: Could not find any options in the database. Check HLStats configuration.');
 }
 
-@error_reporting(E_ALL ^ E_NOTICE);
+// Binary (image/png) endpoint: also strip E_DEPRECATED so PHP 8.1+ implicit
+// float->int notices in the GD signature renderer can't be printed before the
+// image header and corrupt the PNG stream (RB-2).
+@error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
 
 function imagecopymerge_alpha($dst_im, $src_im, $dst_x, $dst_y, $src_x, $src_y, $src_w, $src_h, $pct){
 	$opacity=$pct;

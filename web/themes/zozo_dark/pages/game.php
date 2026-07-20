@@ -74,7 +74,19 @@
 	// --- KPI subtext data: maps in rotation + 24h online peak ---
 	$r = $db->query("SELECT COUNT(DISTINCT act_map) FROM hlstats_Servers WHERE game='$game' AND act_map != ''");
 	list($maps_rotation) = $db->fetch_row($r);
-	$r = $db->query("SELECT MAX(players) FROM hlstats_Trend WHERE game='$game' AND timestamp >= " . (time() - 86400));
+	// Peak CONCURRENT players in the last 24h: sum act_players across the game's
+	// servers at each server_load sample, take the max. (hlstats_Trend.players is
+	// a cumulative registered-player total, not a concurrent count — using it here
+	// reported the whole player base as the "peak online". RB #37 fix.)
+	$r = $db->query("
+		SELECT MAX(tot) FROM (
+			SELECT SUM(sl.act_players) AS tot
+			FROM hlstats_server_load sl
+			JOIN hlstats_Servers s ON s.serverId = sl.server_id
+			WHERE s.game='$game' AND sl.timestamp >= " . (time() - 86400) . "
+			GROUP BY sl.timestamp
+		) x
+	");
 	list($peak_24h) = $db->fetch_row($r);
 
 	// --- Top players (leaderboard preview) ---
