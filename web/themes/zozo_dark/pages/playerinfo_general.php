@@ -98,7 +98,7 @@
     // --- Rank progress (current + next rank; stock verbatim) ---
     $db->query("SELECT hlstats_Ranks.rankName, hlstats_Ranks.image, hlstats_Ranks.minKills FROM hlstats_Ranks WHERE hlstats_Ranks.minKills <= " . (int) $playerdata['kills'] . " AND hlstats_Ranks.game = '$game' ORDER BY hlstats_Ranks.minKills DESC LIMIT 1");
     $curRank = $db->fetch_array();
-    $rankName = $curRank ? zozo_rank_ru($curRank['rankName']) : '';
+    $rankName = $curRank ? zozo_rank_ru_by_kills((int) $playerdata['kills']) : '';
     $rankTier = zozo_rank_tier((int) $playerdata['kills']);
     $rankCurMinKills = $curRank ? $curRank['minKills'] : 0;
     $db->query("SELECT hlstats_Ranks.rankName, hlstats_Ranks.minKills FROM hlstats_Ranks WHERE hlstats_Ranks.minKills > " . (int) $playerdata['kills'] . " AND hlstats_Ranks.game = '$game' ORDER BY hlstats_Ranks.minKills LIMIT 1");
@@ -108,7 +108,7 @@
         $rankPercent = 100;
     } else {
         $nextRank = $db->fetch_array();
-        $nextRankName = zozo_rank_ru($nextRank['rankName']);
+        $nextRankName = zozo_rank_ru_by_kills((int) $nextRank['minKills']);
         $rankKillsNeeded = $nextRank['minKills'] - $playerdata['kills'];
         $span = ($nextRank['minKills'] - $rankCurMinKills);
         $rankPercent = $span > 0 ? round(($playerdata['kills'] - $rankCurMinKills) * 100 / $span, 1) : 0;

@@ -130,7 +130,7 @@
 	}
 	$rankName = '';
 	$rr = $db->query("SELECT rankName FROM hlstats_Ranks WHERE game='$game' AND '" . (int) $playerdata['kills'] . "' BETWEEN minKills AND maxKills LIMIT 1");
-	if ($db->num_rows($rr) > 0) { list($rankRaw) = $db->fetch_row($rr); $rankName = zozo_rank_ru($rankRaw); }
+	if ($db->num_rows($rr) > 0) { $rankName = zozo_rank_ru_by_kills((int) $playerdata['kills']); }
 	$rankTier = zozo_rank_tier((int) $playerdata['kills']);
 	$db->query("SELECT kill_streak FROM hlstats_Players WHERE playerId = '$player'");
 	list($kill_streak) = $db->fetch_row();

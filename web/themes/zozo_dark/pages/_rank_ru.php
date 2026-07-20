@@ -17,57 +17,40 @@ if (!defined('IN_HLSTATS')) {
     die('Do not access this file directly.');
 }
 
-if (!function_exists('zozo_rank_ru')) {
+if (!function_exists('zozo_rank_ru_by_kills')) {
 
-    /** RU translation of a stock L4D2 rankName; falls back to the original. */
-    function zozo_rank_ru(string $rankName): string
+    /**
+     * Zombie-survival RU rank title for a given kill count (task #36 re-key,
+     * founder-approved 2026-07-19, kill-band variant). Keyed on kills, NOT on
+     * the stock rankName: ZoZo prod replaced hlstats_Ranks with 40 custom RU
+     * military ranks, so the old EN-name map missed on real data. Bands mirror
+     * the prod minKills thresholds; apex "Зомби-бог" sits on pos.40 (Терминатор,
+     * 35000+), the new pre-apex "Аннигилятор" on pos.39 (30000+). This is
+     * drift-proof: renames/typos of the DB rankName can't break it.
+     * zozo_rank_tier() (glyph colour) is unchanged.
+     */
+    function zozo_rank_ru_by_kills(int $kills): string
     {
-        // Zombie survival ladder (founder-approved 2026-07-17): the 39 stock
-        // military rankNames map to L4D2 zombie-themed RU titles. EN keys stay
-        // the stock rankName; zozo_rank_tier() (glyph colour) is unchanged.
-        static $map = [
-            'Recruit'                    => 'Новобранец',
-            'Private'                    => 'Выживший',
-            'Private First Class'        => 'Беглец',
-            'Lance Corporal'             => 'Скиталец',
-            'Corporal'                   => 'Мародёр',
-            'Sergeant'                   => 'Стрелок',
-            'Staff Sergeant'             => 'Меткач',
-            'Gunnery Sergeant'           => 'Снайпер',
-            'Master Sergeant'            => 'Следопыт',
-            'First Sergeant'             => 'Охотник',
-            'Master Chief'               => 'Чистильщик',
-            'Sergeant Major'             => 'Боец',
-            'Ensign'                     => 'Штурмовик',
-            'Third Lieutenant'           => 'Громила',
-            'Second Lieutenant'          => 'Берсерк',
-            'First Lieutenant'           => 'Крушитель',
-            'Captain'                    => 'Убийца',
-            'Group Captain'              => 'Головорез',
-            'Senior Captain'             => 'Мясник',
-            'Lieutenant Major'           => 'Палач',
-            'Major'                      => 'Каратель',
-            'Group Major'                => 'Жнец',
-            'Lieutenant Commander'       => 'Истребитель',
-            'Commander'                  => 'Потрошитель',
-            'Group Commander'            => 'Ветеран',
-            'Lieutenant Colonel'         => 'Ликвидатор',
-            'Colonel'                    => 'Опустошитель',
-            'Brigadier'                  => 'Гроза орды',
-            'Brigadier General'          => 'Кошмар',
-            'Major General'              => 'Апокалиптик',
-            'Lieutenant General'         => 'Легенда',
-            'General'                    => 'Погибель',
-            'Commander General'          => 'Разрушитель',
-            'Field Vice Marshal'         => 'Титан',
-            'Field Marshal'              => 'Бессмертный',
-            'Vice Commander of the Army' => 'Владыка',
-            'Commander of the Army'      => 'Апокалипсис',
-            'High Commander'             => 'Повелитель мёртвых',
-            'Supreme Commander'          => 'Зомби-бог',
+        static $bands = [ // [minKills, zombie title] ascending
+            [0,'Новобранец'],[50,'Выживший'],[100,'Беглец'],[200,'Скиталец'],[300,'Мародёр'],
+            [400,'Стрелок'],[500,'Меткач'],[600,'Снайпер'],[700,'Следопыт'],[800,'Охотник'],[900,'Чистильщик'],
+            [1000,'Боец'],[1200,'Штурмовик'],[1400,'Громила'],[1600,'Берсерк'],[1800,'Крушитель'],
+            [2000,'Убийца'],[2250,'Головорез'],[2500,'Мясник'],[2750,'Палач'],[3000,'Каратель'],[3500,'Жнец'],
+            [4000,'Истребитель'],[4500,'Потрошитель'],[5000,'Ветеран'],[5750,'Ликвидатор'],[6500,'Опустошитель'],
+            [7250,'Гроза орды'],[8000,'Кошмар'],[9000,'Апокалиптик'],[10000,'Легенда'],[12500,'Погибель'],
+            [15000,'Разрушитель'],[17500,'Титан'],[20000,'Бессмертный'],[22500,'Владыка'],[25000,'Апокалипсис'],
+            [27500,'Повелитель мёртвых'],[30000,'Аннигилятор'],[35000,'Зомби-бог'],
         ];
 
-        return $map[$rankName] ?? $rankName;
+        $name = $bands[0][1];
+        foreach ($bands as [$min, $zombie]) {
+            if ($kills >= $min) {
+                $name = $zombie;
+            } else {
+                break;
+            }
+        }
+        return $name;
     }
 
     /**

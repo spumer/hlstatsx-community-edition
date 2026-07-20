@@ -171,19 +171,6 @@
 		list($numitems) = $db->fetch_row($resultCount);
 	}
 
-	// Rank bands (kills -> rankName) loaded once; mapped in PHP so the SQL is untouched.
-	$ranks = array();
-	$rr = $db->query("SELECT rankName, minKills, maxKills FROM hlstats_Ranks WHERE game='$game' ORDER BY minKills ASC");
-	while ($rrow = $db->fetch_array($rr)) { $ranks[] = $rrow; }
-	$rankOf = function ($kills) use ($ranks) {
-		foreach ($ranks as $r) {
-			if ($kills >= $r['minKills'] && ($r['maxKills'] == 0 || $kills <= $r['maxKills'])) {
-				return $r['rankName'];
-			}
-		}
-		return '';
-	};
-
 	$avatarTint = function ($seed) {
 		$palette = array('#5a845a', '#8e44ad', '#27ae60', '#3498db', '#d63031', '#e8b931', '#14b8a6', '#6366f1');
 		$h = 0; $seed = (string) $seed;
@@ -292,8 +279,7 @@
 	while ($row = $db->fetch_array($result)) {
 		$nm = $row['lastName'];
 		$initial = mb_strtoupper(mb_substr($nm, 0, 1, 'UTF-8'), 'UTF-8');
-		$rankNameRaw = $rankOf((int) $row['kills']);
-		$rankName = zozo_rank_ru($rankNameRaw);
+		$rankName = zozo_rank_ru_by_kills((int) $row['kills']);
 		$rankTier = zozo_rank_tier((int) $row['kills']);
 		$flagImg = '';
 		if ($g_options['countrydata'] == 1 && !empty($row['flag'])) {
