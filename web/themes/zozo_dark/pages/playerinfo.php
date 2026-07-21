@@ -123,11 +123,17 @@
 
 	// --- ZoZo hero data: SteamID + tier (rankName from hlstats_Ranks) ---
 	$steamid = '';
+	$uid = '';
 	$db->query("SELECT uniqueId FROM hlstats_PlayerUniqueIds WHERE playerId = '$player' LIMIT 1");
 	if ($db->num_rows() > 0) {
 		list($uid) = $db->fetch_row();
 		$steamid = preg_match('/^\d+:\d+:\d+$/', $uid) ? 'STEAM_' . $uid : $uid;
 	}
+	// ELO axis (FEAT-0030 pilot): read-only display value from skill_rating,
+	// served from the local cache table (live-fill-on-miss). Fail-open — never
+	// blocks or breaks the profile render; degrades to no badge on any error.
+	require_once __DIR__ . '/_elo_client.php';
+	$elo = ($uid !== '') ? zozo_elo_get($db, $uid) : null;
 	$rankName = '';
 	$rr = $db->query("SELECT rankName FROM hlstats_Ranks WHERE game='$game' AND '" . (int) $playerdata['kills'] . "' BETWEEN minKills AND maxKills LIMIT 1");
 	if ($db->num_rows($rr) > 0) { $rankName = zozo_rank_ru_by_kills((int) $playerdata['kills']); }
@@ -169,6 +175,7 @@
 		<h1 class="hero-name"><?php echo $flagImg; ?><?php echo $pl_name; ?></h1>
 		<div class="hero-meta">
 <?php if ($rankName !== '') { ?><span class="tier-badge"><span class="tier-glyph tier--<?php echo $rankTier; ?>" aria-hidden="true"></span><?php echo htmlspecialchars($rankName); ?></span><?php } ?>
+<?php if ($elo && $elo['has_elo']) { ?><span class="elo-badge" title="<?=__('playerinfo.elo.title')?>"><span class="tier-glyph tier--<?php echo $elo['glyph']; ?>" aria-hidden="true"></span><span class="elo-tag"><?=__('playerinfo.elo.label')?></span><span class="elo-val"><?php echo $nf($elo['combined']); ?></span><?php if ($elo['calibrating']) { ?><span class="elo-state"><?=__('playerinfo.elo.calibrating')?></span><?php } elseif ($elo['rank']) { ?><span class="elo-rank"><?php echo sprintf(__('playerinfo.elo.rank'), $nf($elo['rank']), $nf($elo['rank_total'])); ?></span><?php } ?></span><?php } ?>
 <?php if ($steamid !== '') { ?><span class="mono hero-id"><?php echo htmlspecialchars($steamid); ?></span><?php } ?>
 			<span class="hero-status <?php echo ($hideranking == 2) ? 'bad' : 'ok'; ?>"><?php echo $statusmsg; ?></span>
 <?php if (!empty($playerdata['clan_name'])) { ?><span class="hero-clan"><?php echo htmlspecialchars($playerdata['clan_name']); ?></span><?php } ?>

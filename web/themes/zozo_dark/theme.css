@@ -904,6 +904,12 @@ a.footer_link:hover {
 .app .hero-name .tableicon { height: 16px; }
 .app .hero-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; margin-top: .5rem; font-size: var(--fs-sm); }
 .app .tier-badge { display: inline-flex; align-items: center; gap: .35rem; padding: .15rem .5rem; background: var(--surface-2); border: 1px solid var(--border-2); color: var(--sage); font-weight: 600; font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: .05em; }
+/* ELO badge (FEAT-0030) — a second, distinct axis next to the zombie rank.
+   Accent-tagged so it reads as its own metric, never confused with points/rank. */
+.app .elo-badge { display: inline-flex; align-items: center; gap: .35rem; padding: .15rem .5rem; background: var(--surface-2); border: 1px solid var(--border-2); font-size: var(--fs-xs); }
+.app .elo-badge .elo-tag { color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+.app .elo-badge .elo-val { color: var(--text); font-weight: 700; }
+.app .elo-badge .elo-rank, .app .elo-badge .elo-state { color: var(--text-muted); }
 .app .hero-id { color: var(--text-muted); }
 .app .hero-status { padding: .1rem .45rem; font-size: var(--fs-xs); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
 .app .hero-status.ok { color: var(--green-bright); }
