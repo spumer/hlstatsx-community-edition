@@ -183,7 +183,7 @@
         $Chart->setFontProperties(IMAGE_PATH . '/sig/font/DejaVuSans.ttf', 7);
         $DataSet->SetYAxisName('Skill');
         $DataSet->SetYAxisUnit('K');
-        $Chart->setColorPalette(0, 255, 255, 0);
+        $Chart->setColorPalette(0, 52, 152, 219);
         $Chart->drawRightScale($DataSet->GetData(), $DataSet->GetDataDescription(),
             SCALE_NORMAL, $colorText['red'], $colorText['green'], $colorText['blue'], TRUE, 0, 0);
         $Chart->drawGrid(1, FALSE, 55, 55, 55, 100);
@@ -199,7 +199,7 @@
         $DataSet->AddSerie('SerieSession');
         $DataSet->SetYAxisName('Session');
         $DataSet->SetYAxisUnit('');
-        $Chart->setColorPalette(1, 255, 0,   0);
+        $Chart->setColorPalette(1, 214, 48, 49);
         $Chart->setColorPalette(2,   0, 0, 255);
         $Chart->drawScale($DataSet->GetData(), $DataSet->GetDataDescription(),
             SCALE_NORMAL, $colorText['red'], $colorText['green'], $colorText['blue'], TRUE, 0, 0);
