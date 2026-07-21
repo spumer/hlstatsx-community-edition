@@ -95,6 +95,7 @@ return [
     'players.rankview.lastweek'  => 'Последняя Неделя',
     'players.rankview.lastmonth' => 'Последний Месяц',
     'players.col.mmrank'         => 'Ранг',
+    'players.col.elo'            => 'ELO',
     'players.minkills.pre'       => 'Показать Игроков с',
     'players.minkills.post'      => 'или более убийствами.',
     'players.minkills.submit'    => 'Показать',

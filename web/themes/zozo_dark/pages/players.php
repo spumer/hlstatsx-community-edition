@@ -73,7 +73,6 @@
 	if ($g_options['rankingtype'] != 'kills') {
 		$cols = array(
 			new TableColumn('lastName', __('common.col.player'), 'width=26&flag=1&link=' . urlencode('mode=playerinfo&amp;player=%k')),
-			new TableColumn('mmrank', __('players.col.mmrank'), 'width=4&type=elorank'),
 			new TableColumn('skill', __('common.col.points'), 'width=7&align=right&skill_change=1'),
 			new TableColumn('activity', __('common.col.activity'), 'width=10&sort=no&type=bargraph'),
 			new TableColumn('connection_time', __('common.col.connection_time'), 'width=10&align=right&type=timestamp'),
@@ -109,7 +108,7 @@
 				hlstats_Players.connection_time,
 				unhex(replace(hex(hlstats_Players.lastName), 'E280AE', '')) as lastName,
 				hlstats_Players.flag, hlstats_Players.country,
-				hlstats_Players.skill, hlstats_Players.mmrank,
+				hlstats_Players.skill,
 				hlstats_Players.kills, hlstats_Players.deaths,
 				hlstats_Players.last_skill_change,
 				ROUND(hlstats_Players.kills/(IF(hlstats_Players.deaths=0, 1, hlstats_Players.deaths)), 2) AS kpd,
@@ -143,7 +142,7 @@
 			SELECT
 				SQL_CALC_FOUND_ROWS
 				hlstats_Players_History.playerId,
-				hlstats_Players.lastName, hlstats_Players.flag, hlstats_Players.country, hlstats_Players.mmrank,
+				hlstats_Players.lastName, hlstats_Players.flag, hlstats_Players.country,
 				SUM(hlstats_Players_History.connection_time) AS connection_time,
 				SUM(hlstats_Players_History.skill_change) AS skill,
 				SUM(hlstats_Players_History.skill_change) AS skill_change,
@@ -266,6 +265,7 @@
 				<?php $th('lastName', __('common.col.player')); ?>
 				<th><?=__('common.col.rank_title')?></th>
 				<?php $th('skill', __('common.col.points'), true, true); ?>
+					<th class="r"><?=__('players.col.elo')?></th>
 				<?php $th('kills', __('common.col.kills'), true, true); ?>
 				<?php $th('deaths', __('common.col.deaths'), true, true); ?>
 				<?php $th('kpd', __('common.col.kpd'), true, true); ?>
@@ -276,7 +276,13 @@
 		</thead>
 		<tbody>
 <?php
-	while ($row = $db->fetch_array($result)) {
+	// Buffer the page, then one cache-only ELO lookup for its playerIds (PR-2).
+	// The ELO column is DISPLAY: it does not touch the ranking SQL/order above.
+	require_once __DIR__ . '/_elo_client.php';
+	$pageRows = array();
+	while ($row = $db->fetch_array($result)) { $pageRows[] = $row; }
+	$eloByPid = zozo_elo_batch_by_players($db, array_map(function ($r) { return (int) $r['playerId']; }, $pageRows));
+	foreach ($pageRows as $row) {
 		$nm = $row['lastName'];
 		$initial = mb_strtoupper(mb_substr($nm, 0, 1, 'UTF-8'), 'UTF-8');
 		$rankName = zozo_rank_ru_by_kills((int) $row['kills']);
@@ -293,6 +299,7 @@
 				<td class="pl"><a href="<?php echo $g_options['scripturl']; ?>?mode=playerinfo&amp;player=<?php echo $row['playerId']; ?>"><?php echo $flagImg; ?><span class="nm"><?php echo htmlspecialchars($nm); ?></span></a></td>
 				<td class="tier"><?php if ($rankName !== '') { ?><span class="tier-glyph tier--<?php echo $rankTier; ?>" aria-hidden="true"></span><span class="tier-name"><?php echo htmlspecialchars($rankName); ?></span><?php } else { ?><span class="num dim">?</span><?php } ?></td>
 				<td class="num r pts"><?php echo number_format((int) $row['skill'], 0, '.', ' '); ?></td>
+				<td class="num r elo-cell"><?php if (($e = $eloByPid[(int) $row['playerId']] ?? null)) { ?><span class="tier-glyph tier--<?php echo $e['glyph']; ?>" aria-hidden="true"></span><?php echo number_format($e['combined'], 0, '.', ' '); ?><?php } else { ?><span class="dim">&mdash;</span><?php } ?></td>
 				<td class="num r"><?php echo number_format((int) $row['kills'], 0, '.', ' '); ?></td>
 				<td class="num r"><?php echo number_format((int) $row['deaths'], 0, '.', ' '); ?></td>
 				<td class="num r"><?php echo htmlspecialchars($row['kpd']); ?></td>

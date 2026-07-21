@@ -910,6 +910,7 @@ a.footer_link:hover {
 .app .elo-badge .elo-tag { color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
 .app .elo-badge .elo-val { color: var(--text); font-weight: 700; }
 .app .elo-badge .elo-rank, .app .elo-badge .elo-state { color: var(--text-muted); }
+.app .lb td.elo-cell .tier-glyph { margin-right: .3rem; vertical-align: -2px; }
 .app .hero-id { color: var(--text-muted); }
 .app .hero-status { padding: .1rem .45rem; font-size: var(--fs-xs); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
 .app .hero-status.ok { color: var(--green-bright); }

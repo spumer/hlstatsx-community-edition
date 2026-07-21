@@ -105,6 +105,7 @@ return [
     'players.rankview.lastweek'  => 'Last Week',
     'players.rankview.lastmonth' => 'Last Month',
     'players.col.mmrank'         => 'Rank',
+    'players.col.elo'            => 'ELO',
     'players.minkills.pre'       => 'Only show players with',
     'players.minkills.post'      => 'or more kills.',
     'players.minkills.submit'    => 'Apply',

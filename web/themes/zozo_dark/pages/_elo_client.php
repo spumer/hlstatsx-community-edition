@@ -32,6 +32,7 @@ if (!defined('ZOZO_ELO_API_BASE')) {
 }
 if (!defined('ZOZO_ELO_TTL'))     define('ZOZO_ELO_TTL', 1800);   // cache-row freshness, 30 min
 if (!defined('ZOZO_ELO_TIMEOUT')) define('ZOZO_ELO_TIMEOUT', 3);  // total curl timeout, seconds
+if (!defined('ZOZO_ELO_MIN_GAMES')) define('ZOZO_ELO_MIN_GAMES', 50); // = skill placement_games (calibrated set)
 
 if (!function_exists('zozo_elo_normalize')) {
 
@@ -224,5 +225,94 @@ if (!function_exists('zozo_elo_normalize')) {
             'rank_total'   => isset($d['rank_total']) && $d['rank_total'] !== null ? (int) $d['rank_total'] : null,
             'games_played' => isset($d['games_played']) && $d['games_played'] !== null ? (int) $d['games_played'] : null,
         ];
+    }
+
+    /**
+     * Cache-ONLY ELO lookup for a set of playerIds (leaderboard column, PR-2).
+     * No live fetch — the leaderboard is bulk-filled by the cron. Returns
+     * [playerId => ['combined'=>int,'tier'=>string,'glyph'=>int,'calibrating'=>bool]]
+     * for players that have ELO. Fail-open: any error yields an empty map (-> "—").
+     * This reads the terminal-sink table for DISPLAY only; it does not touch the
+     * ranking/order SQL, so ELO never influences rank/privilege (red line §1).
+     */
+    function zozo_elo_batch_by_players($db, array $playerIds): array
+    {
+        $out = array();
+        $ids = array();
+        foreach ($playerIds as $p) { $p = (int) $p; if ($p > 0) $ids[$p] = $p; }
+        if (empty($ids)) return $out;
+        if (!zozo_elo_ensure_table($db)) return $out;
+        $list = implode(',', $ids);
+        try {
+            $r = $db->query("SELECT pu.playerId AS pid, ec.combined_elo, ec.tier, ec.calibrating
+                             FROM hlstats_PlayerUniqueIds pu
+                             JOIN hlstats_PlayerEloCache ec ON ec.uid_norm = pu.uniqueId
+                             WHERE pu.playerId IN ($list) AND ec.combined_elo IS NOT NULL", false);
+            if ($r) {
+                while ($row = $db->fetch_array($r)) {
+                    $pid = (int) $row['pid'];
+                    if (isset($out[$pid])) continue;   // first uniqueId wins
+                    $tier = $row['tier'] ?? zozo_elo_tier((int) $row['combined_elo']);
+                    $out[$pid] = [
+                        'combined'    => (int) $row['combined_elo'],
+                        'tier'        => $tier,
+                        'glyph'       => zozo_elo_tier_glyph($tier),
+                        'calibrating' => !empty($row['calibrating']),
+                    ];
+                }
+            }
+        } catch (\Throwable $e) { /* fail-open -> "—" */ }
+        return $out;
+    }
+
+    /**
+     * Bulk pre-fill the cache from skill GET /public/leaderboard (calibrated set,
+     * min_games = placement). Paginates (limit 50). Updates ONLY the leaderboard-
+     * owned fields (combined_elo/tier/calibrating/games_played/fetched_at); leaves
+     * rank_pos/rank_total/surv/inf to the profile live-fill so the "#N of M" on the
+     * badge stays profile-consistent. Returns run stats. Run from the cron wrapper.
+     */
+    function zozo_elo_cron_sync($db, ?callable $log = null): array
+    {
+        $stats = ['pages' => 0, 'rows' => 0, 'upserted' => 0, 'errors' => 0, 'total' => 0];
+        if (!function_exists('curl_init'))   { $stats['errors']++; return $stats; }
+        if (!zozo_elo_ensure_table($db))     { $stats['errors']++; return $stats; }
+        $base = rtrim(ZOZO_ELO_API_BASE, '/');
+        $now = time();
+        $limit = 50; $offset = 0; $total = null; $mg = ZOZO_ELO_MIN_GAMES;
+        do {
+            $url = "$base/public/leaderboard?side=combined&limit=$limit&offset=$offset&min_games=$mg";
+            $ch = curl_init($url);
+            curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 10,
+                CURLOPT_CONNECTTIMEOUT => 3, CURLOPT_USERAGENT => 'hlstatsx-zozo-elo-cron/1.0']);
+            $body = curl_exec($ch); $code = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE); curl_close($ch);
+            if ($code !== 200 || !is_string($body)) { $stats['errors']++; break; }
+            $d = json_decode($body, true);
+            if (!is_array($d) || !isset($d['leaderboard'])) { $stats['errors']++; break; }
+            if ($total === null) { $total = (int) ($d['total'] ?? 0); $stats['total'] = $total; }
+            $batch = $d['leaderboard'];
+            if (empty($batch)) break;
+            $stats['pages']++;
+            foreach ($batch as $e) {
+                $uid = zozo_elo_normalize((string) ($e['steam_id'] ?? ''));
+                if ($uid === null) { $stats['errors']++; continue; }
+                $uidSafe = preg_replace('/[^0-9:]/', '', $uid);
+                if ($uidSafe === '' || !isset($e['rating'])) { $stats['errors']++; continue; }
+                $combined = (int) round($e['rating']);
+                $tier = zozo_elo_tier($combined);
+                $gp = isset($e['games_played']) ? (int) $e['games_played'] : 'NULL';
+                try {
+                    $db->query("INSERT INTO hlstats_PlayerEloCache (uid_norm, combined_elo, tier, calibrating, games_played, fetched_at)
+                                VALUES ('$uidSafe', $combined, '$tier', 0, $gp, $now)
+                                ON DUPLICATE KEY UPDATE combined_elo=VALUES(combined_elo), tier=VALUES(tier),
+                                    calibrating=VALUES(calibrating), games_played=VALUES(games_played), fetched_at=VALUES(fetched_at)", false);
+                    $stats['upserted']++;
+                } catch (\Throwable $ex) { $stats['errors']++; }
+                $stats['rows']++;
+            }
+            if ($log) $log("offset=$offset got=" . count($batch) . " total=$total");
+            $offset += $limit;
+        } while ($total !== null && $offset < $total);
+        return $stats;
     }
 }
