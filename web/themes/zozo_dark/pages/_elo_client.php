@@ -244,10 +244,19 @@ if (!function_exists('zozo_elo_normalize')) {
         if (!zozo_elo_ensure_table($db)) return $out;
         $list = implode(',', $ids);
         try {
+            // JOIN notes (seam-review r1):
+            //  D1: prod hlstats_PlayerUniqueIds.uniqueId is utf8mb4_unicode_ci while the cache is
+            //      general_ci -> two IMPLICIT operands, different collation -> "Illegal mix of
+            //      collations" -> fail-open -> the whole column silently "—" on prod. An explicit
+            //      COLLATE on the seam wins (coercibility 0) regardless of the declared collations.
+            //  O1: normalize uniqueId to Y:Z in SQL (SUBSTRING_INDEX .. -2) so STEAM_/3-part rows
+            //      imported later still match the normalized cache key.
+            //  O2: leaderboard shows only calibrated players (plan §5.2) -> calibrating = 0.
             $r = $db->query("SELECT pu.playerId AS pid, ec.combined_elo, ec.tier, ec.calibrating
                              FROM hlstats_PlayerUniqueIds pu
-                             JOIN hlstats_PlayerEloCache ec ON ec.uid_norm = pu.uniqueId
-                             WHERE pu.playerId IN ($list) AND ec.combined_elo IS NOT NULL", false);
+                             JOIN hlstats_PlayerEloCache ec
+                               ON ec.uid_norm = SUBSTRING_INDEX(pu.uniqueId, ':', -2) COLLATE utf8mb4_unicode_ci
+                             WHERE pu.playerId IN ($list) AND ec.combined_elo IS NOT NULL AND ec.calibrating = 0", false);
             if ($r) {
                 while ($row = $db->fetch_array($r)) {
                     $pid = (int) $row['pid'];
