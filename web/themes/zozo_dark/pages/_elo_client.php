@@ -244,18 +244,22 @@ if (!function_exists('zozo_elo_normalize')) {
         if (!zozo_elo_ensure_table($db)) return $out;
         $list = implode(',', $ids);
         try {
-            // JOIN notes (seam-review r1):
-            //  D1: prod hlstats_PlayerUniqueIds.uniqueId is utf8mb4_unicode_ci while the cache is
-            //      general_ci -> two IMPLICIT operands, different collation -> "Illegal mix of
-            //      collations" -> fail-open -> the whole column silently "—" on prod. An explicit
-            //      COLLATE on the seam wins (coercibility 0) regardless of the declared collations.
+            // JOIN notes (seam-review r1 + collation source-check):
+            //  Collation: the real prod hlstats DB (dbversion 78) is utf8mb4_general_ci across the
+            //  board (uniqueId, this cache, and DB_COLLATE) — install.sql declaring unicode_ci does
+            //  NOT match the live DB (that mismatch is the #35 cutover blocker). So with matching
+            //  general_ci both sides there is no mix and the plain JOIN already works on prod. We
+            //  still pin an EXPLICIT COLLATE (general_ci — the prod family) on the seam: an explicit
+            //  collation has coercibility 0 and wins regardless of the operands' declared collations,
+            //  so this survives any future drift (e.g. a table migrated to unicode_ci) without an
+            //  "Illegal mix of collations" that fail-open would swallow into a blank column.
             //  O1: normalize uniqueId to Y:Z in SQL (SUBSTRING_INDEX .. -2) so STEAM_/3-part rows
             //      imported later still match the normalized cache key.
             //  O2: leaderboard shows only calibrated players (plan §5.2) -> calibrating = 0.
             $r = $db->query("SELECT pu.playerId AS pid, ec.combined_elo, ec.tier, ec.calibrating
                              FROM hlstats_PlayerUniqueIds pu
                              JOIN hlstats_PlayerEloCache ec
-                               ON ec.uid_norm = SUBSTRING_INDEX(pu.uniqueId, ':', -2) COLLATE utf8mb4_unicode_ci
+                               ON ec.uid_norm = SUBSTRING_INDEX(pu.uniqueId, ':', -2) COLLATE utf8mb4_general_ci
                              WHERE pu.playerId IN ($list) AND ec.combined_elo IS NOT NULL AND ec.calibrating = 0", false);
             if ($r) {
                 while ($row = $db->fetch_array($r)) {
